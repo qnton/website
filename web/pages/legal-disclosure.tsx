@@ -1,24 +1,25 @@
-import {
-  DividerComponent,
-  FooterComponent,
-  LegalDisclosureDisclaimerComponent,
-  LegalDisclosureHeroComponent,
-  LegalDisclosureLegalDisclosureComponent,
-  TitleComponent,
-} from '@qnton/components';
 import React from 'react';
 
-export const Contact: React.FC = () => (
+import {
+  Disclaimer,
+  Divider,
+  Footer,
+  LegalDisclosure,
+  LegalDisclosureHero,
+  Title,
+} from '@qnton/components';
+
+export const Legal: React.FC = () => (
   <>
-    <LegalDisclosureHeroComponent />
-    <TitleComponent title='Legal Disclosure & Disclaimer' />
-    <DividerComponent title='Legal Disclosure' />
-    <LegalDisclosureLegalDisclosureComponent />
-    <DividerComponent title='Disclaimer' />
-    <LegalDisclosureDisclaimerComponent />
-    <DividerComponent title='' />
-    <FooterComponent />
+    <LegalDisclosureHero />
+    <Title>Legal Disclosure & Disclaimer</Title>
+    <Divider>Legal Disclosure</Divider>
+    <LegalDisclosure />
+    <Divider>Disclaimer</Divider>
+    <Disclaimer />
+    <Divider />
+    <Footer />
   </>
 );
 
-export default Contact;
+export default Legal;

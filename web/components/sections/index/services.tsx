@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 
-const Accordion = ({ sections }: any) => {
+interface sectionProps {
+  title: string;
+  content: string;
+}
+
+interface AccordionProps {
+  sections: sectionProps[];
+}
+
+const Accordion = (props: AccordionProps) => {
+  const { sections } = props;
   const [activeSectionId, setActiveSectionId] = useState(0);
 
   const handleClick = (id: React.SetStateAction<number>) => {
@@ -26,7 +36,7 @@ const Accordion = ({ sections }: any) => {
               type='button'
               onClick={() => handleClick(index)}
             >
-              <div className='flex items-center justify-between'>
+              <div className='-z-10 flex items-center justify-between'>
                 <span>{section.title}</span>
                 <span
                   className={`${
@@ -41,10 +51,10 @@ const Accordion = ({ sections }: any) => {
             <div
               className={`${
                 activeSectionId === index ? 'max-h-96' : 'max-h-0'
-              } relative overflow-hidden transition-all duration-700`}
+              } relative -z-10 overflow-hidden transition-all duration-700`}
             >
               <div className='mb-8 text-gray-300'>
-                <p className='md:max-w-4xl'>{section.content}</p>
+                <p className='md:max-w-6xl'>{section.content}</p>
               </div>
             </div>
           </li>
@@ -55,7 +65,7 @@ const Accordion = ({ sections }: any) => {
 };
 
 export const Services: React.FC = () => {
-  const sections = [
+  const sections: sectionProps[] = [
     {
       title: 'Front-end development',
       content:
@@ -75,14 +85,14 @@ export const Services: React.FC = () => {
 
   return (
     <section
-      className='mx-5 flex items-center justify-center'
+      className='mx-10 flex items-center justify-center'
       data-scroll
       data-scroll-call='services'
       data-scroll-repeat
     >
-      <div className='w-full text-left text-xl md:max-w-6xl md:text-2xl'>
-        <p className='mb-6 text-4xl md:text-7xl'>Services</p>
-        <p className='mb-4 text-gray-300 md:max-w-4xl'>
+      <div className='w-full text-left text-4xl md:max-w-7xl'>
+        <p className='mb-8 text-7xl md:text-8xl'>Services</p>
+        <p className='mb-8 text-gray-300 md:max-w-6xl'>
           Elevating your web presence with expert services in frontend and
           backend development, as well as strategic consulting.
         </p>

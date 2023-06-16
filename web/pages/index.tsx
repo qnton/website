@@ -1,35 +1,27 @@
-import {
-  ContactComponent,
-  DividerComponent,
-  FooterComponent,
-  IndexHeroComponent,
-  IndexWorkComponent,
-  Services,
-  TitleComponent,
-} from '@qnton/components';
 import React from 'react';
+
+import {
+  Contact,
+  Divider,
+  Footer,
+  IndexHero,
+  Services,
+  Title,
+  Work,
+} from '@qnton/components';
 
 export const Index: React.FC = () => (
   <>
-    <TitleComponent title='Fullstack developer' />
-    <IndexHeroComponent />
-    <DividerComponent
-      id='work'
-      title='My Work'
-    />
-    <IndexWorkComponent />
-    <DividerComponent
-      id='services'
-      title='My Services'
-    />
+    <Title>Fullstack developer</Title>
+    <IndexHero />
+    <Divider id='work'>My Work</Divider>
+    <Work />
+    <Divider id='services'>My Services</Divider>
     <Services />
-    <DividerComponent
-      id='contact'
-      title='Contact me'
-    />
-    <ContactComponent />
-    <DividerComponent title='' />
-    <FooterComponent />
+    <Divider id='contact'>Contact me</Divider>
+    <Contact />
+    <Divider />
+    <Footer />
   </>
 );
 

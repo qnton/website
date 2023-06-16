@@ -1,5 +1,11 @@
 module.exports = {
-  plugins: ['react', 'prettier', 'tailwindcss', 'unused-imports'],
+  plugins: [
+    'react',
+    'prettier',
+    'tailwindcss',
+    'unused-imports',
+    '@typescript-eslint',
+  ],
   env: {
     browser: true,
     es2021: true,
@@ -10,7 +16,17 @@ module.exports = {
     'prettier',
     'plugin:tailwindcss/recommended',
     'plugin:react/recommended',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
+  root: true,
+  settings: {
+    tailwindcss: {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      config: require('path').join(__dirname, 'web/tailwind.config.js'),
+    },
+  },
+  parser: '@typescript-eslint/parser',
   rules: {
     'no-console': 'error',
     'padding-line-between-statements': [

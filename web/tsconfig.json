@@ -3,7 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@qnton/components*": ["components/index"]
+      "@qnton/components*": ["components/index"],
+      "~/*": ["./*"]
     },
     "composite": false,
     "declaration": true,

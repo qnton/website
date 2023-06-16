@@ -1,10 +1,11 @@
-import { ErrorComponent, TitleComponent } from '@qnton/components';
 import React from 'react';
+
+import { Error, Title } from '@qnton/components';
 
 export const NotFoundError: React.FC = () => (
   <>
-    <TitleComponent title='Page not found' />
-    <ErrorComponent />
+    <Title>Page not found</Title>
+    <Error />
   </>
 );
 

@@ -5,7 +5,7 @@ interface Props {
   statusCode?: number;
 }
 
-const Error: NextPage<Props> = ({ statusCode }: any) => (
+const Error: NextPage<Props> = ({ statusCode }: Props) => (
   <p>
     {statusCode
       ? `An error ${statusCode} occurred on server`

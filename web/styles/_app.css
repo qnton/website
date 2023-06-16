@@ -5,7 +5,7 @@
 @layer utilities {
   html {
     font-display: optional;
-    @apply scroll-smooth;
+    @apply scroll-smooth text-[2.6666666667vw] sm:text-[1.4097vw] lg:text-[0.5208333333vw];
   }
 
   body {
@@ -33,7 +33,7 @@
   }
 
   .link-underline-medium {
-    @apply border-b-0 bg-[length:100%_3px] bg-[0_100%] bg-no-repeat duration-200 ease-in-out hover:bg-[length:0_3px] hover:bg-[0_100%];
+    @apply border-b-0 bg-[length:100%_4px] bg-[0_100%] bg-no-repeat duration-200 ease-in-out hover:bg-[length:0_4px] hover:bg-[0_100%];
   }
 
   .link-underline-semi {

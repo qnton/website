@@ -1,11 +1,11 @@
 import React from 'react';
 
-export const LegalDisclosureDisclaimerComponent: React.FC = () => (
-  <section className='mx-5 flex flex-col items-center justify-center last:mb-0 lg:mx-0'>
-    <div className='w-full text-xl md:max-w-6xl md:text-2xl'>
-      <p className='mb-8 text-4xl md:text-6xl'>Disclaimer</p>
+export const Disclaimer: React.FC = () => (
+  <section className='mx-10 flex flex-col items-center justify-center last:mb-0 lg:mx-0'>
+    <div className='w-full text-4xl md:max-w-7xl'>
+      <p className='mb-8 text-7xl md:text-8xl'>Disclaimer</p>
       <>
-        <p className='mb-4 text-3xl md:text-4xl'>Liability for Contents</p>
+        <p className='mb-4 text-5xl'>Liability for Contents</p>
 
         <p className='mb-4 text-gray-300'>
           As service providers, we are liable for own contents of these websites
@@ -16,7 +16,7 @@ export const LegalDisclosureDisclaimerComponent: React.FC = () => (
           activities.
         </p>
 
-        <p className='mb-8 text-gray-300'>
+        <p className='mb-10 text-gray-300'>
           Legal obligations to removing information or to blocking the use of
           information remain unchallenged. In this case, liability is only
           possible at the time of knowledge about a specific violation of law.
@@ -25,7 +25,7 @@ export const LegalDisclosureDisclaimerComponent: React.FC = () => (
         </p>
       </>
       <>
-        <p className='mb-4 text-3xl md:text-4xl'>Liability for Links</p>
+        <p className='mb-4 text-5xl'>Liability for Links</p>
 
         <p className='mb-4 text-gray-300'>
           Our offer includes links to external third party websites. We have no
@@ -34,7 +34,7 @@ export const LegalDisclosureDisclaimerComponent: React.FC = () => (
           websites are always responsible for their own contents.
         </p>
 
-        <p className='mb-8 text-gray-300'>
+        <p className='mb-10 text-gray-300'>
           The linked websites had been checked for possible violations of law at
           the time of the establishment of the link. Illegal contents were not
           detected at the time of the linking. A permanent monitoring of the
@@ -44,7 +44,7 @@ export const LegalDisclosureDisclaimerComponent: React.FC = () => (
         </p>
       </>
       <>
-        <p className='mb-4 text-3xl md:text-4xl'>Copyright</p>
+        <p className='mb-4 text-5xl'>Copyright</p>
 
         <p className='mb-4 text-gray-300'>
           Contents and compilations published on these websites by the providers
@@ -71,4 +71,4 @@ export const LegalDisclosureDisclaimerComponent: React.FC = () => (
     </div>
   </section>
 );
-export default LegalDisclosureDisclaimerComponent;
+export default Disclaimer;
