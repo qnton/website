@@ -1,0 +1,2 @@
+Contact: mailto:security@qnt.one
+Preferred-Languages: en, de

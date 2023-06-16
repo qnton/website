@@ -1,0 +1,13 @@
+{
+  "configurations": [
+    {
+      "name": "Run",
+      "request": "launch",
+      "runtimeArgs": ["run-script", "dev"],
+      "runtimeExecutable": "npm",
+      "skipFiles": ["<node_internals>/**"],
+      "internalConsoleOptions": "neverOpen",
+      "type": "node"
+    }
+  ]
+}
