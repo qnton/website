@@ -1,0 +1,26 @@
+html {
+  font-display: optional;
+  @apply scroll-smooth text-[2.6666666667vw] sm:text-[1.4097vw] lg:text-[0.5208333333vw];
+}
+
+body {
+  @apply bg-zinc-950 font-satoshi text-white;
+}
+
+.link-underline-black {
+  @apply bg-gradient-to-r from-white to-white;
+}
+
+.link-underline {
+  @apply border-b-0 bg-[length:100%_1px] bg-[0_100%] bg-no-repeat duration-200 ease-in-out hover:bg-[length:0_1px] hover:bg-[0_100%];
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("./fonts/Satoshi.woff2") format("woff2"),
+    url("./fonts/Satoshi.woff") format("woff"),
+    url("./fonts/Satoshi.ttf") format("truetype");
+  font-weight: 300;
+  font-display: block;
+  font-style: normal;
+}

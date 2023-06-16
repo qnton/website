@@ -1,13 +1,11 @@
 {
+  "version": "0.2.0",
   "configurations": [
     {
-      "name": "Run",
+      "command": "./node_modules/.bin/astro dev",
+      "name": "Development server",
       "request": "launch",
-      "runtimeArgs": ["run-script", "dev"],
-      "runtimeExecutable": "npm",
-      "skipFiles": ["<node_internals>/**"],
-      "internalConsoleOptions": "neverOpen",
-      "type": "node"
+      "type": "node-terminal"
     }
   ]
 }
