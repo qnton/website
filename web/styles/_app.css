@@ -1,0 +1,46 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer utilities {
+  html {
+    font-display: optional;
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-black font-satoshi text-white;
+  }
+
+  .h-35 {
+    @apply h-[35rem];
+  }
+
+  .link-underline-static {
+    @apply border-b-0 bg-[length:100%_1px] bg-[0_100%] bg-no-repeat;
+  }
+
+  .link-underline-black {
+    @apply bg-gradient-to-r from-white to-white;
+  }
+
+  .link-underline-reverse {
+    @apply border-b-0 bg-[length:0_1px] bg-[0_100%] bg-no-repeat duration-200 ease-in-out hover:bg-[length:100%_1px] hover:bg-[0_100%];
+  }
+
+  .link-underline {
+    @apply border-b-0 bg-[length:100%_1px] bg-[0_100%] bg-no-repeat duration-200 ease-in-out hover:bg-[length:0_1px] hover:bg-[0_100%];
+  }
+
+  .link-underline-medium {
+    @apply border-b-0 bg-[length:100%_3px] bg-[0_100%] bg-no-repeat duration-200 ease-in-out hover:bg-[length:0_3px] hover:bg-[0_100%];
+  }
+
+  .link-underline-semi {
+    @apply border-b-0 bg-[length:100%_5px] bg-[0_100%] bg-no-repeat duration-200 ease-in-out hover:bg-[length:0_5px] hover:bg-[0_100%];
+  }
+
+  .link-underline-thick {
+    @apply border-b-0 bg-[length:100%_10px] bg-[0_100%] bg-no-repeat duration-200 ease-in-out hover:bg-[length:0_10px] hover:bg-[0_100%];
+  }
+}

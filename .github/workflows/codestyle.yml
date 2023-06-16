@@ -1,0 +1,18 @@
+name: Check codestyle
+on:
+  pull_request:
+    branches:
+      - develop
+      - master
+jobs:
+  test:
+    name: Check codestyle
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install packages
+        run: npm ci
+      - name: Prettier
+        run: npm run format:check
+      - name: Lint
+        run: npm run lint
