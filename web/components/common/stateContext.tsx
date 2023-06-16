@@ -1,10 +1,9 @@
 import { useRouter } from 'next/router';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-// Step 1: Create a Context
 const StateContext = createContext({
   activeSectionId: '',
-  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
   setActiveSectionId: (_activeSectionId: string) => {},
 });
 

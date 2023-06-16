@@ -1,31 +1,31 @@
 import Link from 'next/link';
 import React from 'react';
 
-export const LegalDisclosureLegalDisclosureComponent: React.FC = () => (
+export const LegalDisclosure: React.FC = () => (
   <section
-    className='mx-5 flex flex-col items-center justify-center last:mb-0 lg:mx-0'
+    className='mx-10 flex flex-col items-center justify-center last:mb-0 lg:mx-0'
     data-scroll
     data-scroll-repeat
     id='legal-disclosure'
   >
-    <div className='w-full md:max-w-6xl'>
-      <p className='mb-8 text-4xl md:text-6xl'>Legal Disclosure</p>
-      <p className='mb-4 text-3xl md:text-4xl'>
+    <div className='w-full md:max-w-7xl'>
+      <p className='mb-8 text-7xl md:text-8xl'>Legal Disclosure</p>
+      <p className='mb-4 text-5xl'>
         Information provided according to Sec. 5 German Telemedia Act (TMG):
       </p>
-      <div className='mb-8 text-xl text-gray-300 md:text-2xl'>
+      <div className='mb-10 text-4xl text-gray-300'>
         <p>qnton</p>
         <p>Hinterm Wall 28a</p>
         <p>49681 Garrel</p>
         <p>GERMANY</p>
       </div>
 
-      <p className='mb-4 text-3xl md:text-4xl'>Contact:</p>
-      <div className='text-xl text-gray-300 md:text-2xl'>
+      <p className='mb-4 text-5xl'>Contact:</p>
+      <div className='text-4xl text-gray-300'>
         <p>
           E-Mail:{' '}
           <Link
-            className='cursor-ne-resize'
+            className='cursor-pointer'
             href='mailto:hello@qnt.one'
             scroll={false}
           >
@@ -36,4 +36,5 @@ export const LegalDisclosureLegalDisclosureComponent: React.FC = () => (
     </div>
   </section>
 );
-export default LegalDisclosureLegalDisclosureComponent;
+
+export default LegalDisclosure;

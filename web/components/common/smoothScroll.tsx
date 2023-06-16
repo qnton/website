@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { createContext, useEffect, useState } from 'react';
 
-import { useStateContext } from './stateContext';
+import { useStateContext } from '~/components/common/stateContext';
 
 export const SmoothScrollContext = createContext({
   scroll: null,
@@ -10,7 +10,7 @@ export const SmoothScrollContext = createContext({
 export function SmoothScrollProvider({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode | React.ReactNode[] | string;
 }) {
   const [scroll, setScroll] = useState(null);
   const { setActiveSectionId } = useStateContext();
