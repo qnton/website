@@ -28,7 +28,7 @@
   },
   "optionalDependencies": {
     "turbo-android-arm64": "1.4.7",
-    "turbo-darwin-64": "1.9.3",
+    "turbo-darwin-64": "1.10.3",
     "turbo-darwin-arm64": "1.9.3",
     "turbo-freebsd-64": "1.4.7",
     "turbo-freebsd-arm64": "1.4.7",
