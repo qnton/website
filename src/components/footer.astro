@@ -1,0 +1,24 @@
+---
+const { page } = Astro.props;
+---
+
+<footer class="animate-fade animate-once md:mt-32">
+  <nav>
+    <ul
+      class="group bottom-16 left-10 float-left mb-16 ml-10 flex gap-6 text-3xl md:fixed md:m-0"
+    >
+      <li class="opacity-50">© 2023</li>
+    </ul>
+    <ul
+      class="group bottom-16 right-10 float-right mb-16 mr-10 flex gap-6 text-3xl md:fixed md:m-0"
+    >
+      <li
+        class="cursor-pointer opacity-50 transition-opacity duration-300 hover:!opacity-100 group-hover:opacity-25"
+      >
+        <a href={page !== "legal-notice" ? "/legal-notice" : "#"}
+          >Legal notice</a
+        >
+      </li>
+    </ul>
+  </nav>
+</footer>
