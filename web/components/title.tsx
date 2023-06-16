@@ -9,7 +9,7 @@ export const TitleComponent: React.FC<TitleProps> = (props) => {
 
   return (
     <div>
-      <h1 className='absolute top-10 left-60 hidden text-2xl lg:block'>
+      <h1 className='absolute left-60 top-10 hidden text-2xl lg:block'>
         {title}
       </h1>
     </div>

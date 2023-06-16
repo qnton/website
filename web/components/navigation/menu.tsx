@@ -1,6 +1,5 @@
-import { NavLinkComponent } from '@qnton/components';
+import { NavLink, useStateContext } from '@qnton/components';
 import { AnimatePresence, motion } from 'framer-motion';
-import Link from 'next/link';
 import React from 'react';
 
 interface MenuProps {
@@ -10,6 +9,7 @@ interface MenuProps {
 
 export const MenuComponent: React.FC<MenuProps> = (props) => {
   const { isOpen, setIsOpen } = props;
+  const { activeSectionId } = useStateContext();
 
   return (
     <nav>
@@ -22,33 +22,35 @@ export const MenuComponent: React.FC<MenuProps> = (props) => {
             transition={{ type: 'linear' }}
           >
             <div className='fixed top-0 z-20 h-full w-full bg-black'>
-              <div className='fixed top-10 left-5 z-10 flex h-full flex-col items-start text-3xl mix-blend-difference md:text-4xl lg:left-10'>
+              <div className='fixed left-5 top-10 z-10 flex h-full flex-col items-start text-3xl mix-blend-difference md:text-4xl lg:left-10'>
                 <div className='text-5xl md:text-6xl'>
-                  <Link
-                    className='cursor-pointer'
-                    href='/'
-                    scroll={false}
+                  <NavLink
+                    active={false}
+                    href='#anchor-hero'
                   >
                     <p>Anton</p>
                     <p>Werschinin</p>
-                  </Link>
+                  </NavLink>
                 </div>
                 <div className='absolute bottom-16 last:mb-0'>
                   <div className='mb-4 flex'>
-                    <NavLinkComponent
-                      href='/'
-                      text='Home'
+                    <NavLink
+                      active={activeSectionId === 'work'}
+                      href='#anchor-work'
+                      text='Work'
                     />
                   </div>
                   <div className='mb-4 flex'>
-                    <NavLinkComponent
-                      href='/about'
-                      text='About'
+                    <NavLink
+                      active={activeSectionId === 'services'}
+                      href='#anchor-services'
+                      text='Services'
                     />
                   </div>
                   <div className='mb-4 flex'>
-                    <NavLinkComponent
-                      href='mailto:hello@qnt.one'
+                    <NavLink
+                      active={activeSectionId === 'contact'}
+                      href='#anchor-contact'
                       text='Contact'
                     />
                   </div>

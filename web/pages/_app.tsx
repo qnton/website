@@ -1,4 +1,8 @@
-import { NavbarComponent, SmoothScrollProvider } from '@qnton/components';
+import {
+  NavbarComponent,
+  SmoothScrollProvider,
+  StateContextProvider,
+} from '@qnton/components';
 import { AnimatePresence, motion } from 'framer-motion';
 import { AppProps } from 'next/app';
 import React from 'react';
@@ -7,7 +11,7 @@ import '../styles/style.css';
 
 export default function NextApp({ Component, pageProps, router }: AppProps) {
   return (
-    <main>
+    <StateContextProvider>
       <AnimatePresence
         mode='wait'
         onExitComplete={() => window.scrollTo(0, 0)}
@@ -25,21 +29,20 @@ export default function NextApp({ Component, pageProps, router }: AppProps) {
         mode='wait'
         onExitComplete={() => window.scrollTo(0, 0)}
       >
-        <motion.div
+        <motion.main
           animate={{ opacity: 1 }}
           data-scroll-container
+          data-scroll-section
           exit={{ opacity: 0 }}
           initial={{ opacity: 0 }}
           key={router.pathname}
           transition={{ type: 'linear', delay: 0.1 }}
         >
           <SmoothScrollProvider>
-            <div data-scroll-section>
-              <Component {...pageProps} />
-            </div>
+            <Component {...pageProps} />
           </SmoothScrollProvider>
-        </motion.div>
+        </motion.main>
       </AnimatePresence>
-    </main>
+    </StateContextProvider>
   );
 }

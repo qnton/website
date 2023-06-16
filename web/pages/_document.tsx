@@ -8,7 +8,7 @@ export default function Document() {
       <Head>
         <HeaderComponent />
       </Head>
-      <body>
+      <body data-scroll-container>
         <Main />
         <NextScript />
       </body>
