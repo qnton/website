@@ -2,8 +2,13 @@ import Link from 'next/link';
 import React from 'react';
 
 export const LegalDisclosureLegalDisclosureComponent: React.FC = () => (
-  <section className='mx-5 flex flex-col items-center justify-center last:mb-0 lg:mx-0'>
-    <div className='md:max-w-4xl'>
+  <section
+    className='mx-5 flex flex-col items-center justify-center last:mb-0 lg:mx-0'
+    data-scroll
+    data-scroll-repeat
+    id='legal-disclosure'
+  >
+    <div className='w-full md:max-w-6xl'>
       <p className='mb-8 text-4xl md:text-6xl'>Legal Disclosure</p>
       <p className='mb-4 text-3xl md:text-4xl'>
         Information provided according to Sec. 5 German Telemedia Act (TMG):

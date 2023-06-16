@@ -17,7 +17,7 @@ export const HeaderComponent: React.FC = () => {
       />
       <meta charSet='utf-8' />
       <meta
-        content='#000000'
+        content='#0c0a09'
         name='theme-color'
       />
       <meta
@@ -46,6 +46,25 @@ export const HeaderComponent: React.FC = () => {
         href='favicon.ico'
         rel='icon'
         type='image/x-icon'
+      />
+      <link
+        href='images/apple-touch-icon-iphone-60x60.png'
+        rel='apple-touch-icon'
+      />
+      <link
+        href='images/apple-touch-icon-ipad-76x76.png'
+        rel='apple-touch-icon'
+        sizes='60x60'
+      />
+      <link
+        href='images/apple-touch-icon-iphone-retina-120x120.png'
+        rel='apple-touch-icon'
+        sizes='114x114'
+      />
+      <link
+        href='images/apple-touch-icon-ipad-retina-152x152.png'
+        rel='apple-touch-icon'
+        sizes='144x144'
       />
     </>
   );

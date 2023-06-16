@@ -17,6 +17,7 @@ export const ImageComponent: React.FC<ImageProps> = (props) => {
       data-scroll
       data-scroll-speed='-0.5'
       src={image}
+      width={100000}
     />
   );
 };

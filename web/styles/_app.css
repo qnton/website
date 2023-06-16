@@ -9,15 +9,15 @@
   }
 
   body {
-    @apply bg-black font-satoshi text-white;
+    @apply bg-stone-950 font-satoshi text-white;
   }
 
-  .h-35 {
-    @apply h-[35rem];
+  .h-40 {
+    @apply h-[40rem];
   }
 
   .link-underline-static {
-    @apply border-b-0 bg-[length:100%_1px] bg-[0_100%] bg-no-repeat;
+    @apply border-b-0 bg-[length:100%_1px] bg-[0_100%] bg-no-repeat duration-200 ease-in-out;
   }
 
   .link-underline-black {

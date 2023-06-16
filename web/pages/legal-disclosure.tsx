@@ -10,8 +10,8 @@ import React from 'react';
 
 export const Contact: React.FC = () => (
   <>
-    <TitleComponent title='Legal Disclosure & Disclaimer' />
     <LegalDisclosureHeroComponent />
+    <TitleComponent title='Legal Disclosure & Disclaimer' />
     <DividerComponent title='Legal Disclosure' />
     <LegalDisclosureLegalDisclosureComponent />
     <DividerComponent title='Disclaimer' />
