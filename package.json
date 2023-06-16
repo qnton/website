@@ -40,7 +40,7 @@
     "turbo-linux-ppc64le": "1.4.7",
     "turbo-windows-32": "1.4.7",
     "turbo-windows-64": "1.9.3",
-    "turbo-windows-arm64": "1.9.3"
+    "turbo-windows-arm64": "1.10.3"
   },
   "packageManager": "npm@9.5.1",
   "workspaces": [
