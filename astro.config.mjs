@@ -9,5 +9,6 @@ export default defineConfig({
   site: "https://qnt.one/",
   integrations: [react(), tailwind(), sitemap(), robotsTxt()],
   output: "server",
+  denyDotfiles: false,
   adapter: cloudflare(),
 });
