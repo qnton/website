@@ -2,7 +2,7 @@
 const { page } = Astro.props;
 ---
 
-<header class="fixed z-50">
+<header class="fixed z-50 h-32 w-full backdrop-blur-sm md:backdrop-blur-none">
   <div class="group fixed left-10 top-16 animate-fade text-3xl animate-once">
     <a
       href={page === "index" ? "#" : "/"}
