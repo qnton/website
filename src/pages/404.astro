@@ -14,13 +14,15 @@ import Layout from "../components/layout.astro";
       <p
         class="mb-4 animate-fade-left text-gray-400 animate-delay-100 animate-once md:max-w-[90rem]"
       >
-        The request URL was not found on this server
+        The request URL was not found on this server.
       </p>
-      <p
-        class="mb-4 animate-fade-left text-gray-400 animate-delay-200 animate-once md:max-w-[90rem]"
+      <div
+        class="mb-4 animate-fade-left animate-delay-200 animate-once md:max-w-[90rem]"
       >
-        back to home.
-      </p>
+        <a href="/" class="link-underline link-underline-black cursor-pointer">
+          back to home</a
+        >
+      </div>
     </section>
   </main>
 </Layout>
