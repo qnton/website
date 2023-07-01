@@ -1,0 +1,20 @@
+---
+const { image, link, year, title, description } = Astro.props;
+---
+
+<div class="mt-10v text-4xl first:mt-0 lg:min-w-[140rem] lg:max-w-[140rem]">
+  <img
+    class="mt-12 h-70v max-h-80 min-h-50 w-full animate-fade-left rounded-xl object-cover object-[75%_65%] animate-delay-100 animate-once"
+    src={image}
+  />
+  <div class="mt-8 w-full justify-between md:flex">
+    <a
+      target="_blank"
+      class="animate-fade-left animate-delay-200 animate-once"
+      href={link}>{title} - "{year}"</a
+    >
+    <p class="animate-fade-left text-gray-400 animate-delay-300 animate-once">
+      {description}
+    </p>
+  </div>
+</div>
