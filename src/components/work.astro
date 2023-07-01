@@ -7,13 +7,13 @@ const { image, link, year, title, description } = Astro.props;
     class="mt-12 h-70v max-h-80 min-h-50 w-full animate-fade-left rounded-xl object-cover object-[75%_65%] animate-delay-100 animate-once"
     src={image}
   />
-  <div class="mt-8 w-full justify-between md:flex">
-    <a
-      target="_blank"
-      class="animate-fade-left animate-delay-200 animate-once"
-      href={link}>{title} - "{year}"</a
+  <div class="mt-12 w-full justify-between md:flex">
+    <div class="my-5 animate-fade-left animate-delay-200 animate-once">
+      <a target="_blank" href={link}>{title} - "{year}"</a>
+    </div>
+    <p
+      class="my-5 animate-fade-left text-gray-400 animate-delay-300 animate-once"
     >
-    <p class="animate-fade-left text-gray-400 animate-delay-300 animate-once">
       {description}
     </p>
   </div>
