@@ -1,10 +1,11 @@
 ---
-const { image, link, year, title, description } = Astro.props;
+const { image, link, year, title, description, className } = Astro.props;
 ---
 
 <div class="mt-10v text-4xl first:mt-0 lg:min-w-[140rem] lg:max-w-[140rem]">
   <img
-    class="mt-12 h-70v max-h-80 min-h-50 w-full animate-fade-left rounded-xl object-cover object-[75%_65%] animate-delay-100 animate-once"
+    class={"mt-12 h-70v max-h-80 min-h-50 w-full animate-fade-left rounded-xl object-cover animate-delay-100 animate-once " +
+      className}
     src={image}
   />
   <div class="mt-12 w-full justify-between md:flex">
