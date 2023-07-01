@@ -1,13 +1,18 @@
 ---
 import Layout from "../components/layout/layout.astro";
+import Work from "../components/work.astro";
+
+import hm from "../images/hm.webp";
+import schnelltest from "../images/schnelltest.webp";
+import hankens from "../images/hankens.webp";
 ---
 
 <Layout title="Anton Werschinin" page="index">
   <main
-    class="mx-10 mb-16 flex items-center justify-center pt-48 animate-once md:pt-20v lg:m-0 lg:pt-35v"
+    class="mx-10 mb-64 flex flex-col items-center justify-center pt-48 md:pt-20v lg:pt-35v"
   >
-    <section class="text-4xl lg:min-w-[100rem] lg:max-w-[100rem]">
-      <h1 class="inline-block animate-fade text-7xl md:max-w-6xl lg:mt-0">
+    <section class="text-4xl lg:min-w-[140rem] lg:max-w-[140rem]">
+      <h1 class="inline-block animate-fade text-6xl md:max-w-6xl lg:text-7xl">
         Hey
         <span
           class="inline-block animate-wiggle-more animate-delay-300 animate-twice animate-ease-in-out hover:animate-infinite"
@@ -17,7 +22,7 @@ import Layout from "../components/layout/layout.astro";
       </h1>
 
       <p
-        class="my-5 mt-12 animate-fade-left leading-tight text-gray-400 animate-delay-100 animate-once md:max-w-[90rem]"
+        class="my-5 mt-12 animate-fade-left leading-tight text-gray-400 animate-delay-100 animate-once md:max-w-[100rem]"
       >
         I am a <span class="text-white">web developer and designer</span> specializing
         in creating visually stunning and functional websites. My services include
@@ -28,7 +33,7 @@ import Layout from "../components/layout/layout.astro";
       </p>
 
       <p
-        class="my-5 animate-fade-left leading-tight text-gray-400 animate-delay-200 animate-once md:max-w-[90rem]"
+        class="my-5 animate-fade-left leading-tight text-gray-400 animate-delay-200 animate-once md:max-w-[100rem]"
       >
         I have a passion for music and sports. When I am not creating <span
           class="text-white">visually stunning and functional websites,</span
@@ -41,6 +46,62 @@ import Layout from "../components/layout/layout.astro";
           href="mailto:hello@qnt.one"
         >
           Reach out to me
+        </a>
+      </div>
+    </section>
+    <section class="mt-20v">
+      <h1
+        class="inline-block animate-fade text-7xl leading-tight md:max-w-6xl lg:mt-0"
+      >
+        Work
+      </h1>
+      <div>
+        <Work
+          title="Schnelltest"
+          year="2019"
+          description="A website dedicated to providing information about various COVID-19 testing centers."
+          image={schnelltest}
+          link="https://schnelltest-clp.de"
+        />
+        <Work
+          title="HM Medizintechnik"
+          year="2023"
+          description="Rental website for HM Medizintechnik, offering a wide range of medical devices."
+          image={hm}
+          link="https://hm-medizintechnik.de"
+        />
+        <Work
+          title="Hankens"
+          year="2022"
+          description="A platform enabling users to easily locate nearby COVID-19 testing centers."
+          image={hankens}
+          link="https://hankens-testzentrum.de"
+        />
+      </div>
+    </section>
+    <section class="mt-20v text-4xl lg:min-w-[140rem] lg:max-w-[140rem]">
+      <h1 class="inline-block animate-fade text-6xl md:max-w-6xl lg:text-7xl">
+        Contact
+      </h1>
+      <p
+        class="my-5 mt-12 animate-fade-left leading-tight text-gray-400 animate-delay-100 animate-once"
+      >
+        Stand out from the competition with a visually stunning and functional
+        website.
+      </p>
+      <p
+        class="my-5 animate-fade-left leading-tight text-gray-400 animate-delay-200 animate-once"
+      >
+        Let's collaborate to create a <span class="text-white"
+          >unique online experience.</span
+        >
+      </p>
+      <div class="my-5 mb-0 animate-fade-left animate-delay-300 animate-once">
+        <a
+          class="link-underline link-underline-black cursor-pointer"
+          href="mailto:hello@qnt.one"
+        >
+          hello@qnt.one
         </a>
       </div>
     </section>
