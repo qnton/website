@@ -2,7 +2,6 @@
 import "../../styles/globals.css";
 import Header from "../navigation/header.astro";
 import Footer from "../navigation/footer.astro";
-import { Fragment } from "react";
 
 const { title, page, clean } = Astro.props;
 
@@ -101,8 +100,8 @@ const schema = {
       rel="apple-touch-icon"
       sizes="144x144"
     />
-    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-    <meta name="generator" content={Astro.generator} />
+    <script set:html={JSON.stringify(schema)} type="application/ld+json" />
+    <meta content={Astro.generator} name="generator" />
   </head>
   <body>
     {clean ? "" : <Header page={page} />}
@@ -110,7 +109,7 @@ const schema = {
       <slot />
       {clean ? "" : <Footer page={page} />}
     </div>
-    <script hoist>
+    <script>
       import "./../../scroll.js";
     </script>
   </body>
