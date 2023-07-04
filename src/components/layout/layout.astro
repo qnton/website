@@ -110,14 +110,8 @@ const schema = {
       <slot />
       {clean ? "" : <Footer page={page} />}
     </div>
-    <script>
-      import LocomotiveScroll from "https://cdn.skypack.dev/locomotive-scroll";
-
-      const scroll = new LocomotiveScroll({
-        el: document.querySelector("[data-scroll-container]"),
-        smooth: true,
-        reloadOnContextChange: true,
-      });
+    <script hoist>
+      import "./../../scroll.js";
     </script>
   </body>
 </html>

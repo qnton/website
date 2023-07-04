@@ -12,6 +12,7 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,md,js,jsx,json,mdx,astro}\""
   },
   "dependencies": {
+    "locomotive-scroll": "^4.1.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
