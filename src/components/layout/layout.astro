@@ -2,6 +2,7 @@
 import "../../styles/globals.css";
 import Header from "../navigation/header.astro";
 import Footer from "../navigation/footer.astro";
+import { Fragment } from "react";
 
 const { title, page, clean } = Astro.props;
 
@@ -105,7 +106,12 @@ const schema = {
   </head>
   <body>
     {clean ? "" : <Header page={page} />}
-    <slot />
-    {clean ? "" : <Footer page={page} />}
+    <div data-scroll-container>
+      <slot />
+      {clean ? "" : <Footer page={page} />}
+    </div>
+    <script hoist>
+      import "./../../scroll.js";
+    </script>
   </body>
 </html>
