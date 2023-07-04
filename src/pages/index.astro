@@ -7,7 +7,7 @@ import schnelltest from "../images/schnelltest.webp";
 import hankens from "../images/hankens.webp";
 ---
 
-<Layout title="Anton Werschinin" page="index">
+<Layout page="index" title="Anton Werschinin">
   <main
     class="mx-10 flex flex-col items-center justify-center pb-64 pt-48 md:pt-20v lg:pt-35v"
   >
@@ -57,31 +57,31 @@ import hankens from "../images/hankens.webp";
       </h1>
       <div>
         <Work
-          title="Schnelltest"
-          year="2019"
+          alt="Schnelltest website on a phone"
           className="object-[50%_65%]"
           description="A website dedicated to providing information about various COVID-19 testing centers."
           image={schnelltest}
-          alt="Schnelltest website on a phone"
           link="https://schnelltest-clp.de"
+          title="Schnelltest"
+          year="2019"
         />
         <Work
-          title="HM Medizintechnik"
-          year="2023"
+          alt="HM Medizintechnik website on a macbook"
           className="object-[75%_65%]"
           description="Rental website for HM Medizintechnik, offering a wide range of medical devices."
           image={hm}
-          alt="HM Medizintechnik website on a macbook"
           link="https://hm-medizintechnik.de"
+          title="HM Medizintechnik"
+          year="2023"
         />
         <Work
-          title="Hankens"
-          year="2022"
+          alt="Hankens testzentrum website on a phone"
           className="object-[50%_62%]"
           description="A platform enabling users to easily locate nearby COVID-19 testing centers."
           image={hankens}
-          alt="Hankens testzentrum website on a phone"
           link="https://hankens-testzentrum.de"
+          title="Hankens"
+          year="2022"
         />
       </div>
     </section>
@@ -108,9 +108,9 @@ import hankens from "../images/hankens.webp";
         class="my-8 mb-0 animate-fade-left cursor-pointer animate-delay-300 animate-once"
       >
         <a
+          class="link-underline link-underline-black"
           href="mailto:hello@qnt.one"
           target="_blank"
-          class="link-underline link-underline-black"
         >
           hello@qnt.one</a
         >

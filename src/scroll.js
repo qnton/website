@@ -5,3 +5,5 @@ const scroll = new LocomotiveScroll({
   smooth: true,
   reloadOnContextChange: true,
 });
+
+export default scroll;
