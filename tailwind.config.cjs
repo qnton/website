@@ -4,7 +4,11 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        satoshi: ["Satoshi"],
+        satoshiLight: ["Satoshi-Light"],
+        satoshiRegular: ["Satoshi-Regular"],
+        satoshiMedium: ["Satoshi-Medium"],
+        satoshiBold: ["Satoshi-Bold"],
+        satoshiBlack: ["Satoshi-Black"],
       },
       height: {
         "5v": "5vh",
@@ -60,8 +64,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require("tailwindcss-animated"),
-    require("@tailwindcss/typography"),
-  ],
+  plugins: [require("tailwindcss-animated")],
 };
