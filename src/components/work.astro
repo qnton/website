@@ -7,21 +7,25 @@ const { image, link, year, title, description, className, alt } = Astro.props;
     class="mt-12 animate-fade-left overflow-hidden rounded-lg animate-delay-100 animate-once"
   >
     <img
+      alt={alt}
+      class={"-my-16 h-70v min-h-50 w-full rounded-xl object-cover " +
+        className}
       data-scroll
       data-scroll-speed="-0.5"
-      alt={alt}
-      class={"-my-16 h-70v min-h-50 w-full rounded-xl object-cover  " +
-        className}
       src={image}
     />
   </div>
   <div class="w-full justify-between md:flex">
     <div
-      class="my-12 mb-16 animate-fade-left animate-delay-200 animate-once md:my-5"
+      class="my-12 mt-16 animate-fade-left animate-delay-200 animate-once md:my-5"
     >
-      <a class="link-underline link-underline-black" target="_blank" href={link}
-        >{title} - "{year}"</a
+      <a
+        class="link-underline link-underline-black"
+        href={link}
+        target="_blank"
       >
+        {title} - "{year}"
+      </a>
     </div>
     <p class="my-5 animate-fade-left animate-delay-300 animate-once">
       {description}
