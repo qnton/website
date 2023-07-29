@@ -3,7 +3,7 @@ import "../../styles/globals.css";
 import Header from "../navigation/header.astro";
 import Footer from "../navigation/footer.astro";
 
-const { title, page, clean } = Astro.props;
+const { title, page, clean, footer, header } = Astro.props;
 
 /* Structured Data */
 const schema = {
@@ -141,10 +141,10 @@ const schema = {
     />
   </head>
   <body>
-    {clean ? "" : <Header page={page} />}
+    {clean || !header ? "" : <Header page={page} />}
     <div data-scroll-container>
       <slot />
-      {clean ? "" : <Footer page={page} />}
+      {clean || !footer ? "" : <Footer page={page} />}
     </div>
     <script>
       import "./../../scroll.js";
