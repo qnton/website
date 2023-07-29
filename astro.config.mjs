@@ -6,6 +6,9 @@ import robotsTxt from "astro-robots-txt";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
+  experimental: {
+    assets: true,
+  },
   site: "https://qnt.one/",
   integrations: [react(), tailwind(), sitemap(), robotsTxt()],
   output: "server",
