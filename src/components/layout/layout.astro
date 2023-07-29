@@ -65,22 +65,53 @@ const schema = {
 
 <html lang="en">
   <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+    <meta
+      content="text/html; charset=UTF-8"
+      http-equiv="content-type"
+    />
     <meta
       content="default-src * 'self' 'unsafe-eval' 'unsafe-inline'"
       http-equiv="Content-Security-Policy"
     />
     <meta charset="utf-8" />
-    <meta content="#fafafa" name="theme-color" />
-    <meta content="width=device-width,initial-scale=1" name="viewport" />
-    <meta content="qnton - developer" name="description" />
-    <meta content="qnton - developer" property="og:description" />
-    <meta content="https://qnt.one/logo.png" property="image" />
-    <meta content="https://qnt.one/logo.png" property="og:image" />
-    <meta content="qnt.one" property="og:site_name" />
-    <meta content="Anton Werschinin" property="og:title" />
+    <meta
+      content="#fafafa"
+      name="theme-color"
+    />
+    <meta
+      content="width=device-width,initial-scale=1"
+      name="viewport"
+    />
+    <meta
+      content="qnton - developer"
+      name="description"
+    />
+    <meta
+      content="qnton - developer"
+      property="og:description"
+    />
+    <meta
+      content="https://qnt.one/logo.png"
+      property="image"
+    />
+    <meta
+      content="https://qnt.one/logo.png"
+      property="og:image"
+    />
+    <meta
+      content="qnt.one"
+      property="og:site_name"
+    />
+    <meta
+      content="Anton Werschinin"
+      property="og:title"
+    />
     <title>{title}</title>
-    <link href="favicon.ico" rel="icon" type="image/x-icon" />
+    <link
+      href="favicon.ico"
+      rel="icon"
+      type="image/x-icon"
+    />
     <link
       href="images/apple-touch-icon-iphone-60x60.png"
       rel="apple-touch-icon"
@@ -100,8 +131,14 @@ const schema = {
       rel="apple-touch-icon"
       sizes="144x144"
     />
-    <script set:html={JSON.stringify(schema)} type="application/ld+json" />
-    <meta content={Astro.generator} name="generator" />
+    <script
+      set:html={JSON.stringify(schema)}
+      type="application/ld+json"
+    />
+    <meta
+      content={Astro.generator}
+      name="generator"
+    />
   </head>
   <body>
     {clean ? "" : <Header page={page} />}
