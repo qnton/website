@@ -8,8 +8,10 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://qnt.one/",
   integrations: [react(), tailwind(), sitemap(), robotsTxt()],
-  output: "hybrid",
-  adapter: cloudflare(),
+  output: "server",
+  adapter: cloudflare({
+    mode: "directory",
+  }),
   experimental: {
     assets: true,
   },
