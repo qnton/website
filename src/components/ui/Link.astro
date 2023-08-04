@@ -1,0 +1,16 @@
+---
+const { target, href, className } = Astro.props;
+---
+
+<div
+  class={"my-8 mb-0 animate-fade-left animate-delay-300 animate-once " +
+    className}
+>
+  <a
+    class="link-underline link-underline-black"
+    href={href}
+    target={target}
+  >
+    <slot />
+  </a>
+</div>
