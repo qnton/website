@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import Link from "./ui/Link.astro";
 
 const { image, link, year, title, description, className, alt } = Astro.props;
 ---
@@ -20,17 +21,13 @@ const { image, link, year, title, description, className, alt } = Astro.props;
     />
   </div>
   <div class="w-full justify-between md:flex">
-    <div
-      class="my-12 mt-16 animate-fade-left animate-delay-200 animate-once md:my-5"
+    <Link
+      className="my-12 mt-16 animate-fade-left animate-delay-200 animate-once md:my-5"
+      href={link}
+      target="_blank"
     >
-      <a
-        class="link-underline link-underline-black"
-        href={link}
-        target="_blank"
-      >
-        {title} - "{year}"
-      </a>
-    </div>
+      {title} - "{year}"
+    </Link>
     <p class="my-5 animate-fade-left animate-delay-300 animate-once">
       {description}
     </p>

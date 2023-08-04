@@ -1,5 +1,6 @@
 ---
 import Layout from "../components/layout/layout.astro";
+import Link from "../components/ui/Link.astro";
 import Work from "../components/work.astro";
 
 import hm from "../assets/images/hm-medizintechnik.jpg";
@@ -16,7 +17,10 @@ import hankens from "../assets/images/hankens.jpg";
   <main
     class="mx-10 flex flex-col items-center justify-center pb-64 pt-48 md:pt-20v lg:pt-35v"
   >
-    <section class="text-4xl lg:min-w-[140rem] lg:max-w-[140rem]">
+    <section
+      class="text-4xl lg:min-w-[140rem] lg:max-w-[140rem]"
+      id="intro"
+    >
       <h1
         class="inline-block animate-fade font-satoshiBold text-5xl md:max-w-6xl lg:text-7xl"
       >
@@ -42,17 +46,18 @@ import hankens from "../assets/images/hankens.jpg";
         create websites that meet the unique needs of my clients.
       </p>
 
-      <div class="my-8 mb-0 animate-fade-left animate-delay-300 animate-once">
-        <a
-          class="link-underline link-underline-black"
-          href="mailto:hello@qnt.one"
-          target="_blank"
-        >
-          Reach out to me
-        </a>
-      </div>
+      <Link
+        className="my-8 mb-0 animate-fade-left animate-delay-300 animate-once"
+        href="/mail"
+        target="_blank"
+      >
+        Reach out to me
+      </Link>
     </section>
-    <section class="mt-20v">
+    <section
+      class="mt-20v"
+      id="projects"
+    >
       <h1
         class="inline-block animate-fade text-7xl leading-tight md:max-w-6xl lg:mt-0"
       >
@@ -64,7 +69,7 @@ import hankens from "../assets/images/hankens.jpg";
           className="object-[35%_35%]"
           description="A website dedicated to providing information about various COVID-19 testing centers."
           image={schnelltest}
-          link="https://schnelltest-clp.de"
+          link="/project/schnelltest"
           title="Schnelltest"
           year="2019"
         />
@@ -73,7 +78,7 @@ import hankens from "../assets/images/hankens.jpg";
           className="object-[35%_35%]"
           description="Rental website for HM Medizintechnik, offering a wide range of medical devices."
           image={hm}
-          link="https://hm-medizintechnik.de"
+          link="/project/hm-medizintechnik"
           title="HM Medizintechnik"
           year="2023"
         />
@@ -82,13 +87,16 @@ import hankens from "../assets/images/hankens.jpg";
           className="object-[50%_35%]"
           description="A platform enabling users to easily locate nearby COVID-19 testing centers."
           image={hankens}
-          link="https://hankens-testzentrum.de"
+          link="/project/hankens"
           title="Hankens"
           year="2022"
         />
       </div>
     </section>
-    <section class="mt-20v text-4xl lg:min-w-[140rem] lg:max-w-[140rem]">
+    <section
+      class="mt-20v text-4xl lg:min-w-[140rem] lg:max-w-[140rem]"
+      id="contact"
+    >
       <h1 class="inline-block animate-fade text-6xl md:max-w-6xl lg:text-7xl">
         Contact
       </h1>
@@ -103,17 +111,13 @@ import hankens from "../assets/images/hankens.jpg";
       >
         Let's collaborate to create a unique online experience.
       </p>
-      <div
-        class="my-8 mb-0 animate-fade-left cursor-pointer animate-delay-300 animate-once"
+      <Link
+        className="my-8 mb-0 animate-fade-left cursor-pointer animate-delay-300 animate-once"
+        href="/mail"
+        target="_blank"
       >
-        <a
-          class="link-underline link-underline-black"
-          href="mailto:hello@qnt.one"
-          target="_blank"
-        >
-          hello@qnt.one</a
-        >
-      </div>
+        hello@qnt.one
+      </Link>
     </section>
   </main>
 </Layout>
