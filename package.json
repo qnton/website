@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
-    "@typescript-eslint/eslint-plugin": "^6.2.1",
+    "@typescript-eslint/eslint-plugin": "^6.3.0",
     "eslint": "^8.46.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-astro": "^0.28.0",
