@@ -1,7 +1,7 @@
 {
   "name": "website",
   "type": "module",
-  "version": "4.1.1",
+  "version": "4.2.0",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -16,19 +16,17 @@
   "dependencies": {
     "@astrojs/sitemap": "^2.0.1",
     "@astrojs/tailwind": "^4.0.0",
-    "astro": "2.10.1",
+    "astro": "2.10.4",
     "astro-eslint-parser": "^0.14.0",
     "astro-robots-txt": "^0.5.0",
     "clsx": "^2.0.0",
     "locomotive-scroll": "^4.1.4",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animated": "^1.0.1",
-    "typescript": "^5.1.6",
-    "vanilla-lazyload": "^17.8.4"
+    "typescript": "^5.1.6"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.9",
-    "@typescript-eslint/eslint-plugin": "^6.2.1",
+    "@typescript-eslint/eslint-plugin": "^6.3.0",
     "eslint": "^8.46.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-astro": "^0.28.0",
