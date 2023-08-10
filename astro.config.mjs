@@ -12,11 +12,6 @@ export default defineConfig({
   experimental: {
     assets: true,
   },
-  image: {
-    service: {
-      entrypoint: "./src/image-service.ts",
-    },
-  },
   redirects: {
     "/github": {
       status: 302,

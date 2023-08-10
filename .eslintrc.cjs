@@ -4,12 +4,31 @@ module.exports = {
     es2022: true,
     browser: true,
   },
-  extends: ["eslint:recommended", "plugin:astro/recommended"],
+  plugins: ["prettier"],
+  extends: [
+    "prettier",
+    "eslint:recommended",
+    "plugin:astro/recommended",
+    "plugin:tailwindcss/recommended",
+  ],
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  rules: {},
+  rules: {
+    "no-console": 1,
+    "prettier/prettier": 2,
+    "react/jsx-sort-props": [
+      2,
+      {
+        callbacksLast: true,
+        shorthandFirst: false,
+        shorthandLast: false,
+        ignoreCase: true,
+        noSortAlphabetically: false,
+      },
+    ],
+  },
   settings: {
     react: {
       pragma: "h",
@@ -24,18 +43,7 @@ module.exports = {
         parser: "@typescript-eslint/parser",
         extraFileExtensions: [".astro"],
       },
-      rules: {
-        "react/jsx-sort-props": [
-          2,
-          {
-            callbacksLast: true,
-            shorthandFirst: false,
-            shorthandLast: false,
-            ignoreCase: true,
-            noSortAlphabetically: false,
-          },
-        ],
-      },
+      rules: {},
     },
     {
       files: ["*.ts"],
@@ -71,16 +79,6 @@ module.exports = {
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
       ],
       rules: {
-        "react/jsx-sort-props": [
-          2,
-          {
-            callbacksLast: true,
-            shorthandFirst: false,
-            shorthandLast: false,
-            ignoreCase: true,
-            noSortAlphabetically: false,
-          },
-        ],
         "@typescript-eslint/no-unused-vars": [
           "error",
           { argsIgnorePattern: "^_", destructuredArrayIgnorePattern: "^_" },
