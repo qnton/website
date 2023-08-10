@@ -3,6 +3,19 @@ module.exports = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
+      keyframes: {
+        "pulse-bg": {
+          "0%, 100%": {
+            "background-color": "#e5e5e5",
+          },
+          "50%": {
+            "background-color": "#f5f5f5",
+          },
+        },
+      },
+      animation: {
+        "pulse-bg": "pulse-bg 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+      },
       fontFamily: {
         satoshiLight: ["Satoshi-Light"],
         satoshiRegular: ["Satoshi-Regular"],

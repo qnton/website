@@ -3,6 +3,14 @@ import "../../styles/globals.css";
 import Header from "../navigation/header.astro";
 import Footer from "../navigation/footer.astro";
 
+interface Props {
+  title: string;
+  page: string;
+  clean?: boolean;
+  footer?: boolean;
+  header?: boolean;
+}
+
 const { title, page, clean, footer, header } = Astro.props;
 
 /* Structured Data */
