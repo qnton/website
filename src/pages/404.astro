@@ -3,6 +3,9 @@ import Layout from "../components/layout/layout.astro";
 import Typography from "../components/ui/typography.astro";
 ---
 
+<script>
+  document.getElementById("url").innerHTML = window.location.pathname;
+</script>
 <Layout
   header
   page="404"
@@ -23,9 +26,10 @@ import Typography from "../components/ui/typography.astro";
         className="animate-fade-left animate-delay-100 animate-once"
         variant="p"
       >
-        The requested URL <span class="text-zinc-400"
-          >{window.location.pathname}</span
-        > was not found on this server.
+        The requested URL <span
+          class="text-zinc-400"
+          id="url"
+        ></span> was not found on this server.
       </Typography>
 
       <div class="animate-fade-left animate-delay-200 animate-once">
