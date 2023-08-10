@@ -1,8 +1,6 @@
 ---
 import Layout from "../components/layout/layout.astro";
 import Typography from "../components/ui/typography.astro";
-
-const url = Astro.url.pathname;
 ---
 
 <Layout
@@ -25,8 +23,9 @@ const url = Astro.url.pathname;
         className="animate-fade-left animate-delay-100 animate-once"
         variant="p"
       >
-        The requested URL <span class="text-zinc-400">{url}</span> was not found
-        on this server.
+        The requested URL <span class="text-zinc-400"
+          >{window.location.pathname}</span
+        > was not found on this server.
       </Typography>
 
       <div class="animate-fade-left animate-delay-200 animate-once">
