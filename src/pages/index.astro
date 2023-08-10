@@ -5,6 +5,8 @@ import Work from "../components/work.astro";
 import hm from "../assets/images/hm-medizintechnik.jpg";
 import schnelltest from "../assets/images/schnelltest.jpg";
 import hankens from "../assets/images/hankens.jpg";
+
+import Typography from "../components/ui/typography.astro";
 ---
 
 <Layout
@@ -16,9 +18,13 @@ import hankens from "../assets/images/hankens.jpg";
   <main
     class="mx-10 flex flex-col items-center justify-center pb-64 pt-48 md:pt-20v lg:pt-35v"
   >
-    <section class="text-4xl lg:min-w-[140rem] lg:max-w-[140rem]">
-      <h1
-        class="inline-block animate-fade font-satoshiBold text-5xl md:max-w-6xl lg:text-7xl"
+    <section
+      class="lg:min-w-[140rem] lg:max-w-[140rem]"
+      id="intro"
+    >
+      <Typography
+        className="inline-block animate-fade font-satoshiBold text-5xl md:max-w-6xl lg:text-7xl"
+        variant="h1"
       >
         Hey
         <span
@@ -26,93 +32,110 @@ import hankens from "../assets/images/hankens.jpg";
         >
           👋
         </span>, I'm Anton, a developer, designer, and musician.
-      </h1>
-
-      <p
-        class="my-5 mt-12 animate-fade-left leading-tight animate-delay-100 animate-once md:max-w-[100rem]"
+      </Typography>
+      <Typography
+        className="animate-fade-left animate-delay-100 animate-once md:max-w-[100rem]"
+        variant="p"
       >
         I am a web developer and designer specializing in creating visually
         stunning and functional websites.
-      </p>
+      </Typography>
 
-      <p
-        class="my-5 animate-fade-left leading-tight animate-delay-200 animate-once md:max-w-[100rem]"
+      <Typography
+        className="animate-fade-left animate-delay-200 animate-once md:max-w-[100rem]"
+        variant="p"
       >
         My services include design, development, and optimization. I strive to
         create websites that meet the unique needs of my clients.
-      </p>
+      </Typography>
 
-      <div class="my-8 mb-0 animate-fade-left animate-delay-300 animate-once">
-        <a
-          class="link-underline link-underline-black"
-          href="mailto:hello@qnt.one"
+      <div class="animate-fade-left animate-delay-300 animate-once">
+        <Typography
+          className="cursor-pointer"
+          component="a"
+          href="/mail"
           target="_blank"
+          variant="p"
         >
-          Reach out to me
-        </a>
+          <span class="link-underline link-underline-black">
+            Reach out to me
+          </span>
+        </Typography>
       </div>
     </section>
-    <section class="mt-20v">
-      <h1
-        class="inline-block animate-fade text-7xl leading-tight md:max-w-6xl lg:mt-0"
+    <section
+      class="mt-20v lg:min-w-[140rem] lg:max-w-[140rem]"
+      id="projects"
+    >
+      <Typography
+        className="inline-block animate-fade-left text-6xl animate-once md:max-w-6xl lg:text-7xl"
+        variant="h1"
       >
         Projects
-      </h1>
-      <div>
-        <Work
-          alt="Schnelltest website on a phone"
-          className="object-[35%_35%]"
-          description="A website dedicated to providing information about various COVID-19 testing centers."
-          image={schnelltest}
-          link="https://schnelltest-clp.de"
-          title="Schnelltest"
-          year="2019"
-        />
-        <Work
-          alt="HM Medizintechnik website on a macbook"
-          className="object-[35%_35%]"
-          description="Rental website for HM Medizintechnik, offering a wide range of medical devices."
-          image={hm}
-          link="https://hm-medizintechnik.de"
-          title="HM Medizintechnik"
-          year="2023"
-        />
-        <Work
-          alt="Hankens testzentrum website on a phone"
-          className="object-[50%_35%]"
-          description="A platform enabling users to easily locate nearby COVID-19 testing centers."
-          image={hankens}
-          link="https://hankens-testzentrum.de"
-          title="Hankens"
-          year="2022"
-        />
-      </div>
+      </Typography>
+      <Work
+        alt="Schnelltest website on a phone"
+        className="object-[35%_35%]"
+        description="A website dedicated to providing information about various COVID-19 testing centers."
+        image={schnelltest}
+        link="/project/schnelltest"
+        title="Schnelltest"
+        year="2019"
+      />
+      <Work
+        alt="HM Medizintechnik website on a phone"
+        className="object-[35%_35%]"
+        description="Rental website for HM Medizintechnik, offering a wide range of medical devices."
+        image={hm}
+        link="/project/hm-medizintechnik"
+        title="HM Medizintechnik"
+        year="2023"
+      />
+      <Work
+        alt="Hankens testzentrum website on a phone"
+        className="object-[50%_35%]"
+        description="A platform enabling users to easily locate nearby COVID-19 testing centers."
+        image={hankens}
+        link="/project/hankens"
+        title="Hankens"
+        year="2022"
+      />
     </section>
-    <section class="mt-20v text-4xl lg:min-w-[140rem] lg:max-w-[140rem]">
-      <h1 class="inline-block animate-fade text-6xl md:max-w-6xl lg:text-7xl">
+    <section
+      class="mt-20v lg:min-w-[140rem] lg:max-w-[140rem]"
+      id="contact"
+    >
+      <Typography
+        className="inline-block animate-fade-left text-6xl animate-once md:max-w-6xl lg:text-7xl"
+        variant="h1"
+      >
         Contact
-      </h1>
-      <p
-        class="mt-12 animate-fade-left leading-tight animate-delay-100 animate-once"
+      </Typography>
+      <Typography
+        className="animate-fade-left animate-delay-100 animate-once"
+        variant="p"
       >
         Stand out from the competition with a visually stunning and functional
         website.
-      </p>
-      <p
-        class="my-5 animate-fade-left leading-tight animate-delay-200 animate-once"
+      </Typography>
+      <Typography
+        className="animate-fade-left animate-delay-200 animate-once"
+        variant="p"
       >
         Let's collaborate to create a unique online experience.
-      </p>
-      <div
-        class="my-8 mb-0 animate-fade-left cursor-pointer animate-delay-300 animate-once"
-      >
-        <a
-          class="link-underline link-underline-black"
-          href="mailto:hello@qnt.one"
+      </Typography>
+      <div class="animate-fade-left animate-delay-300 animate-once">
+        <Typography
+          className="cursor-pointer"
+          component="a"
+          href="/mail"
           target="_blank"
+          variant="p"
         >
-          hello@qnt.one</a
-        >
+          <span class="link-underline link-underline-black">
+            hello@qnt.one
+          </span>
+        </Typography>
       </div>
     </section>
   </main>

@@ -1,39 +1,43 @@
 ---
 import Layout from "../components/layout/layout.astro";
+import Typography from "../components/ui/typography.astro";
+
+const url = Astro.url.pathname;
 ---
 
 <Layout
   header
   page="404"
-  title="AW • Not found"
+  title="AW • Page not found"
 >
   <main
     class="mx-10 flex flex-col items-center justify-center pb-64 pt-15v"
     data-scroll-container
   >
     <section class="pt-5v lg:min-w-[100rem] lg:max-w-[100rem]">
-      <div class="text-4xl">
-        <h1
-          class="inline-block animate-fade text-7xl leading-tight animate-once md:max-w-6xl"
-        >
-          Page not found.
-        </h1>
+      <Typography
+        className="animate-fade animate-once"
+        variant="h1"
+      >
+        Page not found.
+      </Typography>
+      <Typography
+        className="animate-fade-left animate-delay-100 animate-once"
+        variant="p"
+      >
+        The requested URL <span class="text-zinc-400">{url}</span> was not found
+        on this server.
+      </Typography>
 
-        <h2
-          class="mt-12 animate-fade-left text-zinc-400 leading-tight animate-delay-100 animate-once"
+      <div class="animate-fade-left animate-delay-200 animate-once">
+        <Typography
+          className="mb-6 cursor-pointer lg:mb-0"
+          component="a"
+          href="/"
+          variant="p"
         >
-          The request URL was not found on this server.
-        </h2>
-        <div
-          class="my-8 mb-0 animate-fade-left cursor-pointer animate-delay-300 animate-once"
-        >
-          <a
-            class="link-underline link-underline-black"
-            href="/"
-          >
-            Back to home
-          </a>
-        </div>
+          <span class="link-underline link-underline-black"> Back to home</span>
+        </Typography>
       </div>
     </section>
   </main>

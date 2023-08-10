@@ -1,0 +1,28 @@
+---
+import { cn } from "../../utils";
+
+interface Props {
+  variant: "h1" | "h2" | "h3" | "p";
+  className?: string;
+  component?: any;
+  [key: string]: any;
+  class?: never;
+}
+
+const { className, variant, component, ...props } = Astro.props;
+
+const Element = component || variant;
+
+const textSize: any = {
+  h1: "text-7xl mb-10",
+  h2: "text-5xl mb-8 mt-12",
+  p: "text-4xl mb-6 last:mb-0",
+};
+---
+
+<Element
+  class={cn(textSize[variant], className, "leading-tight")}
+  {...props}
+>
+  <slot />
+</Element>

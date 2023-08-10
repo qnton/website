@@ -1,4 +1,4 @@
-@import "css/satoshi.css";
+@import "./satoshi.css";
 
 html {
   font-display: optional;
@@ -6,7 +6,7 @@ html {
 }
 
 body {
-  @apply bg-neutral-50 font-satoshiRegular text-zinc-800;
+  @apply bg-neutral-50 font-satoshiRegular text-zinc-800 selection:bg-neutral-200;
 }
 
 .link-underline-black {
@@ -16,6 +16,8 @@ body {
 .link-underline {
   @apply border-b-0 bg-[length:100%_1px] bg-[0_100%] bg-no-repeat duration-200 ease-in-out hover:bg-[length:0_1px] hover:bg-[0_100%];
 }
+
+/* Locomotive Scroll */
 
 html.has-smooth-scroll {
   position: fixed;
@@ -60,7 +62,9 @@ html.has-scroll-dragging {
   width: 11px;
   height: 100%;
   transform-origin: center right;
-  transition: transform 0.3s, opacity 0.3s;
+  transition:
+    transform 0.3s,
+    opacity 0.3s;
   opacity: 0;
 }
 
@@ -122,3 +126,5 @@ html.has-scroll-smooth {
   left: 0;
   width: 100vw;
 }
+
+/* Locomotive Scroll */
