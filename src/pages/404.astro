@@ -1,10 +1,10 @@
 ---
-import Layout from "../components/layout/layout.astro";
-import Typography from "../components/ui/typography.astro";
+import Layout from "@/components/layout/layout.astro";
+import Typography from "@/components/ui/typography.astro";
 ---
 
 <script>
-  document.getElementById("url").innerHTML = window.location.pathname;
+  import "@/libs/getPathname.ts";
 </script>
 <Layout
   header
