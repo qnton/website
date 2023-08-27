@@ -16,26 +16,45 @@ const { image, link, year, title, description, className, alt } = Astro.props;
 ---
 
 <figure class="odd:my-15v last:odd:mb-0">
-  <div
-    class="mt-12 animate-fade-left overflow-hidden rounded-lg animate-delay-100 animate-once"
-  >
-    <Image
-      alt={alt}
-      class={`-my-16 h-70v min-h-50 w-full animate-pulse-bg rounded-xl object-cover ${className}`}
-      data-scroll
-      data-scroll-speed="-0.5"
-      decoding="async"
-      loading="lazy"
-      src={image}
-    />
-  </div>
+  <a href={link}>
+    <div
+      class="group mt-12 animate-fade-left cursor-pointer overflow-hidden rounded-lg animate-delay-100 animate-once"
+    >
+      <div
+        class="absolute left-[50%] top-[50%] z-10 translate-x-[-50%] translate-y-[-50%] opacity-0 transition-opacity delay-75 duration-500 group-hover:opacity-100"
+      >
+        <div
+          class="flex h-64 w-64 items-center justify-center rounded-full bg-white p-5 text-center shadow-2xl"
+        >
+          <Typography
+            className="text-4xl"
+            variant="p"
+          >
+            View project
+          </Typography>
+        </div>
+      </div>
+      <div
+        class="relative -my-16 rounded-xl"
+        data-scroll
+        data-scroll-speed="-0.5"
+      >
+        <Image
+          alt={alt}
+          class={`h-70v min-h-50 w-full animate-pulse-bg object-cover transition duration-500 group-hover:scale-[1.05] group-hover:blur-[2px] ${className}`}
+          decoding="async"
+          loading="lazy"
+          src={image}
+        />
+      </div>
+    </div>
+  </a>
   <figcaption class="mt-12 w-full justify-between lg:flex">
     <div class="animate-fade-left animate-delay-200 animate-once">
       <Typography
         className="cursor-pointer"
         component="a"
         href={link}
-        target="_blank"
         variant="p"
       >
         <span class="link-underline link-underline-black">
