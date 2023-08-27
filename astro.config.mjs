@@ -25,17 +25,5 @@ export default defineConfig({
       status: 302,
       destination: "mailto:hello@qnt.one",
     },
-    "/project/schnelltest": {
-      status: 302,
-      destination: "https://schnelltest-clp.de",
-    },
-    "/project/hm-medizintechnik": {
-      status: 302,
-      destination: "https://hm-medizintechnik.de",
-    },
-    "/project/hankens": {
-      status: 302,
-      destination: "https://hankens-testzentrum.de",
-    },
   },
 });
