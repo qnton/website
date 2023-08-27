@@ -17,11 +17,11 @@ module.exports = {
         "pulse-bg": "pulse-bg 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
       fontFamily: {
-        satoshiLight: ["Satoshi-Light"],
-        satoshiRegular: ["Satoshi-Regular"],
-        satoshiMedium: ["Satoshi-Medium"],
-        satoshiBold: ["Satoshi-Bold"],
-        satoshiBlack: ["Satoshi-Black"],
+        "satoshi-light": ["Satoshi-Light"],
+        "satoshi-regular": ["Satoshi-Regular"],
+        "satoshi-medium": ["Satoshi-Medium"],
+        "satoshi-bold": ["Satoshi-Bold"],
+        "satoshi-black": ["Satoshi-Black"],
       },
       height: {
         "5v": "5vh",
