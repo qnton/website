@@ -1,0 +1,138 @@
+---
+import Layout from "@/components/layout/layout.astro";
+import Typography from "@/components/ui/typography.astro";
+
+import { Image } from "astro:assets";
+
+import hankens from "@/assets/images/hankens.jpg";
+---
+
+<Layout
+  footer
+  header
+  page="hankens-testzentrum"
+  title="AW • Hankens-Testzentrum"
+>
+  <main
+    class="mx-10 flex flex-col items-center justify-center pb-64 pt-15v"
+    data-scroll-container
+  >
+    <section class="pt-5v lg:min-w-[100rem] lg:max-w-[100rem]">
+      <Typography
+        className="inline-block animate-fade-left text-6xl animate-once lg:text-7xl"
+        variant="h1"
+      >
+        Test Center Discovery Website
+      </Typography>
+      <div
+        class="mt-12 animate-fade-left overflow-hidden rounded-lg animate-delay-100 animate-once"
+      >
+        <Image
+          alt=""
+          class={`-my-16 h-70v min-h-50 w-full animate-pulse-bg rounded-xl object-cover`}
+          data-scroll
+          data-scroll-speed="-0.5"
+          decoding="async"
+          loading="lazy"
+          src={hankens}
+        />
+      </div>
+
+      <div class="mt-14 flex justify-between">
+        <Typography
+          className="m-0 animate-fade animate-once"
+          variant="p"
+        >
+          Role
+        </Typography>
+        <Typography
+          className="m-0 animate-fade animate-once"
+          variant="p"
+        >
+          Code, Design
+        </Typography>
+      </div>
+      <hr class="my-4 h-0.5 border-0 bg-zinc-200" />
+      <div class="flex justify-between">
+        <Typography
+          className="m-0 animate-fade animate-once"
+          variant="p"
+        >
+          Year
+        </Typography>
+        <Typography
+          className="m-0 animate-fade animate-once"
+          variant="p"
+        >
+          2022
+        </Typography>
+      </div>
+      <hr class="my-4 mb-24 h-0.5 border-0 bg-zinc-200" />
+
+      <Typography
+        className="animate-fade animate-once"
+        variant="h2"
+      >
+        Collaborative Solution with Hankens-Apotheke
+      </Typography>
+      <Typography
+        className="animate-fade text-zinc-400 animate-once md:max-w-[90rem]"
+        variant="p"
+      >
+        Tasked by the rapid testing project, I collaborated with
+        Hankens-Apotheke to develop a website simplifying test center discovery.
+      </Typography>
+
+      <Typography
+        className="animate-fade animate-once"
+        variant="h2"
+      >
+        Interactive Map for Easy Selection
+      </Typography>
+      <Typography
+        className="animate-fade text-zinc-400 animate-once md:max-w-[90rem]"
+        variant="p"
+      >
+        Users can access an interactive map on the website to explore nearby
+        test centers. This feature enables intuitive selection based on location
+        and preferences.
+      </Typography>
+      <Typography
+        className="animate-fade animate-once"
+        variant="h2"
+      >
+        Detailed Information and Seamless Booking
+      </Typography>
+      <Typography
+        className="animate-fade text-zinc-400 animate-once md:max-w-[90rem]"
+        variant="p"
+      >
+        The platform offers comprehensive details for each center, including
+        operating hours, available tests, and contact information. Users can
+        seamlessly proceed from center discovery to appointment booking.
+      </Typography>
+      <hr class="my-4 h-0.5 border-0 bg-zinc-200" />
+    </section>
+    <section
+      class="w-full pt-5v text-right lg:min-w-[100rem] lg:max-w-[100rem]"
+    >
+      <Typography
+        className="mb-0 animate-fade animate-once"
+        component="h1"
+        variant="p"
+      >
+        Next project:
+      </Typography>
+      <div class="animate-fade-left animate-delay-300 animate-once">
+        <Typography
+          className="cursor-pointer"
+          component="a"
+          href="/project/schnelltest"
+          variant="h1"
+        >
+          <span class="link-underline link-underline-black"> Schnelltest</span>
+        </Typography>
+      </div>
+    </section>
+  </main>
+</Layout>
