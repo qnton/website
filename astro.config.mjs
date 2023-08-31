@@ -9,9 +9,6 @@ export default defineConfig({
   output: "static",
   compressHTML: true,
   trailingSlash: "never",
-  experimental: {
-    assets: true,
-  },
   redirects: {
     "/github": {
       status: 302,

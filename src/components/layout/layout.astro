@@ -1,7 +1,9 @@
 ---
 import "@/styles/globals.css";
+import { ViewTransitions } from "astro:transitions";
 import Header from "@/components/navigation/header.astro";
 import Footer from "@/components/navigation/footer.astro";
+import { fade } from "astro/transitions";
 
 interface Props {
   title: string;
@@ -147,8 +149,9 @@ const schema = {
       content={Astro.generator}
       name="generator"
     />
+    <ViewTransitions />
   </head>
-  <body>
+  <body transition:animate={fade({ duration: "0.4s" })}>
     {clean || !header ? "" : <Header page={page} />}
     <div data-scroll-container>
       <slot />
@@ -158,4 +161,4 @@ const schema = {
       import "@/libs/scroll.js";
     </script>
   </body>
-</html>
+  </html>
