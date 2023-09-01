@@ -41,7 +41,7 @@ const { image, link, year, title, description, className, alt } = Astro.props;
       >
         <Image
           alt={alt}
-          class={`h-70v min-h-50 w-full animate-pulse-bg object-cover transition duration-500 group-hover:scale-[1.05] group-hover:blur-[2px] ${className}`}
+          class={`h-70v min-h-50 w-full animate-pulse-bg object-cover transition duration-500 group-hover:scale-[1.05] ${className}`}
           decoding="async"
           loading="lazy"
           src={image}
