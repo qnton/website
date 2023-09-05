@@ -24,19 +24,40 @@ import schnelltest from "@/assets/images/schnelltest.jpg";
       >
         COVID-19 Testing Solutions and Rapid Testing System
       </Typography>
-      <div
-        class="mt-12 animate-fade-left overflow-hidden rounded-lg animate-delay-100 animate-once"
-      >
-        <Image
-          alt=""
-          class="-my-16 h-70v min-h-50 w-full animate-pulse-bg rounded-xl object-cover object-[35%_35%]"
-          data-scroll
-          data-scroll-speed="-0.5"
-          decoding="async"
-          loading="lazy"
-          src={schnelltest}
-        />
-      </div>
+
+      <a href="https://schnelltest-clp.de/">
+        <div
+          class="group mt-12 animate-fade-left cursor-pointer overflow-hidden rounded-lg animate-delay-100 animate-once"
+        >
+          <div
+            class="absolute left-[50%] top-[50%] z-10 translate-x-[-50%] translate-y-[-50%] opacity-0 transition-opacity delay-75 duration-500 group-hover:opacity-100"
+          >
+            <div
+              class="flex h-64 w-64 items-center justify-center rounded-full bg-white p-5 text-center shadow-2xl"
+            >
+              <Typography
+                className="text-4xl"
+                variant="p"
+              >
+                Visit client
+              </Typography>
+            </div>
+          </div>
+          <div
+            class="relative -my-16 rounded-xl"
+            data-scroll
+            data-scroll-speed="-0.5"
+          >
+            <Image
+              alt=""
+              class="h-70v min-h-50 w-full animate-pulse-bg object-cover transition duration-500 group-hover:scale-[1.05]"
+              decoding="async"
+              loading="lazy"
+              src={schnelltest}
+            />
+          </div>
+        </div>
+      </a>
 
       <div class="mt-14 flex justify-between">
         <Typography
@@ -67,18 +88,7 @@ import schnelltest from "@/assets/images/schnelltest.jpg";
           2019
         </Typography>
       </div>
-      <hr class="my-4 h-0.5 border-0 bg-zinc-200" />
-      <div class="mb-24 flex justify-end">
-        <Typography
-          className="cursor-pointer p-0"
-          component="a"
-          href="https://schnelltest-clp.de"
-          target="_blank"
-          variant="p"
-        >
-          <span class="link-underline link-underline-black">Visit client</span>
-        </Typography>
-      </div>
+      <hr class="my-4 mb-24 h-0.5 border-0 bg-zinc-200" />
 
       <Typography
         className="animate-fade animate-once"
