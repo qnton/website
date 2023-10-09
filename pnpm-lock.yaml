@@ -9,8 +9,8 @@ dependencies:
     specifier: ^3.0.0
     version: 3.0.0
   '@astrojs/tailwind':
-    specifier: ^5.0.0
-    version: 5.0.0(astro@3.2.3)(tailwindcss@3.3.3)
+    specifier: ^5.0.1
+    version: 5.0.1(astro@3.2.3)(tailwindcss@3.3.3)
   astro:
     specifier: 3.2.3
     version: 3.2.3
@@ -139,10 +139,10 @@ packages:
       zod: 3.21.1
     dev: false
 
-  /@astrojs/tailwind@5.0.0(astro@3.2.3)(tailwindcss@3.3.3):
-    resolution: {integrity: sha512-bMZZNNm/SW+ijUKMQDhdiuNWDdR3CubEKUHb2Ran4Arx1ikWn/kKIkFDXUV+MUnsLa7s19x9VMRlARRyKbqMkQ==}
+  /@astrojs/tailwind@5.0.1(astro@3.2.3)(tailwindcss@3.3.3):
+    resolution: {integrity: sha512-HzguDH+q1v8NhZIu245UtXfz5tuy4IAd/TND92z5vyftYtGdjDLdBeHhMH4Wd91/0sIPPNRz9NUfToprI636YQ==}
     peerDependencies:
-      astro: ^3.0.0
+      astro: ^3.2.3
       tailwindcss: ^3.0.24
     dependencies:
       astro: 3.2.3
@@ -1370,22 +1370,6 @@ packages:
 
   /ast-types-flow@0.0.7:
     resolution: {integrity: sha512-eBvWn1lvIApYMhzQMsu9ciLfkBY499mFZlNqG+/9WR7PVlroQw0vG30cOQQbaKz3sCEc44TAOu2ykzqXSNnwag==}
-    dev: true
-
-  /astro-eslint-parser@0.15.0:
-    resolution: {integrity: sha512-iC3VvAS/o6TX92Frwp5Yht/AO3a2tQhCnOe9CdbiICwy+ZYTH/ZOiBxeXI2I5qE1YlbtP2wvBLr+SCgwOAEZvg==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    dependencies:
-      '@astrojs/compiler': 2.1.0
-      '@typescript-eslint/scope-manager': 5.62.0
-      '@typescript-eslint/types': 5.62.0
-      astrojs-compiler-sync: 0.3.3(@astrojs/compiler@2.1.0)
-      debug: 4.3.4
-      eslint-visitor-keys: 3.4.3
-      espree: 9.6.1
-      semver: 7.5.4
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   /astro-eslint-parser@0.16.0:
