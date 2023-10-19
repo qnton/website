@@ -14,7 +14,7 @@
     "lint:check": "eslint 'src/**/*.{js,astro,tsx,ts,js}'"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.0.0",
+    "@astrojs/sitemap": "^3.0.2",
     "@astrojs/tailwind": "^5.0.0",
     "astro": "3.2.3",
     "astro-robots-txt": "^1.0.0",
