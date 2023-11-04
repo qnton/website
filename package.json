@@ -14,28 +14,29 @@
     "lint:check": "eslint 'src/**/*.{js,astro,tsx,ts,js}'"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.0.0",
-    "@astrojs/tailwind": "^5.0.0",
-    "astro": "3.0.12",
+    "@astrojs/sitemap": "^3.0.3",
+    "@astrojs/tailwind": "^5.0.2",
+    "astro": "3.4.3",
     "astro-robots-txt": "^1.0.0",
     "clsx": "^2.0.0",
     "locomotive-scroll": "^4.1.4",
-    "tailwind-merge": "^1.14.0",
-    "tailwindcss-animated": "^1.0.1",
-    "typescript": "^5.2.2"
+    "tailwind-merge": "^2.0.0",
+    "tailwindcss-animated": "^1.0.1"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.7.0",
-    "astro-eslint-parser": "^0.15.0",
-    "eslint": "^8.49.0",
+    "@typescript-eslint/eslint-plugin": "^6.9.1",
+    "astro-eslint-parser": "^0.16.0",
+    "eslint": "^8.53.0",
     "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-astro": "^0.29.0",
-    "eslint-plugin-jsx-a11y": "^6.7.1",
-    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-astro": "^0.29.1",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-tailwindcss": "^3.13.0",
     "prettier": "^3.0.3",
-    "prettier-plugin-astro": "^0.12.0",
-    "prettier-plugin-tailwindcss": "^0.5.4"
+    "prettier-plugin-astro": "^0.12.1",
+    "prettier-plugin-tailwindcss": "^0.5.6",
+    "sharp": "^0.32.6",
+    "typescript": "^5.2.2"
   }
 }
