@@ -16,7 +16,7 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.0.3",
     "@astrojs/tailwind": "^5.0.2",
-    "astro": "3.4.3",
+    "astro": "3.6.4",
     "astro-robots-txt": "^1.0.0",
     "clsx": "^2.0.0",
     "locomotive-scroll": "^4.1.4",
