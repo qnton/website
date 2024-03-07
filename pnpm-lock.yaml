@@ -4184,15 +4184,12 @@ packages:
       fsevents: 2.3.2
     dev: false
 
-<<<<<<< HEAD
   /pnpm@8.15.4:
     resolution: {integrity: sha512-C9Opvp6w6aaSZ23uwAowO6IYuiedmSQUdWFrOY267t0RFG+SwoQ0WPVXsdEn4J1MFx4QW9zWthACs5aFqAFrng==}
     engines: {node: '>=16.14'}
     hasBin: true
     dev: true
 
-=======
->>>>>>> 6bcc7df (parent 4de66044f1a579e833288b4241fdc21e9bc6bbb2)
   /postcss-import@15.1.0(postcss@8.4.33):
     resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}
     engines: {node: '>=14.0.0'}
