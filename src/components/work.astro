@@ -24,7 +24,7 @@ const { image, link, year, title, description, className, alt } = Astro.props;
         class="absolute left-[50%] top-[50%] z-10 translate-x-[-50%] translate-y-[-50%] opacity-0 transition-opacity delay-75 duration-500 group-hover:opacity-100"
       >
         <div
-          class="flex h-64 w-64 items-center justify-center rounded-full bg-white p-5 text-center shadow-2xl"
+          class="flex !h-64 !w-64 items-center justify-center rounded-full bg-white p-5 text-center shadow-2xl"
         >
           <Typography
             className="text-4xl"
@@ -43,8 +43,10 @@ const { image, link, year, title, description, className, alt } = Astro.props;
           alt={alt}
           class={`h-70v min-h-50 w-full animate-pulse-bg object-cover transition duration-500 group-hover:scale-[1.05] ${className}`}
           decoding="async"
+          height={1080}
           loading="lazy"
           src={image}
+          width={1980}
         />
       </div>
     </div>

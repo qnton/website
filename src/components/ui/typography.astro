@@ -1,5 +1,5 @@
 ---
-import { cn } from "@/libs/utils";
+import { merge } from "@/libs/merge";
 
 interface Props {
   variant: "h1" | "h2" | "p";
@@ -21,7 +21,7 @@ const textSize: any = {
 ---
 
 <Element
-  class={cn(textSize[variant], className, "leading-tight")}
+  class={merge(textSize[variant], className, "leading-tight")}
   {...props}
 >
   <slot />

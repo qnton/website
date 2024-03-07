@@ -24,6 +24,16 @@ const { page } = Astro.props;
         <Typography
           className="cursor-pointer text-3xl opacity-60 transition-opacity duration-300 hover:opacity-100"
           component="a"
+          href="/resume.pdf"
+          variant="p"
+        >
+          Résumé
+        </Typography>
+      </li>
+      <li>
+        <Typography
+          className="cursor-pointer text-3xl opacity-60 transition-opacity duration-300 hover:opacity-100"
+          component="a"
           href={page !== "legal-notice" ? "/legal-notice" : "#"}
           variant="p"
         >
