@@ -18,6 +18,8 @@ module.exports = {
   rules: {
     "no-console": 1,
     "prettier/prettier": 2,
+    "eol-last": 1,
+    "no-multiple-empty-lines": ["error", { max: 1, maxEOF: 1 }],
     "react/jsx-sort-props": [
       2,
       {
