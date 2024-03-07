@@ -9,18 +9,5 @@ export default defineConfig({
   output: "static",
   compressHTML: true,
   trailingSlash: "never",
-  redirects: {
-    "/github": {
-      status: 302,
-      destination: "https://github.com/qnton",
-    },
-    "/linkedin": {
-      status: 302,
-      destination: "https://www.linkedin.com/in/qnton",
-    },
-    "/mail": {
-      status: 302,
-      destination: "mailto:hello@qnt.one",
-    },
-  },
+  server: { port: 3000 },
 });

@@ -1,0 +1,359 @@
+---
+import "@/styles/globals.css";
+
+import Typography from "@/components/ui/typography.astro";
+---
+
+<html
+  class="[all:unset]"
+  lang="en"
+>
+  <head>
+    <meta charset="utf-8" />
+    <title>Resume - Anton Werschinin</title>
+  </head>
+  <body
+    class="grid min-h-screen place-items-center bg-neutral-50 font-satoshi-regular selection:bg-neutral-200 print:min-h-0 print:bg-white"
+  >
+    <main
+      class="m-4 w-[210mm] overflow-hidden bg-white p-8 shadow-2xl print:m-0 print:w-screen print:shadow-none"
+    >
+      <section
+        class="flex justify-between"
+        id="header"
+      >
+        <div>
+          <Typography
+            className="text-xs"
+            variant="p"
+          >
+            Anton Werschinin<br />
+            Cloppenburg, Lower Saxony, Germany
+          </Typography>
+        </div>
+        <div>
+          <Typography
+            className="text-right text-xs text-zinc-400"
+            variant="p"
+          >
+            hello@qnt.one
+          </Typography>
+        </div>
+      </section>
+      <section
+        class="mt-32 grid grid-cols-12 gap-4"
+        id="experience"
+      >
+        <Typography
+          className="col-span-3 text-xs"
+          variant="p"
+        >
+          Experience
+        </Typography>
+        <div class="col-span-9">
+          <div class="flex justify-between">
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              Apprentice, AMCON Software GmbH
+            </Typography>
+
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              Aug 2021 - Present
+            </Typography>
+          </div>
+          <Typography
+            className="mt-2 text-xs text-zinc-400"
+            variant="p"
+          >
+            Contributed to webshop and web solution development for public
+            transportation firms as an apprentice at AMCON Software GmbH.
+            Utilized TypeScript, React, and C# to develop innovative solutions,
+            enhancing my proficiency in web development.
+          </Typography>
+
+          <div class="flex justify-between">
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              Full Stack Developer, Self-Employed
+            </Typography>
+
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              Jan 2019 - Present
+            </Typography>
+          </div>
+          <Typography
+            className="mt-2 text-xs text-zinc-400"
+            variant="p"
+          >
+            Developed dynamic websites for clients as a self-employed website
+            developer. Delivered high-quality websites tailored to client needs
+            while maintaining focus on performance and security standards.
+          </Typography>
+
+          <div class="flex justify-between">
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              Freelancer, LOIBL-Nighteyes
+            </Typography>
+
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              Dec 2023 - Jan 2024
+            </Typography>
+          </div>
+          <Typography
+            className="mt-2 text-xs text-zinc-400"
+            variant="p"
+          >
+            Developed LOIBL NIGHTEYES, an advanced online platform showcasing
+            night vision and thermal imaging technologies. Implemented the Astro
+            framework hosted on Cloudflare for global accessibility and
+            optimized performance.
+          </Typography>
+
+          <div class="flex justify-between">
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              Freelancer, HM Medizintechnik GmbH & CO. KG
+            </Typography>
+
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              Jan 2023 - Feb 2023
+            </Typography>
+          </div>
+          <Typography
+            className="mt-2 text-xs text-zinc-400"
+            variant="p"
+          >
+            Overhauled HM Medizintechnik's website with a modern design
+            approach. Leveraged Cloudflare Workers to streamline backend
+            processes, ensuring swift confirmations and efficient data
+            management.
+          </Typography>
+
+          <div class="flex justify-between">
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              Freelancer, Hankens-Testzentrum
+            </Typography>
+
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              Apr 2022 - May 2023
+            </Typography>
+          </div>
+          <Typography
+            className="mt-2 text-xs text-zinc-400"
+            variant="p"
+          >
+            Developed a website as part of the rapid testing project in
+            collaboration with Hankens-Apotheke. Facilitated test center
+            discovery through an interactive map interface, allowing users to
+            explore and select centers effortlessly.
+          </Typography>
+
+          <div class="flex justify-between">
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              Freelancer, Schnelltest-Cloppenburg
+            </Typography>
+
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              Dec 2019 - May 2023
+            </Typography>
+          </div>
+          <Typography
+            className="mt-2 text-xs text-zinc-400"
+            variant="p"
+          >
+            Responded to an urgent client need during the pandemic's onset by
+            swiftly developing a comprehensive COVID-19 testing solution.
+            Created an appointment booking portal with an integrated payment
+            gateway, a management dashboard, and a real-time rapid testing
+            system for events. Effectively managed millions of weekly requests
+            and enhanced security measures.
+          </Typography>
+
+          <div class="flex justify-between">
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              Design Intern, Großmann Druck & Werbetechnik
+            </Typography>
+
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              Aug 2019 - Jul 2020
+            </Typography>
+          </div>
+          <Typography
+            className="mt-2 text-xs text-zinc-400"
+            variant="p"
+          >
+            Gained valuable experience in customer and client engagement during
+            my design internship.
+          </Typography>
+
+          <div class="flex justify-between">
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              Freelancer, Desimano
+            </Typography>
+
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              Nov 2019 - Dec 2019
+            </Typography>
+          </div>
+          <Typography
+            className="mt-2 text-xs text-zinc-400"
+            variant="p"
+          >
+            Collaborated with a client to develop an efficient online shop for
+            contactless hand sanitizer dispensers. Effectively showcased the
+            products, resulting in a seamless platform that empowered customers
+            to explore and purchase innovative solutions effortlessly.
+          </Typography>
+        </div>
+      </section>
+
+      <div class="break-before-page"></div>
+
+      <section
+        class="mt-12 grid grid-cols-12 gap-4"
+        id="education"
+      >
+        <Typography
+          className="col-span-3 text-xs"
+          variant="p"
+        >
+          Education
+        </Typography>
+        <div class="col-span-9">
+          <div class="flex justify-between">
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              Bbs Technik Cloppenburg
+            </Typography>
+
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              2021 - 2024
+            </Typography>
+          </div>
+          <Typography
+            className="mt-2 text-xs text-zinc-400"
+            variant="p"
+          >
+            Qualified Vocational Training Qualification, Information Technology
+          </Typography>
+
+          <div class="flex justify-between">
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              Bbs Technik Cloppenburg
+            </Typography>
+
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              2019 - 2021
+            </Typography>
+          </div>
+          <Typography
+            className="mt-2 text-xs text-zinc-400"
+            variant="p"
+          >
+            General Technical College Entrance Qualification, Graphic Design
+          </Typography>
+        </div>
+      </section>
+      <section
+        class="mt-12 grid grid-cols-12 gap-4"
+        id="skills"
+      >
+        <Typography
+          className="col-span-3 text-xs"
+          variant="p"
+        >
+          Skills
+        </Typography>
+        <div class="col-span-9">
+          <div class="flex justify-between">
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              Languages & Frameworks
+            </Typography>
+          </div>
+          <Typography
+            className="mt-2 text-xs text-zinc-400"
+            variant="p"
+          >
+            C# / CSS / HTML / JavaScript / Next.js / Node.js / PHP / Python /
+            React / SQL / TailwindCSS / TypeScript / Wordpress
+          </Typography>
+
+          <div class="flex justify-between">
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              Design & Development Tools
+            </Typography>
+          </div>
+          <Typography
+            className="mt-2 text-xs text-zinc-400"
+            variant="p"
+          >
+            Adobe Illustrator / Adobe Photoshop / Figma / Kubernetes / Rider /
+            Visual Studio Code / Webstorm
+          </Typography>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
