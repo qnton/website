@@ -1,7 +1,10 @@
 # build output
 dist/
 # generated types
-.astro/
+.astro/*
+
+# Exclude all files under .astro folder except settings.json
+!.astro/settings.json
 
 # dependencies
 node_modules/
