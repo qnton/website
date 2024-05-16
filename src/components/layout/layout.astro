@@ -11,10 +11,14 @@ interface Props {
   clean?: boolean;
   footer?: boolean;
   header?: boolean;
-  ogimage?: string;
+  imageText: string;
+  description: string;
 }
 
-const { title, page, clean, footer, header, ogimage } = Astro.props;
+const { title, page, clean, footer, header, imageText, description } =
+  Astro.props;
+
+const OGImageURL = `https://og.qnt.one/?header=${encodeURIComponent(imageText)}`;
 
 /* Structured Data */
 const schema = {
@@ -77,6 +81,7 @@ const schema = {
 
 <html lang="en">
   <head>
+    <meta charset="utf-8" />
     <meta
       content="text/html; charset=UTF-8"
       http-equiv="content-type"
@@ -85,25 +90,31 @@ const schema = {
       content="default-src * 'self' 'unsafe-eval' 'unsafe-inline'"
       http-equiv="Content-Security-Policy"
     />
-    <meta charset="utf-8" />
+    <meta
+      content="width=device-width,initial-scale=1"
+      name="viewport"
+    />
+
+    <title>{title}</title>
+    <meta
+      content={description}
+      name="description"
+    />
     <meta
       content="#fafafa"
       name="theme-color"
     />
     <meta
-      content="width=device-width,initial-scale=1"
-      name="viewport"
+      content={OGImageURL}
+      name="image"
     />
+
     <meta
-      content="I am a web developer and designer specializing in creating visually stunning and functional websites."
-      name="description"
-    />
-    <meta
-      content="I am a web developer and designer specializing in creating visually stunning and functional websites."
+      content={description}
       property="og:description"
     />
     <meta
-      content={ogimage}
+      content={OGImageURL}
       property="og:image"
     />
     <meta
@@ -115,14 +126,35 @@ const schema = {
       property="og:image:height"
     />
     <meta
-      content="qnt.one"
-      property="og:site_name"
-    />
-    <meta
-      content="Anton Werschinin"
+      content={title}
       property="og:title"
     />
-    <title>{title}</title>
+
+    <meta
+      content={description}
+      name="twitter:description"
+    />
+    <meta
+      content={title}
+      name="twitter:title"
+    />
+    <meta
+      content="summary_large_image"
+      name="twitter:card"
+    />
+    <meta
+      content={OGImageURL}
+      name="twitter:image:src"
+    />
+    <meta
+      content="1200"
+      name="twitter:image:width"
+    />
+    <meta
+      content="630"
+      name="twitter:image:height"
+    />
+
     <link
       href="/favicon.ico"
       rel="icon"
