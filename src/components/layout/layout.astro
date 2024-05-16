@@ -11,9 +11,10 @@ interface Props {
   clean?: boolean;
   footer?: boolean;
   header?: boolean;
+  ogimage?: string;
 }
 
-const { title, page, clean, footer, header } = Astro.props;
+const { title, page, clean, footer, header, ogimage } = Astro.props;
 
 /* Structured Data */
 const schema = {
@@ -101,11 +102,11 @@ const schema = {
       property="og:description"
     />
     <meta
-      content="https://qnt.one/logo.png"
+      content={ogimage}
       property="image"
     />
     <meta
-      content="https://qnt.one/logo.png"
+      content={ogimage}
       property="og:image"
     />
     <meta
