@@ -17,7 +17,7 @@ jobs:
       run: echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin ${{ secrets.REGISTRY_URL }}
 
     - name: Build Docker image
-      run: docker build -t ${{ secrets.REGISTRY_URL }}/${{ secrets.NAME }}:latest -f docker/Dockerfile .
+      run: docker build -t ${{ secrets.REGISTRY_URL }}/qnton:latest -f docker/Dockerfile .
 
     - name: Push Docker image
-      run: docker push ${{ secrets.REGISTRY_URL }}/${{ secrets.NAME }}:latest
+      run: docker push ${{ secrets.REGISTRY_URL }}/qnton:latest
