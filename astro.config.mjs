@@ -5,7 +5,19 @@ import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: "https://qnt.one/",
-  integrations: [tailwind(), sitemap(), robotsTxt()],
+  integrations: [
+    tailwind(),
+    sitemap(),
+    robotsTxt({
+      policy: [
+        {
+          userAgent: "*",
+          allow: "/",
+          disallow: ["/resume", "/resume.pdf"],
+        },
+      ],
+    }),
+  ],
   output: "static",
   compressHTML: true,
   trailingSlash: "never",
