@@ -18,7 +18,7 @@ const { image, link, year, title, description, className, alt } = Astro.props;
 <figure class="odd:my-15v last:odd:mb-0">
   <a href={link}>
     <div
-      class="group mt-12 animate-fade-left cursor-pointer overflow-hidden rounded-lg animate-delay-100 animate-once"
+      class="group animate-fade-left cursor-pointer overflow-hidden rounded-lg animate-delay-100 animate-once"
     >
       <div
         class="absolute left-[50%] top-[50%] z-10 translate-x-[-50%] translate-y-[-50%] opacity-0 transition-opacity delay-75 duration-500 group-hover:opacity-100"
@@ -43,10 +43,10 @@ const { image, link, year, title, description, className, alt } = Astro.props;
           alt={alt}
           class={`h-70v min-h-50 w-full animate-pulse-bg object-cover transition duration-500 group-hover:scale-105 ${className}`}
           decoding="async"
+          height={1080}
           loading="lazy"
-          sizes={`(max-width: 640px) 768px, (max-width: 768px) 1024px, (max-width: 1024px) 1280px, (max-width: 1280px) 1536px, ${image.width}px`}
           src={image}
-          widths={[768, 1024, 1280, 1536, image.width]}
+          width={1980}
         />
       </div>
     </div>
