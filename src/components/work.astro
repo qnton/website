@@ -43,10 +43,10 @@ const { image, link, year, title, description, className, alt } = Astro.props;
           alt={alt}
           class={`h-70v min-h-50 w-full animate-pulse-bg object-cover transition duration-500 group-hover:scale-105 ${className}`}
           decoding="async"
-          height={1080}
           loading="lazy"
+          sizes={`(max-width: 640px) 768px, (max-width: 768px) 1024px, (max-width: 1024px) 1280px, (max-width: 1280px) 1536px, ${image.width}px`}
           src={image}
-          width={1980}
+          widths={[768, 1024, 1280, 1536, image.width]}
         />
       </div>
     </div>
