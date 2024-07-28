@@ -6,8 +6,8 @@ interface Props {
   image: any;
   link: string;
   year: string;
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
   className: string;
   alt: string;
   single?: boolean;
@@ -53,29 +53,26 @@ const { image, link, year, title, description, className, alt, single } =
       </div>
     </div>
   </a>
-  {
-    (title || description) && (
-      <figcaption class="mt-12 w-full justify-between lg:flex">
-        <div class="animate-fade animate-once">
-          <Typography
-            className="cursor-pointer"
-            component="a"
-            href={link}
-            variant="p"
-          >
-            <span class="link-underline link-underline-black">
-              {title} - "{year}"
-            </span>
-          </Typography>
-        </div>
 
-        <Typography
-          className="mt-6 animate-fade animate-once lg:mt-0"
-          variant="p"
-        >
-          {description}
-        </Typography>
-      </figcaption>
-    )
-  }
+  <figcaption class="mt-12 w-full justify-between lg:flex">
+    <div class="animate-fade animate-once">
+      <Typography
+        className="cursor-pointer"
+        component="a"
+        href={link}
+        variant="p"
+      >
+        <span class="link-underline link-underline-black">
+          {title} - "{year}"
+        </span>
+      </Typography>
+    </div>
+
+    <Typography
+      className="mt-6 animate-fade animate-once lg:mt-0"
+      variant="p"
+    >
+      {description}
+    </Typography>
+  </figcaption>
 </figure>
