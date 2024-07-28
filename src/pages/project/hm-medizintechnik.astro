@@ -1,10 +1,10 @@
 ---
 import Layout from "@/components/layout/layout.astro";
 import Typography from "@/components/ui/typography.astro";
-
 import { Image } from "astro:assets";
-
 import hm from "@/assets/images/hm-medizintechnik.jpg";
+import hankens from "@/assets/images/hankens.jpg";
+import Work from "@/components/work.astro";
 ---
 
 <Layout
@@ -19,48 +19,32 @@ import hm from "@/assets/images/hm-medizintechnik.jpg";
     class="mx-5 flex flex-col items-center justify-center pb-64 pt-15v"
     data-scroll-container
   >
-    <section class="pt-5v lg:min-w-[100rem] lg:max-w-100">
+    <section class="pt-5v lg:min-w-[110rem] lg:max-w-[110rem]">
       <Typography
-        className="inline-block animate-fade-left text-6xl animate-once lg:text-7xl"
+        className="inline-block animate-fade text-6xl animate-once lg:text-7xl"
         variant="h1"
       >
         HM-Medizintechnik Website Revamp - "2023"
       </Typography>
 
-      <a href="https://hm-medizintechnik.de/">
+      <div class="mt-12 animate-fade overflow-hidden rounded-lg animate-once">
         <div
-          class="group mt-12 animate-fade-left cursor-pointer overflow-hidden rounded-lg animate-delay-100 animate-once"
+          class="relative -my-16 rounded-xl"
+          data-scroll
+          data-scroll-speed="-0.5"
         >
-          <div
-            class="absolute left-[50%] top-[50%] z-10 translate-x-[-50%] translate-y-[-50%] opacity-0 transition-opacity delay-75 duration-500 group-hover:opacity-100"
-          >
-            <div
-              class="flex !h-64 !w-64 items-center justify-center rounded-full bg-white p-5 text-center shadow-2xl"
-            >
-              <Typography
-                className="text-4xl"
-                variant="p"
-              >
-                Visit client
-              </Typography>
-            </div>
-          </div>
-          <div
-            class="relative -my-16 rounded-xl"
-            data-scroll
-            data-scroll-speed="-0.5"
-          >
-            <Image
-              alt="HM Medizintechnik website on a phone"
-              class="h-70v min-h-50 w-full animate-pulse-bg object-cover transition duration-500 group-hover:scale-105"
-              decoding="async"
-              loading="lazy"
-              src={hm}
-            />
-          </div>
+          <Image
+            alt="HM Medizintechnik website on a phone"
+            class="h-70v min-h-50 w-full animate-pulse-bg object-cover transition duration-500"
+            decoding="async"
+            loading="lazy"
+            src={hm}
+          />
         </div>
-      </a>
+      </div>
+    </section>
 
+    <section class="lg:min-w-[108rem] lg:max-w-[108rem]">
       <Typography
         className="animate-fade animate-once"
         variant="h2"
@@ -69,7 +53,7 @@ import hm from "@/assets/images/hm-medizintechnik.jpg";
       </Typography>
 
       <Typography
-        className="animate-fade text-zinc-400 animate-once md:max-w-[90rem]"
+        className="animate-fade text-zinc-400 animate-once"
         variant="p"
       >
         In partnership with <a
@@ -81,7 +65,7 @@ import hm from "@/assets/images/hm-medizintechnik.jpg";
       </Typography>
 
       <Typography
-        className="animate-fade text-zinc-400 animate-once md:max-w-[90rem]"
+        className="animate-fade text-zinc-400 animate-once"
         variant="p"
       >
         Leveraging Cloudflare Workers, we streamlined backend processes, storing
@@ -90,7 +74,7 @@ import hm from "@/assets/images/hm-medizintechnik.jpg";
       </Typography>
 
       <Typography
-        className="animate-fade text-zinc-400 animate-once md:max-w-[90rem]"
+        className="animate-fade text-zinc-400 animate-once"
         variant="p"
       >
         Our collaboration seamlessly merged design finesse with technical
@@ -98,27 +82,25 @@ import hm from "@/assets/images/hm-medizintechnik.jpg";
       </Typography>
     </section>
 
-    <section class="w-full pt-5v text-right lg:min-w-[100rem] lg:max-w-100">
+    <section class="w-full pt-5v lg:min-w-[110rem] lg:max-w-[110rem]">
       <Typography
-        className="mb-0 animate-fade animate-once"
+        className="animate-fade animate-once"
         component="h1"
-        variant="p"
+        variant="h1"
       >
         Next project:
       </Typography>
 
-      <div class="animate-fade-left animate-delay-300 animate-once">
-        <Typography
-          className="cursor-pointer"
-          component="a"
-          href="/project/hankens-testzentrum"
-          variant="h1"
-        >
-          <span class="link-underline link-underline-black">
-            Hankens-Testzentrum
-          </span>
-        </Typography>
-      </div>
+      <Work
+        alt="Hankens testzentrum website on a phone"
+        className="h-50v object-[50%_50%]"
+        description="A platform enabling users to easily locate nearby COVID-19 testing centers."
+        image={hankens}
+        link="/project/hankens-testzentrum"
+        single
+        title="Hankens"
+        year="2022"
+      />
     </section>
   </main>
 </Layout>
