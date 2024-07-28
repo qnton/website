@@ -6,8 +6,8 @@ interface Props {
   image: any;
   link: string;
   year: string;
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   className: string;
   alt: string;
   single?: boolean;
@@ -20,7 +20,7 @@ const { image, link, year, title, description, className, alt, single } =
 <figure class={single ? undefined : "odd:my-15v last:odd:mb-0"}>
   <a href={link}>
     <div
-      class="group animate-fade cursor-pointer overflow-hidden rounded-lg animate-once"
+      class="group relative animate-fade cursor-pointer overflow-hidden rounded-lg animate-delay-100 animate-once"
     >
       <div
         class="absolute left-[50%] top-[50%] z-10 translate-x-[-50%] translate-y-[-50%] opacity-0 transition-opacity delay-75 duration-500 group-hover:opacity-100"
@@ -53,9 +53,8 @@ const { image, link, year, title, description, className, alt, single } =
       </div>
     </div>
   </a>
-
   <figcaption class="mt-12 w-full justify-between lg:flex">
-    <div class="animate-fade animate-once">
+    <div class="animate-fade animate-delay-200 animate-once">
       <Typography
         className="cursor-pointer"
         component="a"
@@ -69,7 +68,7 @@ const { image, link, year, title, description, className, alt, single } =
     </div>
 
     <Typography
-      className="mt-6 animate-fade animate-once lg:mt-0"
+      className="mt-6 animate-fade animate-delay-300 animate-once lg:mt-0"
       variant="p"
     >
       {description}
