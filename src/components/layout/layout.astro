@@ -11,14 +11,12 @@ interface Props {
   clean?: boolean;
   footer?: boolean;
   header?: boolean;
-  imageText: string;
   description: string;
 }
 
-const { title, page, clean, footer, header, imageText, description } =
-  Astro.props;
+const { title, page, clean, footer, header, description } = Astro.props;
 
-const OGImageURL = `https://og.qnt.one/?header=${encodeURIComponent(imageText)}`;
+const OGImageURL = `https://qnt.one/images/${encodeURIComponent(page)}`;
 
 /* Structured Data */
 const schema = {
@@ -30,7 +28,7 @@ const schema = {
     "I am a web developer and designer specializing in creating visually stunning and functional websites.",
   url: "https://qnt.one",
   email: "hello@qnt.one",
-  image: "https://qnt.one/logo.png",
+  image: "https://qnt.one/images/logo.png",
   address: {
     "@type": "PostalAddress",
     streetAddress: "Hinterm Wall 28",
