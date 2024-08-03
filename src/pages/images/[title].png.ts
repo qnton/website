@@ -54,7 +54,7 @@ export async function GET({ props }: APIContext) {
           width="500" 
         />
       </div>
-      <div class="flex absolute bottom-16 left-16 max-w-[2000px] font-satoshi-light text-[9rem] leading-none">
+      <div class="flex absolute bottom-16 left-16 max-w-[2200px] font-satoshi-light text-[9rem] leading-none">
         ${description}
       </div>
     </div>
