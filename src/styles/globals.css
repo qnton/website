@@ -6,7 +6,7 @@ html {
 }
 
 body {
-  @apply bg-neutral-50 font-satoshi-regular text-zinc-800 selection:bg-neutral-200;
+  @apply bg-neutral-50 font-satoshi-regular text-zinc-800 selection:bg-neutral-900/10;
 }
 
 .link-underline-black {
