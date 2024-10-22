@@ -20,7 +20,9 @@ const { image, link, year, title, description, className, alt, single } =
 <figure class={single ? undefined : "odd:my-15v last:odd:mb-0"}>
   <a href={link}>
     <div
-      class="group relative animate-fade cursor-pointer overflow-hidden rounded-lg animate-delay-100 animate-once"
+      class="group relative cursor-pointer overflow-hidden rounded-lg animate-delay-100 animate-once"
+      data-scroll
+      data-scroll-class="animate-fade"
     >
       <div
         class="absolute left-[50%] top-[50%] z-10 translate-x-[-50%] translate-y-[-50%] opacity-0 transition-opacity delay-75 duration-500 group-hover:opacity-100"
@@ -54,7 +56,11 @@ const { image, link, year, title, description, className, alt, single } =
     </div>
   </a>
   <figcaption class="mt-12 w-full justify-between lg:flex">
-    <div class="animate-fade animate-delay-200 animate-once">
+    <div
+      class="animate-delay-200 animate-once"
+      data-scroll
+      data-scroll-class="animate-fade"
+    >
       <Typography
         className="cursor-pointer"
         component="a"
@@ -68,7 +74,9 @@ const { image, link, year, title, description, className, alt, single } =
     </div>
 
     <Typography
-      className="mt-6 animate-fade animate-delay-300 animate-once lg:mt-0"
+      className="mt-6 animate-delay-300 animate-once lg:mt-0"
+      data-scroll
+      data-scroll-class="animate-fade"
       variant="p"
     >
       {description}
