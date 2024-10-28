@@ -20,7 +20,7 @@ const { image, link, year, title, description, className, alt, single } =
 <figure class={single ? undefined : "odd:my-15v last:odd:mb-0"}>
   <a href={link}>
     <div
-      class="group relative cursor-pointer overflow-hidden rounded-lg animate-delay-100 animate-once"
+      class="group relative cursor-pointer overflow-hidden rounded-lg opacity-0 animate-delay-100 animate-once"
       data-scroll
       data-scroll-class="animate-fade"
     >
@@ -57,7 +57,7 @@ const { image, link, year, title, description, className, alt, single } =
   </a>
   <figcaption class="mt-12 w-full justify-between lg:flex">
     <div
-      class="animate-delay-200 animate-once"
+      class="opacity-0 animate-delay-200 animate-once"
       data-scroll
       data-scroll-class="animate-fade"
     >
@@ -74,7 +74,7 @@ const { image, link, year, title, description, className, alt, single } =
     </div>
 
     <Typography
-      className="mt-6 animate-delay-300 animate-once lg:mt-0"
+      className="mt-6 opacity-0 animate-delay-300 animate-once lg:mt-0"
       data-scroll
       data-scroll-class="animate-fade"
       variant="p"
