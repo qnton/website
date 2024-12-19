@@ -17,7 +17,6 @@ body {
   @apply border-b-0 bg-[length:100%_1px] bg-[0_100%] bg-no-repeat transition-[background] duration-200 ease-in-out hover:bg-[length:0_1px] hover:bg-[0_100%];
 }
 
-
 /* Locomotive Scroll */
 
 html.has-smooth-scroll {
