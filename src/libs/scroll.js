@@ -8,9 +8,15 @@ const scroll = () =>
       const options = {
         el: container,
         smooth: true,
-        tablet: {
-          smooth: false,
-          breakpoint: 0,
+        lerp: 0.1,
+        multiplier: 1,
+        reloadOnContextChange: true,
+        touchMultiplier: 2,
+        smoothMobile: true,
+        smartphone: {
+            smooth: true,
+            lerp: 2,
+            breakpoint: 0
         },
       };
 

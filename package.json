@@ -6,6 +6,7 @@
     "astro": "astro",
     "build": "astro build",
     "dev": "astro dev",
+    "dev:host": "astro dev --host",
     "format:check": "prettier --check \"**/*.{ts,tsx,md,js,jsx,json,mdx,astro,css}\"",
     "format": "prettier --write \"**/*.{ts,tsx,md,js,jsx,json,mdx,astro,css}\"",
     "generate-pdf:ci": "start-server-and-test http://localhost:3000 generate-pdf",
