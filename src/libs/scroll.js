@@ -11,12 +11,12 @@ const scroll = () =>
         multiplier: 1,
         mobile: {
           smooth: true,
-          multiplier: 1,
+          multiplier: 2,
           breakpoint: 0,
         },
         tablet: {
           smooth: true,
-          multiplier: 1,
+          multiplier: 2,
           breakpoint: 0,
         },
       };
