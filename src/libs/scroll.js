@@ -8,15 +8,8 @@ const scroll = () =>
       const options = {
         el: container,
         smooth: true,
-        multiplier: 1,
-        mobile: {
-          smooth: true,
-          multiplier: 2,
-          breakpoint: 0,
-        },
         tablet: {
-          smooth: true,
-          multiplier: 2,
+          smooth: false,
           breakpoint: 0,
         },
       };
