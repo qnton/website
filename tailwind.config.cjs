@@ -16,6 +16,15 @@ module.exports = {
       animation: {
         "pulse-bg": "pulse-bg 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
+      backgroundImage: ({ theme }) => ({
+        header: `linear-gradient(to bottom, 
+          ${theme("colors.neutral.50/1")} 0%, 
+          ${theme("colors.neutral.50/0.95")} 10%, 
+          ${theme("colors.neutral.50/0.8")} 25%, 
+          ${theme("colors.neutral.50/0.5")} 50%, 
+          ${theme("colors.neutral.50/0.2")} 75%, 
+          ${theme("colors.transparent")} 100%)`,
+      }),
       fontFamily: {
         "satoshi-light": ["Satoshi-Light"],
         "satoshi-regular": ["Satoshi-Regular"],
