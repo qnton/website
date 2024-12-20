@@ -14,9 +14,9 @@ const scroll = () =>
         touchMultiplier: 2,
         smoothMobile: true,
         smartphone: {
-            smooth: true,
-            lerp: 2,
-            breakpoint: 0
+          smooth: true,
+          lerp: 2,
+          breakpoint: 0,
         },
       };
 
