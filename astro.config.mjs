@@ -7,6 +7,10 @@ import compressor from "astro-compressor";
 
 export default defineConfig({
   site: "https://qnt.one/",
+  prefetch: {
+    defaultStrategy: 'load',
+    prefetchAll: true
+  },
   integrations: [
     tailwind(),
     sitemap(),
