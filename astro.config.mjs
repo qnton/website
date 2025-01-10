@@ -30,7 +30,7 @@ export default defineConfig({
     compressor(),
   ],
   redirects: {
-    '/old-page': '/new-page'
+    '/ph': 'https://eu.i.posthog.com'
   },
   output: "static",
   compressHTML: true,
