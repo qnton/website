@@ -29,6 +29,9 @@ export default defineConfig({
     }),
     compressor(),
   ],
+  redirects: {
+    '/old-page': '/new-page'
+  },
   output: "static",
   compressHTML: true,
   trailingSlash: "never",
