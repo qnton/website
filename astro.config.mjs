@@ -29,9 +29,6 @@ export default defineConfig({
     }),
     compressor(),
   ],
-  redirects: {
-    '/ph': 'https://eu.i.posthog.com'
-  },
   output: "static",
   compressHTML: true,
   trailingSlash: "never",

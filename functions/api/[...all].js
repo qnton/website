@@ -9,26 +9,26 @@ export async function onRequest(context) {
   const pathWithParams = pathname + search;
 
   if (pathname.startsWith("/static/")) {
-      return retrieveStatic(request, pathWithParams, context);
+    return retrieveStatic(request, pathWithParams, context);
   } else {
-      return forwardRequest(request, pathWithParams);
+    return forwardRequest(request, pathWithParams);
   }
 
   async function retrieveStatic(request, pathname, context) {
-      const cache = caches.default;
-      let response = await cache.match(request);
+    const cache = caches.default;
+    let response = await cache.match(request);
 
-      if (!response) {
-          response = await fetch(`https://${ASSET_HOST}${pathname}`);
-          context.waitUntil(cache.put(request, response.clone()));
-      }
+    if (!response) {
+      response = await fetch(`https://${ASSET_HOST}${pathname}`);
+      context.waitUntil(cache.put(request, response.clone()));
+    }
 
-      return response;
+    return response;
   }
 
   async function forwardRequest(request, pathWithSearch) {
-      const originRequest = new Request(request);
-      originRequest.headers.delete("cookie");
-      return await fetch(`https://${API_HOST}${pathWithSearch}`, originRequest);
+    const originRequest = new Request(request);
+    originRequest.headers.delete("cookie");
+    return await fetch(`https://${API_HOST}${pathWithSearch}`, originRequest);
   }
 }
