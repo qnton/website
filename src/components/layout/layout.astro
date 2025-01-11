@@ -4,7 +4,6 @@ import { ViewTransitions } from "astro:transitions";
 import Header from "@/components/navigation/header.astro";
 import Footer from "@/components/navigation/footer.astro";
 import { fade } from "astro:transitions";
-import Posthog from "@/components/layout/posthog.astro";
 
 interface Props {
   title: string;
@@ -186,7 +185,6 @@ const schema = {
       content={Astro.generator}
       name="generator"
     />
-    <Posthog />
     <ViewTransitions />
   </head>
   <body transition:animate={fade({ duration: "0.4s" })}>
