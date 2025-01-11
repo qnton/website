@@ -1,6 +1,6 @@
 ---
 import "@/styles/globals.css";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 import Header from "@/components/navigation/header.astro";
 import Footer from "@/components/navigation/footer.astro";
 import { fade } from "astro:transitions";
@@ -185,7 +185,7 @@ const schema = {
       content={Astro.generator}
       name="generator"
     />
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body transition:animate={fade({ duration: "0.4s" })}>
     {clean || !header ? "" : <Header page={page} />}
