@@ -43,7 +43,7 @@ export async function getStaticPaths() {
 
 export async function GET({ props }: APIContext) {
   const { description } = props;
-  const font = await fs.readFile("src/styles/fonts/Satoshi-Light.ttf");
+  const font = await fs.readFile("src/styles/fonts/Satoshi-Light.woff");
 
   const template = html(`
     <div class="relative flex h-full flex-col bg-neutral-50">

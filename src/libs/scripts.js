@@ -27,3 +27,16 @@ const scroll = () =>
   })();
 scroll();
 document.addEventListener("astro:after-swap", scroll);
+
+document.addEventListener("astro:before-swap", (event) => {
+  const rootElements = event.newDocument.querySelectorAll("header, footer");
+
+  rootElements.forEach((root) => {
+    const animatedElements = root.querySelectorAll(
+      ".animate-once, .animate-fade",
+    );
+    animatedElements.forEach((el) => {
+      el.classList.remove("animate-once", "animate-fade");
+    });
+  });
+});

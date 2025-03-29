@@ -3,7 +3,6 @@ import tailwind from "@astrojs/tailwind";
 import robotsTxt from "astro-robots-txt";
 import sitemap from "@astrojs/sitemap";
 import mailObfuscation from "astro-mail-obfuscation";
-import compressor from "astro-compressor";
 
 export default defineConfig({
   site: "https://qnt.one/",
@@ -27,7 +26,6 @@ export default defineConfig({
       fallbackText: "Please enable JavaScript!",
       allowedTags: ["address"]
     }),
-    compressor(),
   ],
   output: "static",
   compressHTML: true,
