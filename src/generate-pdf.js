@@ -9,7 +9,7 @@ const main = async () => {
   await page.emulateMedia({ media: "print" });
 
   await page.pdf({
-    path: "public/resume.pdf",
+    path: "public/assets/resume.pdf",
     printBackground: true,
   });
 

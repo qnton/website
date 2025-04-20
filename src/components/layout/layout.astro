@@ -4,6 +4,7 @@ import { ClientRouter } from "astro:transitions";
 import Header from "@/components/navigation/header.astro";
 import Footer from "@/components/navigation/footer.astro";
 import { fade } from "astro:transitions";
+import DevBadge from "@/components/dev-badge.astro";
 
 interface Props {
   title: string;
@@ -188,6 +189,7 @@ const schema = {
     <ClientRouter />
   </head>
   <body transition:animate={fade({ duration: "0.4s" })}>
+    <DevBadge />
     {clean || !header ? "" : <Header page={page} />}
     <div data-scroll-container>
       <slot />

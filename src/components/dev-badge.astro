@@ -1,0 +1,11 @@
+---
+const isDev = import.meta.env.DEV;
+---
+
+{
+  isDev && (
+    <div class="fixed left-0 top-0 z-50 rounded-br-lg bg-green-500 px-3 py-1 text-white opacity-100 transition-opacity duration-200 hover:opacity-0">
+      DEV
+    </div>
+  )
+}
