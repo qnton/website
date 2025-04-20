@@ -2,7 +2,7 @@
 
 html {
   font-display: optional;
-  @apply scroll-smooth text-[2.6666666667vw] sm:text-[1.4097vw] lg:text-[0.5208333333vw];
+  @apply scroll-smooth text-[2.6666666667dvw] sm:text-[1.4097dvw] lg:text-[0.5208333333dvw];
 }
 
 body {
@@ -39,7 +39,7 @@ html.has-scroll-dragging {
 }
 
 [data-scroll-direction="horizontal"] [data-scroll-container] {
-  height: 100vh;
+  height: 100dvh;
   display: inline-block;
   white-space: nowrap;
 }
@@ -56,7 +56,7 @@ html.has-scroll-dragging {
   right: 0;
   top: 0;
   width: 11px;
-  height: 100vh;
+  height: 100dvh;
   z-index: 100;
   transform-origin: center right;
   transition:
@@ -121,7 +121,7 @@ html.has-scroll-smooth {
   right: 0;
   bottom: 0;
   left: 0;
-  width: 100vw;
+  width: 100dvw;
 }
 
 /* Locomotive Scroll */
