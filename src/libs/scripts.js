@@ -8,8 +8,7 @@ const scroll = () =>
       const options = {
         el: container,
         smooth: true,
-        lerp: 0.2,
-        multiplier: 1,
+        touchMultiplier: 2.22,
         reloadOnContextChange: true,
         smartphone: {
           smooth: true,
@@ -36,3 +35,8 @@ document.addEventListener("astro:before-swap", (event) => {
     });
   });
 });
+
+const urlElement = document.getElementById("url");
+if (urlElement) {
+  urlElement.innerHTML = window.location.pathname;
+}
