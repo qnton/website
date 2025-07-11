@@ -21,8 +21,7 @@ const { image, link, year, title, description, className, alt, single } =
   <a href={link}>
     <div
       class="group relative cursor-pointer overflow-hidden rounded-lg opacity-0 animate-delay-100 animate-once"
-      data-scroll
-      data-scroll-class="animate-fade"
+      data-in-view-class="animate-fade"
     >
       <div
         class="absolute left-[50%] top-[50%] z-10 translate-x-[-50%] translate-y-[-50%] opacity-0 transition-opacity delay-75 duration-500 group-hover:opacity-100"
@@ -41,7 +40,6 @@ const { image, link, year, title, description, className, alt, single } =
       <div
         class="relative -my-16 rounded-xl"
         data-scroll
-        data-scroll-speed="-0.5"
       >
         <Image
           alt={alt}
@@ -58,8 +56,7 @@ const { image, link, year, title, description, className, alt, single } =
   <figcaption class="mt-12 w-full justify-between lg:flex">
     <div
       class="opacity-0 animate-delay-200 animate-once"
-      data-scroll
-      data-scroll-class="animate-fade"
+      data-in-view-class="animate-fade"
     >
       <Typography
         className="cursor-pointer"
@@ -75,8 +72,7 @@ const { image, link, year, title, description, className, alt, single } =
 
     <Typography
       className="mt-6 opacity-0 animate-delay-300 animate-once lg:mt-0"
-      data-scroll
-      data-scroll-class="animate-fade"
+      data-in-view-class="animate-fade"
       variant="p"
     >
       {description}
