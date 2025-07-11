@@ -188,10 +188,10 @@ const schema = {
     />
     <ClientRouter />
   </head>
-  <body transition:animate={fade({ duration: "0.4s" })}>
+  <body>
     <DevBadge />
     {clean || !header ? "" : <Header page={page} />}
-    <div data-scroll-container>
+    <div>
       <slot />
       {clean || !footer ? "" : <Footer page={page} />}
     </div>
