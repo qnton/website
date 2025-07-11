@@ -15,7 +15,7 @@ export default defineConfig({
       scriptDirective: {
         strictDynamic: true,
         hashes: [
-          "sha512-af35e85006d82469d2910120b1c6e231687bcecce0a80d03384e30f93a67570fd47d75fe1e855a6190babcc7781bee3eace40e81afdb598e876983b855a4554c"
+          "sha256-XAQ/haDK+8IdENaTMjTqyfA4cRRA6b4FYTYt5nkSH0I="
         ],
       }
     }
