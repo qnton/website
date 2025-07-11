@@ -23,7 +23,7 @@ function initializeScrollObserver() {
 }
 
 function initializeParallaxScroll() {
-  const parallaxSections = document.querySelectorAll('[data-scroll]');
+  const parallaxSections = document.querySelectorAll("[data-scroll]");
 
   const updateParallax = () => {
     const windowHeight = window.innerHeight;
@@ -54,7 +54,6 @@ function initializeParallaxScroll() {
   window.addEventListener("resize", onScroll);
   updateParallax();
 }
-
 
 document.addEventListener("astro:before-swap", (event) => {
   const rootElements = event.newDocument.querySelectorAll("header, footer");
