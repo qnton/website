@@ -23,7 +23,7 @@ function initializeScrollObserver() {
 }
 
 function initializeParallaxScroll() {
-  const parallaxSections = document.querySelectorAll("[data-scroll]");
+  const parallaxSections = document.querySelectorAll("[data-parallax]");
 
   const updateParallax = () => {
     const windowHeight = window.innerHeight;

@@ -6,6 +6,17 @@ import mailObfuscation from "astro-mail-obfuscation";
 
 export default defineConfig({
   site: "https://qnt.one/",
+  experimental: {
+     csp: {
+      algorithm: 'SHA-512',
+      directives: [
+        "default-src * 'self' 'unsafe-eval' 'unsafe-inline'"
+      ],
+      scriptDirective: {
+        strictDynamic: true
+      }
+    }
+  },
   prefetch: {
     defaultStrategy: 'load',
     prefetchAll: true
