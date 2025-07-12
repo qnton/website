@@ -1,8 +1,8 @@
 import { defineConfig } from "astro/config";
-import tailwind from "@astrojs/tailwind";
 import robotsTxt from "astro-robots-txt";
 import sitemap from "@astrojs/sitemap";
 import mailObfuscation from "astro-mail-obfuscation";
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   site: "https://qnt.one/",
@@ -11,7 +11,6 @@ export default defineConfig({
     prefetchAll: true
   },
   integrations: [
-    tailwind(),
     sitemap(),
     robotsTxt({
       policy: [
@@ -31,4 +30,7 @@ export default defineConfig({
   compressHTML: true,
   trailingSlash: "never",
   server: { port: 3000 },
+  vite: {
+    plugins: [tailwindcss()]
+  }
 });

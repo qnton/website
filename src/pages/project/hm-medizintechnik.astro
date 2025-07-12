@@ -16,10 +16,10 @@ import Work from "@/components/work.astro";
   page="hm-medizintechnik"
   title="AW • HM-Medizintechnik"
 >
-  <main class="mx-5 flex flex-col items-center justify-center pb-64 pt-15v">
-    <section class="pt-5v lg:min-w-[110rem] lg:max-w-[110rem]">
+  <main class="pt-15vh mx-5 flex flex-col items-center justify-center pb-64">
+    <section class="pt-5vh lg:max-w-440 lg:min-w-440">
       <Typography
-        className="inline-block text-6xl opacity-0 animate-once lg:text-7xl"
+        className="animate-once noscript:animate-fade inline-block text-6xl opacity-0 lg:text-7xl"
         data-in-view-class="animate-fade"
         variant="h1"
       >
@@ -27,7 +27,7 @@ import Work from "@/components/work.astro";
       </Typography>
 
       <div
-        class="mt-12 overflow-hidden rounded-lg opacity-0 animate-once"
+        class="animate-once noscript:animate-fade mt-12 overflow-hidden rounded-lg opacity-0"
         data-in-view-class="animate-fade"
       >
         <div
@@ -36,7 +36,7 @@ import Work from "@/components/work.astro";
         >
           <Image
             alt="HM Medizintechnik website on a phone"
-            class="h-70v min-h-50 w-full animate-pulse-bg object-cover transition duration-500"
+            class="h-70vh animate-pulse-bg min-h-50 w-full object-cover transition duration-500"
             decoding="async"
             loading="lazy"
             src={hm}
@@ -45,9 +45,9 @@ import Work from "@/components/work.astro";
       </div>
     </section>
 
-    <section class="lg:min-w-[108rem] lg:max-w-[108rem]">
+    <section class="lg:max-w-432 lg:min-w-432">
       <Typography
-        className="opacity-0 animate-once"
+        className="animate-once noscript:animate-fade opacity-0"
         data-in-view-class="animate-fade"
         variant="h2"
       >
@@ -55,7 +55,7 @@ import Work from "@/components/work.astro";
       </Typography>
 
       <Typography
-        className="text-zinc-500 opacity-0 animate-once"
+        className="animate-once noscript:animate-fade text-zinc-500 opacity-0"
         data-in-view-class="animate-fade"
         variant="p"
       >
@@ -68,7 +68,7 @@ import Work from "@/components/work.astro";
       </Typography>
 
       <Typography
-        className="text-zinc-500 opacity-0 animate-once"
+        className="animate-once noscript:animate-fade text-zinc-500 opacity-0"
         data-in-view-class="animate-fade"
         variant="p"
       >
@@ -78,7 +78,7 @@ import Work from "@/components/work.astro";
       </Typography>
 
       <Typography
-        className="text-zinc-500 opacity-0 animate-once"
+        className="animate-once noscript:animate-fade text-zinc-500 opacity-0"
         data-in-view-class="animate-fade"
         variant="p"
       >
@@ -87,9 +87,9 @@ import Work from "@/components/work.astro";
       </Typography>
     </section>
 
-    <section class="w-full pt-15v lg:min-w-[110rem] lg:max-w-[110rem]">
+    <section class="pt-15vh w-full lg:max-w-440 lg:min-w-440">
       <Typography
-        className="opacity-0 animate-once"
+        className="animate-once noscript:animate-fade opacity-0"
         component="h1"
         data-in-view-class="animate-fade"
         variant="h1"
@@ -99,7 +99,7 @@ import Work from "@/components/work.astro";
 
       <Work
         alt="Hankens testzentrum website on a phone"
-        className="h-60v min-h-50 object-[50%_50%]"
+        className="h-60vh min-h-50 object-[50%_50%]"
         description="A platform enabling users to easily locate nearby COVID-19 testing centers."
         image={hankens}
         link="/project/hankens-testzentrum"

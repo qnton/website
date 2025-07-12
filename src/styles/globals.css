@@ -1,18 +1,133 @@
-@import "./satoshi.css";
+@import "tailwindcss";
+@plugin "tailwindcss-animated";
+
+@theme inline {
+  --font-display: "Satoshi", "sans-serif";
+  --breakpoint-3xl: 1920px;
+  --color-avocado-100: oklch(0.99 0 0);
+  --color-avocado-200: oklch(0.98 0.04 113.22);
+  --color-avocado-300: oklch(0.94 0.11 115.03);
+  --color-avocado-400: oklch(0.92 0.19 114.08);
+  --color-avocado-500: oklch(0.84 0.18 117.33);
+  --color-avocado-600: oklch(0.53 0.12 118.34);
+
+  --font-satoshi-light: "Satoshi-Light", "sans-serif";
+  --font-satoshi-regular: "Satoshi-Regular", "sans-serif";
+  --font-satoshi-medium: "Satoshi-Medium", "sans-serif";
+  --font-satoshi-bold: "Satoshi-Bold", "sans-serif";
+  --font-satoshi-black: "Satoshi-Black", "sans-serif";
+
+  --spacing-5vh: 5svh;
+  --spacing-10vh: 10svh;
+  --spacing-15vh: 15svh;
+  --spacing-20vh: 20svh;
+  --spacing-30vh: 30svh;
+  --spacing-40vh: 40svh;
+  --spacing-50vh: 50svh;
+  --spacing-60vh: 60svh;
+  --spacing-70vh: 70svh;
+  --spacing-80vh: 80svh;
+  --spacing-90vh: 90svh;
+  --spacing-100vh: 100svh;
+
+  --spacing-5vw: 5svw;
+  --spacing-10vw: 10svw;
+  --spacing-15vw: 15svw;
+  --spacing-20vw: 20svw;
+  --spacing-30vw: 30svw;
+  --spacing-40vw: 40svw;
+  --spacing-50vw: 50svw;
+  --spacing-60vw: 60svw;
+  --spacing-70vw: 70svw;
+  --spacing-80vw: 80svw;
+  --spacing-90vw: 90svw;
+  --spacing-100vw: 100svw;
+
+  @keyframes pulse-bg {
+    0%, 100% {
+      background-color: #e5e5e5;
+    }
+    50% {
+      background-color: #f5f5f5;
+    }
+  }
+
+  --animate-pulse-bg: pulse-bg 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --background-image-head: linear-gradient(
+      to bottom,
+      oklch(98.5% 0 0 / 1) 0%,
+      oklch(98.5% 0 0 / 0.95) 10%,
+      oklch(98.5% 0 0 / 0.8) 25%,
+      oklch(98.5% 0 0 / 0.5) 50%,
+      oklch(98.5% 0 0 / 0.2) 75%,
+      transparent 100%
+    );
+}
 
 html {
   font-display: optional;
-  @apply text-[2.6666666667svw] sm:text-[1.4097svw] lg:text-[0.5208333333svw];
+  @apply text-[2.6666666667svw] sm:text-[1.4097svw] lg:text-[0.5208333333svw] bg-neutral-50;
 }
 
 body {
-  @apply bg-neutral-50 font-satoshi-regular text-zinc-800 selection:bg-neutral-900/10;
+  @apply font-satoshi-regular bg-neutral-50 text-zinc-800 selection:bg-neutral-900/10;
 }
 
 .link-underline-black {
-  @apply bg-gradient-to-r from-zinc-800 to-zinc-800;
+  @apply bg-linear-to-r from-zinc-800 to-zinc-800;
 }
 
 .link-underline {
-  @apply border-b-0 bg-[length:100%_1px] bg-[0_100%] bg-no-repeat transition-[background] duration-200 ease-in-out hover:bg-[length:0_1px] hover:bg-[0_100%];
+  @apply bg-[0_100%] bg-size-[100%_1px] bg-bottom-left bg-no-repeat transition-[background] duration-200 ease-in-out hover:bg-[0_100%] hover:bg-size-[0_1px];
 }
+
+@font-face {
+  font-family: "Satoshi-Light";
+  src:
+    url("./fonts/Satoshi-Light.woff2") format("woff2"),
+    url("./fonts/Satoshi-Light.woff") format("woff");
+  font-weight: 300;
+  font-display: block;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi-Regular";
+  src:
+    url("./fonts/Satoshi-Regular.woff2") format("woff2"),
+    url("./fonts/Satoshi-Regular.woff") format("woff");
+  font-weight: 400;
+  font-display: block;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi-Medium";
+  src:
+    url("./fonts/Satoshi-Medium.woff2") format("woff2"),
+    url("./fonts/Satoshi-Medium.woff") format("woff");
+  font-weight: 500;
+  font-display: block;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi-Bold";
+  src:
+    url("./fonts/Satoshi-Bold.woff2") format("woff2"),
+    url("./fonts/Satoshi-Bold.woff") format("woff");
+  font-weight: 700;
+  font-display: block;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi-Black";
+  src:
+    url("./fonts/Satoshi-Black.woff2") format("woff2"),
+    url("./fonts/Satoshi-Black.woff") format("woff");
+  font-weight: 900;
+  font-display: block;
+  font-style: normal;
+}
+
