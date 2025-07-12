@@ -44,7 +44,8 @@
   --spacing-100vw: 100svw;
 
   @keyframes pulse-bg {
-    0%, 100% {
+    0%,
+    100% {
       background-color: #e5e5e5;
     }
     50% {
@@ -54,19 +55,19 @@
 
   --animate-pulse-bg: pulse-bg 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --background-image-head: linear-gradient(
-      to bottom,
-      oklch(98.5% 0 0 / 1) 0%,
-      oklch(98.5% 0 0 / 0.95) 10%,
-      oklch(98.5% 0 0 / 0.8) 25%,
-      oklch(98.5% 0 0 / 0.5) 50%,
-      oklch(98.5% 0 0 / 0.2) 75%,
-      transparent 100%
-    );
+    to bottom,
+    oklch(98.5% 0 0 / 1) 0%,
+    oklch(98.5% 0 0 / 0.95) 10%,
+    oklch(98.5% 0 0 / 0.8) 25%,
+    oklch(98.5% 0 0 / 0.5) 50%,
+    oklch(98.5% 0 0 / 0.2) 75%,
+    transparent 100%
+  );
 }
 
 html {
   font-display: optional;
-  @apply text-[2.6666666667svw] sm:text-[1.4097svw] lg:text-[0.5208333333svw] bg-neutral-50;
+  @apply bg-neutral-50 text-[2.6666666667svw] sm:text-[1.4097svw] lg:text-[0.5208333333svw];
 }
 
 body {
@@ -130,4 +131,3 @@ body {
   font-display: block;
   font-style: normal;
 }
-
