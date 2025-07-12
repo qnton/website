@@ -12,11 +12,11 @@ const { page } = Astro.props;
 ---
 
 <div
-  class="pointer-events-none fixed top-0 z-40 h-10v min-w-full bg-header lg:hidden"
+  class="h-10vh bg-head pointer-events-none fixed top-0 z-40 min-w-full lg:hidden"
 ></div>
 
 <header class="fixed z-50">
-  <div class="fixed left-5 top-7 animate-fade animate-once">
+  <div class="animate-fade animate-once fixed top-7 left-5">
     <Typography
       className="cursor-pointer text-3xl opacity-60 transition-opacity duration-300 hover:opacity-100"
       component="a"
@@ -26,7 +26,7 @@ const { page } = Astro.props;
       Anton Werschinin
     </Typography>
   </div>
-  <nav class="fixed right-5 top-7 animate-fade animate-once">
+  <nav class="animate-fade animate-once fixed top-7 right-5">
     <ul class="flex gap-6">
       <li>
         <Typography

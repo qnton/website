@@ -16,8 +16,8 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.4.1",
-    "@astrojs/tailwind": "^6.0.2",
     "@resvg/resvg-js": "2.6.2",
+    "@tailwindcss/vite": "^4.1.11",
     "astro": "5.11.0",
     "astro-mail-obfuscation": "^2.3.4",
     "astro-robots-txt": "^1.0.0",
@@ -27,6 +27,7 @@
     "satori-html": "^0.3.2",
     "start-server-and-test": "^2.0.12",
     "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.1.11",
     "tailwindcss-animated": "^2.0.0"
   },
   "devDependencies": {
