@@ -1,23 +1,30 @@
-function initializeScrollObserver() {
+//  https://www.youtube.com/watch?v=uU9Fe-WXew4
+const ON_SIGHT_PREFIX = "on-sight:";
+
+function initializeOnSightObserver() {
   const observer = new IntersectionObserver(
     (entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const target = entry.target;
-          const className = target.getAttribute("data-in-view-class");
-          if (className) {
-            target.classList.add(className);
-            observer.unobserve(target);
-          }
+          const el = entry.target;
+
+          const classList = Array.from(el.classList);
+          classList.forEach((cls) => {
+            if (cls.startsWith(ON_SIGHT_PREFIX)) {
+              const actualClass = cls.replace(ON_SIGHT_PREFIX, "");
+              el.classList.add(actualClass);
+              el.classList.remove(cls);
+            }
+          });
+
+          observer.unobserve(el);
         }
       });
     },
-    {
-      threshold: 0.1,
-    },
+    { threshold: 0.1 },
   );
 
-  document.querySelectorAll("[data-in-view-class]").forEach((el) => {
+  document.querySelectorAll(`[class*='${ON_SIGHT_PREFIX}']`).forEach((el) => {
     observer.observe(el);
   });
 }
@@ -73,11 +80,11 @@ if (urlElement) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  initializeScrollObserver();
+  initializeOnSightObserver();
   initializeParallaxScroll();
 });
 
 document.addEventListener("astro:after-swap", () => {
-  initializeScrollObserver();
+  initializeOnSightObserver();
   initializeParallaxScroll();
 });

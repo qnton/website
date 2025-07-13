@@ -20,8 +20,7 @@ const { image, link, year, title, description, className, alt, single } =
 <figure class={single ? undefined : "odd:my-15vh last:odd:mb-0"}>
   <a href={link}>
     <div
-      class="group animate-delay-100 animate-once noscript:animate-fade relative cursor-pointer overflow-hidden rounded-lg opacity-0"
-      data-in-view-class="animate-fade"
+      class="group animate-delay-100 animate-once noscript:animate-fade on-sight:animate-fade relative cursor-pointer overflow-hidden rounded-lg opacity-0"
     >
       <div
         class="absolute top-[50%] left-[50%] z-10 translate-x-[-50%] translate-y-[-50%] opacity-0 transition-opacity delay-75 duration-500 group-hover:opacity-100"
@@ -33,7 +32,7 @@ const { image, link, year, title, description, className, alt, single } =
             className="text-4xl"
             variant="p"
           >
-            View project
+            View Project
           </Typography>
         </div>
       </div>
@@ -43,11 +42,11 @@ const { image, link, year, title, description, className, alt, single } =
       >
         <Image
           alt={alt}
-          class={`w-full animate-pulse-bg object-cover transition duration-500 group-hover:scale-105 ${className}`}
+          class={`w-full animate-pulse-bg object-cover transition duration-500 min-h-50vh group-hover:scale-105 ${className}`}
           decoding="async"
-          height={1080}
           loading="lazy"
           src={image}
+          height={1080}
           width={1980}
         />
       </div>
@@ -55,8 +54,7 @@ const { image, link, year, title, description, className, alt, single } =
   </a>
   <figcaption class="mt-6 w-full justify-between lg:flex">
     <div
-      class="animate-delay-200 animate-once noscript:animate-fade opacity-0"
-      data-in-view-class="animate-fade"
+      class="animate-delay-200 animate-once noscript:animate-fade on-sight:animate-fade opacity-0"
     >
       <Typography
         className="cursor-pointer"
@@ -71,8 +69,7 @@ const { image, link, year, title, description, className, alt, single } =
     </div>
 
     <Typography
-      className="animate-delay-300 animate-once noscript:animate-fade mt-6 opacity-0 lg:mt-0"
-      data-in-view-class="animate-fade"
+      className="animate-delay-300 animate-once noscript:animate-fade on-sight:animate-fade mt-6 opacity-0 lg:mt-0"
       variant="p"
     >
       {description}
