@@ -19,16 +19,14 @@ import Work from "@/components/work.astro";
   <main class="pt-15vh mx-5 flex flex-col items-center justify-center pb-64">
     <section class="pt-5vh lg:max-w-440 lg:min-w-440">
       <Typography
-        className="animate-once noscript:animate-fade inline-block text-6xl opacity-0 lg:text-7xl"
-        data-in-view-class="animate-fade"
+        className="animate-once noscript:animate-fade on-sight:animate-fade inline-block text-6xl opacity-0 lg:text-7xl"
         variant="h1"
       >
         Test Center Discovery Website - "2022"
       </Typography>
 
       <div
-        class="animate-once noscript:animate-fade mt-12 overflow-hidden rounded-lg opacity-0"
-        data-in-view-class="animate-fade"
+        class="animate-once noscript:animate-fade on-sight:animate-fade mt-12 overflow-hidden rounded-lg opacity-0"
       >
         <div
           class="relative -my-16 rounded-xl"
@@ -39,6 +37,8 @@ import Work from "@/components/work.astro";
             class="h-70vh animate-pulse-bg min-h-50 w-full object-cover transition duration-500"
             decoding="async"
             loading="lazy"
+            height={1080}
+            width={1980}
             src={hankens}
           />
         </div>
@@ -47,16 +47,14 @@ import Work from "@/components/work.astro";
 
     <section class="lg:max-w-432 lg:min-w-432">
       <Typography
-        className="animate-once noscript:animate-fade opacity-0"
-        data-in-view-class="animate-fade"
+        className="animate-once noscript:animate-fade on-sight:animate-fade opacity-0"
         variant="h2"
       >
         Collaborative Solution with Hankens-Apotheke
       </Typography>
 
       <Typography
-        className="animate-once noscript:animate-fade text-zinc-500 opacity-0"
-        data-in-view-class="animate-fade"
+        className="animate-once noscript:animate-fade on-sight:animate-fade text-zinc-500 opacity-0"
         variant="p"
       >
         Tasked by the rapid testing project, I collaborated with
@@ -64,8 +62,7 @@ import Work from "@/components/work.astro";
       </Typography>
 
       <Typography
-        className="animate-once noscript:animate-fade text-zinc-500 opacity-0"
-        data-in-view-class="animate-fade"
+        className="animate-once noscript:animate-fade on-sight:animate-fade text-zinc-500 opacity-0"
         variant="p"
       >
         Users can access an interactive map on the website to explore nearby
@@ -74,8 +71,7 @@ import Work from "@/components/work.astro";
       </Typography>
 
       <Typography
-        className="animate-once noscript:animate-fade text-zinc-500 opacity-0"
-        data-in-view-class="animate-fade"
+        className="animate-once noscript:animate-fade on-sight:animate-fade text-zinc-500 opacity-0"
         variant="p"
       >
         The platform offers comprehensive details for each center, including
@@ -86,9 +82,8 @@ import Work from "@/components/work.astro";
 
     <section class="pt-15vh w-full lg:max-w-440 lg:min-w-440">
       <Typography
-        className="animate-once noscript:animate-fade opacity-0"
+        className="animate-once noscript:animate-fade on-sight:animate-fade opacity-0"
         component="h1"
-        data-in-view-class="animate-fade"
         variant="h1"
       >
         Next project
