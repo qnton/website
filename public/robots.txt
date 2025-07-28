@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /resume
+Disallow: /resume.pdf
+Allow: /
+Sitemap: https://qnt.one/sitemap-index.xml

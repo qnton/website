@@ -15,15 +15,13 @@
     "start": "astro build && astro preview"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.4.1",
     "@resvg/resvg-js": "2.6.2",
     "@tailwindcss/vite": "^4.1.11",
-    "astro": "5.11.0",
+    "astro": "5.12.1",
     "astro-mail-obfuscation": "^2.3.4",
-    "astro-robots-txt": "^1.0.0",
     "clsx": "^2.1.1",
     "playwright": "^1.54.1",
-    "satori": "^0.15.2",
+    "satori": "^0.16.0",
     "satori-html": "^0.3.2",
     "start-server-and-test": "^2.0.12",
     "tailwind-merge": "^3.3.1",

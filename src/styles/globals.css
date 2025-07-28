@@ -82,6 +82,16 @@ body {
   @apply bg-[0_100%] bg-size-[100%_1px] bg-bottom-left bg-no-repeat transition-[background] duration-200 ease-in-out hover:bg-[0_100%] hover:bg-size-[0_1px];
 }
 
+@media print {
+  html,
+  body {
+    font-display: optional;
+    background: white !important;
+    all: initial;
+    font-family: "Satoshi-Regular", "sans-serif";
+  }
+}
+
 @font-face {
   font-family: "Satoshi-Light";
   src:

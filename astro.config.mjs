@@ -1,6 +1,4 @@
 import { defineConfig } from "astro/config";
-import robotsTxt from "astro-robots-txt";
-import sitemap from "@astrojs/sitemap";
 import mailObfuscation from "astro-mail-obfuscation";
 import tailwindcss from '@tailwindcss/vite'
 
@@ -11,19 +9,9 @@ export default defineConfig({
     prefetchAll: true
   },
   integrations: [
-    sitemap(),
-    robotsTxt({
-      policy: [
-        {
-          userAgent: "*",
-          allow: "/",
-          disallow: ["/resume", "/resume.pdf"],
-        },
-      ],
-    }),
     mailObfuscation({
       fallbackText: "Please enable JavaScript!",
-      allowedTags: ["address"]
+      allowedTags: ["address", "span"]
     }),
   ],
   output: "static",
