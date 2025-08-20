@@ -71,3 +71,20 @@ const init = () => {
 
 document.addEventListener("DOMContentLoaded", init);
 document.addEventListener("astro:after-swap", init);
+
+const placeholders = document.querySelectorAll('[data-src]');
+
+const observer = new IntersectionObserver(async (entries, observer) => {
+  for (const entry of entries) {
+    if (entry.isIntersecting) {
+      const placeholder = entry.target;
+      const url = placeholder.getAttribute('data-src');
+      const res = await fetch(url);
+      const svgText = await res.text();
+      placeholder.innerHTML = svgText;
+      observer.unobserve(placeholder);
+    }
+  }
+});
+
+placeholders.forEach(el => observer.observe(el));
