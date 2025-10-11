@@ -17,7 +17,7 @@
   "dependencies": {
     "@resvg/resvg-js": "2.6.2",
     "@tailwindcss/vite": "^4.1.11",
-    "astro": "5.12.8",
+    "astro": "5.14.3",
     "astro-mail-obfuscation": "^2.3.4",
     "clsx": "^2.1.1",
     "playwright": "^1.54.2",
