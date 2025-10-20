@@ -20,7 +20,7 @@
     "astro": "5.12.8",
     "astro-mail-obfuscation": "^2.3.4",
     "clsx": "^2.1.1",
-    "playwright": "^1.54.2",
+    "playwright": "^1.55.1",
     "satori": "^0.16.2",
     "satori-html": "^0.3.2",
     "start-server-and-test": "^2.0.13",
