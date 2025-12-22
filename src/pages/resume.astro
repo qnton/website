@@ -5,7 +5,7 @@ import Typography from "@/components/ui/typography.astro";
 ---
 
 <html
-  class="[all:unset]"
+  class="font-satoshi-regular bg-neutral-50 text-zinc-800 [all:unset] selection:bg-neutral-900/10"
   lang="en"
 >
   <head>
@@ -40,8 +40,35 @@ import Typography from "@/components/ui/typography.astro";
           </Typography>
         </div>
       </section>
+
       <section
         class="mt-32 grid grid-cols-12 gap-4"
+        id="profile"
+      >
+        <Typography
+          className="col-span-3 text-xs"
+          variant="p"
+        >
+          Profile
+        </Typography>
+        <div class="col-span-9">
+          <div class="flex justify-between">
+            <Typography
+              className="mb-0 text-xs text-zinc-400"
+              variant="p"
+            >
+              I'm a full-stack developer with a strong focus on design, product
+              thinking, and user experience. I care about clean UI, intuitive
+              UX, and building software that feels right. I've worked across the
+              stack, but I’m most at home crafting thoughtful interfaces and
+              solving real user problems.
+            </Typography>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="mt-12 grid grid-cols-12 gap-4"
         id="experience"
       >
         <Typography
@@ -56,6 +83,30 @@ import Typography from "@/components/ui/typography.astro";
               className="mb-0 text-xs"
               variant="p"
             >
+              Full Stack Developer, P&T Software GmbH
+            </Typography>
+
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
+              Aug 2024 - Aug 2025
+            </Typography>
+          </div>
+          <Typography
+            className="mt-2 text-xs text-zinc-400"
+            variant="p"
+          >
+            Worked as full-stack developer at P&T Software GmbH on DB InfraGO AG
+            projects. Used Vue, TypeScript, and Kotlin to develop and implement
+            web solutions.
+          </Typography>
+
+          <div class="flex justify-between">
+            <Typography
+              className="mb-0 text-xs"
+              variant="p"
+            >
               Apprentice, AMCON Software GmbH
             </Typography>
 
@@ -63,7 +114,7 @@ import Typography from "@/components/ui/typography.astro";
               className="mb-0 text-xs"
               variant="p"
             >
-              Aug 2021 - Present
+              Aug 2021 - Jul 2024
             </Typography>
           </div>
           <Typography
@@ -310,6 +361,7 @@ import Typography from "@/components/ui/typography.astro";
           </Typography>
         </div>
       </section>
+
       <section
         class="mt-12 grid grid-cols-12 gap-4"
         id="skills"
@@ -333,8 +385,8 @@ import Typography from "@/components/ui/typography.astro";
             className="mt-2 text-xs text-zinc-400"
             variant="p"
           >
-            C# / CSS / HTML / JavaScript / Next.js / Node.js / PHP / Python /
-            React / SQL / TailwindCSS / TypeScript / Wordpress
+            C# / Kotlin / CSS / HTML / JavaScript / Next.js / Node.js / PHP /
+            Python / React / Vue.js / SQL / TailwindCSS / TypeScript / Wordpress
           </Typography>
 
           <div class="flex justify-between">

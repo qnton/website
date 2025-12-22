@@ -1,7 +1,4 @@
 ---
-import Mail from "@/components/icons/mail.astro";
-import GitHub from "@/components/icons/github.astro";
-import LinkedIn from "@/components/icons/linkedin.astro";
 import Typography from "@/components/ui/typography.astro";
 
 interface Props {
@@ -31,42 +28,48 @@ const { page } = Astro.props;
       <li>
         <Typography
           aria-label="email"
-          className="cursor-pointer text-3xl"
+          className="cursor-pointer"
           component="a"
           href="mailto:hello@qnt.one"
           target="_blank"
           variant="p"
         >
-          <Mail
-            className="fill-zinc-800 opacity-60 transition-opacity duration-300 hover:opacity-100"
+          <img
+            src="/icons/mail.svg"
+            alt="mail"
+            class="fill-zinc-800 opacity-60 transition-opacity duration-300 hover:opacity-100 h-9 w-9"
           />
         </Typography>
       </li>
       <li>
         <Typography
           aria-label="github"
-          className="cursor-pointer text-3xl"
+          className="cursor-pointer"
           component="a"
           href="https://github.com/qnton"
           target="_blank"
           variant="p"
         >
-          <GitHub
-            className="fill-zinc-800 opacity-60 transition-opacity duration-300 hover:opacity-100"
+          <img
+            src="/icons/github.svg"
+            alt="github"
+            class="fill-zinc-800 opacity-60 transition-opacity duration-300 hover:opacity-100 h-9 w-9"
           />
         </Typography>
       </li>
       <li>
         <Typography
           aria-label="linkedin"
-          className="cursor-pointer text-3xl"
+          className="cursor-pointer"
           component="a"
           href="https://www.linkedin.com/in/qnton"
           target="_blank"
           variant="p"
         >
-          <LinkedIn
-            className="fill-zinc-800 opacity-60 transition-opacity duration-300 hover:opacity-100"
+          <img
+            src="/icons/linkedin.svg"
+            alt="linkedin"
+            class="fill-zinc-800 opacity-60 transition-opacity duration-300 hover:opacity-100 h-9 w-9"
           />
         </Typography>
       </li>
