@@ -4,12 +4,6 @@
 @theme inline {
   --font-display: "Satoshi", "sans-serif";
   --breakpoint-3xl: 1920px;
-  --color-avocado-100: oklch(0.99 0 0);
-  --color-avocado-200: oklch(0.98 0.04 113.22);
-  --color-avocado-300: oklch(0.94 0.11 115.03);
-  --color-avocado-400: oklch(0.92 0.19 114.08);
-  --color-avocado-500: oklch(0.84 0.18 117.33);
-  --color-avocado-600: oklch(0.53 0.12 118.34);
 
   --font-satoshi-light: "Satoshi-Light", "sans-serif";
   --font-satoshi-regular: "Satoshi-Regular", "sans-serif";
@@ -48,6 +42,7 @@
     100% {
       background-color: #e5e5e5;
     }
+
     50% {
       background-color: #f5f5f5;
     }
@@ -67,11 +62,11 @@
 
 html {
   font-display: optional;
-  @apply bg-neutral-50 text-[2.6666666667svw] sm:text-[1.4097svw] lg:text-[0.5208333333svw];
+  @apply bg-black text-[2.6666666667svw] text-white sm:text-[1.4097svw] lg:text-[0.5208333333svw];
 }
 
 body {
-  @apply font-satoshi-regular bg-neutral-50 text-zinc-800 selection:bg-neutral-900/10;
+  @apply font-satoshi-regular bg-black text-neutral-300 selection:bg-neutral-400/20;
 }
 
 .link-underline-black {
@@ -80,6 +75,18 @@ body {
 
 .link-underline {
   @apply bg-[0_100%] bg-size-[100%_1px] bg-bottom-left bg-no-repeat transition-[background] duration-200 ease-in-out hover:bg-[0_100%] hover:bg-size-[0_1px];
+}
+
+.link-standard {
+  @apply text-lg text-neutral-500 transition-colors duration-200 hover:text-neutral-300 sm:text-xl md:text-2xl lg:text-3xl;
+}
+
+.animate-on-sight {
+  @apply animate-once noscript:animate-fade opacity-0;
+}
+
+[class*="on-sight:"] {
+  @apply opacity-0;
 }
 
 @media print {

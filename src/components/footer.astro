@@ -1,0 +1,45 @@
+---
+import { merge } from "@/libs/merge";
+
+const { class: className } = Astro.props;
+---
+
+<section
+  class={merge(
+    "animate-on-sight flex flex-col items-center justify-center pb-24 pt-24 font-satoshi-regular animate-delay-300 lg:pb-32 lg:pt-32",
+    className,
+  )}
+>
+  <div
+    class="flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:gap-10"
+  >
+    <a
+      class="link-standard"
+      href="https://github.com/qnton"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      github
+    </a>
+    <a
+      class="link-standard"
+      href="https://linkedin.com/in/qnton"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      linkedin
+    </a>
+    <a
+      class="link-standard"
+      href="mailto:hello@qnt.one"
+    >
+      email
+    </a>
+    <a
+      class="link-standard"
+      href="/legal-notice"
+    >
+      legal notice
+    </a>
+  </div>
+</section>
