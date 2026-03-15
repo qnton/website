@@ -1,41 +1,38 @@
 ---
-import Layout from "@/components/layout/layout.astro";
-import Typography from "@/components/ui/typography.astro";
+import Layout from "@/components/layout.astro";
 ---
 
 <Layout
   description="Page not found"
-  header
-  page="404"
   title="AW • Page not found"
 >
-  <main class="h-100vh mx-5 flex flex-col items-center justify-center">
-    <section class="pt-5vh lg:max-w-100 lg:min-w-400">
-      <Typography
-        className="animate-fade animate-once"
-        variant="h1"
+  <main
+    class="font-satoshi-regular flex min-h-[100dvh] flex-col items-center justify-center bg-black text-white"
+  >
+    <section
+      class="flex flex-col items-center justify-center gap-6 px-4 text-center"
+    >
+      <h1
+        class="font-satoshi-medium animate-fade animate-once m-0 text-4xl tracking-wide text-neutral-100 md:text-5xl lg:text-7xl"
       >
-        Page not found.
-      </Typography>
-      <Typography
-        className="animate-fade-left animate-delay-100 animate-once"
-        variant="p"
+        404
+      </h1>
+      <p
+        class="font-satoshi-regular animate-fade-left animate-delay-100 animate-once m-0 text-xl text-neutral-400 md:text-2xl lg:text-3xl"
       >
         The requested URL <span
-          class="text-zinc-400"
           id="url"
-        ></span> was not found on this server.
-      </Typography>
+          class="text-neutral-500"
+        ></span> was not found.
+      </p>
 
-      <div class="animate-fade-left animate-delay-200 animate-once">
-        <Typography
-          className="mb-6 cursor-pointer lg:mb-0"
-          component="a"
+      <div class="animate-fade-left animate-delay-200 animate-once mt-8">
+        <a
           href="/"
-          variant="p"
+          class="link-standard"
         >
-          <span class="link-underline link-underline-black">Back to home</span>
-        </Typography>
+          &larr; return to home
+        </a>
       </div>
     </section>
   </main>

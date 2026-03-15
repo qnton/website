@@ -9,27 +9,19 @@
     "dev:host": "astro dev --host",
     "format:check": "prettier --check \"**/*.{ts,tsx,md,js,jsx,json,mdx,astro,css}\"",
     "format": "prettier --write \"**/*.{ts,tsx,md,js,jsx,json,mdx,astro,css}\"",
-    "generate-pdf:ci": "start-server-and-test http://localhost:3000 generate-pdf",
-    "generate-pdf": "node ./src/generate-pdf.js",
     "preview": "astro preview",
     "start": "astro build && astro preview"
   },
   "dependencies": {
-    "@resvg/resvg-js": "2.6.2",
     "@tailwindcss/vite": "^4.1.11",
     "astro": "5.12.8",
     "astro-mail-obfuscation": "^2.3.4",
     "clsx": "^2.1.1",
-    "playwright": "^1.54.2",
-    "satori": "^0.16.2",
-    "satori-html": "^0.3.2",
-    "start-server-and-test": "^2.0.13",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.11",
     "tailwindcss-animated": "^2.0.0"
   },
   "devDependencies": {
-    "pnpm": "^10.14.0",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.14",

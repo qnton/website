@@ -1,157 +1,43 @@
 ---
-import Layout from "@/components/layout/layout.astro";
-import Work from "@/components/work.astro";
-import Typography from "@/components/ui/typography.astro";
-
-import hm from "@/assets/images/hm-medizintechnik.jpg";
-import schnelltest from "@/assets/images/schnelltest.jpg";
-import hankens from "@/assets/images/hankens.jpg";
+import Layout from "@/components/layout.astro";
+import Footer from "@/components/footer.astro";
+import { Image } from "astro:assets";
 ---
 
 <Layout
   description="I am a web developer and designer specializing in creating visually stunning and functional websites."
-  footer
-  header
-  page="index"
   title="Anton Werschinin"
 >
-  <main
-    class="md:pt-20vh lg:pt-35vh mx-5 flex flex-col items-center justify-center pt-48 pb-64"
-  >
-    <section
-      class="lg:max-w-560 lg:min-w-560"
-      id="intro"
-    >
-      <Typography
-        className="font-satoshi-bold noscript:animate-fade on-sight:animate-fade inline-block text-5xl opacity-0 md:max-w-6xl lg:text-7xl"
-        variant="h1"
-      >
-        Hey
-        <span
-          class="animate-wiggle-more animate-delay-300 animate-twice animate-ease-in-out hover:animate-infinite inline-block"
-        >
-          👋
-        </span>, I'm Anton, a developer, designer, and musician.
-      </Typography>
+  <main class="bg-black text-white">
+    <section class="flex min-h-[100dvh] items-center justify-center">
+      <div class="flex items-center gap-8 md:gap-10 lg:gap-14">
+        <Image
+          alt="Anton Werschinin"
+          class="animate-fade-right animate-once h-24 w-24 rounded-full border border-white/20 object-cover md:h-32 md:w-32 lg:h-48 lg:w-48"
+          src="/images/pfp.jpg"
+          width={1024}
+          height={1024}
+          loading="eager"
+          fetchpriority="high"
+        />
 
-      <Typography
-        className="animate-delay-100 animate-once noscript:animate-fade on-sight:animate-fade-left opacity-0 md:max-w-400"
-        variant="p"
-      >
-        I am a web developer and designer specializing in creating visually
-        stunning and functional websites.
-      </Typography>
-
-      <Typography
-        className="animate-delay-200 animate-once noscript:animate-fade on-sight:animate-fade-left opacity-0 md:max-w-400"
-        variant="p"
-      >
-        My services include design, development, and optimization. I strive to
-        create websites that meet the unique needs of my clients.
-      </Typography>
-
-      <div
-        class="animate-delay-300 noscript:animate-fade animate-once on-sight:animate-fade-left opacity-0"
-      >
-        <Typography
-          className="cursor-pointer"
-          component="a"
-          href="mailto:hello@qnt.one"
-          target="_blank"
-          variant="p"
-        >
-          <span class="link-underline link-underline-black">
-            Reach out to me
-          </span>
-        </Typography>
-      </div>
-    </section>
-
-    <section
-      class="mt-20vh lg:max-w-560 lg:min-w-560"
-      id="projects"
-    >
-      <Typography
-        className="animate-once noscript:animate-fade on-sight:animate-fade inline-block text-6xl opacity-0 md:max-w-6xl lg:text-7xl"
-        variant="h1"
-      >
-        Projects
-      </Typography>
-
-      <Work
-        alt="Schnelltest website on a phone"
-        className="h-70vh min-h-50 object-[35%_35%]"
-        description="A website dedicated to providing information about various COVID-19 testing centers."
-        image={schnelltest}
-        link="/project/schnelltest"
-        title="Schnelltest"
-        year="2019"
-      />
-
-      <Work
-        alt="HM Medizintechnik website on a phone"
-        className="h-70vh min-h-50 object-[50%_50%]"
-        description="Rental website for HM Medizintechnik, offering a wide range of medical devices."
-        image={hm}
-        link="/project/hm-medizintechnik"
-        title="HM Medizintechnik"
-        year="2023"
-      />
-
-      <Work
-        alt="Hankens testzentrum website on a phone"
-        className="h-70vh min-h-50 object-[50%_50%]"
-        description="A platform enabling users to easily locate nearby COVID-19 testing centers."
-        image={hankens}
-        link="/project/hankens-testzentrum"
-        title="Hankens"
-        year="2022"
-      />
-    </section>
-
-    <section
-      class="mt-20vh lg:max-w-560 lg:min-w-560"
-      id="contact"
-    >
-      <Typography
-        className="animate-once noscript:animate-fade on-sight:animate-fade inline-block text-6xl opacity-0 md:max-w-6xl lg:text-7xl"
-        variant="h1"
-      >
-        Contact
-      </Typography>
-
-      <Typography
-        className="animate-delay-100 noscript:animate-fade animate-once on-sight:animate-fade opacity-0"
-        variant="p"
-      >
-        Stand out from the competition with a visually stunning and functional
-        website.
-      </Typography>
-
-      <Typography
-        className="animate-delay-200 noscript:animate-fade animate-once on-sight:animate-fade opacity-0"
-        variant="p"
-      >
-        Let's collaborate to create a unique online experience.
-      </Typography>
-
-      <div
-        class="animate-delay-300 noscript:animate-fade animate-once on-sight:animate-fade opacity-0"
-      >
-        <Typography
-          className="cursor-pointer"
-          component="a"
-          href="mailto:hello@qnt.one"
-          variant="p"
-        >
-          <span
-            class="link-underline link-underline-black"
-            data-obfuscation="0"
+        <div class="flex flex-col justify-center gap-2">
+          <h1
+            class="animate-fade-left animate-delay-100 animate-once font-satoshi-medium m-0 text-4xl tracking-wide text-neutral-100 md:text-5xl lg:text-7xl"
+            style="line-height: 1"
           >
-            hello@qnt.one
-          </span>
-        </Typography>
+            Anton Werschinin
+          </h1>
+          <p
+            class="animate-fade-left animate-delay-200 animate-once font-satoshi-regular m-0 mt-2 text-xl text-neutral-400 md:text-2xl lg:mt-4 lg:text-4xl"
+            style="line-height: 1"
+          >
+            developer & designer
+          </p>
+        </div>
       </div>
     </section>
+
+    <Footer class="on-sight:animate-fade" />
   </main>
 </Layout>
