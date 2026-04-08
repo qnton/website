@@ -1,17 +1,19 @@
 import { defineConfig } from "astro/config";
 import mailObfuscation from "astro-mail-obfuscation";
-import tailwindcss from '@tailwindcss/vite'
+import sitemap from "@astrojs/sitemap";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   site: "https://qnt.one/",
   prefetch: {
-    defaultStrategy: 'load',
-    prefetchAll: true
+    defaultStrategy: "load",
+    prefetchAll: true,
   },
   integrations: [
+    sitemap(),
     mailObfuscation({
       fallbackText: "Please enable JavaScript!",
-      allowedTags: ["address", "span"]
+      allowedTags: ["address", "span"],
     }),
   ],
   output: "static",

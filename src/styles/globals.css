@@ -3,6 +3,7 @@
 
 @theme inline {
   --font-display: "Satoshi", "sans-serif";
+  --font-instrument-serif: "Instrument Serif", "Georgia", "serif";
   --breakpoint-3xl: 1920px;
 
   --font-satoshi-light: "Satoshi-Light", "sans-serif";
@@ -10,6 +11,11 @@
   --font-satoshi-medium: "Satoshi-Medium", "sans-serif";
   --font-satoshi-bold: "Satoshi-Bold", "sans-serif";
   --font-satoshi-black: "Satoshi-Black", "sans-serif";
+
+  --color-accent: oklch(88% 0.08 75);
+  --color-accent-dim: oklch(70% 0.06 75);
+  --color-surface: oklch(8% 0 0);
+  --color-border: oklch(20% 0 0);
 
   --spacing-5vh: 5svh;
   --spacing-10vh: 10svh;
@@ -60,11 +66,6 @@
   );
 }
 
-html {
-  font-display: optional;
-  @apply bg-black text-[2.6666666667svw] text-white sm:text-[1.4097svw] lg:text-[0.5208333333svw];
-}
-
 body {
   @apply font-satoshi-regular bg-black text-neutral-300 selection:bg-neutral-400/20;
 }
@@ -89,13 +90,145 @@ body {
   @apply opacity-0;
 }
 
+/* Project tile abstract backgrounds */
+.tile-infrastructure {
+  background:
+    radial-gradient(
+      ellipse 120% 80% at 70% 30%,
+      oklch(22% 0.02 220) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 80% 60% at 20% 80%,
+      oklch(18% 0.015 210) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      oklch(12% 0.01 215) 0%,
+      oklch(6% 0 0) 100%
+    );
+}
+
+.tile-ecommerce {
+  background:
+    radial-gradient(
+      ellipse 90% 60% at 80% 20%,
+      oklch(30% 0.06 70) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 70% 50% at 10% 90%,
+      oklch(20% 0.04 60) 0%,
+      transparent 45%
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 60px,
+      oklch(15% 0.02 65 / 0.15) 60px,
+      oklch(15% 0.02 65 / 0.15) 61px
+    ),
+    oklch(8% 0.01 60);
+}
+
+.tile-data-platform {
+  background:
+    conic-gradient(
+      from 180deg at 50% 120%,
+      oklch(16% 0.03 240) 0deg,
+      oklch(8% 0.01 260) 90deg,
+      oklch(14% 0.02 230) 180deg,
+      transparent 270deg
+    ),
+    radial-gradient(
+      ellipse 100% 80% at 50% 0%,
+      oklch(20% 0.04 250) 0%,
+      transparent 60%
+    ),
+    oklch(6% 0 0);
+}
+
+.tile-brand-identity {
+  background:
+    linear-gradient(135deg, oklch(18% 0.02 40) 0%, transparent 50%),
+    linear-gradient(315deg, oklch(22% 0.03 45) 0%, transparent 50%),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 80px,
+      oklch(20% 0.015 40 / 0.12) 80px,
+      oklch(20% 0.015 40 / 0.12) 81px
+    ),
+    oklch(9% 0.01 40);
+}
+
+/* Tile hover effects */
+.project-tile {
+  transition:
+    transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.4s ease;
+}
+
+.project-tile:hover {
+  transform: translateY(-4px) scale(1.005);
+  box-shadow: 0 24px 64px oklch(0% 0 0 / 0.6);
+}
+
+.project-tile:hover .tile-overlay {
+  background: linear-gradient(
+    to top,
+    oklch(0% 0 0 / 0.92) 0%,
+    oklch(0% 0 0 / 0.5) 50%,
+    oklch(0% 0 0 / 0.1) 100%
+  );
+}
+
+.project-tile:hover .tile-arrow {
+  transform: translate(3px, -3px);
+  opacity: 1;
+}
+
+.tile-arrow {
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+  opacity: 0.4;
+}
+
+/* Scroll indicator bounce */
+@keyframes scroll-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 0.9;
+  }
+}
+
+.scroll-indicator {
+  animation: scroll-bounce 2s ease-in-out infinite;
+}
+
+/* Section label style */
+.section-label {
+  @apply font-satoshi-medium text-xs tracking-[0.2em] text-neutral-500 uppercase;
+}
+
+/* Service number style */
+.service-number {
+  @apply font-instrument-serif text-5xl leading-none text-neutral-700;
+}
+
 @media print {
   html,
   body {
-    font-display: optional;
     background: white !important;
-    all: initial;
-    font-family: "Satoshi-Regular", "sans-serif";
+    color: #171717 !important;
+    font-family: "Satoshi-Regular", "Georgia", serif;
   }
 }
 
@@ -105,7 +238,7 @@ body {
     url("./fonts/Satoshi-Light.woff2") format("woff2"),
     url("./fonts/Satoshi-Light.woff") format("woff");
   font-weight: 300;
-  font-display: block;
+  font-display: swap;
   font-style: normal;
 }
 
@@ -115,7 +248,7 @@ body {
     url("./fonts/Satoshi-Regular.woff2") format("woff2"),
     url("./fonts/Satoshi-Regular.woff") format("woff");
   font-weight: 400;
-  font-display: block;
+  font-display: swap;
   font-style: normal;
 }
 
@@ -125,7 +258,7 @@ body {
     url("./fonts/Satoshi-Medium.woff2") format("woff2"),
     url("./fonts/Satoshi-Medium.woff") format("woff");
   font-weight: 500;
-  font-display: block;
+  font-display: swap;
   font-style: normal;
 }
 
@@ -135,7 +268,7 @@ body {
     url("./fonts/Satoshi-Bold.woff2") format("woff2"),
     url("./fonts/Satoshi-Bold.woff") format("woff");
   font-weight: 700;
-  font-display: block;
+  font-display: swap;
   font-style: normal;
 }
 
@@ -145,6 +278,6 @@ body {
     url("./fonts/Satoshi-Black.woff2") format("woff2"),
     url("./fonts/Satoshi-Black.woff") format("woff");
   font-weight: 900;
-  font-display: block;
+  font-display: swap;
   font-style: normal;
 }
