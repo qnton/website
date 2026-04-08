@@ -7,19 +7,19 @@ const year = new Date().getFullYear();
 ---
 
 <footer
-  class={merge("border-t border-neutral-900 px-6 py-24 lg:py-36", className)}
+  class={merge("border-t border-hairline px-6 py-24 lg:py-36", className)}
 >
   <div class="mx-auto max-w-5xl">
     <!-- CTA -->
     <div class="mb-16 flex flex-col gap-6 lg:mb-20">
       <span class="section-label">Get in touch</span>
       <h2
-        class="font-instrument-serif m-0 max-w-2xl text-4xl leading-tight text-neutral-100 md:text-5xl lg:text-6xl xl:text-7xl"
+        class="font-instrument-serif text-primary m-0 max-w-2xl text-4xl leading-tight md:text-5xl lg:text-6xl xl:text-7xl"
       >
         Work with me
       </h2>
       <p
-        class="font-satoshi-light m-0 max-w-md text-base leading-relaxed text-neutral-500 md:text-lg"
+        class="font-satoshi-light text-dim m-0 max-w-md text-base leading-relaxed md:text-lg"
       >
         Have a project in mind? I take on a select number of clients each year
         to ensure focused, high-quality collaboration.
@@ -36,7 +36,7 @@ const year = new Date().getFullYear();
       </address>
       <a
         href="mailto:hello@qnt.one"
-        class="font-instrument-serif group inline-flex items-center gap-4 border-b border-neutral-800 pb-3 text-2xl text-neutral-100 transition-colors duration-300 hover:border-neutral-500 hover:text-white md:text-3xl lg:text-4xl"
+        class="font-instrument-serif text-primary group inline-flex items-center gap-4 border-b border-[var(--c-border)] pb-3 text-2xl transition-colors duration-300 hover:border-[var(--c-muted)] hover:text-[var(--c-text)] md:text-3xl lg:text-4xl"
       >
         hello@qnt.one
         <svg
@@ -60,12 +60,12 @@ const year = new Date().getFullYear();
 
     <!-- Bottom row -->
     <div
-      class="flex flex-col gap-6 border-t border-neutral-900 pt-8 sm:flex-row sm:items-center sm:justify-between"
+      class="flex flex-col gap-6 border-t border-hairline pt-8 sm:flex-row sm:items-center sm:justify-between"
     >
       <!-- Social links -->
       <nav class="flex flex-wrap items-center gap-6">
         <a
-          class="font-satoshi-regular text-sm text-neutral-600 transition-colors duration-200 hover:text-neutral-300"
+          class="font-satoshi-regular text-dim text-sm transition-colors duration-200 hover:text-muted"
           href="https://github.com/qnton"
           rel="noopener noreferrer"
           target="_blank"
@@ -73,7 +73,7 @@ const year = new Date().getFullYear();
           GitHub
         </a>
         <a
-          class="font-satoshi-regular text-sm text-neutral-600 transition-colors duration-200 hover:text-neutral-300"
+          class="font-satoshi-regular text-dim text-sm transition-colors duration-200 hover:text-muted"
           href="https://linkedin.com/in/qnton"
           rel="noopener noreferrer"
           target="_blank"
@@ -81,7 +81,7 @@ const year = new Date().getFullYear();
           LinkedIn
         </a>
         <a
-          class="font-satoshi-regular text-sm text-neutral-600 transition-colors duration-200 hover:text-neutral-300"
+          class="font-satoshi-regular text-dim text-sm transition-colors duration-200 hover:text-muted"
           href="/legal"
         >
           Legal &amp; privacy
@@ -89,7 +89,7 @@ const year = new Date().getFullYear();
       </nav>
 
       <!-- Copyright -->
-      <p class="font-satoshi-light m-0 text-sm text-neutral-700">
+      <p class="font-satoshi-light text-faint m-0 text-sm">
         &copy; {year} Anton Werschinin
       </p>
     </div>

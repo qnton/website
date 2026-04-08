@@ -17,6 +17,15 @@
   --color-surface: oklch(8% 0 0);
   --color-border: oklch(20% 0 0);
 
+  /* Semantic neutral roles */
+  --c-bg: oklch(0% 0 0);
+  --c-surface: var(--color-surface);
+  --c-border: var(--color-border);
+  --c-text: oklch(96% 0 0);
+  --c-muted: oklch(78% 0 0);
+  --c-dim: oklch(58% 0 0);
+  --c-faint: oklch(42% 0 0);
+
   --spacing-5vh: 5svh;
   --spacing-10vh: 10svh;
   --spacing-15vh: 15svh;
@@ -67,7 +76,33 @@
 }
 
 body {
-  @apply font-satoshi-regular bg-black text-neutral-300 selection:bg-neutral-400/20;
+  @apply font-satoshi-regular selection:bg-neutral-400/20;
+  background-color: var(--c-bg);
+  color: var(--c-muted);
+}
+
+.text-primary {
+  color: var(--c-text);
+}
+
+.text-muted {
+  color: var(--c-muted);
+}
+
+.text-dim {
+  color: var(--c-dim);
+}
+
+.text-faint {
+  color: var(--c-faint);
+}
+
+.border-hairline {
+  border-color: var(--c-border);
+}
+
+.bg-surface {
+  background-color: var(--c-surface);
 }
 
 .link-underline-black {
@@ -215,12 +250,14 @@ body {
 
 /* Section label style */
 .section-label {
-  @apply font-satoshi-medium text-xs tracking-[0.2em] text-neutral-500 uppercase;
+  @apply font-satoshi-medium text-xs tracking-[0.2em] uppercase;
+  color: var(--c-faint);
 }
 
 /* Service number style */
 .service-number {
-  @apply font-instrument-serif text-5xl leading-none text-neutral-700;
+  @apply font-instrument-serif text-5xl leading-none;
+  color: var(--c-faint);
 }
 
 @media print {

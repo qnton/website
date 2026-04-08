@@ -60,7 +60,7 @@ const services = [
   description="Senior Designer & Engineer with a decade of experience building exceptional digital products."
   title="Anton Werschinin — Designer & Engineer"
 >
-  <main class="bg-black text-white">
+  <main class="bg-black text-muted">
     <!-- ─── HERO ─────────────────────────────────────────────── -->
     <section
       class="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden px-6"
@@ -92,7 +92,7 @@ const services = [
               >Available for projects</span
             >
             <div
-              class="animate-fade-left animate-delay-150 animate-once h-px w-16 bg-neutral-700"
+              class="animate-fade-left animate-delay-150 animate-once h-px w-16 bg-[var(--c-border)]"
             >
             </div>
           </div>
@@ -101,29 +101,29 @@ const services = [
         <!-- Headline -->
         <div class="flex flex-col gap-5 lg:gap-8">
           <h1
-            class="animate-fade-up animate-delay-100 animate-once font-instrument-serif m-0 text-5xl leading-none tracking-tight text-neutral-50 md:text-7xl lg:text-8xl xl:text-9xl"
+            class="animate-fade-up animate-delay-100 animate-once font-instrument-serif m-0 text-5xl leading-none tracking-tight text-primary md:text-7xl lg:text-8xl xl:text-9xl"
           >
-            Anton<br /><em class="text-neutral-400 not-italic">Werschinin</em>
+            Anton<br /><em class="text-dim not-italic">Werschinin</em>
           </h1>
           <p
-            class="animate-fade-up animate-delay-200 animate-once font-satoshi-regular m-0 max-w-2xl text-base leading-snug tracking-normal text-neutral-300 md:text-lg lg:text-xl"
+            class="animate-fade-up animate-delay-200 animate-once font-satoshi-regular m-0 max-w-2xl text-base leading-snug tracking-normal text-muted md:text-lg lg:text-xl"
           >
-            <span class="font-satoshi-medium text-neutral-200"
+            <span class="font-satoshi-medium text-primary"
               >Senior Designer &amp; Engineer</span
             >
             <span
-              class="text-neutral-600"
+              class="text-faint"
               aria-hidden="true"
             >
               ·
             </span>
-            <span class="text-neutral-500">10 years of craft</span>
+            <span class="text-dim">10 years of craft</span>
           </p>
         </div>
 
         <!-- Ethos -->
         <p
-          class="animate-fade-up animate-delay-300 animate-once font-satoshi-light m-0 max-w-xl text-base leading-relaxed text-neutral-600 md:text-lg"
+          class="animate-fade-up animate-delay-300 animate-once font-satoshi-light m-0 max-w-xl text-base leading-relaxed text-dim md:text-lg"
         >
           Bridging engineering precision with design intention. I build products
           that perform at scale and feel inevitable in use.
@@ -134,8 +134,8 @@ const services = [
       <div
         class="animate-fade animate-delay-700 animate-once absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2"
       >
-        <span class="section-label text-neutral-700">Scroll</span>
-        <div class="scroll-indicator text-neutral-700">
+        <span class="section-label">Scroll</span>
+        <div class="scroll-indicator text-faint">
           <svg
             width="16"
             height="16"
@@ -160,18 +160,18 @@ const services = [
       <div class="mx-auto max-w-5xl">
         <!-- Section header -->
         <div
-          class="on-sight:animate-fade mb-12 flex items-end justify-between border-b border-neutral-900 pb-8 lg:mb-16"
+          class="on-sight:animate-fade mb-12 flex items-end justify-between border-b border-hairline pb-8 lg:mb-16"
         >
           <div class="flex flex-col gap-3">
             <span class="section-label">Portfolio</span>
             <h2
-              class="font-instrument-serif m-0 text-3xl leading-none text-neutral-100 md:text-4xl lg:text-5xl"
+              class="font-instrument-serif m-0 text-3xl leading-none text-primary md:text-4xl lg:text-5xl"
             >
               Selected Work
             </h2>
           </div>
           <span
-            class="font-satoshi-light hidden text-sm text-neutral-700 md:block"
+            class="font-satoshi-light text-faint hidden text-sm md:block"
             >2023 – 2024</span
           >
         </div>
@@ -196,15 +196,15 @@ const services = [
                 <div class="absolute inset-0 flex flex-col justify-between p-6 lg:p-8">
                   <div class="flex items-start justify-between">
                     <span class="section-label">{project.category}</span>
-                    <span class="font-satoshi-light text-xs text-neutral-600">
+                    <span class="font-satoshi-light text-faint text-xs">
                       {project.year}
                     </span>
                   </div>
                   <div class="flex items-end justify-between">
-                    <h3 class="font-instrument-serif m-0 max-w-[80%] text-xl leading-snug text-neutral-100 md:text-2xl lg:text-3xl">
+                    <h3 class="font-instrument-serif text-primary m-0 max-w-[80%] text-xl leading-snug md:text-2xl lg:text-3xl">
                       {project.title}
                     </h3>
-                    <div class="tile-arrow text-neutral-400">
+                    <div class="tile-arrow text-dim">
                       <svg
                         width="20"
                         height="20"
@@ -231,20 +231,20 @@ const services = [
     </section>
 
     <!-- ─── CORE SERVICES ─────────────────────────────────────── -->
-    <section class="border-t border-neutral-900 px-6 py-24 lg:py-36">
+    <section class="border-t border-hairline px-6 py-24 lg:py-36">
       <div class="mx-auto max-w-5xl">
         <!-- Section header -->
         <div class="on-sight:animate-fade mb-16 flex flex-col gap-3 lg:mb-20">
           <span class="section-label">What I do</span>
           <h2
-            class="font-instrument-serif m-0 text-3xl leading-none text-neutral-100 md:text-4xl lg:text-5xl"
+            class="font-instrument-serif m-0 text-3xl leading-none text-primary md:text-4xl lg:text-5xl"
           >
             Core Services
           </h2>
         </div>
 
         <!-- Services -->
-        <div class="flex flex-col divide-y divide-neutral-900">
+        <div class="flex flex-col divide-y divide-[var(--c-border)]">
           {
             services.map((service, i) => (
               <div
@@ -254,10 +254,10 @@ const services = [
                 <div class="service-number font-instrument-serif">
                   {service.number}
                 </div>
-                <h3 class="font-satoshi-medium m-0 self-start text-xl text-neutral-100 md:text-2xl">
+                <h3 class="font-satoshi-medium text-primary m-0 self-start text-xl md:text-2xl">
                   {service.title}
                 </h3>
-                <p class="font-satoshi-light m-0 self-start text-base leading-relaxed text-neutral-500 md:text-lg">
+                <p class="font-satoshi-light text-dim m-0 self-start text-base leading-relaxed md:text-lg">
                   {service.description}
                 </p>
               </div>
