@@ -5,9 +5,10 @@ import { ClientRouter } from "astro:transitions";
 interface Props {
   title: string;
   description: string;
+  lang?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, lang = "en" } = Astro.props;
 
 /* Structured Data */
 const schema = {
@@ -68,7 +69,7 @@ const schema = {
 };
 ---
 
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta
