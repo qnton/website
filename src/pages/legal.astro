@@ -2,69 +2,68 @@
 import Layout from "@/components/layout.astro";
 import Footer from "@/components/footer.astro";
 
-const title = "Impressum & Datenschutzerklärung — Anton Werschinin";
+const title = "Legal notice & privacy policy — Anton Werschinin";
 const description =
-  "Impressum und Datenschutzerklärung gemäß TMG, DDG und DSGVO für qnt.one.";
+  "Legal notice (Imprint) and privacy information for qnt.one, including GDPR-related disclosures for visitors in the EU.";
 ---
 
 <Layout
   description={description}
-  lang="de"
   title={title}
 >
   <main class="bg-black text-white">
     <article class="px-6 py-24 lg:py-36">
       <div class="mx-auto max-w-3xl">
         <header class="mb-16 border-b border-neutral-900 pb-12">
-          <p class="section-label mb-4">Rechtliches</p>
+          <p class="section-label mb-4">Legal</p>
           <h1
             class="font-instrument-serif m-0 text-4xl leading-tight text-neutral-50 md:text-5xl lg:text-6xl"
           >
-            Impressum &amp; Datenschutz
+            Legal notice &amp; privacy
           </h1>
           <p
             class="font-satoshi-light mt-6 max-w-2xl text-base leading-relaxed text-neutral-500"
           >
-            Angaben gemäß §&nbsp;5 TMG, §&nbsp;55 RStV (soweit einschlägig)
-            sowie Hinweise zur Datenverarbeitung nach der
-            Datenschutz-Grundverordnung (DSGVO) und dem Bundesdatenschutzgesetz
-            (BDSG).
+            Information provided in accordance with the German Telemedia Act
+            (TMG) and the Interstate Broadcasting Treaty (RStV), where
+            applicable, and notes on processing personal data under the EU
+            General Data Protection Regulation (GDPR) and the German Federal
+            Data Protection Act (BDSG).
           </p>
         </header>
 
         <div
           class="font-satoshi-light space-y-16 text-base leading-relaxed text-neutral-400"
         >
-          <!-- Impressum -->
           <section
             class="space-y-6"
-            aria-labelledby="impressum-heading"
+            aria-labelledby="legal-notice-heading"
           >
             <h2
-              id="impressum-heading"
+              id="legal-notice-heading"
               class="font-instrument-serif m-0 text-2xl text-neutral-100 md:text-3xl"
             >
-              Impressum
+              Legal notice (Imprint)
             </h2>
 
             <div class="space-y-4">
               <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
-                Diensteanbieter
+                Service provider
               </h3>
               <address class="text-neutral-400 not-italic">
                 <p class="m-0">Anton Werschinin</p>
                 <p class="m-0">Hinterm Wall 28</p>
                 <p class="m-0">49661 Cloppenburg</p>
-                <p class="m-0">Deutschland</p>
+                <p class="m-0">Germany</p>
               </address>
             </div>
 
             <div class="space-y-4">
               <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
-                Kontakt
+                Contact
               </h3>
               <p class="m-0">
-                E-Mail:
+                Email:
                 <a
                   class="text-neutral-300 underline decoration-neutral-700 underline-offset-4 transition-colors hover:text-white hover:decoration-neutral-500"
                   href="mailto:hello@qnt.one"
@@ -75,59 +74,57 @@ const description =
 
             <div class="space-y-4">
               <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
-                Verantwortlich für den Inhalt nach §&nbsp;55 Abs.&nbsp;2 RStV
+                Responsible for content (Sec. 55(2) RStV)
               </h3>
-              <p class="m-0"> Anton Werschinin, Anschrift wie oben. </p>
+              <p class="m-0">Anton Werschinin, same address as above.</p>
             </div>
 
             <div class="space-y-4">
               <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
-                EU-Streitschlichtung
+                EU dispute resolution
               </h3>
               <p class="m-0">
-                Die Europäische Kommission stellt eine Plattform zur
-                Online-Streitbeilegung (OS) bereit:
+                The European Commission provides a platform for online dispute
+                resolution (ODR):
                 <a
                   class="text-neutral-300 underline decoration-neutral-700 underline-offset-4 transition-colors hover:text-white hover:decoration-neutral-500"
                   href="https://ec.europa.eu/consumers/odr/"
                   rel="noopener noreferrer"
                   target="_blank"
                   >https://ec.europa.eu/consumers/odr/</a
-                >. Unsere E-Mail-Adresse finden Sie oben im Impressum.
+                >. You can find our email address in this legal notice above.
               </p>
             </div>
 
             <div class="space-y-4">
               <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
-                Verbraucherstreitbeilegung / Universalschlichtungsstelle
+                Consumer dispute resolution
               </h3>
               <p class="m-0">
-                Wir sind nicht verpflichtet und nicht bereit, an
-                Streitbeilegungsverfahren vor einer
-                Verbraucherschlichtungsstelle teilzunehmen.
+                We are not obliged or willing to participate in dispute
+                resolution proceedings before a consumer arbitration board.
               </p>
             </div>
           </section>
 
-          <!-- Datenschutz -->
           <section
             class="space-y-6"
-            aria-labelledby="datenschutz-heading"
+            aria-labelledby="privacy-heading"
           >
             <h2
-              id="datenschutz-heading"
+              id="privacy-heading"
               class="font-instrument-serif m-0 text-2xl text-neutral-100 md:text-3xl"
             >
-              Datenschutzerklärung
+              Privacy policy
             </h2>
 
             <div class="space-y-4">
               <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
-                1. Verantwortlicher
+                1. Controller
               </h3>
               <p class="m-0">
-                Verantwortlicher im Sinne der DSGVO ist Anton Werschinin,
-                Hinterm Wall 28, 49661 Cloppenburg, Deutschland,
+                The controller within the meaning of the GDPR is Anton
+                Werschinin, Hinterm Wall 28, 49661 Cloppenburg, Germany,
                 <a
                   class="text-neutral-300 underline decoration-neutral-700 underline-offset-4 transition-colors hover:text-white hover:decoration-neutral-500"
                   href="mailto:hello@qnt.one"
@@ -138,125 +135,112 @@ const description =
 
             <div class="space-y-4">
               <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
-                2. Allgemeines zur Datenverarbeitung
+                2. General information on processing
               </h3>
               <p class="m-0">
-                Wir verarbeiten personenbezogene Daten nur, soweit dies zur
-                Bereitstellung einer funktionsfähigen Website, von Inhalten und
-                Leistungen erforderlich ist, gesetzliche Verpflichtungen
-                bestehen oder Sie eingewilligt haben.
+                We process personal data only to the extent necessary to provide
+                a functional website and our content and services, to comply
+                with legal obligations, or where you have given consent.
               </p>
               <p class="m-0">
-                Rechtsgrundlagen können insbesondere Art.&nbsp;6 Abs.&nbsp;1
-                lit.&nbsp;a DSGVO (Einwilligung), lit.&nbsp;b DSGVO (Vertrag /
-                vorvertragliche Maßnahmen), lit.&nbsp;c DSGVO (rechtliche
-                Verpflichtung) und lit.&nbsp;f DSGVO (berechtigtes Interesse)
-                sein.
+                Legal bases may include Art. 6(1)(a) GDPR (consent), (b)
+                (contract or pre-contractual steps), (c) (legal obligation), and
+                (f) (legitimate interests), as applicable.
               </p>
             </div>
 
             <div class="space-y-4">
               <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
-                3. Hosting und Aufruf der Website
+                3. Hosting and visiting this website
               </h3>
               <p class="m-0">
-                Diese Website wird bei einem Hosting-Anbieter betrieben. Beim
-                Aufruf der Seiten werden durch den Host und ggf. durch uns
-                technisch erforderliche Daten verarbeitet (z.&nbsp;B.
-                IP-Adresse, Zeitpunkt der Anfrage, User-Agent), um die
-                Auslieferung und Sicherheit der Website zu gewährleisten
-                (berechtigtes Interesse gem. Art.&nbsp;6 Abs.&nbsp;1 lit.&nbsp;f
-                DSGVO).
+                This website is operated on infrastructure provided by a hosting
+                provider. When you access pages, the host and, where applicable,
+                we process technically necessary data (e.g. IP address, time of
+                the request, user agent) to deliver the site and maintain its
+                security (legitimate interest under Art. 6(1)(f) GDPR).
               </p>
               <p class="m-0">
-                Sofern der Anbieter außerhalb des Europäischen Wirtschaftsraums
-                (EWR) sitzt und kein Angemessenheitsbeschluss der EU-Kommission
-                vorliegt, stellen wir — soweit erforderlich — geeignete
-                Garantien sicher (z.&nbsp;B. EU-Standardvertragsklauseln) und
-                informieren Sie gesondert, sobald Vertragsunterlagen öffentlich
-                einsehbar sind.
+                If the provider is located outside the European Economic Area
+                and no adequacy decision of the EU Commission applies, we will
+                put appropriate safeguards in place where required (e.g. EU
+                Standard Contractual Clauses) and provide further information
+                when relevant documentation is publicly available.
               </p>
               <p class="m-0">
-                Entsprechende Hinweise des Hosting-Anbieters (inkl.
-                Auftragsverarbeitung) entnehmen Sie bitte dessen aktueller
-                Datenschutzerklärung.
+                Please refer to the hosting provider’s current privacy policy
+                for details (including any data processing agreement).
               </p>
             </div>
 
             <div class="space-y-4">
               <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
-                4. Kontakt per E-Mail
+                4. Contact by email
               </h3>
               <p class="m-0">
-                Wenn Sie uns per E-Mail kontaktieren, verarbeiten wir die von
-                Ihnen mitgeteilten Daten zur Bearbeitung der Anfrage und für den
-                Fall von Anschlussfragen (Art.&nbsp;6 Abs.&nbsp;1 lit.&nbsp;b
-                bzw. lit.&nbsp;f DSGVO). Die Daten werden gelöscht, sobald sie
-                für die Erreichung des Zwecks nicht mehr erforderlich sind,
-                sofern keine gesetzlichen Aufbewahrungspflichten entgegenstehen.
+                If you contact us by email, we process the data you provide to
+                handle your request and any follow-up questions (Art. 6(1)(b) or
+                (f) GDPR). Data is deleted once no longer needed for that
+                purpose, unless statutory retention requirements apply.
               </p>
             </div>
 
             <div class="space-y-4">
               <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
-                5. Cookies und lokale Speicherung
+                5. Cookies and local storage
               </h3>
               <p class="m-0">
-                Diese Website setzt keine Tracking-Cookies zu Werbe- oder
-                Analysezwecken ein. Es können technisch notwendige Daten in
-                Ihrem Browser verarbeitet werden (z.&nbsp;B. für die Darstellung
-                oder Sicherheit), soweit dies ohne Einwilligung zulässig ist.
+                This website does not use tracking cookies for advertising or
+                analytics. Technically necessary data may be processed in your
+                browser (e.g. for display or security) where permitted without
+                consent.
               </p>
             </div>
 
             <div class="space-y-4">
               <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
-                6. Externe Inhalte (z.&nbsp;B. Schriftarten)
+                6. Third-party content (e.g. fonts)
               </h3>
               <p class="m-0">
-                Zur Darstellung können Inhalte von Drittanbietern geladen werden
-                (z.&nbsp;B. Schriftarten von Google Fonts). Dabei kann der
-                Drittanbieter technische Informationen (u.&nbsp;a. IP-Adresse)
-                erhalten. Rechtsgrundlage ist Art.&nbsp;6 Abs.&nbsp;1
-                lit.&nbsp;f DSGVO (berechtigtes Interesse an einheitlicher,
-                lesbarer Darstellung). Weitere Informationen finden Sie in der
-                Datenschutzerklärung des jeweiligen Anbieters:
+                For presentation, content may be loaded from third parties (e.g.
+                fonts from Google Fonts). The third party may receive technical
+                information (including IP address). The legal basis is Art.
+                6(1)(f) GDPR (legitimate interest in a consistent, readable
+                presentation). Further information is available in the
+                respective provider’s privacy policy:
                 <a
                   class="text-neutral-300 underline decoration-neutral-700 underline-offset-4 transition-colors hover:text-white hover:decoration-neutral-500"
-                  href="https://policies.google.com/privacy?hl=de"
+                  href="https://policies.google.com/privacy?hl=en"
                   rel="noopener noreferrer"
                   target="_blank"
-                  >Google (Datenschutzerklärung)</a
+                  >Google (privacy policy)</a
                 >.
               </p>
             </div>
 
             <div class="space-y-4">
               <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
-                7. Ihre Rechte
+                7. Your rights
               </h3>
               <p class="m-0">
-                Sie haben — unter den gesetzlichen Voraussetzungen — Recht auf
-                Auskunft (Art.&nbsp;15 DSGVO), Berichtigung (Art.&nbsp;16
-                DSGVO), Löschung (Art.&nbsp;17 DSGVO), Einschränkung der
-                Verarbeitung (Art.&nbsp;18 DSGVO), Datenübertragbarkeit
-                (Art.&nbsp;20 DSGVO) sowie Widerspruch gegen die Verarbeitung
-                (Art.&nbsp;21 DSGVO).
+                Where the legal requirements are met, you have the right to
+                access (Art. 15 GDPR), rectification (Art. 16 GDPR), erasure
+                (Art. 17 GDPR), restriction of processing (Art. 18 GDPR), data
+                portability (Art. 20 GDPR), and to object to processing (Art. 21
+                GDPR).
               </p>
               <p class="m-0">
-                Sofern die Verarbeitung auf einer Einwilligung beruht, können
-                Sie diese mit Wirkung für die Zukunft widerrufen (Art.&nbsp;7
-                Abs.&nbsp;3 DSGVO).
+                Where processing is based on consent, you may withdraw consent
+                with effect for the future (Art. 7(3) GDPR).
               </p>
               <p class="m-0">
-                Sie haben zudem das Recht, sich bei einer
-                Datenschutzaufsichtsbehörde zu beschweren (Art.&nbsp;77 DSGVO).
-                Zuständig ist u.&nbsp;a. die für Ihren Wohnsitz oder unseren
-                Sitz zuständige Behörde. Eine Liste der Aufsichtsbehörden in der
-                EU finden Sie unter
+                You also have the right to lodge a complaint with a supervisory
+                authority (Art. 77 GDPR), in particular in the member state of
+                your habitual residence or our place of establishment. A list of
+                authorities in Germany is available at
                 <a
                   class="text-neutral-300 underline decoration-neutral-700 underline-offset-4 transition-colors hover:text-white hover:decoration-neutral-500"
-                  href="https://www.bfdi.bund.de/DE/Service/Anschriften/anschriften_table.html"
+                  href="https://www.bfdi.bund.de/EN/Service/Anschriften/anschriften_table.html"
                   rel="noopener noreferrer"
                   target="_blank"
                   >bfdi.bund.de</a
@@ -266,99 +250,90 @@ const description =
 
             <div class="space-y-4">
               <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
-                8. Speicherdauer
+                8. Storage period
               </h3>
               <p class="m-0">
-                Personenbezogene Daten werden gelöscht oder gesperrt, sobald der
-                Zweck der Speicherung entfällt, es sei denn, gesetzliche
-                Aufbewahrungsfristen stehen dem entgegen.
+                Personal data is deleted or blocked once the purpose of storage
+                no longer applies, unless statutory retention periods require
+                otherwise.
               </p>
             </div>
           </section>
 
-          <!-- Haftung & Urheberrecht -->
           <section
             class="space-y-6"
-            aria-labelledby="haftung-heading"
+            aria-labelledby="liability-heading"
           >
             <h2
-              id="haftung-heading"
+              id="liability-heading"
               class="font-instrument-serif m-0 text-2xl text-neutral-100 md:text-3xl"
             >
-              Haftungsausschluss &amp; Urheberrecht
+              Liability &amp; copyright
             </h2>
 
             <div class="space-y-4">
               <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
-                Haftung für Inhalte
+                Liability for content
               </h3>
               <p class="m-0">
-                Als Diensteanbieter sind wir gemäß §&nbsp;7 Abs.&nbsp;1 TMG für
-                eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen
-                verantwortlich. Nach §§&nbsp;8 bis 10 TMG sind wir als
-                Diensteanbieter jedoch nicht verpflichtet, übermittelte oder
-                gespeicherte fremde Informationen zu überwachen oder nach
-                Umständen zu forschen, die auf eine rechtswidrige Tätigkeit
-                hinweisen.
+                As a service provider, we are responsible for our own content on
+                these pages under general law in accordance with Sec. 7(1) TMG.
+                Under Secs. 8 to 10 TMG, however, we are not obliged to monitor
+                transmitted or stored third-party information or to investigate
+                circumstances indicating illegal activity.
               </p>
               <p class="m-0">
-                Verpflichtungen zur Entfernung oder Sperrung der Nutzung von
-                Informationen nach den allgemeinen Gesetzen bleiben hiervon
-                unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem
-                Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich.
-                Bei Bekanntwerden entsprechender Rechtsverletzungen werden wir
-                diese Inhalte umgehend entfernen.
+                Obligations to remove or block the use of information under
+                general law remain unaffected. Liability in this regard is only
+                possible from the time we become aware of a specific legal
+                violation. Upon notification of such violations, we will remove
+                the content immediately.
               </p>
             </div>
 
             <div class="space-y-4">
               <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
-                Haftung für Links
+                Liability for links
               </h3>
               <p class="m-0">
-                Unser Angebot enthält Links zu externen Websites Dritter, auf
-                deren Inhalte wir keinen Einfluss haben. Deshalb können wir für
-                diese fremden Inhalte auch keine Gewähr übernehmen. Für die
-                Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter
-                oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten
-                wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße
-                überprüft; rechtswidrige Inhalte waren zum Zeitpunkt der
-                Verlinkung nicht erkennbar.
+                Our site contains links to external third-party websites over
+                whose content we have no control. We cannot assume any liability
+                for that external content. The respective provider or operator
+                of the linked pages is always responsible for their content. The
+                linked pages were checked for possible legal violations at the
+                time the link was created; no unlawful content was identifiable
+                at that time.
               </p>
               <p class="m-0">
-                Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist
-                jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht
-                zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir
-                derartige Links umgehend entfernen.
+                Permanent monitoring of linked pages without concrete evidence
+                of a violation is not reasonable. If we become aware of legal
+                violations, we will remove such links immediately.
               </p>
             </div>
 
             <div class="space-y-4">
               <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
-                Urheberrecht
+                Copyright
               </h3>
               <p class="m-0">
-                Die durch den Seitenbetreiber erstellten Inhalte und Werke auf
-                diesen Seiten unterliegen dem deutschen Urheberrecht. Die
-                Vervielfältigung, Bearbeitung, Verbreitung und jede Art der
-                Verwertung außerhalb der Grenzen des Urheberrechts bedürfen der
-                schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
-                Downloads und Kopien dieser Seite sind nur für den privaten,
-                nicht kommerziellen Gebrauch gestattet.
+                Content and works on these pages created by the site operator
+                are subject to German copyright law. Duplication, editing,
+                distribution, and any kind of exploitation outside the limits of
+                copyright require the written consent of the respective author
+                or creator. Downloads and copies of this site are permitted only
+                for private, non-commercial use.
               </p>
               <p class="m-0">
-                Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt
-                wurden, werden die Urheberrechte Dritter beachtet. Insbesondere
-                werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie
-                trotzdem auf eine Urheberrechtsverletzung aufmerksam werden,
-                bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden
-                von Rechtsverletzungen werden wir derartige Inhalte umgehend
-                entfernen.
+                Where content on this site was not created by the operator, the
+                copyrights of third parties are respected. Third-party content
+                is marked as such. Should you nevertheless become aware of a
+                copyright infringement, please notify us. Upon notification of
+                violations, we will remove such content immediately.
               </p>
             </div>
           </section>
 
-          <p class="m-0 text-sm text-neutral-600">Stand: April 2026</p>
+          <p class="m-0 text-sm text-neutral-600">Last updated: April 2026</p>
         </div>
 
         <p class="mt-16">
@@ -366,7 +341,7 @@ const description =
             class="font-satoshi-regular text-sm text-neutral-500 transition-colors hover:text-neutral-300"
             href="/"
           >
-            ← Zur Startseite
+            &larr; Back to home
           </a>
         </p>
       </div>

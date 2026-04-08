@@ -2,37 +2,24 @@
 import "@/styles/globals.css";
 import { ClientRouter } from "astro:transitions";
 
-interface Alternate {
-  hreflang: string;
-  href: string;
-}
-
 interface Props {
   title: string;
   description: string;
-  lang?: string;
   /** Absolute URL for Open Graph / Twitter image */
   image?: string;
   ogType?: string;
   robots?: string;
   /** Skip JSON-LD (e.g. 404) */
   noStructuredData?: boolean;
-  /** hreflang alternates (e.g. EN ↔ DE legal) */
-  alternates?: Alternate[];
-  /** x-default alternate href */
-  xDefaultHref?: string;
 }
 
 const {
   title,
   description,
-  lang = "en",
   image: imageProp,
   ogType = "website",
   robots,
   noStructuredData = false,
-  alternates,
-  xDefaultHref,
 } = Astro.props;
 
 const siteConfig = import.meta.env.SITE ?? "https://qnt.one/";
@@ -58,7 +45,7 @@ const jsonLd = {
       url: origin,
       name: "Anton Werschinin",
       description: structuredDescription,
-      inLanguage: ["en", "de"],
+      inLanguage: "en",
       publisher: { "@id": `${origin}/#person` },
     },
     {
@@ -71,7 +58,7 @@ const jsonLd = {
       url: origin,
       image: `${origin}/images/pfp.jpg`,
       jobTitle: "Designer & Engineer",
-      knowsLanguage: ["de-DE", "en-US"],
+      knowsLanguage: "en-US",
       sameAs: [
         "https://www.linkedin.com/in/qnton",
         "https://github.com/qnton",
@@ -108,7 +95,7 @@ const jsonLd = {
 };
 ---
 
-<html lang={lang}>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -176,7 +163,7 @@ const jsonLd = {
       property="og:image:height"
     />
     <meta
-      content={lang === "de" ? "de_DE" : "en_US"}
+      content="en_US"
       property="og:locale"
     />
 
@@ -243,24 +230,6 @@ const jsonLd = {
       href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap"
       rel="stylesheet"
     />
-    {
-      alternates?.map((a) => (
-        <link
-          rel="alternate"
-          hreflang={a.hreflang}
-          href={a.href}
-        />
-      ))
-    }
-    {
-      xDefaultHref && (
-        <link
-          rel="alternate"
-          hreflang="x-default"
-          href={xDefaultHref}
-        />
-      )
-    }
     <ClientRouter />
   </head>
   <body>
