@@ -7,10 +7,7 @@ const year = new Date().getFullYear();
 ---
 
 <footer
-  class={merge(
-    "border-t border-neutral-900 px-6 py-24 lg:py-36",
-    className,
-  )}
+  class={merge("border-t border-neutral-900 px-6 py-24 lg:py-36", className)}
 >
   <div class="mx-auto max-w-5xl">
     <!-- CTA -->
@@ -21,9 +18,11 @@ const year = new Date().getFullYear();
       >
         Work with me
       </h2>
-      <p class="font-satoshi-light m-0 max-w-md text-base leading-relaxed text-neutral-500 md:text-lg">
-        Have a project in mind? I take on a select number of clients each
-        year to ensure focused, high-quality collaboration.
+      <p
+        class="font-satoshi-light m-0 max-w-md text-base leading-relaxed text-neutral-500 md:text-lg"
+      >
+        Have a project in mind? I take on a select number of clients each year
+        to ensure focused, high-quality collaboration.
       </p>
     </div>
 
@@ -53,7 +52,8 @@ const year = new Date().getFullYear();
             stroke="currentColor"
             stroke-width="1.5"
             stroke-linecap="round"
-            stroke-linejoin="round"></path>
+            stroke-linejoin="round"
+          ></path>
         </svg>
       </a>
     </div>
@@ -63,7 +63,7 @@ const year = new Date().getFullYear();
       class="flex flex-col gap-6 border-t border-neutral-900 pt-8 sm:flex-row sm:items-center sm:justify-between"
     >
       <!-- Social links -->
-      <nav class="flex items-center gap-6">
+      <nav class="flex flex-wrap items-center gap-6">
         <a
           class="font-satoshi-regular text-sm text-neutral-600 transition-colors duration-200 hover:text-neutral-300"
           href="https://github.com/qnton"
@@ -79,6 +79,12 @@ const year = new Date().getFullYear();
           target="_blank"
         >
           LinkedIn
+        </a>
+        <a
+          class="font-satoshi-regular text-sm text-neutral-600 transition-colors duration-200 hover:text-neutral-300"
+          href="/legal"
+        >
+          Impressum &amp; Datenschutz
         </a>
       </nav>
 

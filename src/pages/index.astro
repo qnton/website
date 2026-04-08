@@ -103,9 +103,7 @@ const services = [
           <h1
             class="animate-fade-up animate-delay-100 animate-once font-instrument-serif m-0 text-5xl leading-none tracking-tight text-neutral-50 md:text-7xl lg:text-8xl xl:text-9xl"
           >
-            Anton<br /><em class="not-italic text-neutral-400"
-              >Werschinin</em
-            >
+            Anton<br /><em class="text-neutral-400 not-italic">Werschinin</em>
           </h1>
           <p
             class="animate-fade-up animate-delay-200 animate-once font-satoshi-regular m-0 max-w-2xl text-base leading-snug tracking-normal text-neutral-300 md:text-lg lg:text-xl"
@@ -113,7 +111,12 @@ const services = [
             <span class="font-satoshi-medium text-neutral-200"
               >Senior Designer &amp; Engineer</span
             >
-            <span class="text-neutral-600" aria-hidden="true"> · </span>
+            <span
+              class="text-neutral-600"
+              aria-hidden="true"
+            >
+              ·
+            </span>
             <span class="text-neutral-500">10 years of craft</span>
           </p>
         </div>
@@ -122,8 +125,8 @@ const services = [
         <p
           class="animate-fade-up animate-delay-300 animate-once font-satoshi-light m-0 max-w-xl text-base leading-relaxed text-neutral-600 md:text-lg"
         >
-          Bridging engineering precision with design intention. I build
-          products that perform at scale and feel inevitable in use.
+          Bridging engineering precision with design intention. I build products
+          that perform at scale and feel inevitable in use.
         </p>
       </div>
 
@@ -145,7 +148,8 @@ const services = [
               stroke="currentColor"
               stroke-width="1.5"
               stroke-linecap="round"
-              stroke-linejoin="round"></path>
+              stroke-linejoin="round"
+            ></path>
           </svg>
         </div>
       </div>
@@ -166,7 +170,8 @@ const services = [
               Selected Work
             </h2>
           </div>
-          <span class="font-satoshi-light hidden text-sm text-neutral-700 md:block"
+          <span
+            class="font-satoshi-light hidden text-sm text-neutral-700 md:block"
             >2023 – 2024</span
           >
         </div>
@@ -179,20 +184,15 @@ const services = [
                 class={`on-sight:animate-fade-up project-tile group relative overflow-hidden rounded-sm`}
                 style={`animation-delay: ${project.delay}ms;`}
               >
-                <!-- Abstract background -->
                 <div
                   class={`${project.tile} aspect-[4/3] w-full lg:aspect-[3/2]`}
-                >
-                </div>
+                />
 
-                <!-- Overlay -->
                 <div
                   class="tile-overlay pointer-events-none absolute inset-0 transition-all duration-400"
                   style="background: linear-gradient(to top, oklch(0% 0 0 / 0.85) 0%, oklch(0% 0 0 / 0.35) 50%, oklch(0% 0 0 / 0.05) 100%);"
-                >
-                </div>
+                />
 
-                <!-- Content -->
                 <div class="absolute inset-0 flex flex-col justify-between p-6 lg:p-8">
                   <div class="flex items-start justify-between">
                     <span class="section-label">{project.category}</span>
