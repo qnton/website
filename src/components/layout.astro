@@ -2,70 +2,109 @@
 import "@/styles/globals.css";
 import { ClientRouter } from "astro:transitions";
 
+interface Alternate {
+  hreflang: string;
+  href: string;
+}
+
 interface Props {
   title: string;
   description: string;
   lang?: string;
+  /** Absolute URL for Open Graph / Twitter image */
+  image?: string;
+  ogType?: string;
+  robots?: string;
+  /** Skip JSON-LD (e.g. 404) */
+  noStructuredData?: boolean;
+  /** hreflang alternates (e.g. EN ↔ DE legal) */
+  alternates?: Alternate[];
+  /** x-default alternate href */
+  xDefaultHref?: string;
 }
 
-const { title, description, lang = "en" } = Astro.props;
+const {
+  title,
+  description,
+  lang = "en",
+  image: imageProp,
+  ogType = "website",
+  robots,
+  noStructuredData = false,
+  alternates,
+  xDefaultHref,
+} = Astro.props;
 
-/* Structured Data */
-const schema = {
+const siteConfig = import.meta.env.SITE ?? "https://qnt.one/";
+const origin = new URL(siteConfig).origin;
+const path =
+  Astro.url.pathname.length > 1 ? Astro.url.pathname.replace(/\/$/, "") : "";
+const canonicalUrl = new URL(path || "/", `${origin}/`).href;
+const defaultOgImage = `${origin}/images/pfp.jpg`;
+const ogImage = imageProp ?? defaultOgImage;
+const ogImageSecure = ogImage.startsWith("http")
+  ? ogImage
+  : new URL(ogImage.replace(/^\//, ""), `${origin}/`).href;
+
+const structuredDescription =
+  "Senior designer and engineer building exceptional digital products. Web development, design, and digital transformation.";
+
+const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": "https://qnt.one/#localBusiness",
-  name: "qnton - developer",
-  slogan:
-    "I am a web developer and designer specializing in creating visually stunning and functional websites.",
-  url: "https://qnt.one",
-  email: "hello@qnt.one",
-  image: "https://qnt.one/images/logo.png",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Hinterm Wall 28",
-    addressLocality: "Cloppenburg",
-    postalCode: "49661",
-    addressCountry: "DE",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 52.891917,
-    longitude: 8.007354,
-  },
-  openingHoursSpecification: {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
-    ],
-    opens: "00:00",
-    closes: "23:59",
-  },
-  sameAs: [
-    "https://www.linkedin.com/in/qnton",
-    "https://github.com/qnton",
-    "https://dev.to/qnton",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${origin}/#website`,
+      url: origin,
+      name: "Anton Werschinin",
+      description: structuredDescription,
+      inLanguage: ["en", "de"],
+      publisher: { "@id": `${origin}/#person` },
+    },
+    {
+      "@type": "Person",
+      "@id": `${origin}/#person`,
+      name: "Anton Werschinin",
+      givenName: "Anton",
+      familyName: "Werschinin",
+      email: "hello@qnt.one",
+      url: origin,
+      image: `${origin}/images/pfp.jpg`,
+      jobTitle: "Designer & Engineer",
+      knowsLanguage: ["de-DE", "en-US"],
+      sameAs: [
+        "https://www.linkedin.com/in/qnton",
+        "https://github.com/qnton",
+        "https://dev.to/qnton",
+      ],
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Hinterm Wall 28",
+        addressLocality: "Cloppenburg",
+        postalCode: "49661",
+        addressCountry: "DE",
+      },
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${origin}/#professionalService`,
+      name: "qnton",
+      url: origin,
+      description: structuredDescription,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Hinterm Wall 28",
+        addressLocality: "Cloppenburg",
+        postalCode: "49661",
+        addressCountry: "DE",
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "DE",
+      },
+      founder: { "@id": `${origin}/#person` },
+    },
   ],
-  currenciesAccepted: "EUR",
-  founder: {
-    givenName: "Anton",
-    familyName: "Werschinin",
-    jobTitle: "Developer",
-    gender: "Male",
-    knowsLanguage: ["de-DE", "en-US"],
-  },
-  foundingDate: "2022-01-01",
-  foundingLocation: {
-    name: "Cloppenburg",
-  },
-  knowsLanguage: ["de-DE", "en-US"],
-  priceRange: "$$",
 };
 ---
 
@@ -82,47 +121,80 @@ const schema = {
       content={description}
       name="description"
     />
+    {
+      robots && (
+        <meta
+          content={robots}
+          name="robots"
+        />
+      )
+    }
     <meta
       content="#000000"
       name="theme-color"
     />
 
-    <meta
-      content={description}
-      property="og:description"
+    <link
+      rel="canonical"
+      href={canonicalUrl}
     />
+
     <meta
-      content="1200"
-      property="og:image:width"
-    />
-    <meta
-      content="630"
-      property="og:image:height"
+      content={ogType}
+      property="og:type"
     />
     <meta
       content={title}
       property="og:title"
     />
-
     <meta
       content={description}
-      name="twitter:description"
+      property="og:description"
+    />
+    <meta
+      content={canonicalUrl}
+      property="og:url"
+    />
+    <meta
+      content="Anton Werschinin"
+      property="og:site_name"
+    />
+    <meta
+      content={ogImageSecure}
+      property="og:image"
+    />
+    <meta
+      content="image/jpeg"
+      property="og:image:type"
+    />
+    <meta
+      content="512"
+      property="og:image:width"
+    />
+    <meta
+      content="512"
+      property="og:image:height"
+    />
+    <meta
+      content={lang === "de" ? "de_DE" : "en_US"}
+      property="og:locale"
+    />
+
+    <meta
+      content="summary_large_image"
+      name="twitter:card"
     />
     <meta
       content={title}
       name="twitter:title"
     />
     <meta
-      content="summary_large_image"
-      name="twitter:card"
+      content={description}
+      name="twitter:description"
     />
     <meta
-      content="1200"
-      name="twitter:image:width"
-    />
-    <meta
-      content="630"
-      name="twitter:image:height"
+      content={ogImageSecure}
+      name="twitter:image"
     />
 
     <link
@@ -131,32 +203,33 @@ const schema = {
       type="image/x-icon"
     />
     <link
-      href="/images/apple-touch-icon-iphone-60x60.png"
+      href="/images/apple-touch-icon-ipad-retina-152x152.png"
       rel="apple-touch-icon"
-    />
-    <link
-      href="/images/apple-touch-icon-ipad-76x76.png"
-      rel="apple-touch-icon"
-      sizes="60x60"
+      sizes="152x152"
     />
     <link
       href="/images/apple-touch-icon-iphone-retina-120x120.png"
       rel="apple-touch-icon"
-      sizes="114x114"
+      sizes="120x120"
     />
     <link
-      href="/images/apple-touch-icon-ipad-retina-152x152.png"
+      href="/images/apple-touch-icon-ipad-76x76.png"
       rel="apple-touch-icon"
-      sizes="144x144"
+      sizes="76x76"
     />
-    <script
-      set:html={JSON.stringify(schema)}
-      type="application/ld+json"
+    <link
+      href="/images/apple-touch-icon-iphone-60x60.png"
+      rel="apple-touch-icon"
+      sizes="60x60"
     />
-    <meta
-      content={Astro.generator}
-      name="generator"
-    />
+    {
+      !noStructuredData && (
+        <script
+          set:html={JSON.stringify(jsonLd)}
+          type="application/ld+json"
+        />
+      )
+    }
     <link
       rel="preconnect"
       href="https://fonts.googleapis.com"
@@ -170,6 +243,24 @@ const schema = {
       href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap"
       rel="stylesheet"
     />
+    {
+      alternates?.map((a) => (
+        <link
+          rel="alternate"
+          hreflang={a.hreflang}
+          href={a.href}
+        />
+      ))
+    }
+    {
+      xDefaultHref && (
+        <link
+          rel="alternate"
+          hreflang="x-default"
+          href={xDefaultHref}
+        />
+      )
+    }
     <ClientRouter />
   </head>
   <body>

@@ -13,6 +13,7 @@
     "start": "astro build && astro preview"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.2",
     "@tailwindcss/vite": "^4.1.11",
     "astro": "5.12.8",
     "astro-mail-obfuscation": "^2.3.4",

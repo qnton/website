@@ -66,10 +66,6 @@
   );
 }
 
-html {
-  font-display: optional;
-}
-
 body {
   @apply font-satoshi-regular bg-black text-neutral-300 selection:bg-neutral-400/20;
 }
@@ -97,15 +93,35 @@ body {
 /* Project tile abstract backgrounds */
 .tile-infrastructure {
   background:
-    radial-gradient(ellipse 120% 80% at 70% 30%, oklch(22% 0.02 220) 0%, transparent 60%),
-    radial-gradient(ellipse 80% 60% at 20% 80%, oklch(18% 0.015 210) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, oklch(12% 0.01 215) 0%, oklch(6% 0 0) 100%);
+    radial-gradient(
+      ellipse 120% 80% at 70% 30%,
+      oklch(22% 0.02 220) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 80% 60% at 20% 80%,
+      oklch(18% 0.015 210) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      oklch(12% 0.01 215) 0%,
+      oklch(6% 0 0) 100%
+    );
 }
 
 .tile-ecommerce {
   background:
-    radial-gradient(ellipse 90% 60% at 80% 20%, oklch(30% 0.06 70) 0%, transparent 55%),
-    radial-gradient(ellipse 70% 50% at 10% 90%, oklch(20% 0.04 60) 0%, transparent 45%),
+    radial-gradient(
+      ellipse 90% 60% at 80% 20%,
+      oklch(30% 0.06 70) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 70% 50% at 10% 90%,
+      oklch(20% 0.04 60) 0%,
+      transparent 45%
+    ),
     repeating-linear-gradient(
       -45deg,
       transparent,
@@ -118,8 +134,18 @@ body {
 
 .tile-data-platform {
   background:
-    conic-gradient(from 180deg at 50% 120%, oklch(16% 0.03 240) 0deg, oklch(8% 0.01 260) 90deg, oklch(14% 0.02 230) 180deg, transparent 270deg),
-    radial-gradient(ellipse 100% 80% at 50% 0%, oklch(20% 0.04 250) 0%, transparent 60%),
+    conic-gradient(
+      from 180deg at 50% 120%,
+      oklch(16% 0.03 240) 0deg,
+      oklch(8% 0.01 260) 90deg,
+      oklch(14% 0.02 230) 180deg,
+      transparent 270deg
+    ),
+    radial-gradient(
+      ellipse 100% 80% at 50% 0%,
+      oklch(20% 0.04 250) 0%,
+      transparent 60%
+    ),
     oklch(6% 0 0);
 }
 
@@ -172,8 +198,15 @@ body {
 
 /* Scroll indicator bounce */
 @keyframes scroll-bounce {
-  0%, 100% { transform: translateY(0); opacity: 0.4; }
-  50% { transform: translateY(6px); opacity: 0.9; }
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 0.9;
+  }
 }
 
 .scroll-indicator {
@@ -182,21 +215,20 @@ body {
 
 /* Section label style */
 .section-label {
-  @apply font-satoshi-medium text-xs uppercase tracking-[0.2em] text-neutral-500;
+  @apply font-satoshi-medium text-xs tracking-[0.2em] text-neutral-500 uppercase;
 }
 
 /* Service number style */
 .service-number {
-  @apply font-instrument-serif text-5xl text-neutral-700 leading-none;
+  @apply font-instrument-serif text-5xl leading-none text-neutral-700;
 }
 
 @media print {
   html,
   body {
-    font-display: optional;
     background: white !important;
-    all: initial;
-    font-family: "Satoshi-Regular", "sans-serif";
+    color: #171717 !important;
+    font-family: "Satoshi-Regular", "Georgia", serif;
   }
 }
 
@@ -206,7 +238,7 @@ body {
     url("./fonts/Satoshi-Light.woff2") format("woff2"),
     url("./fonts/Satoshi-Light.woff") format("woff");
   font-weight: 300;
-  font-display: block;
+  font-display: swap;
   font-style: normal;
 }
 
@@ -216,7 +248,7 @@ body {
     url("./fonts/Satoshi-Regular.woff2") format("woff2"),
     url("./fonts/Satoshi-Regular.woff") format("woff");
   font-weight: 400;
-  font-display: block;
+  font-display: swap;
   font-style: normal;
 }
 
@@ -226,7 +258,7 @@ body {
     url("./fonts/Satoshi-Medium.woff2") format("woff2"),
     url("./fonts/Satoshi-Medium.woff") format("woff");
   font-weight: 500;
-  font-display: block;
+  font-display: swap;
   font-style: normal;
 }
 
@@ -236,7 +268,7 @@ body {
     url("./fonts/Satoshi-Bold.woff2") format("woff2"),
     url("./fonts/Satoshi-Bold.woff") format("woff");
   font-weight: 700;
-  font-display: block;
+  font-display: swap;
   font-style: normal;
 }
 
@@ -246,6 +278,6 @@ body {
     url("./fonts/Satoshi-Black.woff2") format("woff2"),
     url("./fonts/Satoshi-Black.woff") format("woff");
   font-weight: 900;
-  font-display: block;
+  font-display: swap;
   font-style: normal;
 }
