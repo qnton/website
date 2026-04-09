@@ -4,25 +4,28 @@ import Layout from "@/components/layout.astro";
 
 <Layout
   description="Page not found"
+  noStructuredData
+  robots="noindex, nofollow"
   title="AW • Page not found"
 >
   <main
-    class="font-satoshi-regular flex min-h-[100dvh] flex-col items-center justify-center bg-black text-white"
+    class="font-satoshi-regular flex min-h-[100dvh] flex-col items-center justify-center bg-black"
+    id="main-content"
   >
     <section
       class="flex flex-col items-center justify-center gap-6 px-4 text-center"
     >
       <h1
-        class="font-satoshi-medium animate-fade animate-once m-0 text-4xl tracking-wide text-neutral-100 md:text-5xl lg:text-7xl"
+        class="tone-primary font-satoshi-medium animate-fade animate-once m-0 text-4xl tracking-wide md:text-5xl lg:text-7xl"
       >
         404
       </h1>
       <p
-        class="font-satoshi-regular animate-fade-left animate-delay-100 animate-once m-0 text-xl text-neutral-400 md:text-2xl lg:text-3xl"
+        class="tone-muted font-satoshi-regular animate-fade-left animate-delay-100 animate-once m-0 text-xl md:text-2xl lg:text-3xl"
       >
         The requested URL <span
           id="url"
-          class="text-neutral-500"
+          class="tone-quiet"
         ></span> was not found.
       </p>
 

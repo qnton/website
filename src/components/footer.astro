@@ -2,38 +2,95 @@
 import { merge } from "@/libs/merge";
 
 const { class: className } = Astro.props;
+
+const year = new Date().getFullYear();
 ---
 
-<section
-  class={merge(
-    "animate-on-sight flex flex-col items-center justify-center pb-24 pt-24 font-satoshi-regular animate-delay-300 lg:pb-32 lg:pt-32",
-    className,
-  )}
->
-  <div
-    class="flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:gap-10"
-  >
-    <a
-      class="link-standard"
-      href="https://github.com/qnton"
-      rel="noopener noreferrer"
-      target="_blank"
+<footer class={merge("border-subtle border-t px-6 py-24 lg:py-36", className)}>
+  <div class="mx-auto max-w-5xl">
+    <!-- CTA -->
+    <div class="mb-16 flex flex-col gap-6 lg:mb-20">
+      <span class="section-label">Get in touch</span>
+      <h2
+        class="tone-primary font-instrument-serif m-0 max-w-2xl text-4xl leading-tight md:text-5xl lg:text-6xl xl:text-7xl"
+      >
+        Work with me
+      </h2>
+      <p
+        class="tone-muted font-satoshi-light m-0 max-w-md text-base leading-relaxed md:text-lg"
+      >
+        Have a project in mind? I take on a select number of clients each year
+        to ensure focused, high-quality collaboration.
+      </p>
+    </div>
+
+    <!-- Email CTA -->
+    <div class="mb-20">
+      <address
+        class="not-italic"
+        data-mailto-token="ocknvq<jgnnqBspr0qpg>"
+        data-mailto-vector="2"
+      >
+      </address>
+      <a
+        href="mailto:hello@qnt.one"
+        class="border-strong tone-primary font-instrument-serif group inline-flex items-center gap-4 border-b pb-3 text-2xl transition-colors duration-300 hover:text-white md:text-3xl lg:text-4xl"
+      >
+        hello@qnt.one
+        <svg
+          class="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+          width="28"
+          height="28"
+          viewBox="0 0 28 28"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            d="M7 21L21 7M21 7H10M21 7v11"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Bottom row -->
+    <div
+      class="border-subtle flex flex-col gap-6 border-t pt-8 sm:flex-row sm:items-center sm:justify-between"
     >
-      github
-    </a>
-    <a
-      class="link-standard"
-      href="https://linkedin.com/in/qnton"
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      linkedin
-    </a>
-    <a
-      class="link-standard"
-      href="mailto:hello@qnt.one"
-    >
-      email
-    </a>
+      <!-- Social links -->
+      <nav class="flex flex-wrap items-center gap-6">
+        <a
+          class="tone-muted font-satoshi-regular text-sm transition-colors duration-200 hover:text-[var(--color-text-primary)]"
+          href="https://github.com/qnton"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          GitHub
+        </a>
+        <a
+          class="tone-muted font-satoshi-regular text-sm transition-colors duration-200 hover:text-[var(--color-text-primary)]"
+          href="https://linkedin.com/in/qnton"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          LinkedIn
+        </a>
+        <a
+          class="tone-muted font-satoshi-regular text-sm transition-colors duration-200 hover:text-[var(--color-text-primary)]"
+          href="/legal"
+        >
+          Legal &amp; privacy
+        </a>
+      </nav>
+
+      <!-- Copyright -->
+      <p class="tone-quiet font-satoshi-light m-0 text-sm">
+        &copy; {year} Anton Werschinin
+      </p>
+    </div>
   </div>
-</section>
+</footer>
