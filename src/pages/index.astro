@@ -76,13 +76,11 @@ const services = [
         <h1
           class="font-instrument-serif m-0 leading-[0.88] tracking-[-0.04em]"
         >
-          <span class="block overflow-hidden">
-            <span
-              class="hero-name hero-reveal tone-primary block leading-[0.88] tracking-[-0.04em]"
-              style="--reveal-delay: 200ms;"
-            >
-              Anton
-            </span>
+          <span
+            class="hero-name hero-reveal tone-primary block leading-[0.88] tracking-[-0.04em]"
+            style="--reveal-delay: 200ms;"
+          >
+            Anton
           </span>
 
           <span
@@ -95,13 +93,11 @@ const services = [
             <span class="hero-divider-label">10 years of craft</span>
           </span>
 
-          <span class="block overflow-hidden">
-            <span
-              class="hero-name hero-name-second hero-reveal tone-muted block leading-[0.88] tracking-[-0.04em]"
-              style="--reveal-delay: 550ms;"
-            >
-              Werschinin
-            </span>
+          <span
+            class="hero-name hero-name-second hero-reveal tone-muted block leading-[0.88] tracking-[-0.04em]"
+            style="--reveal-delay: 550ms;"
+          >
+            Werschinin
           </span>
         </h1>
       </div>
@@ -122,13 +118,16 @@ const services = [
 
     {/*
     ─── SELECTED WORK (commented out — nothing to show yet; uncomment + restore `projects` in frontmatter)
+    Use data-reveal-stagger on max-w-5xl, data-reveal-item + --reveal-index on header and tiles (see Core Services).
     <section
       class="scroll-mt-8 px-6 py-24 lg:scroll-mt-12 lg:py-36"
       id="selected-work"
     >
-      <div class="mx-auto max-w-5xl">
+      <div class="mx-auto max-w-5xl" data-reveal-stagger>
         <div
-          class="border-subtle on-sight:animate-fade mb-12 flex items-end justify-between border-b pb-8 lg:mb-16"
+          class="border-subtle mb-12 flex items-end justify-between border-b pb-8 lg:mb-16"
+          data-reveal-item
+          style={{ "--reveal-index": 0 }}
         >
           <div class="flex flex-col gap-3">
             <span class="section-label">Portfolio</span>
@@ -145,10 +144,11 @@ const services = [
 
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-6">
           {
-            projects.map((project) => (
+            projects.map((project, i) => (
               <article
-                class={`on-sight:animate-fade-up project-tile project-tile--static group relative overflow-hidden rounded-sm`}
-                style={`animation-delay: ${project.delay}ms;`}
+                class={`project-tile project-tile--static group relative overflow-hidden rounded-sm`}
+                data-reveal-item
+                style={{ "--reveal-index": i + 1 }}
                 aria-labelledby={`tile-title-${project.slug}`}
               >
                 <div
@@ -212,9 +212,16 @@ const services = [
 
     <!-- ─── CORE SERVICES ─────────────────────────────────────── -->
     <section class="border-subtle border-t px-6 py-24 lg:py-36">
-      <div class="mx-auto max-w-5xl">
-        <!-- Section header -->
-        <div class="on-sight:animate-fade mb-16 flex flex-col gap-3 lg:mb-20">
+      <div
+        class="mx-auto max-w-5xl"
+        data-reveal-stagger
+      >
+        <!-- Section header (reveals first in stagger) -->
+        <div
+          class="mb-16 flex flex-col gap-3 lg:mb-20"
+          data-reveal-item
+          style={{ "--reveal-index": 0 }}
+        >
           <span class="section-label">What I do</span>
           <h2
             class="tone-primary font-instrument-serif m-0 text-3xl leading-none md:text-4xl lg:text-5xl"
@@ -228,8 +235,9 @@ const services = [
           {
             services.map((service, i) => (
               <div
-                class="on-sight:animate-fade-up group grid grid-cols-1 gap-6 py-10 md:grid-cols-[120px_1fr_1fr] md:gap-8 lg:py-14"
-                style={`animation-delay: ${i * 100}ms;`}
+                class="group grid grid-cols-1 gap-6 py-10 md:grid-cols-[120px_1fr_1fr] md:gap-8 lg:py-14"
+                data-reveal-item
+                style={{ "--reveal-index": i + 1 }}
               >
                 <div class="service-number font-instrument-serif">
                   {service.number}
@@ -248,6 +256,6 @@ const services = [
     </section>
 
     <!-- ─── FOOTER ─────────────────────────────────────────────── -->
-    <Footer class="on-sight:animate-fade" />
+    <Footer />
   </main>
 </Layout>

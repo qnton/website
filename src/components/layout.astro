@@ -1,6 +1,8 @@
 ---
 import "@/styles/globals.css";
-import { ClientRouter } from "astro:transitions";
+import { ClientRouter, fade } from "astro:transitions";
+
+const pageFade = fade({ duration: "0.55s" });
 
 interface Props {
   title: string;
@@ -224,7 +226,10 @@ const jsonLd = {
       class="skip-link"
       href="#main-content"
       >Skip to main content</a>
-    <div>
+    <div
+      transition:animate={pageFade}
+      transition:name="page"
+    >
       <slot />
     </div>
     <script>
