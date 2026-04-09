@@ -24,35 +24,6 @@ function initializeOnSightObserver() {
     .forEach(observer.observe.bind(observer));
 }
 
-function initializeParallaxScroll() {
-  const parallaxSections = document.querySelectorAll(".parallax");
-  let ticking = false;
-
-  const updateParallax = () => {
-    const windowHeight = window.innerHeight;
-    parallaxSections.forEach((section) => {
-      const rect = section.getBoundingClientRect();
-      if (rect.bottom > 0 && rect.top < windowHeight) {
-        const shift = (1 - rect.top / windowHeight - 0.5) * 50;
-        section.style.transform = `translateY(${shift}px)`;
-      }
-    });
-  };
-
-  const onScroll = () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        updateParallax();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  };
-
-  ["scroll", "resize"].forEach((evt) => window.addEventListener(evt, onScroll));
-  updateParallax();
-}
-
 document.addEventListener("astro:before-swap", (event) => {
   event.newDocument.querySelectorAll("header, footer").forEach((root) => {
     root
@@ -66,25 +37,7 @@ if (urlElement) urlElement.textContent = window.location.pathname;
 
 const init = () => {
   initializeOnSightObserver();
-  initializeParallaxScroll();
 };
 
 document.addEventListener("DOMContentLoaded", init);
 document.addEventListener("astro:after-swap", init);
-
-const placeholders = document.querySelectorAll("[data-src]");
-
-const observer = new IntersectionObserver(async (entries, observer) => {
-  for (const entry of entries) {
-    if (entry.isIntersecting) {
-      const placeholder = entry.target;
-      const url = placeholder.getAttribute("data-src");
-      const res = await fetch(url);
-      const svgText = await res.text();
-      placeholder.innerHTML = svgText;
-      observer.unobserve(placeholder);
-    }
-  }
-});
-
-placeholders.forEach((el) => observer.observe(el));

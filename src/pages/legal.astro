@@ -11,27 +11,30 @@ const description =
   description={description}
   title={title}
 >
-  <main class="bg-black text-white">
+  <main
+    class="bg-black"
+    id="main-content"
+  >
     <article class="px-6 py-24 lg:py-36">
       <div class="mx-auto max-w-3xl">
         <p class="mb-12">
           <a
-            class="font-satoshi-regular text-sm text-neutral-500 transition-colors hover:text-neutral-300"
+            class="tone-muted font-satoshi-regular text-sm transition-colors hover:text-[var(--color-text-primary)]"
             href="/"
           >
             &larr; Back to home
           </a>
         </p>
 
-        <header class="mb-16 border-b border-neutral-900 pb-12">
+        <header class="border-subtle mb-16 border-b pb-12">
           <p class="section-label mb-4">Legal</p>
           <h1
-            class="font-instrument-serif m-0 text-4xl leading-tight text-neutral-50 md:text-5xl lg:text-6xl"
+            class="tone-primary font-instrument-serif m-0 text-4xl leading-tight md:text-5xl lg:text-6xl"
           >
             Legal notice &amp; privacy
           </h1>
           <p
-            class="font-satoshi-light mt-6 max-w-2xl text-base leading-relaxed text-neutral-500"
+            class="tone-muted font-satoshi-light mt-6 max-w-2xl text-base leading-relaxed"
           >
             Information provided in accordance with the German Telemedia Act
             (TMG) and the Interstate Broadcasting Treaty (RStV), where
@@ -42,7 +45,7 @@ const description =
         </header>
 
         <div
-          class="font-satoshi-light space-y-16 text-base leading-relaxed text-neutral-400"
+          class="tone-muted font-satoshi-light space-y-16 text-base leading-relaxed"
         >
           <section
             class="space-y-6"
@@ -50,31 +53,31 @@ const description =
           >
             <h2
               id="legal-notice-heading"
-              class="font-instrument-serif m-0 text-2xl text-neutral-100 md:text-3xl"
+              class="tone-primary font-instrument-serif m-0 text-2xl md:text-3xl"
             >
               Legal notice (Imprint)
             </h2>
 
             <div class="space-y-4">
-              <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
+              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
                 Service provider
               </h3>
-              <address class="text-neutral-400 not-italic">
+              <address class="tone-muted not-italic">
                 <p class="m-0">Anton Werschinin</p>
                 <p class="m-0">Hinterm Wall 28</p>
-                <p class="m-0">49661 Cloppenburg</p>
+                <p class="m-0">49681 Cloppenburg</p>
                 <p class="m-0">Germany</p>
               </address>
             </div>
 
             <div class="space-y-4">
-              <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
+              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
                 Contact
               </h3>
               <p class="m-0">
                 Email:
                 <a
-                  class="text-neutral-300 underline decoration-neutral-700 underline-offset-4 transition-colors hover:text-white hover:decoration-neutral-500"
+                  class="tone-primary underline decoration-[var(--color-border-strong)] underline-offset-4 transition-colors hover:decoration-[var(--color-text-muted)]"
                   href="mailto:hello@qnt.one"
                   >hello@qnt.one</a
                 >
@@ -82,21 +85,21 @@ const description =
             </div>
 
             <div class="space-y-4">
-              <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
+              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
                 Responsible for content (Sec. 55(2) RStV)
               </h3>
               <p class="m-0">Anton Werschinin, same address as above.</p>
             </div>
 
             <div class="space-y-4">
-              <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
+              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
                 EU dispute resolution
               </h3>
               <p class="m-0">
                 The European Commission provides a platform for online dispute
                 resolution (ODR):
                 <a
-                  class="text-neutral-300 underline decoration-neutral-700 underline-offset-4 transition-colors hover:text-white hover:decoration-neutral-500"
+                  class="tone-primary underline decoration-[var(--color-border-strong)] underline-offset-4 transition-colors hover:decoration-[var(--color-text-muted)]"
                   href="https://ec.europa.eu/consumers/odr/"
                   rel="noopener noreferrer"
                   target="_blank"
@@ -106,7 +109,7 @@ const description =
             </div>
 
             <div class="space-y-4">
-              <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
+              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
                 Consumer dispute resolution
               </h3>
               <p class="m-0">
@@ -122,20 +125,20 @@ const description =
           >
             <h2
               id="privacy-heading"
-              class="font-instrument-serif m-0 text-2xl text-neutral-100 md:text-3xl"
+              class="tone-primary font-instrument-serif m-0 text-2xl md:text-3xl"
             >
               Privacy policy
             </h2>
 
             <div class="space-y-4">
-              <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
+              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
                 1. Controller
               </h3>
               <p class="m-0">
                 The controller within the meaning of the GDPR is Anton
-                Werschinin, Hinterm Wall 28, 49661 Cloppenburg, Germany,
+                Werschinin, Hinterm Wall 28, 49681 Cloppenburg, Germany,
                 <a
-                  class="text-neutral-300 underline decoration-neutral-700 underline-offset-4 transition-colors hover:text-white hover:decoration-neutral-500"
+                  class="tone-primary underline decoration-[var(--color-border-strong)] underline-offset-4 transition-colors hover:decoration-[var(--color-text-muted)]"
                   href="mailto:hello@qnt.one"
                   >hello@qnt.one</a
                 >.
@@ -143,7 +146,7 @@ const description =
             </div>
 
             <div class="space-y-4">
-              <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
+              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
                 2. General information on processing
               </h3>
               <p class="m-0">
@@ -159,7 +162,7 @@ const description =
             </div>
 
             <div class="space-y-4">
-              <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
+              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
                 3. Hosting and visiting this website
               </h3>
               <p class="m-0">
@@ -183,7 +186,7 @@ const description =
             </div>
 
             <div class="space-y-4">
-              <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
+              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
                 4. Contact by email
               </h3>
               <p class="m-0">
@@ -195,7 +198,7 @@ const description =
             </div>
 
             <div class="space-y-4">
-              <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
+              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
                 5. Cookies and local storage
               </h3>
               <p class="m-0">
@@ -207,28 +210,25 @@ const description =
             </div>
 
             <div class="space-y-4">
-              <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
-                6. Third-party content (e.g. fonts)
+              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
+                6. Fonts and third-party resources
               </h3>
               <p class="m-0">
-                For presentation, content may be loaded from third parties (e.g.
-                fonts from Google Fonts). The third party may receive technical
-                information (including IP address). The legal basis is Art.
-                6(1)(f) GDPR (legitimate interest in a consistent, readable
-                presentation). Further information is available in the
-                respective provider’s privacy policy:
-                <a
-                  class="text-neutral-300 underline decoration-neutral-700 underline-offset-4 transition-colors hover:text-white hover:decoration-neutral-500"
-                  href="https://policies.google.com/privacy?hl=en"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  >Google (privacy policy)</a
-                >.
+                Display and body fonts used on this website are self-hosted and
+                served from the same origin as the pages. No font requests are
+                sent to third-party font providers for that purpose.
+              </p>
+              <p class="m-0">
+                If we embed other third-party content in the future (for example
+                videos or maps), those providers may process technical data such
+                as your IP address when that content is loaded. We will describe
+                the legal basis and, where applicable, link to the provider’s
+                privacy policy in an updated version of this notice.
               </p>
             </div>
 
             <div class="space-y-4">
-              <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
+              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
                 7. Your rights
               </h3>
               <p class="m-0">
@@ -248,7 +248,7 @@ const description =
                 your habitual residence or our place of establishment. A list of
                 authorities in Germany is available at
                 <a
-                  class="text-neutral-300 underline decoration-neutral-700 underline-offset-4 transition-colors hover:text-white hover:decoration-neutral-500"
+                  class="tone-primary underline decoration-[var(--color-border-strong)] underline-offset-4 transition-colors hover:decoration-[var(--color-text-muted)]"
                   href="https://www.bfdi.bund.de/EN/Service/Anschriften/anschriften_table.html"
                   rel="noopener noreferrer"
                   target="_blank"
@@ -258,7 +258,7 @@ const description =
             </div>
 
             <div class="space-y-4">
-              <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
+              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
                 8. Storage period
               </h3>
               <p class="m-0">
@@ -275,13 +275,13 @@ const description =
           >
             <h2
               id="liability-heading"
-              class="font-instrument-serif m-0 text-2xl text-neutral-100 md:text-3xl"
+              class="tone-primary font-instrument-serif m-0 text-2xl md:text-3xl"
             >
               Liability &amp; copyright
             </h2>
 
             <div class="space-y-4">
-              <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
+              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
                 Liability for content
               </h3>
               <p class="m-0">
@@ -301,7 +301,7 @@ const description =
             </div>
 
             <div class="space-y-4">
-              <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
+              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
                 Liability for links
               </h3>
               <p class="m-0">
@@ -321,7 +321,7 @@ const description =
             </div>
 
             <div class="space-y-4">
-              <h3 class="font-satoshi-medium m-0 text-lg text-neutral-200">
+              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
                 Copyright
               </h3>
               <p class="m-0">
@@ -342,7 +342,7 @@ const description =
             </div>
           </section>
 
-          <p class="m-0 text-sm text-neutral-600">Last updated: April 2026</p>
+          <p class="tone-quiet m-0 text-sm">Last updated: April 2026</p>
         </div>
       </div>
     </article>

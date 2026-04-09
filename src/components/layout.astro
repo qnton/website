@@ -68,7 +68,7 @@ const jsonLd = {
         "@type": "PostalAddress",
         streetAddress: "Hinterm Wall 28",
         addressLocality: "Cloppenburg",
-        postalCode: "49661",
+        postalCode: "49681",
         addressCountry: "DE",
       },
     },
@@ -82,7 +82,7 @@ const jsonLd = {
         "@type": "PostalAddress",
         streetAddress: "Hinterm Wall 28",
         addressLocality: "Cloppenburg",
-        postalCode: "49661",
+        postalCode: "49681",
         addressCountry: "DE",
       },
       areaServed: {
@@ -155,11 +155,11 @@ const jsonLd = {
       property="og:image:type"
     />
     <meta
-      content="512"
+      content="1536"
       property="og:image:width"
     />
     <meta
-      content="512"
+      content="2048"
       property="og:image:height"
     />
     <meta
@@ -217,27 +217,18 @@ const jsonLd = {
         />
       )
     }
-    <link
-      rel="preconnect"
-      href="https://fonts.googleapis.com"
-    />
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap"
-      rel="stylesheet"
-    />
     <ClientRouter />
   </head>
   <body>
+    <a
+      class="skip-link"
+      href="#main-content"
+      >Skip to main content</a>
     <div>
       <slot />
     </div>
     <script>
       import "@/libs/scripts.js";
     </script>
-  </body></html
->
+  </body>
+</html>
