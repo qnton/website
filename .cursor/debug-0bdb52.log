@@ -108,3 +108,10 @@
 {"sessionId":"0bdb52","runId":"post-fix","hypothesisId":"H3","location":"scripts.js:activateReveal","message":"activateReveal","data":{"tag":"DIV","stagger":true,"solo":false},"timestamp":1775758313659}
 {"sessionId":"0bdb52","runId":"post-fix","hypothesisId":"H1","location":"scripts.js:IntersectionObserver","message":"entry","data":{"isIntersecting":true,"qualifies":true,"iw":1125,"ih":26.5,"tag":"FOOTER"},"timestamp":1775758313842}
 {"sessionId":"0bdb52","runId":"post-fix","hypothesisId":"H3","location":"scripts.js:activateReveal","message":"activateReveal","data":{"tag":"FOOTER","stagger":false,"solo":true},"timestamp":1775758313842}
+{"sessionId":"0bdb52","runId":"post-fix","hypothesisId":"H2","location":"scripts.js:initializeScrollReveal","message":"init","data":{"source":"DOMContentLoaded","prm":false,"staggerCount":1,"soloCount":1,"path":"/"},"timestamp":1775758468062}
+{"sessionId":"0bdb52","runId":"post-fix","hypothesisId":"H4","location":"scripts.js:flushPendingRevealEntries","message":"takeRecords","data":{"count":0},"timestamp":1775758468062}
+{"sessionId":"0bdb52","runId":"post-fix","hypothesisId":"H1","location":"scripts.js:IntersectionObserver","message":"entry","data":{"isIntersecting":false,"qualifies":false,"iw":0,"ih":0,"tag":"FOOTER"},"timestamp":1775758468065}
+{"sessionId":"0bdb52","runId":"post-fix","hypothesisId":"H4","location":"scripts.js:flushPendingRevealEntries","message":"takeRecords","data":{"count":0},"timestamp":1775758468063}
+{"sessionId":"0bdb52","runId":"post-fix","hypothesisId":"H3","location":"scripts.js:revealVisibleTargets","message":"stagger_fallback","data":{"qualify":false,"vw":-145,"vhBand":1024},"timestamp":1775758468064}
+{"sessionId":"0bdb52","runId":"post-fix","hypothesisId":"H3","location":"scripts.js:revealVisibleTargets","message":"solo_fallback","data":{"qualify":false,"vw":-1087.5,"vhBand":1716,"tag":"FOOTER"},"timestamp":1775758468064}
+{"sessionId":"0bdb52","runId":"post-fix","hypothesisId":"H1","location":"scripts.js:IntersectionObserver","message":"entry","data":{"isIntersecting":false,"qualifies":false,"iw":0,"ih":0,"tag":"DIV"},"timestamp":1775758468065}

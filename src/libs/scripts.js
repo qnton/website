@@ -1,29 +1,5 @@
 //  https://www.youtube.com/watch?v=uU9Fe-WXew4
 
-/** @type {string} */
-let lastRevealInitSource = "";
-
-// #region agent log
-function dbgReveal(hypothesisId, location, message, data) {
-  fetch("http://127.0.0.1:7725/ingest/0090e826-12b9-4e87-9465-ead68f8c78e2", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Debug-Session-Id": "0bdb52",
-    },
-    body: JSON.stringify({
-      sessionId: "0bdb52",
-      runId: "post-fix",
-      hypothesisId,
-      location,
-      message,
-      data,
-      timestamp: Date.now(),
-    }),
-  }).catch(() => {});
-}
-// #endregion
-
 /** @type {IntersectionObserver | null} */
 let scrollRevealObserver = null;
 
@@ -46,19 +22,12 @@ function prefersReducedMotion() {
  * @param {HTMLElement} el
  */
 function activateReveal(el) {
-  // #region agent log
-  dbgReveal("H3", "scripts.js:activateReveal", "activateReveal", {
-    tag: el.tagName,
-    stagger: el.hasAttribute("data-reveal-stagger"),
-    solo: el.hasAttribute("data-reveal"),
-  });
-  // #endregion
   el.setAttribute("data-reveal-active", "");
 }
 
 /**
- * Minimum overlap with the viewport (fallback when we don’t have an IO entry).
- * Kept small so it never deadlocks reveals; IO rootMargin handles “not too early”.
+ * Fallback overlap with the visual viewport (microtask / already-visible).
+ * Any positive overlap counts; IO handles timing via rootMargin.
  * @param {Element} el
  */
 function elementQualifiesForReveal(el) {
@@ -73,7 +42,6 @@ function elementQualifiesForReveal(el) {
   const h = bottom - top;
   const w = right - left;
 
-  /* >0 only: 20px min rejected valid IO rects (log: never reached activateReveal). */
   return h > 0 && w > 0;
 }
 
@@ -107,24 +75,8 @@ function activateAllReveals() {
 
 function flushPendingRevealEntries(observer) {
   if (!observer) return;
-  const pending = observer.takeRecords();
-  // #region agent log
-  dbgReveal("H4", "scripts.js:flushPendingRevealEntries", "takeRecords", {
-    count: pending.length,
-  });
-  // #endregion
-  for (const entry of pending) {
-    const qualifies = entryQualifies(entry);
-    // #region agent log
-    if (entry.isIntersecting && !qualifies) {
-      dbgReveal("H1", "scripts.js:flushPendingRevealEntries", "intersecting_but_rejected", {
-        iw: entry.intersectionRect.width,
-        ih: entry.intersectionRect.height,
-        tag: entry.target instanceof HTMLElement ? entry.target.tagName : "?",
-      });
-    }
-    // #endregion
-    if (!qualifies) continue;
+  for (const entry of observer.takeRecords()) {
+    if (!entryQualifies(entry)) continue;
     const target = /** @type {HTMLElement} */ (entry.target);
     activateReveal(target);
     observer.unobserve(target);
@@ -134,32 +86,13 @@ function flushPendingRevealEntries(observer) {
 function revealVisibleTargets(observer) {
   for (const el of queryStaggerRoots()) {
     if (el.hasAttribute("data-reveal-active")) continue;
-    const ok = elementQualifiesForReveal(el);
-    // #region agent log
-    const r = el.getBoundingClientRect();
-    dbgReveal("H3", "scripts.js:revealVisibleTargets", "stagger_fallback", {
-      qualify: ok,
-      vw: Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0),
-      vhBand: Math.min(r.right, window.innerWidth) - Math.max(r.left, 0),
-    });
-    // #endregion
-    if (!ok) continue;
+    if (!elementQualifiesForReveal(el)) continue;
     activateReveal(el);
     observer?.unobserve(el);
   }
   for (const el of querySoloRevealRoots()) {
     if (el.hasAttribute("data-reveal-active")) continue;
-    const ok = elementQualifiesForReveal(el);
-    // #region agent log
-    const r = el.getBoundingClientRect();
-    dbgReveal("H3", "scripts.js:revealVisibleTargets", "solo_fallback", {
-      qualify: ok,
-      vw: Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0),
-      vhBand: Math.min(r.right, window.innerWidth) - Math.max(r.left, 0),
-      tag: el.tagName,
-    });
-    // #endregion
-    if (!ok) continue;
+    if (!elementQualifiesForReveal(el)) continue;
     activateReveal(el);
     observer?.unobserve(el);
   }
@@ -171,43 +104,14 @@ function initializeScrollReveal() {
     scrollRevealObserver = null;
   }
 
-  const prm = prefersReducedMotion();
-  const staggers = queryStaggerRoots();
-  const solos = querySoloRevealRoots();
-  // #region agent log
-  dbgReveal("H2", "scripts.js:initializeScrollReveal", "init", {
-    source: lastRevealInitSource,
-    prm,
-    staggerCount: staggers.length,
-    soloCount: solos.length,
-    path: typeof window !== "undefined" ? window.location.pathname : "",
-  });
-  // #endregion
-
-  if (prm) {
+  if (prefersReducedMotion()) {
     activateAllReveals();
     return;
   }
 
   scrollRevealObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      const qualifies = entryQualifies(entry);
-      // #region agent log
-      dbgReveal("H1", "scripts.js:IntersectionObserver", "entry", {
-        isIntersecting: entry.isIntersecting,
-        qualifies,
-        iw: entry.intersectionRect.width,
-        ih: entry.intersectionRect.height,
-        tag: entry.target instanceof HTMLElement ? entry.target.tagName : "?",
-      });
-      if (entry.isIntersecting && !qualifies) {
-        dbgReveal("H1", "scripts.js:IntersectionObserver", "intersecting_rejected", {
-          iw: entry.intersectionRect.width,
-          ih: entry.intersectionRect.height,
-        });
-      }
-      // #endregion
-      if (!qualifies) return;
+      if (!entryQualifies(entry)) return;
       const target = /** @type {HTMLElement} */ (entry.target);
       activateReveal(target);
       scrollRevealObserver?.unobserve(target);
@@ -253,16 +157,11 @@ document.addEventListener("astro:before-swap", (event) => {
 const urlElement = document.getElementById("url");
 if (urlElement) urlElement.textContent = window.location.pathname;
 
-function scheduleScrollRevealInit(source) {
-  lastRevealInitSource = source;
+function scheduleScrollRevealInit() {
   requestAnimationFrame(() => {
     requestAnimationFrame(() => initializeScrollReveal());
   });
 }
 
-document.addEventListener("DOMContentLoaded", () =>
-  scheduleScrollRevealInit("DOMContentLoaded"),
-);
-document.addEventListener("astro:after-swap", () =>
-  scheduleScrollRevealInit("astro:after-swap"),
-);
+document.addEventListener("DOMContentLoaded", scheduleScrollRevealInit);
+document.addEventListener("astro:after-swap", scheduleScrollRevealInit);
