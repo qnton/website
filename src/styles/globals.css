@@ -313,6 +313,60 @@ summary:focus-visible {
   }
 }
 
+/* ─── Hero atmosphere (radials + grain) ─────────────────────── */
+.hero-section::before,
+.hero-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-section::before {
+  background:
+    radial-gradient(
+      ellipse 90% 60% at 88% 12%,
+      oklch(16% 0.04 75 / 0.48) 0%,
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 75% 55% at 8% 78%,
+      oklch(14% 0.03 250 / 0.32) 0%,
+      transparent 52%
+    );
+}
+
+@media (min-width: 769px) {
+  .hero-section::before {
+    background:
+      radial-gradient(
+        ellipse 95% 70% at 90% 10%,
+        oklch(14% 0.03 75 / 0.22) 0%,
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse 80% 50% at 5% 80%,
+        oklch(12% 0.02 250 / 0.16) 0%,
+        transparent 50%
+      );
+  }
+}
+
+.hero-section::after {
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+  mix-blend-mode: overlay;
+}
+
+@media (min-width: 769px) {
+  .hero-section::after {
+    opacity: 0.022;
+  }
+}
+
 /* ─── Oversized name typography ─────────────────────────────── */
 .hero-name {
   font-size: clamp(3.5rem, 17vw, 16rem);
@@ -326,7 +380,7 @@ summary:focus-visible {
 
 @media (max-width: 479px) {
   .hero-name-second {
-    padding-left: 0;
+    padding-left: clamp(0.75rem, 5vw, 2.5rem);
   }
 }
 
@@ -364,6 +418,7 @@ summary:focus-visible {
 .hero-divider-line {
   flex: 1;
   height: 1px;
+  min-width: 2rem;
   background: linear-gradient(
     to right,
     transparent,
@@ -373,6 +428,28 @@ summary:focus-visible {
   );
 }
 
+@media (max-width: 639px) {
+  .hero-divider {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+    padding: 0.65rem 0 0.85rem;
+  }
+
+  .hero-divider-label {
+    white-space: normal;
+    text-align: left;
+    font-size: clamp(0.65rem, 2.8vw, 0.8rem);
+    letter-spacing: 0.14em;
+  }
+
+  .hero-divider-line {
+    flex: none;
+    width: 100%;
+    min-width: unset;
+    min-height: 1px;
+  }
+}
 
 /* ─── Scroll hint ───────────────────────────────────────────── */
 .hero-scroll-hint {
@@ -526,6 +603,14 @@ summary:focus-visible {
 .service-number {
   @apply font-instrument-serif text-5xl leading-none;
   color: var(--color-text-quiet);
+}
+
+/* Core services: left accent + inset on small viewports only */
+@media (max-width: 767px) {
+  .service-row {
+    border-left: 2px solid color-mix(in oklch, var(--color-accent) 32%, transparent);
+    padding-left: 1.15rem;
+  }
 }
 
 @media print {
