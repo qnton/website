@@ -70,12 +70,14 @@ const services = [
     id="main-content"
   >
     <!-- ─── HERO ─────────────────────────────────────────────── -->
-    <section class="hero-section relative flex min-h-[100dvh] flex-col items-stretch justify-center overflow-hidden">
+    <section
+      class="hero-section relative flex min-h-[100dvh] flex-col items-stretch justify-center overflow-hidden"
+    >
       <!-- Name block -->
-      <div class="relative z-10 flex flex-col px-6 pb-24 pt-16 md:px-10 md:pb-28 lg:px-14">
-        <h1
-          class="font-instrument-serif m-0 leading-[0.88] tracking-[-0.04em]"
-        >
+      <div
+        class="relative z-10 flex flex-col px-6 pt-16 pb-24 md:px-10 md:pb-28 lg:px-14"
+      >
+        <h1 class="font-instrument-serif m-0 leading-[0.88] tracking-[-0.04em]">
           <span
             class="hero-name hero-reveal tone-primary block leading-[0.88] tracking-[-0.04em]"
             style="--reveal-delay: 200ms;"
@@ -88,7 +90,9 @@ const services = [
             style="--reveal-delay: 400ms;"
             aria-hidden="true"
           >
-            <span class="hero-divider-label">Senior Designer &amp; Engineer</span>
+            <span class="hero-divider-label"
+              >Senior Designer &amp; Engineer</span
+            >
             <span class="hero-divider-line"></span>
             <span class="hero-divider-label">10 years of craft</span>
           </span>
@@ -104,19 +108,20 @@ const services = [
 
       <!-- Bottom bar -->
       <div
-        class="absolute bottom-0 left-0 right-0 z-10 flex flex-row items-end justify-between px-6 pb-10 md:px-10 lg:px-14"
+        class="absolute right-0 bottom-0 left-0 z-10 flex flex-row items-end justify-between px-6 pb-10 md:px-10 lg:px-14"
       >
         <p
-          class="hero-reveal font-satoshi-light tone-quiet m-0 max-w-xs text-xs leading-relaxed md:text-sm"
+          class="hero-reveal font-satoshi-light tone-quiet m-0 max-w-sm text-sm leading-relaxed md:text-base"
           style="--reveal-delay: 800ms;"
         >
-          Engineering precision, design intention,<br />and products that still make sense.
+          Engineering precision, design intention,<br />and products that still
+          make sense.
         </p>
-
       </div>
     </section>
 
-    {/*
+    {
+      /*
     ─── SELECTED WORK (commented out — nothing to show yet; uncomment + restore `projects` in frontmatter)
     Use data-reveal-stagger on max-w-5xl, data-reveal-item + --reveal-index on header and tiles (see Core Services).
     <section
@@ -208,7 +213,8 @@ const services = [
         </div>
       </div>
     </section>
-    */}
+    */
+    }
 
     <!-- ─── CORE SERVICES ─────────────────────────────────────── -->
     <section class="border-subtle border-t px-6 py-24 lg:py-36">

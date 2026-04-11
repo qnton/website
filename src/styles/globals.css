@@ -605,14 +605,6 @@ summary:focus-visible {
   color: var(--color-text-quiet);
 }
 
-/* Core services: left accent + inset on small viewports only */
-@media (max-width: 767px) {
-  .service-row {
-    border-left: 2px solid color-mix(in oklch, var(--color-accent) 32%, transparent);
-    padding-left: 1.15rem;
-  }
-}
-
 @media print {
   html,
   body {
