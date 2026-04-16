@@ -2,42 +2,15 @@
 import Layout from "@/components/layout.astro";
 import Footer from "@/components/footer.astro";
 
-/* Selected work — re-enable when you have case studies to show
-const projects = [
-  {
-    slug: "global-scale-infrastructure",
-    title: "Global Scale Infrastructure",
-    category: "Engineering",
-    tile: "tile-infrastructure",
-    year: "2024",
-    delay: "0",
-  },
-  {
-    slug: "premium-ecommerce-ux",
-    title: "Premium E-commerce UX",
-    category: "Design & Development",
-    tile: "tile-ecommerce",
-    year: "2024",
-    delay: "100",
-  },
-  {
-    slug: "intelligent-data-platform",
-    title: "Intelligent Data Platform",
-    category: "Engineering",
-    tile: "tile-data-platform",
-    year: "2023",
-    delay: "200",
-  },
-  {
-    slug: "brand-identity-system",
-    title: "Brand Identity System",
-    category: "Design",
-    tile: "tile-brand-identity",
-    year: "2023",
-    delay: "300",
-  },
+const antonLetters = ["A", "n", "t", "o", "n"];
+const werLetters = ["W", "e", "r"];
+const schininLetters = ["s", "c", "h", "i", "n", "i", "n"];
+
+const indexLinks = [
+  { label: "Services", href: "#services", external: false },
+  { label: "Contact", href: "#contact", external: false },
+  { label: "GitHub", href: "#github", external: false },
 ];
-*/
 
 const services = [
   {
@@ -65,203 +38,235 @@ const services = [
   description="Senior Designer & Engineer with a decade of experience building exceptional digital products."
   title="Anton Werschinin — Designer & Engineer"
 >
-  <main
-    class="bg-black"
-    id="main-content"
+  <!-- Persistent left rail — threads through every section -->
+  <div
+    class="page-rail"
+    aria-hidden="true"
   >
+    <span class="page-rail__inner">
+      <span class="page-rail__tick"></span>
+      Anton Werschinin — Est. MMXV
+      <span class="page-rail__tick"></span>
+    </span>
+  </div>
+
+  <main id="main-content">
     <!-- ─── HERO ─────────────────────────────────────────────── -->
     <section
-      class="hero-section relative flex min-h-[100dvh] flex-col items-stretch justify-center overflow-hidden"
+      class="hero-section"
+      data-hero
     >
-      <!-- Name block -->
-      <div
-        class="relative z-10 flex flex-col px-6 pt-16 pb-24 md:px-10 md:pb-28 lg:px-14"
-      >
-        <h1 class="font-instrument-serif m-0 leading-[0.88] tracking-[-0.04em]">
-          <span
-            class="hero-name hero-reveal tone-primary block leading-[0.88] tracking-[-0.04em]"
-            style="--reveal-delay: 200ms;"
-          >
-            Anton
-          </span>
-
-          <span
-            class="hero-divider hero-reveal block"
-            style="--reveal-delay: 400ms;"
-            aria-hidden="true"
-          >
-            <span class="hero-divider-label"
-              >Senior Designer &amp; Engineer</span
-            >
-            <span class="hero-divider-line"></span>
-            <span class="hero-divider-label">10 years of craft</span>
-          </span>
-
-          <span
-            class="hero-name hero-name-second hero-reveal tone-muted block leading-[0.88] tracking-[-0.04em]"
-            style="--reveal-delay: 550ms;"
-          >
-            Werschinin
-          </span>
-        </h1>
-      </div>
-
-      <!-- Bottom bar -->
-      <div
-        class="absolute right-0 bottom-0 left-0 z-10 flex flex-row items-end justify-between px-6 pb-10 md:px-10 lg:px-14"
-      >
-        <p
-          class="hero-reveal font-satoshi-light tone-quiet m-0 max-w-sm text-sm leading-relaxed md:text-base"
-          style="--reveal-delay: 800ms;"
+      <div class="hero-section__inner">
+        <!-- Section head -->
+        <header
+          class="section-head hero-reveal"
+          style="--reveal-delay: 120ms;"
         >
-          Engineering precision, design intention,<br />and products that still
-          make sense.
-        </p>
+          <span class="section-head__label">Introduction</span>
+          <span class="section-head__meta">Est. MMXV</span>
+        </header>
+
+        <!-- Name stage -->
+        <div class="hero-name-stage">
+          <h1
+            class="hero-h1 font-instrument-serif m-0"
+            aria-label="Anton Werschinin"
+          >
+            <!-- Decorative outlined ghost (duplicate of primary name) -->
+            <span
+              class="hero-name-ghost"
+              aria-hidden="true"
+              style="--reveal-delay: 600ms;"
+              >Anton</span
+            >
+
+            <!-- Primary: Anton (per-letter stagger) -->
+            <span
+              class="hero-name hero-name--primary"
+              aria-hidden="true"
+            >
+              {
+                antonLetters.map((ch, i) => (
+                  <span
+                    class="hero-letter"
+                    style={{
+                      "--i": i,
+                      "--reveal-delay": `${180 + i * 45}ms`,
+                    }}
+                  >
+                    {ch}
+                  </span>
+                ))
+              }
+            </span>
+
+            <!-- Secondary: Werschinin, italic, diagonal flow -->
+            <span
+              class="hero-name hero-name--secondary"
+              aria-hidden="true"
+            >
+              <span class="hero-name-group hero-name-group--wer">
+                {
+                  werLetters.map((ch, i) => (
+                    <span
+                      class="hero-letter hero-letter--sub hero-letter--italic"
+                      style={{
+                        "--i": i,
+                        "--reveal-delay": `${520 + i * 40}ms`,
+                      }}
+                    >
+                      {ch}
+                    </span>
+                  ))
+                }
+              </span><span class="hero-name-group hero-name-group--schinin">
+                {
+                  schininLetters.map((ch, i) => (
+                    <span
+                      class="hero-letter hero-letter--sub hero-letter--italic"
+                      style={{
+                        "--i": i,
+                        "--reveal-delay": `${680 + i * 35}ms`,
+                      }}
+                    >
+                      {ch}
+                    </span>
+                  ))
+                }
+              </span>
+            </span>
+          </h1>
+
+          <!-- Rule under secondary name -->
+          <span
+            class="hero-name-rule"
+            style="--reveal-delay: 900ms;"
+            aria-hidden="true"
+          ></span>
+        </div>
+
+        <!-- Hero foot: tagline + index -->
+        <div class="hero-foot">
+          <p
+            class="hero-tagline-block hero-reveal"
+            style="--reveal-delay: 1000ms;"
+          >
+            <span class="hero-tagline-text">
+              Engineering precision, design intention,<br />
+              and products that still make sense.
+            </span>
+          </p>
+
+          <nav
+            class="hero-index hero-reveal"
+            aria-label="Hero shortcuts"
+            style="--reveal-delay: 1050ms;"
+          >
+            <span class="hero-index-label">Index</span>
+            <ul class="hero-index-list">
+              {
+                indexLinks.map((link, i) => (
+                  <li>
+                    <a
+                      class="hero-index-link"
+                      href={link.href}
+                      rel={link.external ? "noopener noreferrer" : undefined}
+                      target={link.external ? "_blank" : undefined}
+                    >
+                      <span class="hero-index-number">{`0${i + 1}`}</span>
+                      <span class="hero-index-name">{link.label}</span>
+                      <span
+                        class="hero-index-arrow"
+                        aria-hidden="true"
+                      >
+                        <svg
+                          width="11"
+                          height="11"
+                          viewBox="0 0 11 11"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M1.5 9.5L9.5 1.5M9.5 1.5H4M9.5 1.5V7"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </span>
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </nav>
+        </div>
       </div>
     </section>
 
-    {
-      /*
-    ─── SELECTED WORK (commented out — nothing to show yet; uncomment + restore `projects` in frontmatter)
-    Use data-reveal-stagger on max-w-5xl, data-reveal-item + --reveal-index on header and tiles (see Core Services).
+    <!-- ─── CORE SERVICES ────────────────────────────────────── -->
     <section
-      class="scroll-mt-8 px-6 py-24 lg:scroll-mt-12 lg:py-36"
-      id="selected-work"
+      class="section"
+      id="services"
     >
-      <div class="mx-auto max-w-5xl" data-reveal-stagger>
-        <div
-          class="border-subtle mb-12 flex items-end justify-between border-b pb-8 lg:mb-16"
+      <div
+        class="section__inner"
+        data-reveal-stagger
+      >
+        <!-- Section head -->
+        <header
+          class="section-head"
           data-reveal-item
           style={{ "--reveal-index": 0 }}
         >
-          <div class="flex flex-col gap-3">
-            <span class="section-label">Portfolio</span>
-            <h2
-              class="tone-primary font-instrument-serif m-0 text-3xl leading-none md:text-4xl lg:text-5xl"
-            >
-              Selected Work
-            </h2>
-          </div>
-          <span class="tone-quiet font-satoshi-light hidden text-sm md:block"
-            >2023 – 2024</span
-          >
-        </div>
+          <span class="section-head__label">What I do</span>
+          <span class="section-head__meta">Core Services</span>
+        </header>
 
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-6">
+        <!-- Section title -->
+        <h2
+          class="section-title"
+          data-reveal-item
+          style={{ "--reveal-index": 1 }}
+        >
+          A focused practice across <em>design</em> and <em>engineering</em>.
+        </h2>
+
+        <!-- Services list -->
+        <div
+          class="mt-12 lg:mt-16"
+          role="list"
+        >
           {
-            projects.map((project, i) => (
+            services.map((service, i) => (
               <article
-                class={`project-tile project-tile--static group relative overflow-hidden rounded-sm`}
+                class="service-row"
                 data-reveal-item
-                style={{ "--reveal-index": i + 1 }}
-                aria-labelledby={`tile-title-${project.slug}`}
+                role="listitem"
+                style={{ "--reveal-index": i + 2 }}
               >
-                <div
-                  class={`${project.tile} aspect-[4/3] w-full lg:aspect-[3/2]`}
-                  role="presentation"
-                />
-
-                <div
-                  class="tile-overlay pointer-events-none absolute inset-0 transition-all duration-400"
-                  style="background: linear-gradient(to top, oklch(0% 0 0 / 0.85) 0%, oklch(0% 0 0 / 0.35) 50%, oklch(0% 0 0 / 0.05) 100%);"
-                />
-
-                <div class="absolute inset-0 flex flex-col justify-between p-6 lg:p-8">
-                  <div class="flex items-start justify-between gap-3">
-                    <span class="section-label">{project.category}</span>
-                    <div class="shrink-0 text-right">
-                      <span class="tone-muted font-satoshi-light block text-xs tabular-nums">
-                        {project.year}
-                      </span>
-                      <span class="tone-quiet font-satoshi-light mt-1 block text-[10px] uppercase tracking-wider">
-                        Case study soon
-                      </span>
-                    </div>
-                  </div>
-                  <div class="flex items-end justify-between gap-4">
-                    <h3
-                      class="tone-primary font-instrument-serif m-0 max-w-[80%] text-xl leading-snug md:text-2xl lg:text-3xl"
-                      id={`tile-title-${project.slug}`}
-                    >
-                      {project.title}
-                    </h3>
-                    <div
-                      class="tile-arrow tone-muted"
-                      aria-hidden="true"
-                    >
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M5 15L15 5M15 5H7M15 5v8"
-                          stroke="currentColor"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
+                <span
+                  class="service-row__num"
+                  aria-hidden="true"
+                >
+                  {service.number}
+                </span>
+                <h3 class="service-row__title">{service.title}</h3>
+                <p class="service-row__body">{service.description}</p>
               </article>
             ))
           }
-        </div>
-      </div>
-    </section>
-    */
-    }
-
-    <!-- ─── CORE SERVICES ─────────────────────────────────────── -->
-    <section class="border-subtle border-t px-6 py-24 lg:py-36">
-      <div
-        class="mx-auto max-w-5xl"
-        data-reveal-stagger
-      >
-        <!-- Section header (reveals first in stagger) -->
-        <div
-          class="mb-16 flex flex-col gap-3 lg:mb-20"
-          data-reveal-item
-          style={{ "--reveal-index": 0 }}
-        >
-          <span class="section-label">What I do</span>
-          <h2
-            class="tone-primary font-instrument-serif m-0 text-3xl leading-none md:text-4xl lg:text-5xl"
-          >
-            Core Services
-          </h2>
-        </div>
-
-        <!-- Services -->
-        <div class="border-subtle flex flex-col divide-y">
-          {
-            services.map((service, i) => (
-              <div
-                class="service-row group grid grid-cols-1 gap-6 py-12 md:grid-cols-[120px_1fr_1fr] md:gap-8 md:py-10 lg:py-14"
-                data-reveal-item
-                style={{ "--reveal-index": i + 1 }}
-              >
-                <div class="service-number font-instrument-serif">
-                  {service.number}
-                </div>
-                <h3 class="tone-primary font-satoshi-medium m-0 self-start text-xl md:text-2xl">
-                  {service.title}
-                </h3>
-                <p class="tone-muted font-satoshi-light m-0 self-start text-base leading-relaxed md:text-lg">
-                  {service.description}
-                </p>
-              </div>
-            ))
-          }
+          <span
+            class="rule-hair"
+            aria-hidden="true"
+          ></span>
         </div>
       </div>
     </section>
 
-    <!-- ─── FOOTER ─────────────────────────────────────────────── -->
+    <!-- ─── FOOTER ─────────────────────────────────────────── -->
     <Footer />
   </main>
 </Layout>

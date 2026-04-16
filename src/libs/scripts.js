@@ -1,11 +1,12 @@
-//  https://www.youtube.com/watch?v=uU9Fe-WXew4
+//  Scroll reveal — intersection-observed stagger + solo reveals.
+//  Companion to [data-reveal-stagger] / [data-reveal] markup + CSS in globals.css.
 
 /** @type {IntersectionObserver | null} */
 let scrollRevealObserver = null;
 
 /**
- * Slight shrink from the bottom of the viewport so we don’t fire while the
- * block is only in the bottom strip; still uses the real viewport (no “early”
+ * Slight shrink from the bottom of the viewport so we don't fire while the
+ * block is only in the bottom strip; still uses the real viewport (no "early"
  * expansion below the fold).
  */
 const REVEAL_IO = {
@@ -63,9 +64,9 @@ function queryStaggerRoots() {
 
 /** @returns {HTMLElement[]} */
 function querySoloRevealRoots() {
-  return [...document.querySelectorAll("[data-reveal]:not([data-reveal-item])")].filter(
-    (n) => n instanceof HTMLElement,
-  );
+  return [
+    ...document.querySelectorAll("[data-reveal]:not([data-reveal-item])"),
+  ].filter((n) => n instanceof HTMLElement);
 }
 
 function activateAllReveals() {
@@ -159,7 +160,7 @@ if (urlElement) urlElement.textContent = window.location.pathname;
 
 function scheduleScrollRevealInit() {
   requestAnimationFrame(() => {
-    requestAnimationFrame(() => initializeScrollReveal());
+    requestAnimationFrame(initializeScrollReveal);
   });
 }
 
