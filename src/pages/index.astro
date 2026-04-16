@@ -39,6 +39,16 @@ const projects = [
 ];
 */
 
+const antonLetters = ["A", "n", "t", "o", "n"];
+const werLetters = ["W", "e", "r"];
+const schininLetters = ["s", "c", "h", "i", "n", "i", "n"];
+
+const indexLinks = [
+  { label: "Services", href: "#services", external: false },
+  { label: "Contact", href: "#contact", external: false },
+  { label: "GitHub", href: "#github", external: false },
+];
+
 const services = [
   {
     number: "01",
@@ -71,53 +81,182 @@ const services = [
   >
     <!-- ─── HERO ─────────────────────────────────────────────── -->
     <section
-      class="hero-section relative flex min-h-[100dvh] flex-col items-stretch justify-center overflow-hidden"
+      class="hero-section relative min-h-[100dvh] overflow-hidden"
+      data-hero
     >
-      <!-- Name block -->
+      <!-- Atmospheric layers (gradients + grain + spotlight) handled in CSS ::before/::after -->
       <div
-        class="relative z-10 flex flex-col px-6 pt-16 pb-24 md:px-10 md:pb-28 lg:px-14"
+        class="hero-spotlight"
+        aria-hidden="true"
       >
-        <h1 class="font-instrument-serif m-0 leading-[0.88] tracking-[-0.04em]">
-          <span
-            class="hero-name hero-reveal tone-primary block leading-[0.88] tracking-[-0.04em]"
-            style="--reveal-delay: 200ms;"
-          >
-            Anton
-          </span>
+      </div>
+      <div
+        class="hero-grid-lines"
+        aria-hidden="true"
+      >
+      </div>
 
+      <!-- Decorative diagonal rule -->
+      <span
+        class="hero-diagonal-rule"
+        aria-hidden="true"
+      ></span>
+
+      <!-- Left vertical rail -->
+      <span
+        class="hero-vertical-rail hero-reveal"
+        style="--reveal-delay: 250ms;"
+        aria-hidden="true"
+      >
+        <span class="hero-rail-tick"></span>
+        Senior Designer &amp; Engineer — Est. MMXV
+        <span class="hero-rail-tick"></span>
+      </span>
+
+      <!-- Primary name composition -->
+      <div class="hero-name-stage">
+        <h1
+          class="hero-h1 font-instrument-serif m-0"
+          aria-label="Anton Werschinin"
+        >
+          <!-- Decorative outlined ghost (duplicate of primary name) -->
           <span
-            class="hero-divider hero-reveal block"
-            style="--reveal-delay: 400ms;"
+            class="hero-name-ghost hero-reveal"
+            style="--reveal-delay: 600ms;"
+            aria-hidden="true"
+            >Anton</span
+          >
+
+          <!-- Primary: Anton (per-letter stagger) -->
+          <span
+            class="hero-name hero-name--primary"
             aria-hidden="true"
           >
-            <span class="hero-divider-label"
-              >Senior Designer &amp; Engineer</span
-            >
-            <span class="hero-divider-line"></span>
-            <span class="hero-divider-label">10 years of craft</span>
+            {
+              antonLetters.map((ch, i) => (
+                <span
+                  class="hero-letter"
+                  style={{
+                    "--i": i,
+                    "--reveal-delay": `${180 + i * 45}ms`,
+                  }}
+                >
+                  {ch}
+                </span>
+              ))
+            }
           </span>
 
+          <!-- Secondary: Wer—schinin, italic, diagonal flow -->
           <span
-            class="hero-name hero-name-second hero-reveal tone-muted block leading-[0.88] tracking-[-0.04em]"
-            style="--reveal-delay: 550ms;"
+            class="hero-name hero-name--secondary"
+            aria-hidden="true"
           >
-            Werschinin
+            <span class="hero-name-group hero-name-group--wer">
+              {
+                werLetters.map((ch, i) => (
+                  <span
+                    class="hero-letter hero-letter--sub"
+                    style={{
+                      "--i": i,
+                      "--reveal-delay": `${520 + i * 40}ms`,
+                    }}
+                  >
+                    {ch}
+                  </span>
+                ))
+              }
+              <span
+                class="hero-letter hero-letter--sub hero-letter--dash"
+                aria-hidden="true"
+                style="--reveal-delay: 640ms;"
+                >—</span
+              >
+            </span>
+            <span class="hero-name-group hero-name-group--schinin">
+              {
+                schininLetters.map((ch, i) => (
+                  <span
+                    class="hero-letter hero-letter--sub hero-letter--italic"
+                    style={{
+                      "--i": i,
+                      "--reveal-delay": `${680 + i * 35}ms`,
+                    }}
+                  >
+                    {ch}
+                  </span>
+                ))
+              }
+            </span>
           </span>
         </h1>
+
+        <!-- Rule under secondary name, stretches into the right margin -->
+        <span
+          class="hero-name-rule hero-reveal"
+          style="--reveal-delay: 900ms;"
+          aria-hidden="true"
+        ></span>
       </div>
 
-      <!-- Bottom bar -->
-      <div
-        class="absolute right-0 bottom-0 left-0 z-10 flex flex-row items-end justify-between px-6 pb-10 md:px-10 lg:px-14"
+      <!-- Centre-bottom tagline -->
+      <p
+        class="hero-tagline-block hero-reveal"
+        style="--reveal-delay: 1000ms;"
       >
-        <p
-          class="hero-reveal font-satoshi-light tone-quiet m-0 max-w-sm text-sm leading-relaxed md:text-base"
-          style="--reveal-delay: 800ms;"
-        >
-          Engineering precision, design intention,<br />and products that still
-          make sense.
-        </p>
-      </div>
+        <span class="hero-tagline-rule"></span>
+        <span class="hero-tagline-text">
+          Engineering precision, design intention,<br />
+          and products that still make sense.
+        </span>
+      </p>
+
+      <!-- Bottom-right index -->
+      <nav
+        class="hero-index hero-reveal"
+        aria-label="Hero shortcuts"
+        style="--reveal-delay: 1050ms;"
+      >
+        <span class="hero-index-label">Index</span>
+        <ul class="hero-index-list">
+          {
+            indexLinks.map((link, i) => (
+              <li>
+                <a
+                  class="hero-index-link"
+                  href={link.href}
+                  rel={link.external ? "noopener noreferrer" : undefined}
+                  target={link.external ? "_blank" : undefined}
+                >
+                  <span class="hero-index-number">{`0${i + 1}`}</span>
+                  <span class="hero-index-name">{link.label}</span>
+                  <span
+                    class="hero-index-arrow"
+                    aria-hidden="true"
+                  >
+                    <svg
+                      width="11"
+                      height="11"
+                      viewBox="0 0 11 11"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M1.5 9.5L9.5 1.5M9.5 1.5H4M9.5 1.5V7"
+                        stroke="currentColor"
+                        stroke-width="1.25"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
     </section>
 
     {
@@ -217,7 +356,10 @@ const services = [
     }
 
     <!-- ─── CORE SERVICES ─────────────────────────────────────── -->
-    <section class="border-subtle border-t px-6 py-24 lg:py-36">
+    <section
+      class="border-subtle scroll-mt-8 border-t px-6 py-24 lg:scroll-mt-12 lg:py-36"
+      id="services"
+    >
       <div
         class="mx-auto max-w-5xl"
         data-reveal-stagger
@@ -237,7 +379,7 @@ const services = [
         </div>
 
         <!-- Services -->
-        <div class="border-subtle flex flex-col divide-y">
+        <div class="border-subtle divide-border-subtle flex flex-col divide-y">
           {
             services.map((service, i) => (
               <div

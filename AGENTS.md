@@ -19,4 +19,3 @@ See `package.json` scripts for the full list. The most common:
 - The `pnpm format:check` command serves as the lint/format check. There is no separate ESLint setup.
 - Build scripts for `@tailwindcss/oxide`, `esbuild`, and `sharp` may show as "ignored" after `pnpm install`. The build and dev server still work correctly without approving them.
 - The dev server runs on port 3000 by default (configured in `astro.config.mjs`).
-
