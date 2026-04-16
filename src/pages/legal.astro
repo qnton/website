@@ -5,150 +5,288 @@ import Footer from "@/components/footer.astro";
 const title = "Legal notice & privacy policy — Anton Werschinin";
 const description =
   "Legal notice (Imprint) and privacy information for qnt.one, including GDPR-related disclosures for visitors in the EU.";
+
+const linkClass =
+  "tone-primary underline decoration-[var(--color-border-strong)] underline-offset-4 transition-colors hover:decoration-[var(--color-text-muted)]";
 ---
 
 <Layout
   description={description}
   title={title}
 >
-  <main
-    class="bg-black"
-    id="main-content"
+  <div
+    class="page-rail"
+    aria-hidden="true"
   >
-    <article class="px-6 py-24 lg:py-36">
-      <div class="mx-auto max-w-3xl">
-        <p class="mb-12">
-          <a
-            class="tone-muted font-satoshi-regular text-sm transition-colors hover:text-[var(--color-text-primary)]"
-            href="/"
-          >
-            &larr; Back to home
-          </a>
-        </p>
+    <span class="page-rail__inner">
+      <span class="page-rail__tick"></span>
+      Anton Werschinin — Est. MMXV
+      <span class="page-rail__tick"></span>
+    </span>
+  </div>
 
-        <header class="border-subtle mb-16 border-b pb-12">
-          <p class="section-label mb-4">Legal</p>
-          <h1
-            class="tone-primary font-instrument-serif m-0 text-4xl leading-tight md:text-5xl lg:text-6xl"
-          >
-            Legal notice &amp; privacy
-          </h1>
-          <p
-            class="tone-muted font-satoshi-light mt-6 max-w-2xl text-base leading-relaxed"
-          >
-            Information provided in accordance with the German Telemedia Act
-            (TMG) and the Interstate Broadcasting Treaty (RStV), where
-            applicable, and notes on processing personal data under the EU
-            General Data Protection Regulation (GDPR) and the German Federal
-            Data Protection Act (BDSG).
-          </p>
+  <main id="main-content">
+    <!-- Intro -->
+    <section
+      class="section"
+      aria-labelledby="legal-page-title"
+    >
+      <div class="section__inner">
+        <header class="section-head">
+          <span class="section-head__label">Legal</span>
+          <span class="section-head__meta">qnt.one · April 2026</span>
         </header>
 
-        <div
-          class="tone-muted font-satoshi-light space-y-16 text-base leading-relaxed"
+        <h1
+          class="section-title"
+          id="legal-page-title"
         >
-          <section
-            class="space-y-6"
-            aria-labelledby="legal-notice-heading"
-          >
-            <h2
-              id="legal-notice-heading"
-              class="tone-primary font-instrument-serif m-0 text-2xl md:text-3xl"
-            >
-              Legal notice (Imprint)
-            </h2>
+          Legal notice &amp; <em>privacy</em>
+        </h1>
 
-            <div class="space-y-4">
-              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
-                Service provider
-              </h3>
-              <address class="tone-muted not-italic">
-                <p class="m-0">Anton Werschinin</p>
-                <p class="m-0">Hinterm Wall 28</p>
-                <p class="m-0">49681 Cloppenburg</p>
-                <p class="m-0">Germany</p>
-              </address>
-            </div>
+        <p
+          class="tone-muted font-satoshi-light m-0 mt-6 max-w-2xl text-base leading-relaxed md:text-lg"
+        >
+          Information provided in accordance with the German Telemedia Act (TMG)
+          and the Interstate Broadcasting Treaty (RStV), where applicable, and
+          notes on processing personal data under the EU General Data Protection
+          Regulation (GDPR) and the German Federal Data Protection Act (BDSG).
+        </p>
 
-            <div class="space-y-4">
-              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
-                Contact
-              </h3>
-              <p class="m-0">
-                Email:
-                <a
-                  class="tone-primary underline decoration-[var(--color-border-strong)] underline-offset-4 transition-colors hover:decoration-[var(--color-text-muted)]"
-                  href="mailto:hello@qnt.one"
-                  >hello@qnt.one</a
+        <nav
+          class="hero-index mt-10 lg:mt-12"
+          aria-label="Shortcuts"
+        >
+          <span class="hero-index-label">Navigate</span>
+          <ul class="hero-index-list">
+            <li>
+              <a
+                class="hero-index-link"
+                href="/"
+              >
+                <span class="hero-index-number">00</span>
+                <span class="hero-index-name">Home</span>
+                <span
+                  class="hero-index-arrow"
+                  aria-hidden="true"
                 >
-              </p>
-            </div>
+                  <svg
+                    width="11"
+                    height="11"
+                    viewBox="0 0 11 11"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M1.5 9.5L9.5 1.5M9.5 1.5H4M9.5 1.5V7"
+                      stroke="currentColor"
+                      stroke-width="1.25"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </section>
 
-            <div class="space-y-4">
-              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
-                Responsible for content (Sec. 55(2) RStV)
-              </h3>
-              <p class="m-0">Anton Werschinin, same address as above.</p>
-            </div>
+    <!-- Imprint -->
+    <section
+      class="section"
+      aria-labelledby="legal-notice-heading"
+    >
+      <div
+        class="section__inner"
+        data-reveal-stagger
+      >
+        <header class="section-head">
+          <span class="section-head__label">Imprint</span>
+          <span class="section-head__meta">TMG · RStV</span>
+        </header>
 
-            <div class="space-y-4">
-              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
-                EU dispute resolution
-              </h3>
-              <p class="m-0">
-                The European Commission provides a platform for online dispute
-                resolution (ODR):
-                <a
-                  class="tone-primary underline decoration-[var(--color-border-strong)] underline-offset-4 transition-colors hover:decoration-[var(--color-text-muted)]"
-                  href="https://ec.europa.eu/consumers/odr/"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  >https://ec.europa.eu/consumers/odr/</a
-                >. You can find our email address in this legal notice above.
-              </p>
-            </div>
+        <h2
+          class="service-row__title m-0 mb-10 max-w-[24ch]"
+          id="legal-notice-heading"
+        >
+          Legal notice (Imprint)
+        </h2>
 
-            <div class="space-y-4">
-              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
-                Consumer dispute resolution
-              </h3>
-              <p class="m-0">
-                We are not obliged or willing to participate in dispute
-                resolution proceedings before a consumer arbitration board.
-              </p>
-            </div>
-          </section>
-
-          <section
-            class="space-y-6"
-            aria-labelledby="privacy-heading"
+        <div role="list">
+          <article
+            class="service-row"
+            data-reveal-item
+            role="listitem"
+            style={{ "--reveal-index": 0 }}
           >
-            <h2
-              id="privacy-heading"
-              class="tone-primary font-instrument-serif m-0 text-2xl md:text-3xl"
+            <span
+              class="service-row__num"
+              aria-hidden="true"
+              >01</span
             >
-              Privacy policy
-            </h2>
+            <h3 class="service-row__title">Service provider</h3>
+            <address class="service-row__body not-italic">
+              <p class="m-0">Anton Werschinin</p>
+              <p class="m-0">Hinterm Wall 28</p>
+              <p class="m-0">49681 Cloppenburg</p>
+              <p class="m-0">Germany</p>
+            </address>
+          </article>
 
-            <div class="space-y-4">
-              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
-                1. Controller
-              </h3>
-              <p class="m-0">
-                The controller within the meaning of the GDPR is Anton
-                Werschinin, Hinterm Wall 28, 49681 Cloppenburg, Germany,
-                <a
-                  class="tone-primary underline decoration-[var(--color-border-strong)] underline-offset-4 transition-colors hover:decoration-[var(--color-text-muted)]"
-                  href="mailto:hello@qnt.one"
-                  >hello@qnt.one</a
-                >.
-              </p>
-            </div>
+          <article
+            class="service-row"
+            data-reveal-item
+            role="listitem"
+            style={{ "--reveal-index": 1 }}
+          >
+            <span
+              class="service-row__num"
+              aria-hidden="true"
+              >02</span
+            >
+            <h3 class="service-row__title">Contact</h3>
+            <p class="service-row__body m-0">
+              Email:
+              <a
+                class={linkClass}
+                href="mailto:hello@qnt.one"
+                >hello@qnt.one</a
+              >
+            </p>
+          </article>
 
-            <div class="space-y-4">
-              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
-                2. General information on processing
-              </h3>
+          <article
+            class="service-row"
+            data-reveal-item
+            role="listitem"
+            style={{ "--reveal-index": 2 }}
+          >
+            <span
+              class="service-row__num"
+              aria-hidden="true"
+              >03</span
+            >
+            <h3 class="service-row__title">
+              Responsible for content (Sec. 55(2) RStV)
+            </h3>
+            <p class="service-row__body m-0">
+              Anton Werschinin, same address as above.
+            </p>
+          </article>
+
+          <article
+            class="service-row"
+            data-reveal-item
+            role="listitem"
+            style={{ "--reveal-index": 3 }}
+          >
+            <span
+              class="service-row__num"
+              aria-hidden="true"
+              >04</span
+            >
+            <h3 class="service-row__title">EU dispute resolution</h3>
+            <p class="service-row__body m-0">
+              The European Commission provides a platform for online dispute
+              resolution (ODR):
+              <a
+                class={linkClass}
+                href="https://ec.europa.eu/consumers/odr/"
+                rel="noopener noreferrer"
+                target="_blank"
+                >https://ec.europa.eu/consumers/odr/</a
+              >. You can find our email address in this legal notice above.
+            </p>
+          </article>
+
+          <article
+            class="service-row"
+            data-reveal-item
+            role="listitem"
+            style={{ "--reveal-index": 4 }}
+          >
+            <span
+              class="service-row__num"
+              aria-hidden="true"
+              >05</span
+            >
+            <h3 class="service-row__title">Consumer dispute resolution</h3>
+            <p class="service-row__body m-0">
+              We are not obliged or willing to participate in dispute resolution
+              proceedings before a consumer arbitration board.
+            </p>
+          </article>
+        </div>
+        <span
+          class="rule-hair mt-4"
+          aria-hidden="true"
+        ></span>
+      </div>
+    </section>
+
+    <!-- Privacy -->
+    <section
+      class="section"
+      aria-labelledby="privacy-heading"
+    >
+      <div
+        class="section__inner"
+        data-reveal-stagger
+      >
+        <header class="section-head">
+          <span class="section-head__label">Privacy</span>
+          <span class="section-head__meta">GDPR · BDSG</span>
+        </header>
+
+        <h2
+          class="service-row__title m-0 mb-10 max-w-[18ch]"
+          id="privacy-heading"
+        >
+          Privacy policy
+        </h2>
+
+        <div role="list">
+          <article
+            class="service-row"
+            data-reveal-item
+            role="listitem"
+            style={{ "--reveal-index": 0 }}
+          >
+            <span
+              class="service-row__num"
+              aria-hidden="true"
+              >01</span
+            >
+            <h3 class="service-row__title">1. Controller</h3>
+            <p class="service-row__body m-0">
+              The controller within the meaning of the GDPR is Anton Werschinin,
+              Hinterm Wall 28, 49681 Cloppenburg, Germany,
+              <a
+                class={linkClass}
+                href="mailto:hello@qnt.one"
+                >hello@qnt.one</a
+              >.
+            </p>
+          </article>
+
+          <article
+            class="service-row"
+            data-reveal-item
+            role="listitem"
+            style={{ "--reveal-index": 1 }}
+          >
+            <span
+              class="service-row__num"
+              aria-hidden="true"
+              >02</span
+            >
+            <h3 class="service-row__title"
+              >2. General information on processing</h3
+            >
+            <div class="service-row__body [&_p+p]:mt-4">
               <p class="m-0">
                 We process personal data only to the extent necessary to provide
                 a functional website and our content and services, to comply
@@ -160,11 +298,23 @@ const description =
                 (f) (legitimate interests), as applicable.
               </p>
             </div>
+          </article>
 
-            <div class="space-y-4">
-              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
-                3. Hosting and visiting this website
-              </h3>
+          <article
+            class="service-row"
+            data-reveal-item
+            role="listitem"
+            style={{ "--reveal-index": 2 }}
+          >
+            <span
+              class="service-row__num"
+              aria-hidden="true"
+              >03</span
+            >
+            <h3 class="service-row__title"
+              >3. Hosting and visiting this website</h3
+            >
+            <div class="service-row__body [&_p+p]:mt-4">
               <p class="m-0">
                 This website is operated on infrastructure provided by a hosting
                 provider. When you access pages, the host and, where applicable,
@@ -184,35 +334,63 @@ const description =
                 for details (including any data processing agreement).
               </p>
             </div>
+          </article>
 
-            <div class="space-y-4">
-              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
-                4. Contact by email
-              </h3>
-              <p class="m-0">
-                If you contact us by email, we process the data you provide to
-                handle your request and any follow-up questions (Art. 6(1)(b) or
-                (f) GDPR). Data is deleted once no longer needed for that
-                purpose, unless statutory retention requirements apply.
-              </p>
-            </div>
+          <article
+            class="service-row"
+            data-reveal-item
+            role="listitem"
+            style={{ "--reveal-index": 3 }}
+          >
+            <span
+              class="service-row__num"
+              aria-hidden="true"
+              >04</span
+            >
+            <h3 class="service-row__title">4. Contact by email</h3>
+            <p class="service-row__body m-0">
+              If you contact us by email, we process the data you provide to
+              handle your request and any follow-up questions (Art. 6(1)(b) or
+              (f) GDPR). Data is deleted once no longer needed for that purpose,
+              unless statutory retention requirements apply.
+            </p>
+          </article>
 
-            <div class="space-y-4">
-              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
-                5. Cookies and local storage
-              </h3>
-              <p class="m-0">
-                This website does not use tracking cookies for advertising or
-                analytics. Technically necessary data may be processed in your
-                browser (e.g. for display or security) where permitted without
-                consent.
-              </p>
-            </div>
+          <article
+            class="service-row"
+            data-reveal-item
+            role="listitem"
+            style={{ "--reveal-index": 4 }}
+          >
+            <span
+              class="service-row__num"
+              aria-hidden="true"
+              >05</span
+            >
+            <h3 class="service-row__title">5. Cookies and local storage</h3>
+            <p class="service-row__body m-0">
+              This website does not use tracking cookies for advertising or
+              analytics. Technically necessary data may be processed in your
+              browser (e.g. for display or security) where permitted without
+              consent.
+            </p>
+          </article>
 
-            <div class="space-y-4">
-              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
-                6. Fonts and third-party resources
-              </h3>
+          <article
+            class="service-row"
+            data-reveal-item
+            role="listitem"
+            style={{ "--reveal-index": 5 }}
+          >
+            <span
+              class="service-row__num"
+              aria-hidden="true"
+              >06</span
+            >
+            <h3 class="service-row__title"
+              >6. Fonts and third-party resources</h3
+            >
+            <div class="service-row__body [&_p+p]:mt-4">
               <p class="m-0">
                 Display and body fonts used on this website are self-hosted and
                 served from the same origin as the pages. No font requests are
@@ -226,11 +404,21 @@ const description =
                 privacy policy in an updated version of this notice.
               </p>
             </div>
+          </article>
 
-            <div class="space-y-4">
-              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
-                7. Your rights
-              </h3>
+          <article
+            class="service-row"
+            data-reveal-item
+            role="listitem"
+            style={{ "--reveal-index": 6 }}
+          >
+            <span
+              class="service-row__num"
+              aria-hidden="true"
+              >07</span
+            >
+            <h3 class="service-row__title">7. Your rights</h3>
+            <div class="service-row__body [&_p+p]:mt-4">
               <p class="m-0">
                 Where the legal requirements are met, you have the right to
                 access (Art. 15 GDPR), rectification (Art. 16 GDPR), erasure
@@ -248,7 +436,7 @@ const description =
                 your habitual residence or our place of establishment. A list of
                 authorities in Germany is available at
                 <a
-                  class="tone-primary underline decoration-[var(--color-border-strong)] underline-offset-4 transition-colors hover:decoration-[var(--color-text-muted)]"
+                  class={linkClass}
                   href="https://www.bfdi.bund.de/EN/Service/Anschriften/anschriften_table.html"
                   rel="noopener noreferrer"
                   target="_blank"
@@ -256,34 +444,69 @@ const description =
                 >.
               </p>
             </div>
+          </article>
 
-            <div class="space-y-4">
-              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
-                8. Storage period
-              </h3>
-              <p class="m-0">
-                Personal data is deleted or blocked once the purpose of storage
-                no longer applies, unless statutory retention periods require
-                otherwise.
-              </p>
-            </div>
-          </section>
-
-          <section
-            class="space-y-6"
-            aria-labelledby="liability-heading"
+          <article
+            class="service-row"
+            data-reveal-item
+            role="listitem"
+            style={{ "--reveal-index": 7 }}
           >
-            <h2
-              id="liability-heading"
-              class="tone-primary font-instrument-serif m-0 text-2xl md:text-3xl"
+            <span
+              class="service-row__num"
+              aria-hidden="true"
+              >08</span
             >
-              Liability &amp; copyright
-            </h2>
+            <h3 class="service-row__title">8. Storage period</h3>
+            <p class="service-row__body m-0">
+              Personal data is deleted or blocked once the purpose of storage no
+              longer applies, unless statutory retention periods require
+              otherwise.
+            </p>
+          </article>
+        </div>
+        <span
+          class="rule-hair mt-4"
+          aria-hidden="true"
+        ></span>
+      </div>
+    </section>
 
-            <div class="space-y-4">
-              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
-                Liability for content
-              </h3>
+    <!-- Liability -->
+    <section
+      class="section"
+      aria-labelledby="liability-heading"
+    >
+      <div
+        class="section__inner"
+        data-reveal-stagger
+      >
+        <header class="section-head">
+          <span class="section-head__label">Liability</span>
+          <span class="section-head__meta">Content · Copyright</span>
+        </header>
+
+        <h2
+          class="service-row__title m-0 mb-10 max-w-[22ch]"
+          id="liability-heading"
+        >
+          Liability &amp; copyright
+        </h2>
+
+        <div role="list">
+          <article
+            class="service-row"
+            data-reveal-item
+            role="listitem"
+            style={{ "--reveal-index": 0 }}
+          >
+            <span
+              class="service-row__num"
+              aria-hidden="true"
+              >01</span
+            >
+            <h3 class="service-row__title">Liability for content</h3>
+            <div class="service-row__body [&_p+p]:mt-4">
               <p class="m-0">
                 As a service provider, we are responsible for our own content on
                 these pages under general law in accordance with Sec. 7(1) TMG.
@@ -299,11 +522,21 @@ const description =
                 the content immediately.
               </p>
             </div>
+          </article>
 
-            <div class="space-y-4">
-              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
-                Liability for links
-              </h3>
+          <article
+            class="service-row"
+            data-reveal-item
+            role="listitem"
+            style={{ "--reveal-index": 1 }}
+          >
+            <span
+              class="service-row__num"
+              aria-hidden="true"
+              >02</span
+            >
+            <h3 class="service-row__title">Liability for links</h3>
+            <div class="service-row__body [&_p+p]:mt-4">
               <p class="m-0">
                 Our site contains links to external third-party websites over
                 whose content we have no control. We cannot assume any liability
@@ -319,11 +552,21 @@ const description =
                 violations, we will remove such links immediately.
               </p>
             </div>
+          </article>
 
-            <div class="space-y-4">
-              <h3 class="tone-primary font-satoshi-medium m-0 text-lg">
-                Copyright
-              </h3>
+          <article
+            class="service-row"
+            data-reveal-item
+            role="listitem"
+            style={{ "--reveal-index": 2 }}
+          >
+            <span
+              class="service-row__num"
+              aria-hidden="true"
+              >03</span
+            >
+            <h3 class="service-row__title">Copyright</h3>
+            <div class="service-row__body [&_p+p]:mt-4">
               <p class="m-0">
                 Content and works on these pages created by the site operator
                 are subject to German copyright law. Duplication, editing,
@@ -340,12 +583,10 @@ const description =
                 violations, we will remove such content immediately.
               </p>
             </div>
-          </section>
-
-          <p class="tone-quiet m-0 text-sm">Last updated: April 2026</p>
+          </article>
         </div>
       </div>
-    </article>
+    </section>
 
     <Footer />
   </main>

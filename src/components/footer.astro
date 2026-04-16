@@ -7,32 +7,32 @@ const year = new Date().getFullYear();
 ---
 
 <footer
-  class={merge(
-    "scroll-mt-8 border-subtle border-t px-6 py-24 lg:scroll-mt-12 lg:py-36",
-    className,
-  )}
+  class={merge("footer-section", className)}
   data-reveal
   id="contact"
 >
-  <div class="mx-auto max-w-5xl">
-    <!-- CTA -->
-    <div class="mb-16 flex flex-col gap-6 lg:mb-20">
-      <span class="section-label">Get in touch</span>
-      <h2
-        class="tone-primary font-instrument-serif m-0 max-w-2xl text-4xl leading-tight md:text-5xl lg:text-6xl xl:text-7xl"
-      >
-        Work with me
-      </h2>
-      <p
-        class="tone-muted font-satoshi-light m-0 max-w-md text-base leading-relaxed md:text-lg"
-      >
-        Have a project in mind? I take on a select number of clients each year
-        to ensure focused, high-quality collaboration.
-      </p>
-    </div>
+  <div class="section__inner">
+    <!-- Section head -->
+    <header class="section-head">
+      <span class="section-head__label">Get in touch</span>
+      <span class="section-head__meta">Available · {year}</span>
+    </header>
 
-    <!-- Email CTA -->
-    <div class="mb-20">
+    <!-- Section title -->
+    <h2 class="section-title">
+      Work <em>with</em> me.
+    </h2>
+
+    <!-- Description -->
+    <p
+      class="tone-muted font-satoshi-light m-0 mt-6 max-w-lg text-base leading-relaxed md:text-lg"
+    >
+      A project in mind? I take on a small, deliberate number of clients each
+      year so every engagement stays focused, considered, and high-quality.
+    </p>
+
+    <!-- Mailto CTA -->
+    <div class="mt-14 lg:mt-20">
       <address
         class="not-italic"
         data-mailto-token="ocknvq<jgnnqBspr0qpg>"
@@ -41,41 +41,41 @@ const year = new Date().getFullYear();
       </address>
       <a
         href="mailto:hello@qnt.one"
-        class="border-strong tone-primary font-instrument-serif group inline-flex items-center gap-4 border-b pb-3 text-2xl transition-colors duration-300 hover:text-white md:text-3xl lg:text-4xl"
+        class="footer-mailto"
       >
         hello@qnt.one
-        <svg
-          class="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-          width="28"
-          height="28"
-          viewBox="0 0 28 28"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+        <span
+          class="footer-mailto__arrow"
           aria-hidden="true"
         >
-          <path
-            d="M7 21L21 7M21 7H10M21 7v11"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></path>
-        </svg>
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 28 28"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7 21L21 7M21 7H10M21 7v11"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </svg>
+        </span>
       </a>
     </div>
 
-    <!-- Bottom row -->
-    <div
-      class="border-subtle flex flex-col gap-6 border-t pt-8 sm:flex-row sm:items-center sm:justify-between"
-    >
-      <!-- Social links -->
+    <!-- Meta row: socials + copyright (micro-caps, framed by hairline) -->
+    <div class="footer-meta">
       <nav
-        class="flex scroll-mt-8 flex-wrap items-center gap-6 lg:scroll-mt-12"
+        class="footer-meta-nav"
         id="github"
         aria-label="Profiles and external links"
       >
         <a
-          class="tone-muted font-satoshi-regular text-sm transition-colors duration-200 hover:text-[var(--color-text-primary)]"
+          class="footer-meta-link"
           href="https://github.com/qnton"
           rel="noopener noreferrer"
           target="_blank"
@@ -83,7 +83,7 @@ const year = new Date().getFullYear();
           GitHub
         </a>
         <a
-          class="tone-muted font-satoshi-regular text-sm transition-colors duration-200 hover:text-[var(--color-text-primary)]"
+          class="footer-meta-link"
           href="https://linkedin.com/in/qnton"
           rel="noopener noreferrer"
           target="_blank"
@@ -91,17 +91,14 @@ const year = new Date().getFullYear();
           LinkedIn
         </a>
         <a
-          class="tone-muted font-satoshi-regular text-sm transition-colors duration-200 hover:text-[var(--color-text-primary)]"
+          class="footer-meta-link"
           href="/legal"
         >
-          Legal &amp; privacy
+          Legal &amp; Privacy
         </a>
       </nav>
 
-      <!-- Copyright -->
-      <p class="tone-quiet font-satoshi-light m-0 text-sm">
-        &copy; {year} Anton Werschinin
-      </p>
+      <p class="footer-copy">&copy; {year} · Anton Werschinin</p>
     </div>
   </div>
 </footer>
