@@ -202,7 +202,7 @@ a:focus-visible,
 button:focus-visible,
 [href]:focus-visible,
 summary:focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-text-primary);
   outline-offset: 3px;
   border-radius: 0.125rem;
 }
@@ -381,12 +381,12 @@ summary:focus-visible {
   background:
     radial-gradient(
       ellipse 90% 60% at 92% 8%,
-      oklch(18% 0.05 75 / 0.35) 0%,
+      oklch(18% 0 0 / 0.35) 0%,
       transparent 60%
     ),
     radial-gradient(
       ellipse 80% 55% at 2% 92%,
-      oklch(14% 0.03 250 / 0.22) 0%,
+      oklch(14% 0 0 / 0.22) 0%,
       transparent 55%
     ),
     var(--color-surface);
@@ -446,8 +446,8 @@ summary:focus-visible {
   transition: opacity 0.6s ease;
   background: radial-gradient(
     circle 480px at var(--mx) var(--my),
-    oklch(88% 0.08 75 / 0.1) 0%,
-    oklch(88% 0.08 75 / 0.04) 25%,
+    oklch(100% 0 0 / 0.1) 0%,
+    oklch(100% 0 0 / 0.04) 25%,
     transparent 55%
   );
   mix-blend-mode: screen;
@@ -556,7 +556,7 @@ summary:focus-visible {
   font-size: clamp(3.25rem, 11vw, 11rem);
   color: var(--hero-ink-muted);
   padding-left: clamp(0rem, 8vw, 12rem);
-  gap: 0.08em;
+  gap: 0;
   align-items: flex-end;
   flex-wrap: wrap;
 }
@@ -567,13 +567,13 @@ summary:focus-visible {
 }
 
 .hero-name-group--wer {
-  color: var(--hero-ink-muted);
+  color: var(--hero-ink);
+  font-style: italic;
 }
 
 .hero-name-group--schinin {
   color: var(--hero-ink);
   font-style: italic;
-  margin-left: 0.05em;
 }
 
 .hero-letter {
@@ -587,12 +587,6 @@ summary:focus-visible {
 
 .hero-letter--italic {
   font-style: italic;
-}
-
-.hero-letter--dash {
-  font-style: normal;
-  padding: 0 0.08em;
-  color: var(--hero-ink-quiet);
 }
 
 .hero-letter--sub {
@@ -758,7 +752,7 @@ summary:focus-visible {
 .hero-index-link:hover .hero-index-arrow,
 .hero-index-link:focus-visible .hero-index-arrow {
   transform: translate(2px, -2px);
-  color: var(--color-accent);
+  color: var(--hero-ink);
 }
 
 /* ─── Tablet / below ────────────────────────────────────────── */
@@ -865,12 +859,11 @@ summary:focus-visible {
     padding-left: 0;
     margin-top: clamp(-0.25em, -1vw, -0.1em);
     flex-wrap: wrap;
-    gap: 0.02em;
-    row-gap: 0;
+    gap: 0;
   }
 
   /* Force the italic "schinin" onto its own line so the name reads as a
-     three-line editorial cascade (Anton / Wer— / schinin). */
+     three-line editorial cascade (Anton / Wer / schinin). */
   .hero-name-group--wer {
     flex-basis: auto;
   }

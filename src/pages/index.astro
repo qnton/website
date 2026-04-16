@@ -147,7 +147,7 @@ const services = [
             }
           </span>
 
-          <!-- Secondary: Wer—schinin, italic, diagonal flow -->
+          <!-- Secondary: Werschinin, italic, diagonal flow -->
           <span
             class="hero-name hero-name--secondary"
             aria-hidden="true"
@@ -156,7 +156,7 @@ const services = [
               {
                 werLetters.map((ch, i) => (
                   <span
-                    class="hero-letter hero-letter--sub"
+                    class="hero-letter hero-letter--sub hero-letter--italic"
                     style={{
                       "--i": i,
                       "--reveal-delay": `${520 + i * 40}ms`,
@@ -166,14 +166,7 @@ const services = [
                   </span>
                 ))
               }
-              <span
-                class="hero-letter hero-letter--sub hero-letter--dash"
-                aria-hidden="true"
-                style="--reveal-delay: 640ms;"
-                >—</span
-              >
-            </span>
-            <span class="hero-name-group hero-name-group--schinin">
+            </span><span class="hero-name-group hero-name-group--schinin">
               {
                 schininLetters.map((ch, i) => (
                   <span
