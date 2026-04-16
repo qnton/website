@@ -63,9 +63,9 @@ function queryStaggerRoots() {
 
 /** @returns {HTMLElement[]} */
 function querySoloRevealRoots() {
-  return [...document.querySelectorAll("[data-reveal]:not([data-reveal-item])")].filter(
-    (n) => n instanceof HTMLElement,
-  );
+  return [
+    ...document.querySelectorAll("[data-reveal]:not([data-reveal-item])"),
+  ].filter((n) => n instanceof HTMLElement);
 }
 
 function activateAllReveals() {
@@ -152,6 +152,8 @@ document.addEventListener("astro:before-swap", (event) => {
       .querySelectorAll(".animate-once, .animate-fade")
       .forEach((el) => el.classList.remove("animate-once", "animate-fade"));
   });
+
+  teardownHero();
 });
 
 const urlElement = document.getElementById("url");
@@ -159,9 +161,165 @@ if (urlElement) urlElement.textContent = window.location.pathname;
 
 function scheduleScrollRevealInit() {
   requestAnimationFrame(() => {
-    requestAnimationFrame(() => initializeScrollReveal());
+    requestAnimationFrame(() => {
+      initializeScrollReveal();
+      initHero();
+    });
   });
 }
 
 document.addEventListener("DOMContentLoaded", scheduleScrollRevealInit);
 document.addEventListener("astro:after-swap", scheduleScrollRevealInit);
+
+/* ─── Hero: kinetic editorial interactivity ──────────────────── */
+
+/**
+ * @typedef {object} HeroState
+ * @property {HTMLElement} section
+ * @property {DOMRect | null} sectionRect
+ * @property {number} targetMx
+ * @property {number} targetMy
+ * @property {number} currentMx
+ * @property {number} currentMy
+ * @property {number} rafId
+ * @property {AbortController} ac
+ * @property {boolean} pointerInside
+ */
+
+/** @type {HeroState | null} */
+let heroState = null;
+
+function teardownHero() {
+  if (!heroState) return;
+  heroState.ac.abort();
+  if (heroState.rafId) cancelAnimationFrame(heroState.rafId);
+  heroState = null;
+}
+
+function canHover() {
+  return window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+}
+
+function initHero() {
+  teardownHero();
+
+  const section = /** @type {HTMLElement | null} */ (
+    document.querySelector("[data-hero]")
+  );
+  if (!section) return;
+
+  const ac = new AbortController();
+  const reduced = prefersReducedMotion();
+  const hoverCapable = canHover();
+
+  const state = {
+    section,
+    sectionRect: null,
+    targetMx: 0,
+    targetMy: 0,
+    currentMx: 0,
+    currentMy: 0,
+    rafId: 0,
+    ac,
+    pointerInside: false,
+  };
+  heroState = state;
+
+  if (reduced || !hoverCapable) {
+    return;
+  }
+
+  function updateRect() {
+    state.sectionRect = section.getBoundingClientRect();
+  }
+  updateRect();
+
+  window.addEventListener("resize", updateRect, {
+    passive: true,
+    signal: ac.signal,
+  });
+  window.addEventListener("scroll", updateRect, {
+    passive: true,
+    signal: ac.signal,
+  });
+
+  section.addEventListener(
+    "pointerenter",
+    (e) => {
+      if (e.pointerType !== "mouse") return;
+      state.pointerInside = true;
+      section.setAttribute("data-hero-active", "");
+      scheduleHeroFrame();
+    },
+    { signal: ac.signal },
+  );
+
+  section.addEventListener(
+    "pointerleave",
+    () => {
+      state.pointerInside = false;
+      section.removeAttribute("data-hero-active");
+      scheduleHeroFrame();
+    },
+    { signal: ac.signal },
+  );
+
+  section.addEventListener(
+    "pointermove",
+    (e) => {
+      if (e.pointerType !== "mouse") return;
+      if (!state.sectionRect) updateRect();
+      if (!state.sectionRect) return;
+      state.targetMx = e.clientX - state.sectionRect.left;
+      state.targetMy = e.clientY - state.sectionRect.top;
+      scheduleHeroFrame();
+    },
+    { signal: ac.signal, passive: true },
+  );
+
+  document.addEventListener(
+    "visibilitychange",
+    () => {
+      if (document.hidden) {
+        if (state.rafId) cancelAnimationFrame(state.rafId);
+        state.rafId = 0;
+      } else {
+        scheduleHeroFrame();
+      }
+    },
+    { signal: ac.signal },
+  );
+
+  function scheduleHeroFrame() {
+    if (state.rafId) return;
+    state.rafId = requestAnimationFrame(heroFrame);
+  }
+
+  function heroFrame() {
+    state.rafId = 0;
+
+    const lerp = 0.18;
+    state.currentMx += (state.targetMx - state.currentMx) * lerp;
+    state.currentMy += (state.targetMy - state.currentMy) * lerp;
+
+    if (state.sectionRect) {
+      const w = state.sectionRect.width || 1;
+      const h = state.sectionRect.height || 1;
+      section.style.setProperty(
+        "--mx",
+        `${((state.currentMx / w) * 100).toFixed(2)}%`,
+      );
+      section.style.setProperty(
+        "--my",
+        `${((state.currentMy / h) * 100).toFixed(2)}%`,
+      );
+    }
+
+    const pointerMoving =
+      Math.abs(state.targetMx - state.currentMx) > 0.4 ||
+      Math.abs(state.targetMy - state.currentMy) > 0.4;
+    if (pointerMoving) {
+      scheduleHeroFrame();
+    }
+  }
+}
