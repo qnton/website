@@ -1,8 +1,7 @@
 ---
 import Layout from "@/components/layout.astro";
-import Footer from "@/components/footer.astro";
 
-const title = "Legal notice & privacy policy — Anton Werschinin";
+const title = "Legal notice & privacy policy — qnt.one";
 const description =
   "Legal notice (Imprint) and privacy information for qnt.one, including GDPR-related disclosures for visitors in the EU.";
 
@@ -14,17 +13,6 @@ const linkClass =
   description={description}
   title={title}
 >
-  <div
-    class="page-rail"
-    aria-hidden="true"
-  >
-    <span class="page-rail__inner">
-      <span class="page-rail__tick"></span>
-      Anton Werschinin — Est. MMXV
-      <span class="page-rail__tick"></span>
-    </span>
-  </div>
-
   <main id="main-content">
     <!-- Intro -->
     <section
@@ -128,12 +116,12 @@ const linkClass =
               >01</span
             >
             <h3 class="service-row__title">Service provider</h3>
-            <address class="service-row__body not-italic">
-              <p class="m-0">Anton Werschinin</p>
-              <p class="m-0">Hinterm Wall 28</p>
-              <p class="m-0">49681 Cloppenburg</p>
-              <p class="m-0">Germany</p>
-            </address>
+            <div class="service-row__body">
+              <p class="m-0">
+                The service provider within the meaning of the TMG is the
+                operator of <span class="tone-primary">qnt.one</span>.
+              </p>
+            </div>
           </article>
 
           <article
@@ -173,7 +161,8 @@ const linkClass =
               Responsible for content (Sec. 55(2) RStV)
             </h3>
             <p class="service-row__body m-0">
-              Anton Werschinin, same address as above.
+              The operator of qnt.one, reachable at the contact details listed
+              under “Contact” above.
             </p>
           </article>
 
@@ -262,8 +251,8 @@ const linkClass =
             >
             <h3 class="service-row__title">1. Controller</h3>
             <p class="service-row__body m-0">
-              The controller within the meaning of the GDPR is Anton Werschinin,
-              Hinterm Wall 28, 49681 Cloppenburg, Germany,
+              The controller within the meaning of the GDPR is the operator of
+              qnt.one, reachable at
               <a
                 class={linkClass}
                 href="mailto:hello@qnt.one"
@@ -587,7 +576,5 @@ const linkClass =
         </div>
       </div>
     </section>
-
-    <Footer />
   </main>
 </Layout>

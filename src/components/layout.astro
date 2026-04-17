@@ -29,14 +29,13 @@ const origin = new URL(siteConfig).origin;
 const path =
   Astro.url.pathname.length > 1 ? Astro.url.pathname.replace(/\/$/, "") : "";
 const canonicalUrl = new URL(path || "/", `${origin}/`).href;
-const defaultOgImage = `${origin}/images/pfp.jpg`;
+const defaultOgImage = `${origin}/og.png`;
 const ogImage = imageProp ?? defaultOgImage;
 const ogImageSecure = ogImage.startsWith("http")
   ? ogImage
   : new URL(ogImage.replace(/^\//, ""), `${origin}/`).href;
 
-const structuredDescription =
-  "Senior designer and engineer building exceptional digital products. Web development, design, and digital transformation.";
+const structuredDescription = "Contact and legal information for qnt.one.";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -45,53 +44,9 @@ const jsonLd = {
       "@type": "WebSite",
       "@id": `${origin}/#website`,
       url: origin,
-      name: "Anton Werschinin",
+      name: "qnt.one",
       description: structuredDescription,
       inLanguage: "en",
-      publisher: { "@id": `${origin}/#person` },
-    },
-    {
-      "@type": "Person",
-      "@id": `${origin}/#person`,
-      name: "Anton Werschinin",
-      givenName: "Anton",
-      familyName: "Werschinin",
-      email: "hello@qnt.one",
-      url: origin,
-      image: `${origin}/images/pfp.jpg`,
-      jobTitle: "Designer & Engineer",
-      knowsLanguage: "en-US",
-      sameAs: [
-        "https://www.linkedin.com/in/qnton",
-        "https://github.com/qnton",
-        "https://dev.to/qnton",
-      ],
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "Hinterm Wall 28",
-        addressLocality: "Cloppenburg",
-        postalCode: "49681",
-        addressCountry: "DE",
-      },
-    },
-    {
-      "@type": "ProfessionalService",
-      "@id": `${origin}/#professionalService`,
-      name: "qnton",
-      url: origin,
-      description: structuredDescription,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "Hinterm Wall 28",
-        addressLocality: "Cloppenburg",
-        postalCode: "49681",
-        addressCountry: "DE",
-      },
-      areaServed: {
-        "@type": "Country",
-        name: "DE",
-      },
-      founder: { "@id": `${origin}/#person` },
     },
   ],
 };
@@ -145,7 +100,7 @@ const jsonLd = {
       property="og:url"
     />
     <meta
-      content="Anton Werschinin"
+      content="qnt.one"
       property="og:site_name"
     />
     <meta
@@ -153,15 +108,15 @@ const jsonLd = {
       property="og:image"
     />
     <meta
-      content="image/jpeg"
+      content="image/png"
       property="og:image:type"
     />
     <meta
-      content="1536"
+      content="1200"
       property="og:image:width"
     />
     <meta
-      content="2048"
+      content="630"
       property="og:image:height"
     />
     <meta
