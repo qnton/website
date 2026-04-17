@@ -1,272 +1,64 @@
 ---
 import Layout from "@/components/layout.astro";
-import Footer from "@/components/footer.astro";
-
-const antonLetters = ["A", "n", "t", "o", "n"];
-const werLetters = ["W", "e", "r"];
-const schininLetters = ["s", "c", "h", "i", "n", "i", "n"];
-
-const indexLinks = [
-  { label: "Services", href: "#services", external: false },
-  { label: "Contact", href: "#contact", external: false },
-  { label: "GitHub", href: "#github", external: false },
-];
-
-const services = [
-  {
-    number: "01",
-    title: "Web Development",
-    description:
-      "Performance-driven applications built with modern stacks. From architecture to deployment, delivered with engineering rigour and attention to every millisecond.",
-  },
-  {
-    number: "02",
-    title: "Design",
-    description:
-      "Brand systems, interface design, and visual identity that communicate authority. Rooted in craft, built to endure, refined until nothing remains to remove.",
-  },
-  {
-    number: "03",
-    title: "Digital Transformation",
-    description:
-      "Strategic modernisation of legacy systems and digital workflows. Clear roadmaps, measurable outcomes, and technical consulting across the full stack.",
-  },
-];
 ---
 
 <Layout
-  description="Senior Designer & Engineer with a decade of experience building exceptional digital products."
-  title="Anton Werschinin — Designer & Engineer"
+  description="Have a project in mind? Get in touch for focused, high-quality collaboration."
+  title="qnt.one"
 >
-  <!-- Persistent left rail — threads through every section -->
-  <div
-    class="page-rail"
-    aria-hidden="true"
+  <main
+    class="min-h-dvh bg-black px-[clamp(1.5rem,6vw,4rem)] pt-[clamp(3rem,12vh,8rem)] pb-16 text-left"
+    id="main-content"
   >
-    <span class="page-rail__inner">
-      <span class="page-rail__tick"></span>
-      Anton Werschinin — Est. MMXV
-      <span class="page-rail__tick"></span>
-    </span>
-  </div>
-
-  <main id="main-content">
-    <!-- ─── HERO ─────────────────────────────────────────────── -->
-    <section
-      class="hero-section"
-      data-hero
-    >
-      <div class="hero-section__inner">
-        <!-- Section head -->
-        <header
-          class="section-head hero-reveal"
-          style="--reveal-delay: 120ms;"
-        >
-          <span class="section-head__label">Introduction</span>
-          <span class="section-head__meta">Est. MMXV</span>
-        </header>
-
-        <!-- Name stage -->
-        <div class="hero-name-stage">
-          <h1
-            class="hero-h1 font-instrument-serif m-0"
-            aria-label="Anton Werschinin"
-          >
-            <!-- Decorative outlined ghost (duplicate of primary name) -->
-            <span
-              class="hero-name-ghost"
-              aria-hidden="true"
-              style="--reveal-delay: 600ms;"
-              >Anton</span
-            >
-
-            <!-- Primary: Anton (per-letter stagger) -->
-            <span
-              class="hero-name hero-name--primary"
-              aria-hidden="true"
-            >
-              {
-                antonLetters.map((ch, i) => (
-                  <span
-                    class="hero-letter"
-                    style={{
-                      "--i": i,
-                      "--reveal-delay": `${180 + i * 45}ms`,
-                    }}
-                  >
-                    {ch}
-                  </span>
-                ))
-              }
-            </span>
-
-            <!-- Secondary: Werschinin, italic, diagonal flow -->
-            <span
-              class="hero-name hero-name--secondary"
-              aria-hidden="true"
-            >
-              <span class="hero-name-group hero-name-group--wer">
-                {
-                  werLetters.map((ch, i) => (
-                    <span
-                      class="hero-letter hero-letter--sub hero-letter--italic"
-                      style={{
-                        "--i": i,
-                        "--reveal-delay": `${520 + i * 40}ms`,
-                      }}
-                    >
-                      {ch}
-                    </span>
-                  ))
-                }
-              </span><span class="hero-name-group hero-name-group--schinin">
-                {
-                  schininLetters.map((ch, i) => (
-                    <span
-                      class="hero-letter hero-letter--sub hero-letter--italic"
-                      style={{
-                        "--i": i,
-                        "--reveal-delay": `${680 + i * 35}ms`,
-                      }}
-                    >
-                      {ch}
-                    </span>
-                  ))
-                }
-              </span>
-            </span>
-          </h1>
-
-          <!-- Rule under secondary name -->
-          <span
-            class="hero-name-rule"
-            style="--reveal-delay: 900ms;"
-            aria-hidden="true"
-          ></span>
-        </div>
-
-        <!-- Hero foot: tagline + index -->
-        <div class="hero-foot">
-          <p
-            class="hero-tagline-block hero-reveal"
-            style="--reveal-delay: 1000ms;"
-          >
-            <span class="hero-tagline-text">
-              Engineering precision, design intention,<br />
-              and products that still make sense.
-            </span>
-          </p>
-
-          <nav
-            class="hero-index hero-reveal"
-            aria-label="Hero shortcuts"
-            style="--reveal-delay: 1050ms;"
-          >
-            <span class="hero-index-label">Index</span>
-            <ul class="hero-index-list">
-              {
-                indexLinks.map((link, i) => (
-                  <li>
-                    <a
-                      class="hero-index-link"
-                      href={link.href}
-                      rel={link.external ? "noopener noreferrer" : undefined}
-                      target={link.external ? "_blank" : undefined}
-                    >
-                      <span class="hero-index-number">{`0${i + 1}`}</span>
-                      <span class="hero-index-name">{link.label}</span>
-                      <span
-                        class="hero-index-arrow"
-                        aria-hidden="true"
-                      >
-                        <svg
-                          width="11"
-                          height="11"
-                          viewBox="0 0 11 11"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          aria-hidden="true"
-                        >
-                          <path
-                            d="M1.5 9.5L9.5 1.5M9.5 1.5H4M9.5 1.5V7"
-                            stroke="currentColor"
-                            stroke-width="1.25"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                      </span>
-                    </a>
-                  </li>
-                ))
-              }
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </section>
-
-    <!-- ─── CORE SERVICES ────────────────────────────────────── -->
-    <section
-      class="section"
-      id="services"
-    >
-      <div
-        class="section__inner"
-        data-reveal-stagger
+    <div class="max-w-[36rem]">
+      <p
+        class="font-satoshi-medium m-0 text-[0.6875rem] tracking-[0.22em] text-[oklch(58%_0_0)] uppercase"
       >
-        <!-- Section head -->
-        <header
-          class="section-head"
-          data-reveal-item
-          style={{ "--reveal-index": 0 }}
-        >
-          <span class="section-head__label">What I do</span>
-          <span class="section-head__meta">Core Services</span>
-        </header>
+        Get in touch
+      </p>
 
-        <!-- Section title -->
-        <h2
-          class="section-title"
-          data-reveal-item
-          style={{ "--reveal-index": 1 }}
-        >
-          A focused practice across <em>design</em> and <em>engineering</em>.
-        </h2>
+      <h1
+        class="font-instrument-serif m-0 mt-5 text-[clamp(2.75rem,8vw,4.25rem)] leading-[1.05] font-normal tracking-[-0.02em] text-white"
+      >
+        Work with me
+      </h1>
 
-        <!-- Services list -->
-        <div
-          class="mt-12 lg:mt-16"
-          role="list"
+      <p
+        class="tone-muted font-satoshi-light m-0 mt-6 max-w-lg text-base leading-relaxed md:text-lg"
+      >
+        Have a project in mind? I take on a select number of clients each year
+        to ensure focused, high-quality collaboration.
+      </p>
+
+      <div class="mt-12 md:mt-16">
+        <a
+          class="font-instrument-serif inline-flex max-w-full items-baseline gap-2 border-b border-white pb-1 text-[clamp(1.75rem,5vw,2.75rem)] leading-none tracking-[-0.02em] text-white no-underline transition-opacity hover:opacity-85"
+          href="mailto:hello@qnt.one"
         >
-          {
-            services.map((service, i) => (
-              <article
-                class="service-row"
-                data-reveal-item
-                role="listitem"
-                style={{ "--reveal-index": i + 2 }}
-              >
-                <span
-                  class="service-row__num"
-                  aria-hidden="true"
-                >
-                  {service.number}
-                </span>
-                <h3 class="service-row__title">{service.title}</h3>
-                <p class="service-row__body">{service.description}</p>
-              </article>
-            ))
-          }
+          <span class="min-w-0 break-all">hello@qnt.one</span>
           <span
-            class="rule-hair"
+            class="inline-flex shrink-0 translate-y-[0.08em] self-center"
             aria-hidden="true"
-          ></span>
-        </div>
+          >
+            <svg
+              class="size-[0.55em] md:size-[0.5em]"
+              fill="none"
+              height="24"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 18L18 6M18 6H9M18 6V15"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.25"
+              ></path>
+            </svg>
+          </span>
+        </a>
       </div>
-    </section>
-
-    <!-- ─── FOOTER ─────────────────────────────────────────── -->
-    <Footer />
+    </div>
   </main>
 </Layout>

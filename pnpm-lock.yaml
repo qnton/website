@@ -20,12 +20,6 @@ importers:
       astro-mail-obfuscation:
         specifier: ^2.3.4
         version: 2.3.4(astro@5.12.8(@types/node@24.12.2)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.37.0)(typescript@5.9.2))
-      clsx:
-        specifier: ^2.1.1
-        version: 2.1.1
-      tailwind-merge:
-        specifier: ^3.3.1
-        version: 3.3.1
       tailwindcss:
         specifier: ^4.1.11
         version: 4.1.11
@@ -1696,9 +1690,6 @@ packages:
 
   suf-log@2.5.3:
     resolution: {integrity: sha512-KvC8OPjzdNOe+xQ4XWJV2whQA0aM1kGVczMQ8+dStAO6KfEB140JEVQ9dE76ONZ0/Ylf67ni4tILPJB41U0eow==}
-
-  tailwind-merge@3.3.1:
-    resolution: {integrity: sha512-gBXpgUm/3rp1lMZZrM/w7D8GKqshif0zAymAhbCyIt8KMe+0v9DQ7cdYLR4FHH/cKpdTXb+A/tKKU3eolfsI+g==}
 
   tailwindcss-animated@2.0.0:
     resolution: {integrity: sha512-anNNGpxNgjydD8p1lcJjxxH+XbjW6KR8Xs29owTrbcf3tOJ6IRblpyFob43HBkfxFJJTAfFQqugoEG2b1EsR0A==}
@@ -3846,8 +3837,6 @@ snapshots:
   suf-log@2.5.3:
     dependencies:
       s.color: 0.0.15
-
-  tailwind-merge@3.3.1: {}
 
   tailwindcss-animated@2.0.0(tailwindcss@4.1.11):
     dependencies:
