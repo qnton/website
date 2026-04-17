@@ -25,19 +25,29 @@ const origin = new URL(siteConfig).origin;
 const path =
   Astro.url.pathname.length > 1 ? Astro.url.pathname.replace(/\/$/, "") : "";
 const canonicalUrl = new URL(path || "/", `${origin}/`).href;
+const ogImageUrl = new URL("/og.png", `${origin}/`).href;
 
-const structuredDescription = "Contact information for qnt.one.";
+const personId = `${origin}/#person`;
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "Person",
+      "@id": personId,
+      name: "Anton Werschinin",
+      alternateName: ["qnton", "qnt.one"],
+      url: `${origin}/`,
+      email: "hello@qnt.one",
+    },
+    {
       "@type": "WebSite",
       "@id": `${origin}/#website`,
       url: origin,
       name: "qnt.one",
-      description: structuredDescription,
+      description,
       inLanguage: "en",
+      publisher: { "@id": personId },
     },
   ],
 };
@@ -90,6 +100,39 @@ const jsonLd = {
       content={canonicalUrl}
       property="og:url"
     />
+    <meta
+      content="qnt.one"
+      property="og:site_name"
+    />
+    <meta
+      content="en_US"
+      property="og:locale"
+    />
+    <meta
+      content={ogImageUrl}
+      property="og:image"
+    />
+    <meta
+      content={title}
+      property="og:image:alt"
+    />
+
+    <meta
+      content="summary_large_image"
+      name="twitter:card"
+    />
+    <meta
+      content={title}
+      name="twitter:title"
+    />
+    <meta
+      content={description}
+      name="twitter:description"
+    />
+    <meta
+      content={ogImageUrl}
+      name="twitter:image"
+    />
 
     {
       !noStructuredData && (
@@ -108,5 +151,5 @@ const jsonLd = {
     >
       <slot />
     </div>
-  </body></html
->
+  </body>
+</html>
