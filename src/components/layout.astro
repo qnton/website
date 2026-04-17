@@ -7,18 +7,14 @@ const pageFade = fade({ duration: "0.55s" });
 interface Props {
   title: string;
   description: string;
-  /** Absolute URL for Open Graph / Twitter image */
-  image?: string;
   ogType?: string;
   robots?: string;
-  /** Skip JSON-LD (e.g. 404) */
   noStructuredData?: boolean;
 }
 
 const {
   title,
   description,
-  image: imageProp,
   ogType = "website",
   robots,
   noStructuredData = false,
@@ -29,11 +25,6 @@ const origin = new URL(siteConfig).origin;
 const path =
   Astro.url.pathname.length > 1 ? Astro.url.pathname.replace(/\/$/, "") : "";
 const canonicalUrl = new URL(path || "/", `${origin}/`).href;
-const defaultOgImage = `${origin}/og.png`;
-const ogImage = imageProp ?? defaultOgImage;
-const ogImageSecure = ogImage.startsWith("http")
-  ? ogImage
-  : new URL(ogImage.replace(/^\//, ""), `${origin}/`).href;
 
 const structuredDescription = "Contact information for qnt.one.";
 
@@ -99,47 +90,6 @@ const jsonLd = {
       content={canonicalUrl}
       property="og:url"
     />
-    <meta
-      content="qnt.one"
-      property="og:site_name"
-    />
-    <meta
-      content={ogImageSecure}
-      property="og:image"
-    />
-    <meta
-      content="image/png"
-      property="og:image:type"
-    />
-    <meta
-      content="1200"
-      property="og:image:width"
-    />
-    <meta
-      content="630"
-      property="og:image:height"
-    />
-    <meta
-      content="en_US"
-      property="og:locale"
-    />
-
-    <meta
-      content="summary_large_image"
-      name="twitter:card"
-    />
-    <meta
-      content={title}
-      name="twitter:title"
-    />
-    <meta
-      content={description}
-      name="twitter:description"
-    />
-    <meta
-      content={ogImageSecure}
-      name="twitter:image"
-    />
 
     {
       !noStructuredData && (
@@ -152,11 +102,6 @@ const jsonLd = {
     <ClientRouter />
   </head>
   <body>
-    <a
-      class="skip-link"
-      href="#main-content"
-      >Skip to main content</a
-    >
     <div
       transition:animate={pageFade}
       transition:name="page"
