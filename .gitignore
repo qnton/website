@@ -21,3 +21,9 @@ pnpm-debug.log*
 
 # Cursor IDE (local / ephemeral)
 .cursor/debug*.log
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example

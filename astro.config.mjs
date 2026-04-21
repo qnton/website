@@ -3,12 +3,16 @@ import mailObfuscation from "astro-mail-obfuscation";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 
+import cloudflare from "@astrojs/cloudflare";
+
 export default defineConfig({
   site: "https://qnt.one/",
+
   prefetch: {
     defaultStrategy: "hover",
     prefetchAll: false,
   },
+
   integrations: [
     sitemap(),
     mailObfuscation({
@@ -16,11 +20,15 @@ export default defineConfig({
       allowedTags: ["address", "span"],
     }),
   ],
+
   output: "static",
   compressHTML: true,
   trailingSlash: "never",
   server: { port: 3000 },
+
   vite: {
     plugins: [tailwindcss()]
-  }
+  },
+
+  adapter: cloudflare()
 });
