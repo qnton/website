@@ -10,7 +10,8 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,md,js,jsx,json,mdx,astro,css}\"",
     "format": "prettier --write \"**/*.{ts,tsx,md,js,jsx,json,mdx,astro,css}\"",
     "preview": "astro preview",
-    "start": "astro build && astro preview"
+    "start": "astro build && astro preview",
+    "csp:hash": "node scripts/print-jsonld-csp-hash.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
