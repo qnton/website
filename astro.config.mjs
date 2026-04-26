@@ -17,6 +17,9 @@ export default defineConfig({
     }),
   ],
   output: "static",
+  build: {
+    inlineStylesheets: "always",
+  },
   compressHTML: true,
   trailingSlash: "never",
   server: { port: 3000 },
