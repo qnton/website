@@ -31,38 +31,6 @@ const ogImageUrl = new URL("/og.png", `${origin}/`).href;
 const OG_IMAGE_WIDTH = 1200;
 const OG_IMAGE_HEIGHT = 630;
 
-const personId = `${origin}/#person`;
-
-const sameAs = [
-  "https://github.com/qnton",
-  "https://www.linkedin.com/in/qnton",
-];
-
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": personId,
-      name: "Anton Werschinin",
-      alternateName: ["qnton", "qnt.one"],
-      url: `${origin}/`,
-      image: ogImageUrl,
-      email: "hello@qnt.one",
-      sameAs,
-    },
-    {
-      "@type": "WebSite",
-      "@id": `${origin}/#website`,
-      url: origin,
-      name: "qnt.one",
-      description,
-      inLanguage: "en",
-      publisher: { "@id": personId },
-    },
-  ],
-};
-
 const criticalFonts = [
   { href: instrumentSerifLatin },
   { href: satoshiLight },
@@ -182,7 +150,7 @@ const criticalFonts = [
     {
       !noStructuredData && (
         <script
-          set:html={JSON.stringify(jsonLd)}
+          src="/schema.json"
           type="application/ld+json"
         />
       )
