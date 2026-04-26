@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 
 import instrumentSerifLatin from "@/styles/fonts/instrument-serif-400-normal-latin.woff2?url";
 import satoshiLight from "@/styles/fonts/Satoshi-Light.woff2?url";
+import satoshiRegular from "@/styles/fonts/Satoshi-Regular.woff2?url";
 import satoshiMedium from "@/styles/fonts/Satoshi-Medium.woff2?url";
 
 interface Props {
@@ -31,40 +32,9 @@ const ogImageUrl = new URL("/og.png", `${origin}/`).href;
 const OG_IMAGE_WIDTH = 1200;
 const OG_IMAGE_HEIGHT = 630;
 
-const personId = `${origin}/#person`;
-
-const sameAs = [
-  "https://github.com/qnton",
-  "https://www.linkedin.com/in/qnton",
-];
-
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": personId,
-      name: "Anton Werschinin",
-      alternateName: ["qnton", "qnt.one"],
-      url: `${origin}/`,
-      image: ogImageUrl,
-      email: "hello@qnt.one",
-      sameAs,
-    },
-    {
-      "@type": "WebSite",
-      "@id": `${origin}/#website`,
-      url: origin,
-      name: "qnt.one",
-      description,
-      inLanguage: "en",
-      publisher: { "@id": personId },
-    },
-  ],
-};
-
 const criticalFonts = [
   { href: instrumentSerifLatin },
+  { href: satoshiRegular },
   { href: satoshiLight },
   { href: satoshiMedium },
 ];
@@ -182,7 +152,7 @@ const criticalFonts = [
     {
       !noStructuredData && (
         <script
-          set:html={JSON.stringify(jsonLd)}
+          src="/schema.json"
           type="application/ld+json"
         />
       )

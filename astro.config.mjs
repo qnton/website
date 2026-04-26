@@ -17,6 +17,10 @@ export default defineConfig({
     }),
   ],
   output: "static",
+  build: {
+    // External `/_astro/*.css` only — `style-src 'self'` in public/_headers disallows inline `<style>`
+    inlineStylesheets: "never",
+  },
   compressHTML: true,
   trailingSlash: "never",
   server: { port: 3000 },

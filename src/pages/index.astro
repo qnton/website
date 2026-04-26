@@ -1,9 +1,10 @@
 ---
+import { homeDescription } from "@/data/site";
 import Layout from "@/components/layout.astro";
 ---
 
 <Layout
-  description="Anton Werschinin is a developer and designer behind qnt.one. For focused collaboration, get in touch — I also go by qnton online."
+  description={homeDescription}
   title="Anton Werschinin — qnt.one"
 >
   <main
@@ -33,6 +34,7 @@ import Layout from "@/components/layout.astro";
       <div class="mt-12 md:mt-16">
         <a
           class="font-instrument-serif inline-flex max-w-full items-baseline gap-2 border-b border-white pb-1 text-[clamp(1.75rem,5vw,2.75rem)] leading-none tracking-[-0.02em] text-white no-underline transition-colors duration-150 ease-out hover:border-white/85 hover:text-white/85"
+          data-obfuscation="0"
           href="mailto:hello@qnt.one"
         >
           <span class="min-w-0 break-all">hello@qnt.one</span>

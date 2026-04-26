@@ -86,25 +86,6 @@ body::after {
   mix-blend-mode: overlay;
 }
 
-.skip-link {
-  @apply font-satoshi-medium text-sm;
-  position: absolute;
-  left: 1rem;
-  top: 1rem;
-  z-index: 100;
-  padding: 0.5rem 1rem;
-  border-radius: 0.125rem;
-  border: 1px solid var(--color-border-strong);
-  background-color: var(--color-surface-elevated);
-  color: var(--color-text-primary);
-  transform: translateY(-200%);
-  transition: transform 0.2s ease;
-}
-
-.skip-link:focus-visible {
-  transform: translateY(0);
-}
-
 a:focus-visible,
 button:focus-visible,
 [href]:focus-visible,
