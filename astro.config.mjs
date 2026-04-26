@@ -18,7 +18,8 @@ export default defineConfig({
   ],
   output: "static",
   build: {
-    inlineStylesheets: "always",
+    // External `/_astro/*.css` only — `style-src 'self'` in public/_headers disallows inline `<style>`
+    inlineStylesheets: "never",
   },
   compressHTML: true,
   trailingSlash: "never",
