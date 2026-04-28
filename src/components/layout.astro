@@ -1,10 +1,11 @@
 ---
 import "@/styles/globals.css";
 
+import { personWebsiteJsonLd } from "@/data/jsonLd";
+
 import instrumentSerifLatin from "@/styles/fonts/instrument-serif-400-normal-latin.woff2?url";
 import satoshiLight from "@/styles/fonts/Satoshi-Light.woff2?url";
 import satoshiRegular from "@/styles/fonts/Satoshi-Regular.woff2?url";
-import satoshiMedium from "@/styles/fonts/Satoshi-Medium.woff2?url";
 
 interface Props {
   title: string;
@@ -36,8 +37,11 @@ const criticalFonts = [
   { href: instrumentSerifLatin },
   { href: satoshiRegular },
   { href: satoshiLight },
-  { href: satoshiMedium },
 ];
+
+const structuredDataJson = JSON.stringify(
+  personWebsiteJsonLd(origin, description),
+);
 ---
 
 <html lang="en">
@@ -152,8 +156,8 @@ const criticalFonts = [
     {
       !noStructuredData && (
         <script
-          src="/schema.json"
           type="application/ld+json"
+          set:html={structuredDataJson}
         />
       )
     }

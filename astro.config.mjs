@@ -5,10 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   site: "https://qnt.one/",
-  prefetch: {
-    defaultStrategy: "hover",
-    prefetchAll: false,
-  },
+  prefetch: false,
   integrations: [
     sitemap(),
     mailObfuscation({
