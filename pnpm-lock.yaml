@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  astro-mail-obfuscation@2.3.4:
+    hash: 25fe8a84ea76ea1be7dac798e6f7d5776228b7ac3d8c84d9eac1babc25fae013
+    path: patches/astro-mail-obfuscation@2.3.4.patch
+
 importers:
 
   .:
@@ -19,7 +24,7 @@ importers:
         version: 5.12.8(@types/node@24.12.2)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.37.0)(typescript@5.9.2)
       astro-mail-obfuscation:
         specifier: ^2.3.4
-        version: 2.3.4(astro@5.12.8(@types/node@24.12.2)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.37.0)(typescript@5.9.2))
+        version: 2.3.4(patch_hash=25fe8a84ea76ea1be7dac798e6f7d5776228b7ac3d8c84d9eac1babc25fae013)(astro@5.12.8(@types/node@24.12.2)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.37.0)(typescript@5.9.2))
       tailwindcss:
         specifier: ^4.1.11
         version: 4.1.11
@@ -2509,7 +2514,7 @@ snapshots:
 
   array-iterate@2.0.1: {}
 
-  astro-mail-obfuscation@2.3.4(astro@5.12.8(@types/node@24.12.2)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.37.0)(typescript@5.9.2)):
+  astro-mail-obfuscation@2.3.4(patch_hash=25fe8a84ea76ea1be7dac798e6f7d5776228b7ac3d8c84d9eac1babc25fae013)(astro@5.12.8(@types/node@24.12.2)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.37.0)(typescript@5.9.2)):
     dependencies:
       astro: 5.12.8(@types/node@24.12.2)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.37.0)(typescript@5.9.2)
       cheerio: 1.0.0
