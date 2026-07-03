@@ -49,43 +49,6 @@ body {
   min-height: 100svh;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background:
-    radial-gradient(
-      ellipse 90% 60% at 92% 8%,
-      oklch(18% 0 0 / 0.42) 0%,
-      transparent 62%
-    ),
-    radial-gradient(
-      ellipse 80% 55% at 2% 92%,
-      oklch(14% 0 0 / 0.28) 0%,
-      transparent 58%
-    ),
-    radial-gradient(
-      ellipse 100% 50% at 50% 50%,
-      transparent 0%,
-      oklch(3% 0 0 / 0.35) 100%
-    );
-}
-
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 220px 220px;
-  mix-blend-mode: overlay;
-}
-
 a:focus-visible,
 button:focus-visible,
 [href]:focus-visible,
@@ -115,11 +78,6 @@ summary:focus-visible {
     background: white !important;
     color: #171717 !important;
     font-family: "Satoshi-Regular", "Georgia", serif;
-  }
-
-  body::before,
-  body::after {
-    display: none !important;
   }
 }
 
