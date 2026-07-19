@@ -22,3 +22,6 @@ pnpm-debug.log*
 # Cursor IDE (local / ephemeral)
 .cursor/debug*.log
 .pnpm-store
+
+# local PostgreSQL data
+docker/postgres-data/

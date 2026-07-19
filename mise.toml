@@ -1,2 +1,31 @@
 [tools]
 node = "lts"
+pnpm = "latest"
+
+[tasks.install]
+description = "Install dependencies"
+run = "pnpm install"
+
+[tasks.dev]
+description = "Start the development server"
+run = "pnpm dev"
+
+[tasks.build]
+description = "Build the production site"
+run = "pnpm build"
+
+[tasks.preview]
+description = "Preview the production build"
+run = "pnpm preview"
+
+[tasks.format]
+description = "Format project files"
+run = "pnpm format"
+
+[tasks.check]
+description = "Check formatting and build the site"
+depends = ["format-check", "build"]
+
+[tasks.format-check]
+description = "Check project formatting"
+run = "pnpm format:check"
