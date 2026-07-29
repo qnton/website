@@ -42,11 +42,26 @@
 }
 
 body {
-  @apply font-satoshi-regular selection:bg-white/10;
+  @apply font-satoshi-regular;
   background-color: var(--color-surface);
   color: var(--color-text-muted);
   position: relative;
   min-height: 100svh;
+}
+
+/* Default selection treatment, per design.md --color-selection. */
+::selection {
+  background-color: oklch(78% 0 0 / 20%);
+}
+
+/*
+ * Once the dither field is live it renders the selection itself, as forced dot
+ * density behind the text, so the flat highlight gets out of the way. `::selection`
+ * only honours background-color in browsers, which is why this cannot just be a
+ * patterned background here. Without JS the rule above stands.
+ */
+html[data-dither-selection] ::selection {
+  background-color: transparent;
 }
 
 a:focus-visible,

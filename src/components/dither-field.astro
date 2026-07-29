@@ -24,9 +24,9 @@
    * Procedural ordered-dither field (see design.md §8 "Procedural dither field").
    *
    * A scalar wave field is sampled on a fixed grid, thinned toward the top/left by
-   * a corner falloff, and rendered through a Bayer 4x4 threshold. The threshold
-   * drives dot *density*, the field value drives dot *brightness and size* — that
-   * combination is what produces the halftone crosshatch look.
+   * a corner falloff, and rendered through a high-frequency noise threshold. The
+   * threshold drives dot *density*, the field value drives each mark's *brightness
+   * and shape* — that combination is what produces the halftone crosshatch look.
    */
 
   const CELL = 6; // grid pitch in CSS px
@@ -78,9 +78,42 @@
   const BLOB_SCALE = 2.1;
 
   /**
+   * Text selection is rendered as the field itself: the native highlight is turned
+   * transparent and the field's density is raised inside the selection rectangles
+   * instead. `::selection` only honours `background-color` in browsers, so a
+   * patterned highlight is not reachable from CSS — but the canvas already sits
+   * behind the text, so filling it there works.
+   *
+   * The selection raises the falloff rather than forcing a fixed value, so the wave
+   * field still runs through it and the region breaks into the same blobs and the
+   * same mix of marks as the corner. Forcing a value instead produced a flat slab of
+   * identical brightest blocks. It has to override the corner falloff, or a
+   * selection over the heading would land where the field carries no dots at all.
+   */
+  const SELECTION_REACH = 0.7;
+  /**
+   * Line boxes are rectangles, and a rectangle reads as a bar no matter how its
+   * interior is dithered. So the coverage is blurred before use: corners round off
+   * and neighbouring lines merge into one mass instead of stacking as slabs. The
+   * radius is in cells and has to exceed the gap between lines for them to join.
+   */
+  const SELECTION_BLUR_CELLS = 3;
+  const SELECTION_BLUR_PASSES = 2; // two box passes approximate a Gaussian
+  /**
+   * Remap window for the blurred coverage, plus how far the wave field is allowed to
+   * displace the contour. The wobble is what keeps the outline irregular rather than
+   * a tidy rounded rectangle, and it comes free from the wave already computed.
+   */
+  const SELECTION_EDGE_LOW = 0.3;
+  const SELECTION_EDGE_HIGH = 0.72;
+  const SELECTION_WOBBLE = 0.34;
+  /** Guard against pathological selections; well above any real line count here. */
+  const SELECTION_MAX_RECTS = 96;
+
+  /**
    * Entrance sweep. Rather than fading opacity, the reveal grows the dot density
    * outward from the anchored corner: the wavefront advances across the falloff
-   * and the Bayer threshold frays its leading edge, so the field assembles itself
+   * and the dither threshold frays its leading edge, so the field assembles itself
    * out of the surface instead of appearing on top of it.
    */
   const INTRO_MS = 1300;
@@ -187,6 +220,11 @@
      * testing every cell against every trail sample.
      */
     let influence = new Float32Array(0);
+    /** Per-cell selection coverage 0..1, rebuilt whenever the selection changes. */
+    let selectionMask = new Float32Array(0);
+    /** Scratch for the separable blur; avoids allocating on every selection change. */
+    let selectionScratch = new Float32Array(0);
+    let selectionActive = false;
 
     let rafId = 0;
     let lastFrame = 0;
@@ -222,6 +260,93 @@
         () => new Float32Array(capacity),
       );
       influence = new Float32Array(cols * rows);
+      selectionMask = new Float32Array(cols * rows);
+      selectionScratch = new Float32Array(cols * rows);
+      readSelection();
+    }
+
+    /**
+     * Marks the cells covered by the current text selection. One line box per rect,
+     * so a multi-line selection produces one band per line, matching what the native
+     * highlight would have drawn.
+     */
+    function readSelection(): void {
+      if (selectionActive) selectionMask.fill(0);
+      selectionActive = false;
+      if (selectionMask.length === 0) return;
+
+      const selection = document.getSelection();
+      if (!selection || selection.isCollapsed) return;
+
+      let marked = 0;
+      for (let r = 0; r < selection.rangeCount; r++) {
+        for (const box of selection.getRangeAt(r).getClientRects()) {
+          if (box.width <= 0 || box.height <= 0) continue;
+          if (++marked > SELECTION_MAX_RECTS) break;
+
+          const left = box.left - rect.left;
+          const top = box.top - rect.top;
+          const colMin = Math.max(0, Math.floor(left / CELL));
+          const colMax = Math.min(
+            cols - 1,
+            Math.ceil((left + box.width) / CELL),
+          );
+          const rowMin = Math.max(0, Math.floor(top / CELL));
+          const rowMax = Math.min(
+            rows - 1,
+            Math.ceil((top + box.height) / CELL),
+          );
+
+          for (let row = rowMin; row <= rowMax; row++) {
+            const rowOffset = row * cols;
+            for (let col = colMin; col <= colMax; col++) {
+              selectionMask[rowOffset + col] = 1;
+            }
+          }
+          selectionActive = true;
+        }
+      }
+
+      // Blur the hard union of line boxes into one smooth field. The draw pass then
+      // re-thresholds it, which is what turns it from a rectangle into a blob.
+      if (selectionActive) blurSelection();
+    }
+
+    /** Separable box blur over the mask, via a running sum so it stays cheap. */
+    function blurSelection(): void {
+      const radius = SELECTION_BLUR_CELLS;
+      const span = radius * 2 + 1;
+
+      for (let pass = 0; pass < SELECTION_BLUR_PASSES; pass++) {
+        for (let row = 0; row < rows; row++) {
+          const offset = row * cols;
+          let sum = 0;
+          for (let col = 0; col <= radius && col < cols; col++) {
+            sum += selectionMask[offset + col]!;
+          }
+          for (let col = 0; col < cols; col++) {
+            selectionScratch[offset + col] = sum / span;
+            const add = col + radius + 1;
+            const drop = col - radius;
+            if (add < cols) sum += selectionMask[offset + add]!;
+            if (drop >= 0) sum -= selectionMask[offset + drop]!;
+          }
+        }
+
+        for (let col = 0; col < cols; col++) {
+          let sum = 0;
+          for (let row = 0; row <= radius && row < rows; row++) {
+            sum += selectionScratch[row * cols + col]!;
+          }
+          for (let row = 0; row < rows; row++) {
+            selectionMask[row * cols + col] = sum / span;
+            const add = row + radius + 1;
+            const drop = row - radius;
+            if (add < rows) sum += selectionScratch[add * cols + col]!;
+            if (drop >= 0) sum -= selectionScratch[drop * cols + col]!;
+          }
+        }
+      }
     }
 
     /**
@@ -326,20 +451,14 @@
           const x = col * CELL;
           const nx = x / width;
 
+          const index = row * cols + col;
+          const coverage = selectionActive ? selectionMask[index]! : 0;
+
           // Density falls off with pixel distance from the bottom-right corner, all
           // the way to zero, so everything beyond the reach stays bare surface.
           const distX = (width - x) / CORNER_STRETCH;
           const reach = 1 - Math.sqrt(distX * distX + distYSq) / reachRadius;
-          if (reach <= 0) continue;
-
-          let falloff = Math.pow(reach, FOCUS);
-          if (sweeping) {
-            // Cells the front has not reached yet stay empty; the band just behind
-            // it ramps in, and the Bayer threshold frays that ramp into an edge.
-            const edge = (reach - front) / INTRO_EDGE;
-            if (edge <= 0) continue;
-            falloff *= edge < 1 ? edge : 1;
-          }
+          if (reach <= 0 && coverage <= 0) continue;
 
           const wave =
             0.5 +
@@ -351,12 +470,37 @@
                 (nx * 2.1 - ny * 1.7) * 9.5 * BLOB_SCALE - seconds * 0.5,
               );
 
+          // Re-threshold the blurred coverage, letting the wave push the contour
+          // around. That is what turns the blurred line boxes into a drifting blob
+          // rather than a rounded rectangle.
+          let selected = 0;
+          if (coverage > 0) {
+            const shifted = coverage + (wave - 0.5) * SELECTION_WOBBLE;
+            const t =
+              (shifted - SELECTION_EDGE_LOW) /
+              (SELECTION_EDGE_HIGH - SELECTION_EDGE_LOW);
+            selected = t <= 0 ? 0 : t >= 1 ? 1 : t * t * (3 - 2 * t);
+          }
+
+          let falloff = reach > 0 ? Math.pow(reach, FOCUS) : 0;
+          if (sweeping) {
+            // Cells the front has not reached yet stay empty; the band just behind
+            // it ramps in, and the dither threshold frays that ramp into an edge.
+            const edge = (reach - front) / INTRO_EDGE;
+            falloff *= edge <= 0 ? 0 : edge < 1 ? edge : 1;
+          }
+
+          // Lift, not override: whichever is denser wins, and the wave still runs
+          // through it so the selection breaks into blobs like the rest of the field.
+          const lifted = selected * SELECTION_REACH;
+          if (lifted > falloff) falloff = lifted;
+
           // The bias sets how solid the corner gets; the waves swing density
           // around it so the field breaks into distinct dense and sparse
           // regions instead of reading as one smooth ramp.
           let value = (FIELD_BIAS + (wave - 0.5) * CONTRAST) * falloff;
 
-          if (pointerActive) value += influence[row * cols + col]!;
+          if (pointerActive) value += influence[index]!;
 
           if (value <= 0) continue;
 
@@ -513,7 +657,19 @@
       }
     }
 
+    function onSelectionChange(): void {
+      readSelection();
+      // The animation loop picks this up on its next frame; the static branch has
+      // no loop, so it has to repaint here.
+      if (reduceMotion.matches) draw(0);
+    }
+
     resize();
+
+    // Hand the highlight over to the canvas. Until this runs the native
+    // `::selection` colour stays in place, so selection still works without JS.
+    document.documentElement.dataset.ditherSelection = "";
+    document.addEventListener("selectionchange", onSelectionChange);
 
     if (reduceMotion.matches) {
       // Static single frame: the texture is present, nothing moves.
