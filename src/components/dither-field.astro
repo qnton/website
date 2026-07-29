@@ -97,11 +97,19 @@
   /** Ease-out exponent. Near-linear keeps the front travelling at a readable pace. */
   const INTRO_EASE = 1.7;
 
-  /** Bayer 4x4 matrix, normalised to (0, 1) threshold values. */
-  const BAYER = [
-    0.0625, 0.5625, 0.1875, 0.6875, 0.8125, 0.3125, 0.9375, 0.4375, 0.25, 0.75,
-    0.125, 0.625, 1.0, 0.5, 0.875, 0.375,
-  ];
+  /**
+   * Dither threshold field: interleaved gradient noise. This replaces a Bayer 4x4
+   * matrix, whose 16 fixed sub-positions each carried a wildly different threshold
+   * (measured hit rates from 0.004 to 1.000) and stamped a visible crosshatch grid
+   * repeating every four cells. These weights spread the thresholds evenly with no
+   * repeat period at all, so the dithering reads as texture rather than as a lattice.
+   *
+   * Note this is not void-and-cluster blue noise; it is a cheap high-frequency hash
+   * that needs no lookup table. Good enough at this dot pitch.
+   */
+  const NOISE_COL = 0.06711056;
+  const NOISE_ROW = 0.00583715;
+  const NOISE_GAIN = 52.9829189;
 
   /**
    * Four brightness steps, all zero chroma, ascending. These read far darker than
@@ -117,10 +125,18 @@
   /** sRGB greys matching the tones above, for engines without oklch() on canvas. */
   const TONES_SRGB = ["#161616", "#292929", "#3d3d3d", "#525252"];
   /**
-   * Dot edge length per brightness step, in CSS px. Halves keep the dots crisp
-   * at both 1x and 2x, and the spread makes the size shift legible.
+   * One mark per brightness step, sparsest first: speck, dot, cross, block. Varying
+   * the mark's *shape* and not only its size is what gives the field its crosshatch
+   * character instead of reading as four sizes of the same square.
+   *
+   * Every size keeps `(CELL - size) / 2` a whole or half pixel so the marks land on
+   * device pixels at both 1x and 2x. A 1.5px mark would sit at offset 2.25 and get
+   * antialiased into a second, muddier tone.
    */
-  const DOT_SIZES = [1, 1.5, 2, 2.5];
+  const SQUARE_SIZES = [1, 2, 0, 3]; // index CROSS_LEVEL is unused
+  const CROSS_LEVEL = 2;
+  const CROSS_ARM = 4;
+  const CROSS_THICKNESS = 1;
   const LEVELS = TONES_OKLCH.length;
 
   function supportsOklch(ctx: CanvasRenderingContext2D): boolean {
@@ -344,8 +360,9 @@
 
           if (value <= 0) continue;
 
-          // Bayer threshold decides *whether* the dot exists.
-          if (value <= BAYER[(row & 3) * 4 + (col & 3)]!) continue;
+          // The noise threshold decides *whether* the mark exists.
+          const seed = (NOISE_COL * col + NOISE_ROW * row) % 1;
+          if (value <= (NOISE_GAIN * seed) % 1) continue;
 
           // Field value decides *how bright and large* it is.
           const level = Math.min(LEVELS - 1, Math.floor(value * LEVELS));
@@ -357,13 +374,27 @@
         }
       }
 
+      // One fillStyle per level rather than per mark: four state changes a frame.
       for (let level = 0; level < LEVELS; level++) {
         const count = counts[level]!;
         if (count === 0) continue;
         const bucket = buckets[level]!;
-        const size = DOT_SIZES[level]!;
-        const offset = (CELL - size) / 2;
         ctx!.fillStyle = tones[level]!;
+
+        if (level === CROSS_LEVEL) {
+          const inset = (CELL - CROSS_ARM) / 2;
+          const mid = (CELL - CROSS_THICKNESS) / 2;
+          for (let i = 0; i < count; i++) {
+            const x = bucket[i * 2]!;
+            const y = bucket[i * 2 + 1]!;
+            ctx!.fillRect(x + inset, y + mid, CROSS_ARM, CROSS_THICKNESS);
+            ctx!.fillRect(x + mid, y + inset, CROSS_THICKNESS, CROSS_ARM);
+          }
+          continue;
+        }
+
+        const size = SQUARE_SIZES[level]!;
+        const offset = (CELL - size) / 2;
         for (let i = 0; i < count; i++) {
           ctx!.fillRect(
             bucket[i * 2]! + offset,
