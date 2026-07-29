@@ -35,8 +35,28 @@
   const MAX_DPR = 2;
   const POINTER_RADIUS = 120; // CSS px
   const POINTER_GAIN = 0.55; // added to the field value at the cursor centre
-  const POINTER_EASE = 0.12; // per-frame lerp toward the real cursor position
+  const POINTER_EASE = 0.12; // per-frame lerp of the highlight's overall strength
   const POINTER_IDLE_MS = 1400; // cursor stillness after which the highlight fades
+  /**
+   * The head of the highlight sits on the raw cursor position, so tracking is
+   * instant. The tail is built from recent positions sampled per pointer event —
+   * including the sub-frame positions the browser coalesces — rather than once per
+   * rendered frame, so a fast sweep leaves a continuous streak instead of a chain
+   * of separate blobs.
+   */
+  const TRAIL_MS = 420; // how long a position keeps contributing to the tail
+  const TRAIL_CAPACITY = 96; // ring buffer size; covers TRAIL_MS at ~230Hz
+  /** Decay exponent along the tail. Higher means a shorter, tighter trail. */
+  const TRAIL_DECAY = 2.2;
+  /**
+   * The halo is not a circle. Its radius is bent by a two-lobe and a three-lobe
+   * harmonic that drift out of phase with each other, so the highlight reads as a
+   * living smudge rather than a stamped dot. Kept well under 1 so it never pinches
+   * the radius to nothing.
+   */
+  const WOBBLE = 0.34;
+  /** Radians per second the two lobes rotate through. */
+  const WOBBLE_SPEED = 1.15;
   const FIELD_BIAS = 0.86; // dot density at the anchored corner, before waves
   const CONTRAST = 0.78; // how hard the waves swing density around that bias
   /**
@@ -136,10 +156,21 @@
     // Cursor position in canvas-local CSS px; `strength` fades the effect in/out.
     let targetX = 0;
     let targetY = 0;
-    let cursorX = 0;
-    let cursorY = 0;
     let targetStrength = 0;
     let strength = 0;
+
+    // Ring buffer of recent cursor positions with timestamps, newest last written.
+    const trailX = new Float32Array(TRAIL_CAPACITY);
+    const trailY = new Float32Array(TRAIL_CAPACITY);
+    const trailAt = new Float64Array(TRAIL_CAPACITY);
+    let trailHead = 0;
+    let trailCount = 0;
+    /**
+     * Per-cell highlight contribution. Scattering the trail into this buffer once
+     * per frame keeps the cost proportional to the trail's own footprint instead of
+     * testing every cell against every trail sample.
+     */
+    let influence = new Float32Array(0);
 
     let rafId = 0;
     let lastFrame = 0;
@@ -174,6 +205,84 @@
         { length: LEVELS },
         () => new Float32Array(capacity),
       );
+      influence = new Float32Array(cols * rows);
+    }
+
+    /**
+     * Stamps one halo into `influence`. Takes the strongest contribution per cell
+     * rather than summing: a slow cursor piles many samples into one spot, and
+     * adding those would blow the head out into a solid blob.
+     */
+    function scatter(
+      cx: number,
+      cy: number,
+      weight: number,
+      phase: number,
+    ): void {
+      // Lobe strengths for this instant. They drift at different rates so the
+      // outline never settles into a repeating shape.
+      const lobe2Amp = WOBBLE * 0.6 * Math.sin(phase);
+      const lobe3Amp = WOBBLE * 0.4 * Math.cos(phase * 0.7);
+
+      // The bbox has to cover the widest the outline can bulge, not the base radius.
+      const maxRadius = POINTER_RADIUS * (1 + WOBBLE);
+      const colMin = Math.max(0, Math.floor((cx - maxRadius) / CELL));
+      const colMax = Math.min(cols - 1, Math.ceil((cx + maxRadius) / CELL));
+      const rowMin = Math.max(0, Math.floor((cy - maxRadius) / CELL));
+      const rowMax = Math.min(rows - 1, Math.ceil((cy + maxRadius) / CELL));
+      const maxRadiusSq = maxRadius * maxRadius;
+
+      for (let row = rowMin; row <= rowMax; row++) {
+        const dy = row * CELL - cy;
+        const rowOffset = row * cols;
+        for (let col = colMin; col <= colMax; col++) {
+          const dx = col * CELL - cx;
+          const distSq = dx * dx + dy * dy;
+          if (distSq >= maxRadiusSq) continue;
+
+          const dist = Math.sqrt(distSq);
+          let radius = POINTER_RADIUS;
+          if (dist > 0.001) {
+            // Unit direction, then sin(2θ) and cos(3θ) built from it directly —
+            // cheaper than an atan2 per cell and there are a lot of cells.
+            const ux = dx / dist;
+            const uy = dy / dist;
+            const lobe2 = 2 * ux * uy;
+            const lobe3 = ux * (4 * ux * ux - 3);
+            radius *= 1 + lobe2Amp * lobe2 + lobe3Amp * lobe3;
+          }
+          if (dist >= radius) continue;
+
+          const near = 1 - dist / radius;
+          const contribution = near * near * weight;
+          const index = rowOffset + col;
+          if (contribution > influence[index]!) influence[index] = contribution;
+        }
+      }
+    }
+
+    /** Rebuilds the highlight: full-weight head at the cursor, aged tail behind. */
+    function buildInfluence(now: number): void {
+      influence.fill(0);
+      if (strength <= 0.001) return;
+
+      const phase = now * 0.001 * WOBBLE_SPEED;
+
+      // The head is the live cursor position, never an aged sample, so it survives
+      // even when the cursor holds still and no new events arrive.
+      scatter(targetX, targetY, POINTER_GAIN * strength, phase);
+
+      for (let i = 0; i < trailCount; i++) {
+        const at = (trailHead - 1 - i + TRAIL_CAPACITY) % TRAIL_CAPACITY;
+        const age = now - trailAt[at]!;
+        if (age >= TRAIL_MS) break; // older entries are older still
+        const fade = 1 - age / TRAIL_MS;
+        const weight = Math.pow(fade, TRAIL_DECAY) * POINTER_GAIN * strength;
+        if (weight <= 0.001) continue;
+        // Roll the phase back along the tail so it writhes instead of reading as
+        // one rigid extruded tube.
+        scatter(trailX[at]!, trailY[at]!, weight, phase - (1 - fade) * 0.9);
+      }
     }
 
     function draw(seconds: number, intro = 1): void {
@@ -181,8 +290,8 @@
       ctx!.clearRect(0, 0, width, height);
       counts.fill(0);
 
+      buildInfluence(seconds * 1000);
       const pointerActive = strength > 0.001;
-      const radiusSq = POINTER_RADIUS * POINTER_RADIUS;
 
       // The `reach` value the entrance front currently sits at: starts beyond the
       // corner so the first frame is empty, and travels down to INTRO_FRONT_END.
@@ -231,15 +340,7 @@
           // regions instead of reading as one smooth ramp.
           let value = (FIELD_BIAS + (wave - 0.5) * CONTRAST) * falloff;
 
-          if (pointerActive) {
-            const px = x - cursorX;
-            const py = y - cursorY;
-            const distSq = px * px + py * py;
-            if (distSq < radiusSq) {
-              const near = 1 - Math.sqrt(distSq) / POINTER_RADIUS;
-              value += near * near * POINTER_GAIN * strength;
-            }
-          }
+          if (pointerActive) value += influence[row * cols + col]!;
 
           if (value <= 0) continue;
 
@@ -284,12 +385,14 @@
       const t = elapsed <= 0 ? 0 : Math.min(1, elapsed / INTRO_MS);
       const intro = 1 - Math.pow(1 - t, INTRO_EASE);
 
-      cursorX += (targetX - cursorX) * POINTER_EASE;
-      cursorY += (targetY - cursorY) * POINTER_EASE;
       // Hold the highlight back until the sweep lands, so an early cursor cannot
       // punch dots through the advancing front.
       strength =
         intro < 1 ? 0 : strength + (targetStrength - strength) * POINTER_EASE;
+
+      // While the highlight is out, drop the history so returning to the page
+      // cannot draw a streak from wherever the cursor last was.
+      if (strength <= 0.001) trailCount = 0;
 
       draw(now * 0.001, intro);
     }
@@ -315,10 +418,29 @@
       else stop();
     }
 
+    function pushTrail(clientX: number, clientY: number, at: number): void {
+      trailX[trailHead] = clientX - rect.left;
+      trailY[trailHead] = clientY - rect.top;
+      trailAt[trailHead] = at;
+      trailHead = (trailHead + 1) % TRAIL_CAPACITY;
+      if (trailCount < TRAIL_CAPACITY) trailCount++;
+    }
+
     function onPointerMove(event: PointerEvent): void {
       if (!finePointer.matches) return;
       targetX = event.clientX - rect.left;
       targetY = event.clientY - rect.top;
+
+      // Coalesced events carry the positions the browser merged into this one, so
+      // the trail follows the pointer's real sampling rate, not the frame rate.
+      const merged = event.getCoalescedEvents?.() ?? [];
+      if (merged.length > 1) {
+        for (const sample of merged) {
+          pushTrail(sample.clientX, sample.clientY, sample.timeStamp);
+        }
+      } else {
+        pushTrail(event.clientX, event.clientY, event.timeStamp);
+      }
       const inside =
         targetX > -POINTER_RADIUS &&
         targetY > -POINTER_RADIUS &&
