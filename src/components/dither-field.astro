@@ -1,0 +1,394 @@
+---
+
+---
+
+<canvas
+  class="dither-field"
+  aria-hidden="true"
+></canvas>
+
+<style>
+  .dither-field {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  /**
+   * Procedural ordered-dither field (see design.md §8 "Procedural dither field").
+   *
+   * A scalar wave field is sampled on a fixed grid, thinned toward the top/left by
+   * a corner falloff, and rendered through a Bayer 4x4 threshold. The threshold
+   * drives dot *density*, the field value drives dot *brightness and size* — that
+   * combination is what produces the halftone crosshatch look.
+   */
+
+  const CELL = 6; // grid pitch in CSS px
+  const FPS = 30;
+  const FRAME_MS = 1000 / FPS;
+  const MAX_DPR = 2;
+  const POINTER_RADIUS = 120; // CSS px
+  const POINTER_GAIN = 0.55; // added to the field value at the cursor centre
+  const POINTER_EASE = 0.12; // per-frame lerp toward the real cursor position
+  const POINTER_IDLE_MS = 1400; // cursor stillness after which the highlight fades
+  const FIELD_BIAS = 0.86; // dot density at the anchored corner, before waves
+  const CONTRAST = 0.78; // how hard the waves swing density around that bias
+  /**
+   * Falloff reach, as a fraction of the canvas diagonal. Measuring the distance in
+   * pixels rather than in normalised coordinates keeps the field's shape roughly
+   * circular on any aspect ratio: on a tall phone viewport it spreads across the
+   * full width instead of collapsing into a squashed vertical sliver.
+   */
+  const REACH_RADIUS = 1;
+  /** Divides the horizontal distance. Above 1 stretches the field sideways. */
+  const CORNER_STRETCH = 1.3;
+  /**
+   * Exponent on the corner falloff. The canvas spans the whole page, but a higher
+   * value pulls the texture tighter into the anchored corner and lets the rest of
+   * the page fall to bare surface with no dots at all.
+   */
+  const FOCUS = 3;
+  /** Multiplier on the wave frequencies. Higher means smaller, finer blobs. */
+  const BLOB_SCALE = 2.1;
+
+  /**
+   * Entrance sweep. Rather than fading opacity, the reveal grows the dot density
+   * outward from the anchored corner: the wavefront advances across the falloff
+   * and the Bayer threshold frays its leading edge, so the field assembles itself
+   * out of the surface instead of appearing on top of it.
+   */
+  const INTRO_MS = 1300;
+  /** Held back so the field trails the staggered text reveal in index.astro. */
+  const INTRO_DELAY_MS = 220;
+  /** Width of the soft front, in `reach` units. Wider means a longer frayed edge. */
+  const INTRO_EDGE = 0.24;
+  /**
+   * Where the front stops. Below this `reach` the falloff leaves no dots anyway, so
+   * ending here spends the whole duration on the part of the sweep that is visible
+   * instead of trailing off through empty surface.
+   */
+  const INTRO_FRONT_END = 0.28;
+  /** Ease-out exponent. Near-linear keeps the front travelling at a readable pace. */
+  const INTRO_EASE = 1.7;
+
+  /** Bayer 4x4 matrix, normalised to (0, 1) threshold values. */
+  const BAYER = [
+    0.0625, 0.5625, 0.1875, 0.6875, 0.8125, 0.3125, 0.9375, 0.4375, 0.25, 0.75,
+    0.125, 0.625, 1.0, 0.5, 0.875, 0.375,
+  ];
+
+  /**
+   * Four brightness steps, all zero chroma, ascending. These read far darker than
+   * they look in isolation: at this pitch a dot covers under a fifth of its cell,
+   * so the field's perceived lightness stays well below its brightest tone.
+   */
+  const TONES_OKLCH = [
+    "oklch(20% 0 0)",
+    "oklch(28% 0 0)",
+    "oklch(36% 0 0)",
+    "oklch(44% 0 0)",
+  ];
+  /** sRGB greys matching the tones above, for engines without oklch() on canvas. */
+  const TONES_SRGB = ["#161616", "#292929", "#3d3d3d", "#525252"];
+  /**
+   * Dot edge length per brightness step, in CSS px. Halves keep the dots crisp
+   * at both 1x and 2x, and the spread makes the size shift legible.
+   */
+  const DOT_SIZES = [1, 1.5, 2, 2.5];
+  const LEVELS = TONES_OKLCH.length;
+
+  function supportsOklch(ctx: CanvasRenderingContext2D): boolean {
+    const sentinel = "#123456";
+    const previous = ctx.fillStyle;
+    ctx.fillStyle = sentinel;
+    ctx.fillStyle = TONES_OKLCH[0]!;
+    const supported = ctx.fillStyle !== sentinel;
+    ctx.fillStyle = previous;
+    return supported;
+  }
+
+  function init(canvas: HTMLCanvasElement): void {
+    const ctx = canvas.getContext("2d", { alpha: true });
+    if (!ctx) return;
+
+    const tones = supportsOklch(ctx) ? TONES_OKLCH : TONES_SRGB;
+    const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
+    const finePointer = matchMedia("(hover: hover) and (pointer: fine)");
+
+    let width = 0;
+    let height = 0;
+    let cols = 0;
+    let rows = 0;
+    /** Per-level scratch buffers of dot coordinates, sized on resize. */
+    let buckets: Float32Array[] = [];
+    const counts = new Uint32Array(LEVELS);
+
+    /** Falloff reach in CSS px, recomputed whenever the canvas is resized. */
+    let reachRadius = 1;
+
+    let rect = canvas.getBoundingClientRect();
+    // Cursor position in canvas-local CSS px; `strength` fades the effect in/out.
+    let targetX = 0;
+    let targetY = 0;
+    let cursorX = 0;
+    let cursorY = 0;
+    let targetStrength = 0;
+    let strength = 0;
+
+    let rafId = 0;
+    let lastFrame = 0;
+    let introStart = 0;
+    let resizeTimer = 0;
+    let idleTimer = 0;
+
+    function measure(): void {
+      rect = canvas.getBoundingClientRect();
+    }
+
+    function resize(): void {
+      measure();
+      const nextWidth = Math.max(1, Math.round(rect.width));
+      const nextHeight = Math.max(1, Math.round(rect.height));
+      if (nextWidth === width && nextHeight === height) return;
+
+      width = nextWidth;
+      height = nextHeight;
+      cols = Math.ceil(width / CELL);
+      rows = Math.ceil(height / CELL);
+      reachRadius = REACH_RADIUS * Math.hypot(width / CORNER_STRETCH, height);
+
+      const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      // Worst case every cell lands in the same bucket, so each holds all cells.
+      const capacity = cols * rows * 2;
+      buckets = Array.from(
+        { length: LEVELS },
+        () => new Float32Array(capacity),
+      );
+    }
+
+    function draw(seconds: number, intro = 1): void {
+      if (width === 0 || height === 0) return;
+      ctx!.clearRect(0, 0, width, height);
+      counts.fill(0);
+
+      const pointerActive = strength > 0.001;
+      const radiusSq = POINTER_RADIUS * POINTER_RADIUS;
+
+      // The `reach` value the entrance front currently sits at: starts beyond the
+      // corner so the first frame is empty, and travels down to INTRO_FRONT_END.
+      // Once the sweep is done the gate is skipped entirely.
+      const sweeping = intro < 1;
+      const frontStart = 1 + INTRO_EDGE;
+      const front = frontStart - intro * (frontStart - INTRO_FRONT_END);
+
+      for (let row = 0; row < rows; row++) {
+        const y = row * CELL;
+        const ny = y / height;
+        const distY = height - y;
+        const distYSq = distY * distY;
+
+        for (let col = 0; col < cols; col++) {
+          const x = col * CELL;
+          const nx = x / width;
+
+          // Density falls off with pixel distance from the bottom-right corner, all
+          // the way to zero, so everything beyond the reach stays bare surface.
+          const distX = (width - x) / CORNER_STRETCH;
+          const reach = 1 - Math.sqrt(distX * distX + distYSq) / reachRadius;
+          if (reach <= 0) continue;
+
+          let falloff = Math.pow(reach, FOCUS);
+          if (sweeping) {
+            // Cells the front has not reached yet stay empty; the band just behind
+            // it ramps in, and the Bayer threshold frays that ramp into an edge.
+            const edge = (reach - front) / INTRO_EDGE;
+            if (edge <= 0) continue;
+            falloff *= edge < 1 ? edge : 1;
+          }
+
+          const wave =
+            0.5 +
+            0.26 * Math.sin(nx * 7.4 * BLOB_SCALE + seconds * 0.45) +
+            0.22 * Math.sin(ny * 5.1 * BLOB_SCALE - seconds * 0.32) +
+            0.2 * Math.sin((nx + ny) * 4.3 * BLOB_SCALE + seconds * 0.6) +
+            0.14 *
+              Math.sin(
+                (nx * 2.1 - ny * 1.7) * 9.5 * BLOB_SCALE - seconds * 0.5,
+              );
+
+          // The bias sets how solid the corner gets; the waves swing density
+          // around it so the field breaks into distinct dense and sparse
+          // regions instead of reading as one smooth ramp.
+          let value = (FIELD_BIAS + (wave - 0.5) * CONTRAST) * falloff;
+
+          if (pointerActive) {
+            const px = x - cursorX;
+            const py = y - cursorY;
+            const distSq = px * px + py * py;
+            if (distSq < radiusSq) {
+              const near = 1 - Math.sqrt(distSq) / POINTER_RADIUS;
+              value += near * near * POINTER_GAIN * strength;
+            }
+          }
+
+          if (value <= 0) continue;
+
+          // Bayer threshold decides *whether* the dot exists.
+          if (value <= BAYER[(row & 3) * 4 + (col & 3)]!) continue;
+
+          // Field value decides *how bright and large* it is.
+          const level = Math.min(LEVELS - 1, Math.floor(value * LEVELS));
+          const bucket = buckets[level]!;
+          const at = counts[level]! * 2;
+          bucket[at] = x;
+          bucket[at + 1] = y;
+          counts[level]++;
+        }
+      }
+
+      for (let level = 0; level < LEVELS; level++) {
+        const count = counts[level]!;
+        if (count === 0) continue;
+        const bucket = buckets[level]!;
+        const size = DOT_SIZES[level]!;
+        const offset = (CELL - size) / 2;
+        ctx!.fillStyle = tones[level]!;
+        for (let i = 0; i < count; i++) {
+          ctx!.fillRect(
+            bucket[i * 2]! + offset,
+            bucket[i * 2 + 1]! + offset,
+            size,
+            size,
+          );
+        }
+      }
+    }
+
+    function frame(now: number): void {
+      rafId = requestAnimationFrame(frame);
+      if (now - lastFrame < FRAME_MS - 0.5) return;
+      lastFrame = now;
+
+      if (introStart === 0) introStart = now;
+      const elapsed = now - introStart - INTRO_DELAY_MS;
+      const t = elapsed <= 0 ? 0 : Math.min(1, elapsed / INTRO_MS);
+      const intro = 1 - Math.pow(1 - t, INTRO_EASE);
+
+      cursorX += (targetX - cursorX) * POINTER_EASE;
+      cursorY += (targetY - cursorY) * POINTER_EASE;
+      // Hold the highlight back until the sweep lands, so an early cursor cannot
+      // punch dots through the advancing front.
+      strength =
+        intro < 1 ? 0 : strength + (targetStrength - strength) * POINTER_EASE;
+
+      draw(now * 0.001, intro);
+    }
+
+    let visible = true;
+    let running = false;
+
+    function start(): void {
+      if (running || reduceMotion.matches) return;
+      running = true;
+      lastFrame = 0;
+      rafId = requestAnimationFrame(frame);
+    }
+
+    function stop(): void {
+      if (!running) return;
+      running = false;
+      cancelAnimationFrame(rafId);
+    }
+
+    function sync(): void {
+      if (visible && !document.hidden) start();
+      else stop();
+    }
+
+    function onPointerMove(event: PointerEvent): void {
+      if (!finePointer.matches) return;
+      targetX = event.clientX - rect.left;
+      targetY = event.clientY - rect.top;
+      const inside =
+        targetX > -POINTER_RADIUS &&
+        targetY > -POINTER_RADIUS &&
+        targetX < width + POINTER_RADIUS &&
+        targetY < height + POINTER_RADIUS;
+      targetStrength = inside ? 1 : 0;
+
+      // A resting cursor is not attention, so let the highlight settle back out.
+      // The existing lerp handles the easing; this only retargets it.
+      clearTimeout(idleTimer);
+      idleTimer = window.setTimeout(onPointerIdle, POINTER_IDLE_MS);
+    }
+
+    function onPointerIdle(): void {
+      targetStrength = 0;
+    }
+
+    function onPointerLeave(): void {
+      clearTimeout(idleTimer);
+      targetStrength = 0;
+    }
+
+    function onResize(): void {
+      clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        resize();
+        if (reduceMotion.matches) draw(0);
+      }, 120);
+    }
+
+    function onMotionPreferenceChange(): void {
+      if (reduceMotion.matches) {
+        stop();
+        targetStrength = 0;
+        strength = 0;
+        draw(0);
+      } else {
+        sync();
+      }
+    }
+
+    resize();
+
+    if (reduceMotion.matches) {
+      // Static single frame: the texture is present, nothing moves.
+      draw(0);
+    } else {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          visible = entries.some((entry) => entry.isIntersecting);
+          sync();
+        },
+        { rootMargin: "64px" },
+      );
+      observer.observe(canvas);
+      document.addEventListener("visibilitychange", sync);
+      window.addEventListener("pointermove", onPointerMove, { passive: true });
+      document.addEventListener("pointerleave", onPointerLeave);
+      window.addEventListener("blur", onPointerLeave);
+      sync();
+    }
+
+    window.addEventListener("resize", onResize, { passive: true });
+    window.addEventListener("scroll", measure, { passive: true });
+    reduceMotion.addEventListener("change", onMotionPreferenceChange);
+  }
+
+  for (const canvas of document.querySelectorAll<HTMLCanvasElement>(
+    "canvas.dither-field",
+  )) {
+    init(canvas);
+  }
+</script>
