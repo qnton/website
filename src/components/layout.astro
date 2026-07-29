@@ -29,8 +29,19 @@ const origin = new URL(siteConfig).origin;
 const path =
   Astro.url.pathname.length > 1 ? Astro.url.pathname.replace(/\/$/, "") : "";
 const canonicalUrl = new URL(path || "/", `${origin}/`).href;
-const ogImageUrl = new URL("/og.png", `${origin}/`).href;
+/**
+ * The animated card, for the consumers that play it (Discord). Everywhere else it
+ * degrades to its first frame, which is byte-identical to `og.png` — see the "Social
+ * card" recipe in design.md.
+ */
+const ogImageUrl = new URL("/og-loop.gif", `${origin}/`).href;
+/**
+ * X strips animation from cards outright, so pointing it at the still saves 5.5x the
+ * bytes for an identical result.
+ */
+const twitterImageUrl = new URL("/og.png", `${origin}/`).href;
 
+// Both files are the same size, so one pair of dimensions covers them.
 const OG_IMAGE_WIDTH = 1200;
 const OG_IMAGE_HEIGHT = 630;
 
@@ -126,7 +137,7 @@ const structuredDataJson = JSON.stringify(
       property="og:image:height"
     />
     <meta
-      content="image/png"
+      content="image/gif"
       property="og:image:type"
     />
     <meta
@@ -151,7 +162,7 @@ const structuredDataJson = JSON.stringify(
       name="twitter:description"
     />
     <meta
-      content={ogImageUrl}
+      content={twitterImageUrl}
       name="twitter:image"
     />
 
