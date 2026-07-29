@@ -29,7 +29,23 @@
    * and shape* — that combination is what produces the halftone crosshatch look.
    */
 
-  const CELL = 6; // grid pitch in CSS px
+  import {
+    CELL,
+    FOCUS,
+    LEVELS,
+    TONES_OKLCH,
+    TONES_SRGB,
+    VALUE_FLOOR,
+    densityAt,
+    drawMark,
+    levelFor,
+    reachAt,
+    reachRadiusFor,
+    supportsOklch,
+    thresholdAt,
+    waveAt,
+  } from "@/lib/dither-core.js";
+
   const FPS = 30;
   const FRAME_MS = 1000 / FPS;
   const MAX_DPR = 2;
@@ -57,33 +73,6 @@
   const WOBBLE = 0.34;
   /** Radians per second the two lobes rotate through. */
   const WOBBLE_SPEED = 1.15;
-  const FIELD_BIAS = 0.86; // dot density at the anchored corner, before waves
-  const CONTRAST = 0.78; // how hard the waves swing density around that bias
-  /**
-   * Falloff reach, as a fraction of the canvas diagonal. Measuring the distance in
-   * pixels rather than in normalised coordinates keeps the field's shape roughly
-   * circular on any aspect ratio: on a tall phone viewport it spreads across the
-   * full width instead of collapsing into a squashed vertical sliver.
-   */
-  const REACH_RADIUS = 1;
-  /** Divides the horizontal distance. Above 1 stretches the field sideways. */
-  const CORNER_STRETCH = 1.3;
-  /**
-   * Exponent on the corner falloff. The canvas spans the whole page, but a higher
-   * value pulls the texture tighter into the anchored corner and lets the rest of
-   * the page fall to bare surface with no dots at all.
-   */
-  const FOCUS = 3;
-  /** Multiplier on the wave frequencies. Higher means smaller, finer blobs. */
-  const BLOB_SCALE = 2.1;
-  /**
-   * Below this field value a cell draws nothing at all. The falloff only reaches
-   * exactly zero in the opposite corner, so without a floor the whole far side of
-   * the page keeps passing the threshold in about one cell per hundred — a thin
-   * dusting of lone darkest specks with no visible blob to belong to. Applied after
-   * the cursor and selection contributions, so both still work out there.
-   */
-  const VALUE_FLOOR = 0.09;
 
   /**
    * Text selection is rendered as the field itself: the native highlight is turned
@@ -137,58 +126,6 @@
   const INTRO_FRONT_END = 0.28;
   /** Ease-out exponent. Near-linear keeps the front travelling at a readable pace. */
   const INTRO_EASE = 1.7;
-
-  /**
-   * Dither threshold field: interleaved gradient noise. This replaces a Bayer 4x4
-   * matrix, whose 16 fixed sub-positions each carried a wildly different threshold
-   * (measured hit rates from 0.004 to 1.000) and stamped a visible crosshatch grid
-   * repeating every four cells. These weights spread the thresholds evenly with no
-   * repeat period at all, so the dithering reads as texture rather than as a lattice.
-   *
-   * Note this is not void-and-cluster blue noise; it is a cheap high-frequency hash
-   * that needs no lookup table. Good enough at this dot pitch.
-   */
-  const NOISE_COL = 0.06711056;
-  const NOISE_ROW = 0.00583715;
-  const NOISE_GAIN = 52.9829189;
-
-  /**
-   * Four brightness steps, all zero chroma, ascending. These read far darker than
-   * they look in isolation: at this pitch a dot covers under a fifth of its cell,
-   * so the field's perceived lightness stays well below its brightest tone.
-   */
-  const TONES_OKLCH = [
-    "oklch(20% 0 0)",
-    "oklch(28% 0 0)",
-    "oklch(36% 0 0)",
-    "oklch(44% 0 0)",
-  ];
-  /** sRGB greys matching the tones above, for engines without oklch() on canvas. */
-  const TONES_SRGB = ["#161616", "#292929", "#3d3d3d", "#525252"];
-  /**
-   * One mark per brightness step, sparsest first: speck, dot, cross, block. Varying
-   * the mark's *shape* and not only its size is what gives the field its crosshatch
-   * character instead of reading as four sizes of the same square.
-   *
-   * Every size keeps `(CELL - size) / 2` a whole or half pixel so the marks land on
-   * device pixels at both 1x and 2x. A 1.5px mark would sit at offset 2.25 and get
-   * antialiased into a second, muddier tone.
-   */
-  const SQUARE_SIZES = [1, 2, 0, 3]; // index CROSS_LEVEL is unused
-  const CROSS_LEVEL = 2;
-  const CROSS_ARM = 4;
-  const CROSS_THICKNESS = 1;
-  const LEVELS = TONES_OKLCH.length;
-
-  function supportsOklch(ctx: CanvasRenderingContext2D): boolean {
-    const sentinel = "#123456";
-    const previous = ctx.fillStyle;
-    ctx.fillStyle = sentinel;
-    ctx.fillStyle = TONES_OKLCH[0]!;
-    const supported = ctx.fillStyle !== sentinel;
-    ctx.fillStyle = previous;
-    return supported;
-  }
 
   function init(canvas: HTMLCanvasElement): void {
     const ctx = canvas.getContext("2d", { alpha: true });
@@ -254,7 +191,7 @@
       height = nextHeight;
       cols = Math.ceil(width / CELL);
       rows = Math.ceil(height / CELL);
-      reachRadius = REACH_RADIUS * Math.hypot(width / CORNER_STRETCH, height);
+      reachRadius = reachRadiusFor(width, height);
 
       const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
       canvas.width = Math.round(width * dpr);
@@ -452,8 +389,6 @@
       for (let row = 0; row < rows; row++) {
         const y = row * CELL;
         const ny = y / height;
-        const distY = height - y;
-        const distYSq = distY * distY;
 
         for (let col = 0; col < cols; col++) {
           const x = col * CELL;
@@ -464,19 +399,10 @@
 
           // Density falls off with pixel distance from the bottom-right corner, all
           // the way to zero, so everything beyond the reach stays bare surface.
-          const distX = (width - x) / CORNER_STRETCH;
-          const reach = 1 - Math.sqrt(distX * distX + distYSq) / reachRadius;
+          const reach = reachAt(x, y, width, height, reachRadius);
           if (reach <= 0 && coverage <= 0) continue;
 
-          const wave =
-            0.5 +
-            0.26 * Math.sin(nx * 7.4 * BLOB_SCALE + seconds * 0.45) +
-            0.22 * Math.sin(ny * 5.1 * BLOB_SCALE - seconds * 0.32) +
-            0.2 * Math.sin((nx + ny) * 4.3 * BLOB_SCALE + seconds * 0.6) +
-            0.14 *
-              Math.sin(
-                (nx * 2.1 - ny * 1.7) * 9.5 * BLOB_SCALE - seconds * 0.5,
-              );
+          const wave = waveAt(nx, ny, seconds);
 
           // Re-threshold the blurred coverage, letting the wave push the contour
           // around. That is what turns the blurred line boxes into a drifting blob
@@ -503,21 +429,17 @@
           const lifted = selected * SELECTION_REACH;
           if (lifted > falloff) falloff = lifted;
 
-          // The bias sets how solid the corner gets; the waves swing density
-          // around it so the field breaks into distinct dense and sparse
-          // regions instead of reading as one smooth ramp.
-          let value = (FIELD_BIAS + (wave - 0.5) * CONTRAST) * falloff;
+          let value = densityAt(wave, falloff);
 
           if (pointerActive) value += influence[index]!;
 
           if (value <= VALUE_FLOOR) continue;
 
           // The noise threshold decides *whether* the mark exists.
-          const seed = (NOISE_COL * col + NOISE_ROW * row) % 1;
-          if (value <= (NOISE_GAIN * seed) % 1) continue;
+          if (value <= thresholdAt(col, row)) continue;
 
-          // Field value decides *how bright and large* it is.
-          const level = Math.min(LEVELS - 1, Math.floor(value * LEVELS));
+          // Field value decides *how bright and what shape* it is.
+          const level = levelFor(value);
           const bucket = buckets[level]!;
           const at = counts[level]! * 2;
           bucket[at] = x;
@@ -532,28 +454,8 @@
         if (count === 0) continue;
         const bucket = buckets[level]!;
         ctx!.fillStyle = tones[level]!;
-
-        if (level === CROSS_LEVEL) {
-          const inset = (CELL - CROSS_ARM) / 2;
-          const mid = (CELL - CROSS_THICKNESS) / 2;
-          for (let i = 0; i < count; i++) {
-            const x = bucket[i * 2]!;
-            const y = bucket[i * 2 + 1]!;
-            ctx!.fillRect(x + inset, y + mid, CROSS_ARM, CROSS_THICKNESS);
-            ctx!.fillRect(x + mid, y + inset, CROSS_THICKNESS, CROSS_ARM);
-          }
-          continue;
-        }
-
-        const size = SQUARE_SIZES[level]!;
-        const offset = (CELL - size) / 2;
         for (let i = 0; i < count; i++) {
-          ctx!.fillRect(
-            bucket[i * 2]! + offset,
-            bucket[i * 2 + 1]! + offset,
-            size,
-            size,
-          );
+          drawMark(ctx!, bucket[i * 2]!, bucket[i * 2 + 1]!, level);
         }
       }
     }

@@ -20,5 +20,8 @@
 /og.png
   Cache-Control: public, max-age=604800, immutable
 
+/og-loop.gif
+  Cache-Control: public, max-age=604800, immutable
+
 /
   Cache-Control: public, max-age=0, must-revalidate

@@ -1,0 +1,437 @@
+<!doctype html>
+<!--
+  Social-card generator. Not part of the shipped site: it lives outside `src/` and
+  outside `public/`, so Astro never sees it. Run `mise run og`, open the printed URL,
+  and this page writes `public/og.png` and `public/og-loop.gif` itself.
+
+  It draws the card with the real fonts and the real field maths from
+  `src/lib/dither-core.js`, so the card cannot drift away from the live page.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Social card generator</title>
+    <style>
+      @font-face {
+        font-family: "Satoshi-Medium";
+        src: url("/src/styles/fonts/Satoshi-Medium.woff2") format("woff2");
+        font-weight: 500;
+      }
+      @font-face {
+        font-family: "Instrument Serif";
+        src: url("/src/styles/fonts/instrument-serif-400-normal-latin.woff2")
+          format("woff2");
+        font-weight: 400;
+      }
+      body {
+        margin: 0;
+        padding: 2rem;
+        background: oklch(7% 0 0);
+        color: oklch(72% 0 0);
+        font:
+          14px/1.6 ui-monospace,
+          monospace;
+      }
+      canvas {
+        display: block;
+        width: 600px;
+        height: 315px;
+        margin-bottom: 1.5rem;
+        outline: 1px solid oklch(28% 0 0);
+      }
+      #log div {
+        white-space: pre;
+      }
+      .ok {
+        color: oklch(96% 0 0);
+      }
+      .bad {
+        color: oklch(96% 0 0);
+        background: oklch(30% 0 0);
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="preview"></canvas>
+    <div id="log"></div>
+
+    <script type="module">
+      import {
+        CELL,
+        FOCUS,
+        LEVELS,
+        TONES_OKLCH,
+        TONES_SRGB,
+        VALUE_FLOOR,
+        densityAt,
+        drawMark,
+        levelFor,
+        reachAt,
+        reachRadiusFor,
+        supportsOklch,
+        thresholdAt,
+        waveAt,
+      } from "/src/lib/dither-core.js";
+      import { encodeGif, inspectGif } from "./gif.js";
+
+      /**
+       * 1200x630 is the canonical Open Graph size and is what `layout.astro` already
+       * declares in `og:image:width` / `og:image:height`.
+       */
+      const WIDTH = 1200;
+      const HEIGHT = 630;
+
+      /** Matches the site's own gutter: 6vw of 1200. */
+      const MARGIN = 72;
+      const EYEBROW = "HELLO@QNT.ONE";
+      const HEADLINE = "Anton Werschinin";
+
+      const SURFACE = "oklch(8% 0 0)";
+      const TEXT_PRIMARY = "oklch(96% 0 0)";
+      const TEXT_SUBDUED = "oklch(58% 0 0)";
+
+      /**
+       * The loop has to close seamlessly, and the live field's drift rates
+       * (0.45 / 0.32 / 0.6 / 0.5 rad/s) share no common period — the first repeat
+       * would be at 2*PI/0.45, about 14 seconds and ~140 frames.
+       *
+       * So for the card the rates are quantised to integer multiples of 2*PI/LOOP_S.
+       * Every term then completes a whole number of cycles per loop and frame N lands
+       * exactly on frame 0. Side effect: the card drifts faster than the live page.
+       * That is a deliberate trade — a short loop beats matching the live speed.
+       */
+      const LOOP_SECONDS = 3;
+      const FRAMES = 30;
+      const HARMONICS = [1, 2, 3, 2];
+      const LOOP_RATES = HARMONICS.map((n) => (n * 2 * Math.PI) / LOOP_SECONDS);
+
+      const log = document.getElementById("log");
+      /**
+       * @param {string} message
+       * @param {"ok" | "bad" | ""} [kind]
+       */
+      const say = (message, kind = "") => {
+        const line = document.createElement("div");
+        line.className = kind;
+        line.textContent = message;
+        log.append(line);
+        console.log(message);
+      };
+
+      const failures = [];
+      /**
+       * @param {string} label
+       * @param {boolean} condition
+       * @param {unknown} [detail]
+       */
+      const check = (label, condition, detail) => {
+        if (!condition) failures.push(label);
+        say(
+          `${condition ? "PASS" : "FAIL"}  ${label}${detail === undefined ? "" : `  ${JSON.stringify(detail)}`}`,
+          condition ? "ok" : "bad",
+        );
+      };
+
+      /**
+       * Paints one complete card. Text is redrawn every frame so that a frame cropped
+       * to the changed region is still correct wherever it overlaps type.
+       *
+       * @param {CanvasRenderingContext2D} ctx
+       * @param {number} seconds
+       * @param {string[]} tones
+       */
+      function paint(ctx, seconds, tones) {
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.fillStyle = SURFACE;
+        ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+        // Field first, so type always sits on top of it.
+        const radius = reachRadiusFor(WIDTH, HEIGHT);
+        const cols = Math.ceil(WIDTH / CELL);
+        const rows = Math.ceil(HEIGHT / CELL);
+        /** @type {number[][]} */
+        const buckets = Array.from({ length: LEVELS }, () => []);
+
+        for (let row = 0; row < rows; row++) {
+          const y = row * CELL;
+          const ny = y / HEIGHT;
+          for (let col = 0; col < cols; col++) {
+            const x = col * CELL;
+            const reach = reachAt(x, y, WIDTH, HEIGHT, radius);
+            if (reach <= 0) continue;
+            const value = densityAt(
+              waveAt(x / WIDTH, ny, seconds, LOOP_RATES),
+              Math.pow(reach, FOCUS),
+            );
+            if (value <= VALUE_FLOOR) continue;
+            if (value <= thresholdAt(col, row)) continue;
+            buckets[levelFor(value)].push(x, y);
+          }
+        }
+        for (let level = 0; level < LEVELS; level++) {
+          const bucket = buckets[level];
+          if (bucket.length === 0) continue;
+          ctx.fillStyle = tones[level];
+          for (let i = 0; i < bucket.length; i += 2) {
+            drawMark(ctx, bucket[i], bucket[i + 1], level);
+          }
+        }
+
+        ctx.textBaseline = "alphabetic";
+
+        ctx.fillStyle = TEXT_SUBDUED;
+        ctx.font = '500 15px "Satoshi-Medium", sans-serif';
+        ctx.letterSpacing = "0.26em";
+        ctx.fillText(EYEBROW.toUpperCase(), MARGIN, 132);
+
+        ctx.fillStyle = TEXT_PRIMARY;
+        ctx.font = '400 84px "Instrument Serif", Georgia, serif';
+        ctx.letterSpacing = "-0.02em";
+        ctx.fillText(HEADLINE, MARGIN - 4, 236);
+        ctx.letterSpacing = "0px";
+      }
+
+      /**
+       * @param {ImageData} image
+       * @returns {{ indices: Uint8Array, maxChannelSpread: number }}
+       */
+      function toGreyIndices(image) {
+        const { data } = image;
+        const indices = new Uint8Array(data.length / 4);
+        let spread = 0;
+        for (let i = 0, p = 0; i < data.length; i += 4, p++) {
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+          const local = Math.max(Math.abs(r - g), Math.abs(r - b));
+          if (local > spread) spread = local;
+          indices[p] = r;
+        }
+        return { indices, maxChannelSpread: spread };
+      }
+
+      /**
+       * Union of every pixel that is not identical across all frames. Frame 0 carries
+       * the whole card; the rest only need to repaint this region, which is what keeps
+       * the file small without any transparency bookkeeping.
+       *
+       * @param {Uint8Array[]} frames
+       */
+      function changedBounds(frames) {
+        const base = frames[0];
+        let minX = WIDTH;
+        let minY = HEIGHT;
+        let maxX = -1;
+        let maxY = -1;
+        for (let f = 1; f < frames.length; f++) {
+          const other = frames[f];
+          for (let y = 0; y < HEIGHT; y++) {
+            const rowStart = y * WIDTH;
+            for (let x = 0; x < WIDTH; x++) {
+              if (base[rowStart + x] === other[rowStart + x]) continue;
+              if (x < minX) minX = x;
+              if (x > maxX) maxX = x;
+              if (y < minY) minY = y;
+              if (y > maxY) maxY = y;
+            }
+          }
+        }
+        if (maxX < 0) return { left: 0, top: 0, width: WIDTH, height: HEIGHT };
+        return {
+          left: minX,
+          top: minY,
+          width: maxX - minX + 1,
+          height: maxY - minY + 1,
+        };
+      }
+
+      /**
+       * @param {Uint8Array} full
+       * @param {{left:number,top:number,width:number,height:number}} box
+       */
+      function crop(full, box) {
+        const out = new Uint8Array(box.width * box.height);
+        for (let y = 0; y < box.height; y++) {
+          const from = (box.top + y) * WIDTH + box.left;
+          out.set(full.subarray(from, from + box.width), y * box.width);
+        }
+        return out;
+      }
+
+      /**
+       * @param {string} name
+       * @param {Uint8Array} bytes
+       * @param {string} type
+       */
+      async function save(name, bytes, type) {
+        const response = await fetch(`/save/${name}`, {
+          method: "POST",
+          headers: { "Content-Type": type },
+          body: bytes,
+        });
+        if (!response.ok) throw new Error(`${name}: ${response.status}`);
+        say(`saved public/${name}  ${bytes.length.toLocaleString()} bytes`);
+      }
+
+      async function main() {
+        await Promise.all([
+          document.fonts.load('500 15px "Satoshi-Medium"'),
+          document.fonts.load('400 84px "Instrument Serif"'),
+        ]);
+        await document.fonts.ready;
+        check(
+          "fonts loaded",
+          document.fonts.check('500 15px "Satoshi-Medium"') &&
+            document.fonts.check('400 84px "Instrument Serif"'),
+        );
+
+        const canvas = document.createElement("canvas");
+        canvas.width = WIDTH;
+        canvas.height = HEIGHT;
+        const ctx = canvas.getContext("2d", { willReadFrequently: true });
+        const tones = supportsOklch(ctx) ? TONES_OKLCH : TONES_SRGB;
+        check("oklch available on canvas", tones === TONES_OKLCH);
+
+        /** @type {Uint8Array[]} */
+        const indexFrames = [];
+        let worstSpread = 0;
+        for (let f = 0; f < FRAMES; f++) {
+          paint(ctx, (f / FRAMES) * LOOP_SECONDS, tones);
+          const { indices, maxChannelSpread } = toGreyIndices(
+            ctx.getImageData(0, 0, WIDTH, HEIGHT),
+          );
+          indexFrames.push(indices);
+          worstSpread = Math.max(worstSpread, maxChannelSpread);
+        }
+        // A 256-grey palette is only lossless if nothing on the card is chromatic.
+        check("card is fully neutral", worstSpread === 0, { worstSpread });
+
+        // Frame 0 doubles as the static card, so show it and export it as the PNG.
+        paint(ctx, 0, tones);
+        const preview = document.getElementById("preview");
+        preview.width = WIDTH;
+        preview.height = HEIGHT;
+        preview.getContext("2d").drawImage(canvas, 0, 0);
+
+        const pngBlob = await new Promise((resolve) =>
+          canvas.toBlob(resolve, "image/png"),
+        );
+        const png = new Uint8Array(await pngBlob.arrayBuffer());
+
+        // The loop closes only if the field at t = LOOP_SECONDS equals t = 0.
+        paint(ctx, LOOP_SECONDS, tones);
+        const wrapped = toGreyIndices(
+          ctx.getImageData(0, 0, WIDTH, HEIGHT),
+        ).indices;
+        let wrapDiff = 0;
+        for (let i = 0; i < wrapped.length; i++) {
+          if (wrapped[i] !== indexFrames[0][i]) wrapDiff++;
+        }
+        check("loop closes exactly", wrapDiff === 0, { differingPixels: wrapDiff });
+
+        const box = changedBounds(indexFrames);
+        say(
+          `changed region ${box.width}x${box.height} at ${box.left},${box.top}` +
+            `  (${((box.width * box.height * 100) / (WIDTH * HEIGHT)).toFixed(1)}% of the card)`,
+        );
+        // The real invariant behind cropping: with disposal 1 the untouched area keeps
+        // frame 0's pixels forever, so nothing outside the box may ever differ from it.
+        // Type inside the box is fine — every frame repaints the full composition, and
+        // the crop is taken from that.
+        let strayOutside = 0;
+        for (let f = 1; f < indexFrames.length; f++) {
+          for (let y = 0; y < HEIGHT; y++) {
+            const inRows = y >= box.top && y < box.top + box.height;
+            for (let x = 0; x < WIDTH; x++) {
+              if (inRows && x >= box.left && x < box.left + box.width) continue;
+              const at = y * WIDTH + x;
+              if (indexFrames[f][at] !== indexFrames[0][at]) strayOutside++;
+            }
+          }
+        }
+        check("nothing changes outside the cropped region", strayOutside === 0, {
+          strayOutside,
+        });
+
+        const gif = encodeGif({
+          width: WIDTH,
+          height: HEIGHT,
+          delayMs: (LOOP_SECONDS * 1000) / FRAMES,
+          frames: [
+            {
+              indices: indexFrames[0],
+              left: 0,
+              top: 0,
+              width: WIDTH,
+              height: HEIGHT,
+            },
+            ...indexFrames.slice(1).map((full) => ({ indices: crop(full, box), ...box })),
+          ],
+        });
+
+        const meta = inspectGif(gif);
+        check("GIF89a header", meta.header === "GIF89a", meta.header);
+        check("logical screen 1200x630", meta.width === WIDTH && meta.height === HEIGHT, {
+          width: meta.width,
+          height: meta.height,
+        });
+        check("frame count", meta.frames === FRAMES, { frames: meta.frames });
+        check("loops forever", meta.loopCount === 0, { loopCount: meta.loopCount });
+        check("first frame is full bleed", meta.rects[0].width === WIDTH, meta.rects[0]);
+
+        // The decisive test: let the browser's own decoder read our bytes back and
+        // compare pixel for pixel. Done on a single-frame GIF of frame 0 rather than on
+        // the animation, because `drawImage` of an animated GIF samples whichever frame
+        // is currently on screen — which would make this check race the loop. The LZW
+        // path is the same either way, so losslessness here covers the animation too.
+        const probe = encodeGif({
+          width: WIDTH,
+          height: HEIGHT,
+          delayMs: 100,
+          frames: [
+            { indices: indexFrames[0], left: 0, top: 0, width: WIDTH, height: HEIGHT },
+          ],
+        });
+        const url = URL.createObjectURL(new Blob([probe], { type: "image/gif" }));
+        const img = new Image();
+        await new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = () => reject(new Error("browser refused the GIF"));
+          img.src = url;
+        });
+        check(
+          "decoder agrees on size",
+          img.naturalWidth === WIDTH && img.naturalHeight === HEIGHT,
+          { w: img.naturalWidth, h: img.naturalHeight },
+        );
+
+        const rt = document.createElement("canvas");
+        rt.width = WIDTH;
+        rt.height = HEIGHT;
+        const rtCtx = rt.getContext("2d", { willReadFrequently: true });
+        rtCtx.drawImage(img, 0, 0);
+        const decoded = toGreyIndices(
+          rtCtx.getImageData(0, 0, WIDTH, HEIGHT),
+        ).indices;
+        let mismatch = 0;
+        for (let i = 0; i < decoded.length; i++) {
+          if (decoded[i] !== indexFrames[0][i]) mismatch++;
+        }
+        check("round-trip is lossless", mismatch === 0, { differingPixels: mismatch });
+        URL.revokeObjectURL(url);
+
+        say(`GIF ${gif.length.toLocaleString()} bytes  PNG ${png.length.toLocaleString()} bytes`);
+
+        if (failures.length > 0) {
+          say(`REFUSING TO WRITE — ${failures.length} check(s) failed: ${failures.join(", ")}`, "bad");
+          return;
+        }
+        await save("og.png", png, "image/png");
+        await save("og-loop.gif", gif, "image/gif");
+        say("done", "ok");
+      }
+
+      main().catch((error) => say(`ERROR  ${error.message}`, "bad"));
+    </script>
+  </body>
+</html>

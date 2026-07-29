@@ -22,6 +22,10 @@ run = "pnpm preview"
 description = "Format project files"
 run = "pnpm format"
 
+[tasks.og]
+description = "Serve the social-card generator; open the printed URL to write the assets"
+run = "python3 tools/og/serve.py"
+
 [tasks.check]
 description = "Check formatting and build the site"
 depends = ["format-check", "build"]
