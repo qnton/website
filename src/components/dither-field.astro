@@ -76,6 +76,14 @@
   const FOCUS = 3;
   /** Multiplier on the wave frequencies. Higher means smaller, finer blobs. */
   const BLOB_SCALE = 2.1;
+  /**
+   * Below this field value a cell draws nothing at all. The falloff only reaches
+   * exactly zero in the opposite corner, so without a floor the whole far side of
+   * the page keeps passing the threshold in about one cell per hundred — a thin
+   * dusting of lone darkest specks with no visible blob to belong to. Applied after
+   * the cursor and selection contributions, so both still work out there.
+   */
+  const VALUE_FLOOR = 0.09;
 
   /**
    * Text selection is rendered as the field itself: the native highlight is turned
@@ -502,7 +510,7 @@
 
           if (pointerActive) value += influence[index]!;
 
-          if (value <= 0) continue;
+          if (value <= VALUE_FLOOR) continue;
 
           // The noise threshold decides *whether* the mark exists.
           const seed = (NOISE_COL * col + NOISE_ROW * row) % 1;
