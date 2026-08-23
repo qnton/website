@@ -172,6 +172,41 @@ On hover, strengthen the relevant contrast or border. Apply the shared focus-vis
 - Interactive cards use the shared focus-visible, active, and disabled treatments.
 - Nested links and controls retain independent focus indicators and must not be hidden by the card's interaction treatment.
 
+### Procedural dither field
+
+A single ambient texture, generated at runtime rather than shipped as an image or video. Permitted under the documented exception in §5, subject to every limit below.
+
+- Span the full content plane with one unframed, borderless surface, and weight the dot density toward a single page corner.
+- Let the density reach zero well before the opposite corner, so the rest of the page stays bare surface instead of carrying a faint wash. Shape that falloff inside the field function itself. Do not fade it with a CSS gradient or mask.
+- Cut the field off below a minimum value. A power falloff only reaches exactly zero at the far corner, so without a floor roughly one cell per hundred still clears the threshold right across the page — a dusting of lone darkest marks with no blob to belong to, which reads as dirt rather than texture. Apply the floor after any cursor and selection contribution so those still work out in the bare region.
+- Measure that falloff in pixels, not in normalised coordinates. Normalised distance makes the field's shape follow the viewport's aspect ratio, which collapses it into a squashed vertical sliver on a tall phone screen; pixel distance keeps it spreading across the full width there. Bias it slightly wider than tall.
+- Draw square dots on a fixed grid with a `6px` pitch and a maximum dot edge of `2.5px`.
+- Restrict every dot to zero chroma within `oklch(20% 0 0)` to `oklch(44% 0 0)`. At this pitch a dot covers under a fifth of its cell, so the field's perceived lightness stays far below its brightest tone and never approaches the contrast of text laid over it. Where `oklch()` is unsupported, substitute the matching sRGB greys.
+- Quantise brightness to at most four steps and give each step its own mark shape, not merely its own size: a speck, a dot, a cross, a block. The shape change is what makes the field read as halftone crosshatch rather than as four sizes of one square. Size each mark so its offset within the cell lands on a whole device pixel at both 1x and 2x, or it antialiases into a muddier extra tone.
+- Drive the dither from a high-frequency threshold field, not from a small ordered matrix. A Bayer 4x4 gives each of its 16 sub-positions a fixed and very different threshold — measured hit rates from `0.004` to `1.000` — which stamps a visible lattice repeating every four cells. Interleaved gradient noise, a blue-noise tile, or any similarly high-passed field avoids that. This is the one admitted use of noise: as a threshold, never as a grain or texture overlay.
+- Do not use blur or alpha gradients anywhere in the field.
+- Cap the animation at `30fps`. Suspend it whenever the field is off-screen or the document is hidden.
+- Reveal it on load by growing the dot density outward from the anchored corner over roughly `1.3s`, never by fading opacity. Let the dither threshold fray the advancing front, and keep the front's travel within the range that actually carries dots so the sweep reads at an even pace. Suppress pointer response until it lands.
+- Under `prefers-reduced-motion: reduce`, render one static frame with no entrance sweep and no pointer response. The texture stays; the motion does not.
+- Mark it `aria-hidden="true"` with `pointer-events: none`. It is never focusable, never conveys state, and no content may depend on it.
+- Optional pointer response may raise local dot density and brightness only. Enable it solely for `(hover: hover) and (pointer: fine)`.
+- Track the cursor instantly: put the head of the highlight on the raw pointer position, never on an eased one. Carry the softness in a decaying tail of recent positions instead, sampled per pointer event rather than per rendered frame so a fast sweep leaves a continuous streak rather than a chain of separate blobs. Take the strongest contribution per cell, never the sum, or a slow cursor stacks its samples into a solid blob.
+- Do not stamp the highlight as a circle. Bend its radius with a couple of slowly drifting harmonics so it reads as a living smudge, and keep the deformation well below the base radius so it never pinches shut.
+- The field may render the text selection. `::selection` only honours `background-color` in browsers, so a patterned highlight is unreachable from CSS; drive it from the field instead, and set the native highlight transparent only once the field is live so selection still works without scripting. Lift the local density rather than forcing a fixed value, or the selection reads as a flat slab of one mark instead of the field's own blobs. Keep the lift low enough that all four marks still appear; if the brightest mark dominates, the region reads as a solid bar again. Blur the union of line boxes before using it, then re-threshold that coverage with the wave field as jitter — a feathered rectangle is still a rectangle, whereas blurring rounds the corners, merges adjacent lines into one mass, and the wave-driven re-threshold turns the contour irregular. The selection must override both the corner falloff and the entrance sweep: it is feedback, not decoration.
+- Ease the pointer highlight back out after roughly `1.4s` of cursor stillness. A resting cursor is not attention, and a highlight parked under an idle pointer reads as a rendering artefact.
+
+### Social card
+
+The link-preview image. It carries the same vocabulary as the page: flat zero-chroma surface, the display face for the name, an eyebrow in interface emphasis, and the procedural dither field weighted into one corner.
+
+- Render at `1200x630`, and keep the declared `og:image:width` and `og:image:height` in step with the file. A mismatch is silently wrong rather than visibly broken.
+- Use the page's gutter for the left margin so the card and the page share an edge.
+- Derive it from the same field code as the live page rather than reproducing the look by hand, or the two drift apart at the next tweak.
+- **The first frame has to carry the card on its own.** Facebook, X and LinkedIn render only the first frame of an animated `og:image`; Discord animates it. So an animated card must open fully formed — never on an entrance sweep, which would unfurl as an empty rectangle almost everywhere.
+- When an animated card is used for `og:image`, ship the still as a separate file too and declare `og:image:type` as `image/gif`. Point `twitter:image` at the still: X strips animation regardless, so serving it the animation is pure weight for an identical result.
+- A seamless loop needs every wave term to complete a whole number of cycles per loop, so quantise the drift rates to integer multiples of `2*PI / duration`. The live rates share no common period and will not close.
+- The card is greyscale, so an animated export can use one palette entry per grey level. Anything smaller bands the antialiased type.
+
 ## 9. Accessibility
 
 - Provide visible keyboard focus for every interactive element.
