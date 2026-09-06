@@ -8,24 +8,54 @@ import Layout from "@/components/layout.astro";
   robots="noindex, nofollow"
   title="qnt.one • Page not found"
 >
-  <main
-    class="font-satoshi-regular flex min-h-dvh flex-col items-center justify-center"
-    id="main-content"
+  <p
+    class="reveal font-satoshi-medium text-[0.6875rem] tracking-[0.26em] text-[oklch(58%_0_0)] uppercase"
+    style="--i: 0"
   >
-    <section
-      class="flex flex-col items-center justify-center gap-6 px-4 text-center"
+    Error 404
+  </p>
+
+  <h1
+    class="reveal font-instrument-serif text-text-primary mt-5 text-[clamp(2.75rem,8vw,4.25rem)] leading-[1.05] font-normal tracking-[-0.02em]"
+    style="--i: 1"
+  >
+    Page not found
+  </h1>
+
+  <p
+    class="reveal font-satoshi-light text-text-muted mt-6 max-w-lg text-base leading-relaxed md:text-lg"
+    style="--i: 2"
+  >
+    The page you're looking for doesn't exist. It may have been moved, or the
+    link you followed is broken.
+  </p>
+
+  <div class="reveal mt-12 md:mt-16" style="--i: 3">
+    <a
+      class="group font-instrument-serif text-text-primary relative inline-flex max-w-full items-baseline gap-2 pb-1 text-[clamp(1.75rem,5vw,2.75rem)] leading-none tracking-[-0.02em] no-underline before:absolute before:inset-x-0 before:bottom-0 before:h-px before:bg-[oklch(96%_0_0/0.28)] after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-right after:scale-x-0 after:bg-[oklch(96%_0_0)] after:transition-transform after:duration-[450ms] after:ease-[cubic-bezier(0.22,1,0.36,1)] hover:after:scale-x-100 focus-visible:after:scale-x-100"
+      href="/"
     >
-      <h1
-        class="reveal font-instrument-serif text-text-primary m-0 text-4xl tracking-wide md:text-5xl lg:text-7xl"
+      <span
+        class="inline-flex shrink-0 translate-y-[0.08em] self-center transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-x-[0.12em] group-focus-visible:-translate-x-[0.12em]"
+        aria-hidden="true"
       >
-        404
-      </h1>
-      <a
-        class="font-satoshi-medium text-sm tracking-[0.12em] text-[oklch(62%_0_0)] uppercase no-underline transition-colors duration-150 ease-out hover:text-white"
-        href="/"
-      >
-        Back to home
-      </a>
-    </section>
-  </main>
+        <svg
+          class="size-[0.55em] md:size-[0.5em]"
+          fill="none"
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M19 12H5M5 12L12 5M5 12L12 19"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.25"></path>
+        </svg>
+      </span>
+      <span>Back to home</span>
+    </a>
+  </div>
 </Layout>

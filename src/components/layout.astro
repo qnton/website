@@ -95,6 +95,13 @@ const structuredDataJson = JSON.stringify({
     }
   </head>
   <body>
-    <slot />
+    <main
+      class="flex min-h-dvh flex-col px-[clamp(1.5rem,6vw,4rem)] pt-[clamp(3rem,12vh,8rem)] pb-10 text-left"
+      id="main-content"
+    >
+      <div class="max-w-[36rem] flex-1">
+        <slot />
+      </div>
+    </main>
   </body>
 </html>

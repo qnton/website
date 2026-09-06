@@ -6,102 +6,55 @@ import Layout from "@/components/layout.astro";
   description="Anton Werschinin is a developer and designer behind qnt.one. For focused collaboration, get in touch — I also go by qnton online."
   title="Anton Werschinin — qnt.one"
 >
-  <main
-    class="flex min-h-dvh flex-col px-[clamp(1.5rem,6vw,4rem)] pt-[clamp(3rem,12vh,8rem)] pb-10 text-left"
-    id="main-content"
+  <p
+    class="reveal font-satoshi-medium text-[0.6875rem] tracking-[0.26em] text-[oklch(58%_0_0)] uppercase"
+    style="--i: 0"
   >
-    <div class="max-w-[36rem] flex-1">
-      <p
-        class="reveal font-satoshi-medium m-0 text-[0.6875rem] tracking-[0.26em] text-[oklch(58%_0_0)] uppercase"
-        style="--i: 0"
-      >
-        Get in touch
-      </p>
+    Get in touch
+  </p>
 
-      <h1
-        class="reveal font-instrument-serif text-text-primary m-0 mt-5 text-[clamp(2.75rem,8vw,4.25rem)] leading-[1.05] font-normal tracking-[-0.02em]"
-        style="--i: 1"
-      >
-        Work with me
-      </h1>
+  <h1
+    class="reveal font-instrument-serif text-text-primary mt-5 text-[clamp(2.75rem,8vw,4.25rem)] leading-[1.05] font-normal tracking-[-0.02em]"
+    style="--i: 1"
+  >
+    Work with me
+  </h1>
 
-      <p
-        class="reveal font-satoshi-light text-text-muted m-0 mt-6 max-w-lg text-base leading-relaxed md:text-lg"
-        style="--i: 2"
-      >
-        I'm Anton Werschinin. Have a project in mind? I take on a select number
-        of clients each year to ensure focused, high-quality collaboration.
-      </p>
+  <p
+    class="reveal font-satoshi-light text-text-muted mt-6 max-w-lg text-base leading-relaxed md:text-lg"
+    style="--i: 2"
+  >
+    I'm Anton Werschinin. Have a project in mind? I take on a select number of
+    clients each year to ensure focused, high-quality collaboration.
+  </p>
 
-      <div class="reveal mt-12 md:mt-16" style="--i: 3">
-        <a
-          class="email-link font-instrument-serif text-text-primary inline-flex max-w-full items-baseline gap-2 pb-1 text-[clamp(1.75rem,5vw,2.75rem)] leading-none tracking-[-0.02em] no-underline"
-          data-obfuscation="0"
-          href="mailto:hello@qnt.one"
+  <div class="reveal mt-12 md:mt-16" style="--i: 3">
+    <a
+      class="group font-instrument-serif text-text-primary relative inline-flex max-w-full items-baseline gap-2 pb-1 text-[clamp(1.75rem,5vw,2.75rem)] leading-none tracking-[-0.02em] no-underline before:absolute before:inset-x-0 before:bottom-0 before:h-px before:bg-[oklch(96%_0_0/0.28)] after:absolute after:inset-x-0 after:bottom-0 after:h-px after:origin-left after:scale-x-0 after:bg-[oklch(96%_0_0)] after:transition-transform after:duration-[450ms] after:ease-[cubic-bezier(0.22,1,0.36,1)] hover:after:scale-x-100 focus-visible:after:scale-x-100"
+      data-obfuscation="0"
+      href="mailto:hello@qnt.one"
+    >
+      <span class="min-w-0 break-all">hello@qnt.one</span>
+      <span
+        class="inline-flex shrink-0 translate-y-[0.08em] self-center transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[0.12em] group-hover:translate-y-[0.04em] group-focus-visible:translate-x-[0.12em] group-focus-visible:translate-y-[0.04em]"
+        aria-hidden="true"
+      >
+        <svg
+          class="size-[0.55em] md:size-[0.5em]"
+          fill="none"
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <span class="min-w-0 break-all">hello@qnt.one</span>
-          <span
-            class="arrow inline-flex shrink-0 translate-y-[0.08em] self-center"
-            aria-hidden="true"
-          >
-            <svg
-              class="size-[0.55em] md:size-[0.5em]"
-              fill="none"
-              height="24"
-              viewBox="0 0 24 24"
-              width="24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M6 18L18 6M18 6H9M18 6V15"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.25"></path>
-            </svg>
-          </span>
-        </a>
-      </div>
-    </div>
-  </main>
+          <path
+            d="M6 18L18 6M18 6H9M18 6V15"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.25"></path>
+        </svg>
+      </span>
+    </a>
+  </div>
 </Layout>
-
-<style>
-  .email-link {
-    position: relative;
-  }
-
-  .email-link::before,
-  .email-link::after {
-    content: "";
-    position: absolute;
-    inset-inline: 0;
-    bottom: 0;
-    height: 1px;
-  }
-
-  .email-link::before {
-    background: oklch(96% 0 0 / 0.28);
-  }
-
-  .email-link::after {
-    background: oklch(96% 0 0);
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .email-link:hover::after,
-  .email-link:focus-visible::after {
-    transform: scaleX(1);
-  }
-
-  .email-link .arrow {
-    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .email-link:hover .arrow,
-  .email-link:focus-visible .arrow {
-    transform: translate(0.12em, -0.04em);
-  }
-</style>
