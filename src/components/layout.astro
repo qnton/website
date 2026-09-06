@@ -1,8 +1,6 @@
 ---
 import "@/styles/globals.css";
 
-import { personWebsiteJsonLd } from "@/data/jsonLd";
-
 import instrumentSerifLatin from "@/styles/fonts/instrument-serif-400-normal-latin.woff2?url";
 import satoshiMedium from "@/styles/fonts/Satoshi-Medium.woff2?url";
 import satoshiLight from "@/styles/fonts/Satoshi-Light.woff2?url";
@@ -11,62 +9,58 @@ import satoshiRegular from "@/styles/fonts/Satoshi-Regular.woff2?url";
 interface Props {
   title: string;
   description: string;
-  ogType?: string;
   robots?: string;
   noStructuredData?: boolean;
 }
 
-const {
-  title,
-  description,
-  ogType = "website",
-  robots,
-  noStructuredData = false,
-} = Astro.props;
+const { title, description, robots, noStructuredData = false } = Astro.props;
 
-const siteConfig = import.meta.env.SITE ?? "https://qnt.one/";
-const origin = new URL(siteConfig).origin;
+const origin = Astro.site!.origin;
 const path =
   Astro.url.pathname.length > 1 ? Astro.url.pathname.replace(/\/$/, "") : "";
 const canonicalUrl = new URL(path || "/", `${origin}/`).href;
-/**
- * The animated card, for the consumers that play it (Discord). Everywhere else it
- * degrades to its first frame, which is byte-identical to `og.png` — see the "Social
- * card" recipe in design.md.
- */
-const ogImageUrl = new URL("/og-loop.gif", `${origin}/`).href;
-/**
- * X strips animation from cards outright, so pointing it at the still saves 5.5x the
- * bytes for an identical result.
- */
-const twitterImageUrl = new URL("/og.png", `${origin}/`).href;
-
-// Both files are the same size, so one pair of dimensions covers them.
-const OG_IMAGE_WIDTH = 1200;
-const OG_IMAGE_HEIGHT = 630;
+const ogImageUrl = `${origin}/og.png`;
 
 const criticalFonts = [
-  { href: instrumentSerifLatin },
-  { href: satoshiMedium },
-  { href: satoshiRegular },
-  { href: satoshiLight },
+  instrumentSerifLatin,
+  satoshiMedium,
+  satoshiRegular,
+  satoshiLight,
 ];
 
-const structuredDataJson = JSON.stringify(
-  personWebsiteJsonLd(origin, description),
-);
+const personId = `${origin}/#person`;
+const structuredDataJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": personId,
+      name: "Anton Werschinin",
+      alternateName: ["qnton", "qnt.one"],
+      url: `${origin}/`,
+      image: ogImageUrl,
+      email: "hello@qnt.one",
+      sameAs: ["https://github.com/qnton", "https://www.linkedin.com/in/qnton"],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${origin}/#website`,
+      url: origin,
+      name: "qnt.one",
+      description,
+      inLanguage: "en",
+      publisher: { "@id": personId },
+    },
+  ],
+});
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta
-      content="width=device-width,initial-scale=1"
-      name="viewport"
-    />
-
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
     {
-      criticalFonts.map(({ href }) => (
+      criticalFonts.map((href) => (
         <link
           rel="preload"
           href={href}
@@ -76,102 +70,27 @@ const structuredDataJson = JSON.stringify(
         />
       ))
     }
-
     <title>{title}</title>
-    <meta
-      content={description}
-      name="description"
-    />
-    {
-      robots && (
-        <meta
-          content={robots}
-          name="robots"
-        />
-      )
-    }
-    <meta
-      content="#000000"
-      name="theme-color"
-    />
-
-    <link
-      rel="canonical"
-      href={canonicalUrl}
-    />
-
-    <meta
-      content={ogType}
-      property="og:type"
-    />
-    <meta
-      content={title}
-      property="og:title"
-    />
-    <meta
-      content={description}
-      property="og:description"
-    />
-    <meta
-      content={canonicalUrl}
-      property="og:url"
-    />
-    <meta
-      content="qnt.one"
-      property="og:site_name"
-    />
-    <meta
-      content="en_US"
-      property="og:locale"
-    />
-    <meta
-      content={ogImageUrl}
-      property="og:image"
-    />
-    <meta
-      content={String(OG_IMAGE_WIDTH)}
-      property="og:image:width"
-    />
-    <meta
-      content={String(OG_IMAGE_HEIGHT)}
-      property="og:image:height"
-    />
-    <meta
-      content="image/gif"
-      property="og:image:type"
-    />
-    <meta
-      content={title}
-      property="og:image:alt"
-    />
-
-    <meta
-      content="summary_large_image"
-      name="twitter:card"
-    />
-    <meta
-      content="@qnton"
-      name="twitter:creator"
-    />
-    <meta
-      content={title}
-      name="twitter:title"
-    />
-    <meta
-      content={description}
-      name="twitter:description"
-    />
-    <meta
-      content={twitterImageUrl}
-      name="twitter:image"
-    />
-
+    <meta content={description} name="description" />
+    {robots && <meta content={robots} name="robots" />}
+    <meta content="#000000" name="theme-color" />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta content="website" property="og:type" />
+    <meta content={title} property="og:title" />
+    <meta content={description} property="og:description" />
+    <meta content={canonicalUrl} property="og:url" />
+    <meta content="qnt.one" property="og:site_name" />
+    <meta content="en_US" property="og:locale" />
+    <meta content={ogImageUrl} property="og:image" />
+    <meta content="1200" property="og:image:width" />
+    <meta content="630" property="og:image:height" />
+    <meta content="image/png" property="og:image:type" />
+    <meta content={title} property="og:image:alt" />
+    <meta content="summary_large_image" name="twitter:card" />
+    <meta content="@qnton" name="twitter:creator" />
     {
       !noStructuredData && (
-        <script
-          type="application/ld+json"
-          set:html={structuredDataJson}
-        />
+        <script type="application/ld+json" set:html={structuredDataJson} />
       )
     }
   </head>

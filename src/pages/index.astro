@@ -1,20 +1,16 @@
 ---
-import { homeDescription } from "@/data/site";
-import DitherField from "@/components/dither-field.astro";
 import Layout from "@/components/layout.astro";
 ---
 
 <Layout
-  description={homeDescription}
+  description="Anton Werschinin is a developer and designer behind qnt.one. For focused collaboration, get in touch — I also go by qnton online."
   title="Anton Werschinin — qnt.one"
 >
   <main
-    class="relative flex min-h-dvh flex-col overflow-hidden bg-[oklch(8%_0_0)] px-[clamp(1.5rem,6vw,4rem)] pt-[clamp(3rem,12vh,8rem)] pb-10 text-left"
+    class="flex min-h-dvh flex-col px-[clamp(1.5rem,6vw,4rem)] pt-[clamp(3rem,12vh,8rem)] pb-10 text-left"
     id="main-content"
   >
-    <DitherField />
-
-    <div class="relative z-10 max-w-[36rem] flex-1">
+    <div class="max-w-[36rem] flex-1">
       <p
         class="reveal font-satoshi-medium m-0 text-[0.6875rem] tracking-[0.26em] text-[oklch(58%_0_0)] uppercase"
         style="--i: 0"
@@ -23,26 +19,23 @@ import Layout from "@/components/layout.astro";
       </p>
 
       <h1
-        class="reveal font-instrument-serif m-0 mt-5 text-[clamp(2.75rem,8vw,4.25rem)] leading-[1.05] font-normal tracking-[-0.02em] text-[oklch(96%_0_0)]"
+        class="reveal font-instrument-serif text-text-primary m-0 mt-5 text-[clamp(2.75rem,8vw,4.25rem)] leading-[1.05] font-normal tracking-[-0.02em]"
         style="--i: 1"
       >
         Work with me
       </h1>
 
       <p
-        class="reveal font-satoshi-light m-0 mt-6 max-w-lg text-base leading-relaxed text-[oklch(72%_0_0)] md:text-lg"
+        class="reveal font-satoshi-light text-text-muted m-0 mt-6 max-w-lg text-base leading-relaxed md:text-lg"
         style="--i: 2"
       >
         I'm Anton Werschinin. Have a project in mind? I take on a select number
         of clients each year to ensure focused, high-quality collaboration.
       </p>
 
-      <div
-        class="reveal mt-12 md:mt-16"
-        style="--i: 3"
-      >
+      <div class="reveal mt-12 md:mt-16" style="--i: 3">
         <a
-          class="email-link font-instrument-serif inline-flex max-w-full items-baseline gap-2 pb-1 text-[clamp(1.75rem,5vw,2.75rem)] leading-none tracking-[-0.02em] text-[oklch(96%_0_0)] no-underline"
+          class="email-link font-instrument-serif text-text-primary inline-flex max-w-full items-baseline gap-2 pb-1 text-[clamp(1.75rem,5vw,2.75rem)] leading-none tracking-[-0.02em] no-underline"
           data-obfuscation="0"
           href="mailto:hello@qnt.one"
         >
@@ -64,8 +57,7 @@ import Layout from "@/components/layout.astro";
                 stroke="currentColor"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                stroke-width="1.25"
-              ></path>
+                stroke-width="1.25"></path>
             </svg>
           </span>
         </a>
@@ -75,22 +67,6 @@ import Layout from "@/components/layout.astro";
 </Layout>
 
 <style>
-  @media (prefers-reduced-motion: no-preference) {
-    .reveal {
-      opacity: 0;
-      transform: translateY(0.875rem);
-      animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-      animation-delay: calc(var(--i) * 130ms + 120ms);
-    }
-
-    @keyframes rise {
-      to {
-        opacity: 1;
-        transform: none;
-      }
-    }
-  }
-
   .email-link {
     position: relative;
   }

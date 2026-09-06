@@ -17,8 +17,7 @@
     "@tailwindcss/vite": "^4.3.3",
     "astro": "7.1.1",
     "astro-mail-obfuscation": "^2.3.4",
-    "tailwindcss": "^4.3.3",
-    "tailwindcss-animated": "^2.1.0"
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
     "prettier": "^3.9.5",
