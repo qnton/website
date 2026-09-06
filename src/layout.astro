@@ -1,10 +1,8 @@
 ---
-import "@/styles/globals.css";
+import "@/globals.css";
 
-import instrumentSerifLatin from "@/styles/fonts/instrument-serif-400-normal-latin.woff2?url";
-import satoshiMedium from "@/styles/fonts/Satoshi-Medium.woff2?url";
-import satoshiLight from "@/styles/fonts/Satoshi-Light.woff2?url";
-import satoshiRegular from "@/styles/fonts/Satoshi-Regular.woff2?url";
+import instrumentSerif from "@/instrument-serif.woff2?url";
+import satoshiVariable from "@/satoshi-variable.woff2?url";
 
 interface Props {
   title: string;
@@ -21,12 +19,7 @@ const path =
 const canonicalUrl = new URL(path || "/", `${origin}/`).href;
 const ogImageUrl = `${origin}/og.png`;
 
-const criticalFonts = [
-  instrumentSerifLatin,
-  satoshiMedium,
-  satoshiRegular,
-  satoshiLight,
-];
+const criticalFonts = [instrumentSerif, satoshiVariable];
 
 const personId = `${origin}/#person`;
 const structuredDataJson = JSON.stringify({
